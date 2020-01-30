@@ -154,10 +154,10 @@ export default [
         component: Setting.AccountSetting
       },
       {
-        name: 'security-setting',
-        path: 'security',
-        meta: {requiresAuth: true, title: 'Security Settings'},
-        component: Setting.SecuritySetting
+        name: 'test-setting',
+        path: 'test',
+        meta: {requiresAuth: true, title: 'Test Settings'},
+        component: Setting.TestSetting
       }
     ]
   },
