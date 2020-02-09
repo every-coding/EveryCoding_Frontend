@@ -1,8 +1,8 @@
 <template>
   <el-menu class="vertical_menu"
            :router="true" :default-active="currentPath">
-    <div class="logo">
-      <img src="../../../assets/logo.svg" alt="oj admin"/>
+    <div class="logo_2">
+      <img src="../../../assets/logo_3.png" alt="oj admin"/><!--해당 이미지를 학교 로고로 변경-->
     </div>
     <el-menu-item index="/"><i class="el-icon-fa-dashboard"></i>{{$t('m.Dashboard')}}</el-menu-item>
     <el-submenu v-if="isSuperAdmin" index="general">
@@ -20,8 +20,13 @@
       <el-menu-item index="/problem/batch_ops">{{$t('m.Export_Import_Problem')}}</el-menu-item>
 
     </el-submenu>
+    <el-submenu index="lecture">
+      <template slot="title"><i class="el-icon-fa-book"></i>{{$t('m.Lecture')}}</template>
+      <el-menu-item index="/lecture">{{$t('m.Lecture_List')}}</el-menu-item>
+      <el-menu-item index="/lecture/create">{{$t('m.Create_Lecture')}}</el-menu-item>
+    </el-submenu>
     <el-submenu index="contest">
-      <template slot="title"><i class="el-icon-fa-trophy"></i>{{$t('m.Contest')}}</template>
+      <template slot="title"><i class="el-icon-fa-calendar"></i>{{$t('m.Contest')}}</template>
       <el-menu-item index="/contest">{{$t('m.Contest_List')}}</el-menu-item>
       <el-menu-item index="/contest/create">{{$t('m.Create_Contest')}}</el-menu-item>
     </el-submenu>
@@ -66,6 +71,16 @@
         border: 3px solid #fff;
         width: 75px;
         height: 75px;
+      }
+    }
+    .logo_2 {
+      margin: 20px 0;
+      text-align: center;
+      img {
+        background-color: #fff;
+        border: 3px solid #fff;
+        width: 108px;
+        height: 67px;       
       }
     }
   }

@@ -112,7 +112,7 @@
     },
     methods: {
       saveContest () {
-        let funcName = this.$route.name === 'edit-contest' ? 'editContest' : 'createContest'
+        let funcName = this.$route.name === 'edit-contest' ? 'editContest' : 'createContest' // ../../router.js 파일 내부 참조하여 일치하는 component 가져옴
         let data = Object.assign({}, this.contest)
         let ranges = []
         for (let v of data.allowed_ip_ranges) {
