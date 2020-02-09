@@ -8,7 +8,7 @@
              :loading="loadings.table"
              disabled-hover></Table>
     </Panel>
-    <Pagination :total="total" :page-size="limit" @on-change="pushRouter" :current.sync="query.page"></Pagination>
+
 
     </Col>
 
