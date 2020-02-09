@@ -107,5 +107,14 @@ export const m = {
   DashBoardJudge_Server: '채점 서버',
   HTTPS_Status: 'HTTPS 상태',
   Force_HTTPS: '강제 HTTPS',
-  CDN_HOST: 'CDN 호스트'
+  CDN_HOST: 'CDN 호스트',
+  // 수강과목
+  Lecture: '수강과목',
+  Lecture_List: '수강과목 목록',
+  Create_Lecture: '수강과목 생성',
+  LectureDescription: '강의계획',
+  LectureTitle: '수강과목 제목',
+  Lecture_Start_Time: '수강과목 시작일',
+  Lecture_End_Time: '수강과목 종료일',
+  Lecture_Status: '수강과목 상태'
 }

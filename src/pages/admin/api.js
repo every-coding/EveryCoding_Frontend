@@ -179,6 +179,38 @@ export default {
       params: params
     })
   },
+
+  // Contest를 포함하는 강의 테이블 생성을 위한 함수
+
+  createLecture (data) {
+    return ajax('admin/lecture', 'post', {
+      data
+    })
+  },
+  getLecture (id) {
+    return ajax('admin/lecture', 'get', {
+      params: {
+        id
+      }
+    })
+  },
+  editLecture (data) {
+    return ajax('admin/lecture', 'put', {
+      data
+    })
+  },
+  getLectureList (offset, limit, keyword) {
+    let params = {paging: true, offset, limit}
+    if (keyword) {
+      params.keyword = keyword
+    }
+    return ajax('admin/lecture', 'get', {
+      params: params
+    })
+  },
+
+  // 임의 함수 종료
+
   getContestAnnouncementList (contestID) {
     return ajax('admin/contest/announcement', 'get', {
       params: {
