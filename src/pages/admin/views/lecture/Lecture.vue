@@ -13,6 +13,15 @@
               <Simditor v-model="lecture.description"></Simditor>
             </el-form-item>
           </el-col>
+		  <el-col :spane="8">
+		  	<el-form-item :label="$t('m.LectureStatus')" required>
+			  <el-switch
+			    v-model="lecture.status"
+				active-text=""
+				inactive-text="">
+			  </el-switch>
+			</el-form-item>
+		  </el-col>
         </el-row>
       </el-form>
       <save @click.native="saveLecture"></save>
@@ -35,7 +44,8 @@
         disableRuleType: false,
         lecture: {
           title: '',
-          description: ''
+          description: '',
+          status: false
         }
       }
     },

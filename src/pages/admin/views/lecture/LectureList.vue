@@ -31,15 +31,24 @@
           prop="title"
           label="Title">
         </el-table-column>
+		<el-table-column
+		  width="100"
+		  label="Status">
+		  <template slot-scope="scope">
+		    <el-switch v-model="scope.row.status"
+			           active-text=""
+					   inactive-text=""
+					   @change="handleVisibleSwitch(scope.row)">
+			</el-switch>
+	      </template>
+		</el-table-column>
         <el-table-column
           fixed="right"
           width="250"
           label="Operation">
           <div slot-scope="scope">
             <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
-            <icon-btn name="Problem" icon="list-ol" @click.native="goContestProblemList(scope.row.id)"></icon-btn>
-            <icon-btn name="Announcement" icon="info-circle"
-                      @click.native="goContestAnnouncement(scope.row.id)"></icon-btn>
+
           </div>
         </el-table-column>
       </el-table>
@@ -88,7 +97,7 @@
     methods: {
       currentChange (page) {
         this.currentPage = page
-        this.getContestList(page)
+        this.getLectureList(page)
       },
       getLectureList (page) {
         this.loading = true
