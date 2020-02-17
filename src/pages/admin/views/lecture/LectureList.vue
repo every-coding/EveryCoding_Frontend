@@ -48,7 +48,7 @@
           label="Operation">
           <div slot-scope="scope">
             <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
-
+            <icon-btn name="Student List" icon="list-ol" @click.native="goLectureStudentList(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>
       </el-table>
@@ -62,14 +62,6 @@
         </el-pagination>
       </div>
     </Panel>
-    <el-dialog title="Download Contest Submissions"
-               width="30%"
-               :visible.sync="downloadDialogVisible">
-      <el-switch v-model="excludeAdmin" active-text="Exclude admin submissions"></el-switch>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="downloadSubmissions">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 
@@ -115,6 +107,9 @@
       },
       goEdit (lectureId) {
         this.$router.push({name: 'edit-lecture', params: {lectureId}})
+      },
+      goLectureStudentList (lectureId) {
+        this.$router.push({name: 'lecture-student-list', params: {lectureId}})
       },
       handleVisibleSwitch (row) {
         api.editLecture(row)

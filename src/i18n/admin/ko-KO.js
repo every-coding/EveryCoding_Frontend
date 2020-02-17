@@ -116,5 +116,9 @@ export const m = {
   LectureTitle: '수강과목 제목',
   Lecture_Start_Time: '수강과목 시작일',
   Lecture_End_Time: '수강과목 종료일',
-  Lecture_Status: '수강과목 상태'
+  LectureStatus: '수강 과목 상태',
+  Lecture_Password: '수강 과목 비밀번호',
+  // 수강과목 학생
+  Student: '학생',
+  Student_List: '학생 목록'
 }
