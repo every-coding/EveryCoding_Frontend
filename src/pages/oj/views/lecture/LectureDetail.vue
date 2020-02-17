@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="contest-card" shadow>
-      <div slot="title">{{query.rule_type === '' ? this.$i18n.t('m.All') : query.rule_type}} {{$t('m.Contests')}}</div>
+      <div slot="title">{{ $route.params.lectureTitle }}</div><!--LectureList.vue에서 보낸 수강과목 title 값-->
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -39,7 +39,8 @@
       <p id="no-contest" v-if="contests.length == 0">{{$t('m.No_contest')}}</p>
       <ol id="contest-list">
         <li v-for="contest in contests" v-if="contest.assigned_lecture == $route.params.lectureID" :key="contest.title">
-            <Row type="flex" justify="space-between" align="middle"><!--contest가 수강과목 id값을 가지고 있는 경우에만 수행-->
+		<!--수강 과목에 포함된 contest만을 (contest에서 assigned lecture의 값이 lecture id 값과 같은 경우) contest를 출력한다.-->
+            <Row type="flex" justify="space-between" align="middle">
             <img class="trophy" src="../../../../assets/Cup.png"/><!--다른 이미지로 변경 요망-->
             <Col :span="18" class="contest-main">
             <p class="title">
@@ -123,8 +124,8 @@
       }
     },
     mounted () {
-      this.lectureID = this.$route.params.row.id
-      this.route_name = this.$route.name
+      // this.lectureID = this.$route.params.row.id
+      // this.route_name = this.$route.name
     },
     beforeRouteEnter (to, from, next) {
       api.getContestList(0, limit).then((res) => {

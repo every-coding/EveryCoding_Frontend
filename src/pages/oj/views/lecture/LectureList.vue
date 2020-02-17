@@ -13,7 +13,7 @@
       </div>
       <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
       <ol id="lecture-list">
-        <li v-for="lecture in lectures" :key="lecture.title">
+        <li v-for="lecture in lectures" v-if="lecture.status == true" :key="lecture.title"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
           <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
             <Col :span="18" class="lecture-main">
@@ -23,8 +23,8 @@
               </a>
             </p>
             </Col>
-            <Col :span="4" style="text-align: center">
-			<Tag type="dot">Test</Tag>
+            <Col :span="4" style="text-align: center ">
+			<Button @click="applyLecture(lecture)">수강 신청</Button>
 			</Col>
           </Row>
         </li>
@@ -106,9 +106,12 @@
       },
       goLecture (lecture) {
         this.cur_lecture_id = lecture.id
-        this.$router.push({name: 'lecture-details', params: {lectureID: lecture.id}})
+        this.$router.push({name: 'lecture-details', params: {lectureID: lecture.id, lectureTitle: lecture.title}})
       },
-
+      applyLecture (lecture) {
+        // this.
+        console.log('test')
+      },
       getDuration (startTime, endTime) {
         return time.duration(startTime, endTime)
       }
