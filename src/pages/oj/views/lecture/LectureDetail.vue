@@ -124,8 +124,8 @@
       }
     },
     mounted () {
-      // this.lectureID = this.$route.params.row.id
-      // this.route_name = this.$route.name
+      this.lectureID = this.$route.params.lectureID
+      this.route_name = this.$route.name
     },
     beforeRouteEnter (to, from, next) {
       api.getContestList(0, limit).then((res) => {
@@ -177,7 +177,7 @@
           this.$error(this.$i18n.t('m.Please_login_first'))
           this.$store.dispatch('changeModalStatus', {visible: true})
         } else {
-          this.$router.push({name: 'contest-details', params: {contestID: contest.id}})
+          this.$router.push({name: 'contest-details', params: {contestID: contest.id, lectureID: this.lectureID}})
         }
       },
 
