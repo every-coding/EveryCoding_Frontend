@@ -33,19 +33,19 @@
     </div>
     <div v-show="showMenu" id="contest-menu">
       <VerticalMenu @on-click="handleRoute">
-        <VerticalMenu-item :route="{name: 'contest-details', params: {contestID: contestID}}">
+        <VerticalMenu-item :route="{name: 'contest-details', params: {contestID: contestID, lectureID: lectureID}}">
           <Icon type="home"></Icon>
           {{$t('m.Overview')}}
         </VerticalMenu-item>
 
         <VerticalMenu-item :disabled="contestMenuDisabled"
-                           :route="{name: 'contest-announcement-list', params: {contestID: contestID}}">
+                           :route="{name: 'contest-announcement-list', params: {contestID: contestID, lectureID: lectureID}}">
           <Icon type="chatbubble-working"></Icon>
           {{$t('m.Announcements')}}
         </VerticalMenu-item>
 
         <VerticalMenu-item :disabled="contestMenuDisabled"
-                           :route="{name: 'contest-problem-list', params: {contestID: contestID}}">
+                           :route="{name: 'contest-problem-list', params: {contestID: contestID, lectureID: lectureID}}">
           <Icon type="ios-photos"></Icon>
           {{$t('m.Problems')}}
         </VerticalMenu-item>
@@ -59,13 +59,13 @@
 
         <VerticalMenu-item v-if="OIContestRealTimePermission"
                            :disabled="contestMenuDisabled"
-                           :route="{name: 'contest-rank', params: {contestID: contestID}}">
+                           :route="{name: 'contest-rank', params: {contestID: contestID, lectureID: lectureID}}">
           <Icon type="stats-bars"></Icon>
           {{$t('m.Rankings')}}
         </VerticalMenu-item>
 
         <VerticalMenu-item v-if="showAdminHelper"
-                           :route="{name: 'acm-helper', params: {contestID: contestID}}">
+                           :route="{name: 'acm-helper', params: {contestID: contestID, lectureID: lectureID}}">
           <Icon type="ios-paw"></Icon>
           {{$t('m.Admin_Helper')}}
         </VerticalMenu-item>
@@ -91,6 +91,7 @@
         route_name: '',
         btnLoading: false,
         contestID: '',
+        lectureID: '',
         contestPassword: '',
         columns: [
           {
@@ -134,6 +135,7 @@
     },
     mounted () {
       this.contestID = this.$route.params.contestID
+      this.lectureID = this.$route.params.lectureID
       this.route_name = this.$route.name
       this.$store.dispatch('getContest').then(res => {
         this.changeDomTitle({title: res.data.data.title})

@@ -168,6 +168,11 @@
                 }
               }, params.row.username)
             }
+          },
+          {
+            title: this.$i18n.t('m.Lecture_id'),
+            align: 'center',
+            key: 'lecture'
           }
         ],
         loadingTable: false,
