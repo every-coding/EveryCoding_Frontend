@@ -228,6 +228,7 @@
         captchaSrc: '',
         contestID: '',
         problemID: '',
+        lectureID: '',
         submitting: false,
         code: '',
         language: 'C++',
@@ -281,6 +282,7 @@
         this.$Loading.start()
         this.contestID = this.$route.params.contestID
         this.problemID = this.$route.params.problemID
+        this.lectureID = this.$route.params.lectureID
         let func = this.$route.name === 'problem-details' ? 'getProblem' : 'getContestProblem'
         api[func](this.problemID, this.contestID).then(res => {
           this.$Loading.finish()
@@ -395,6 +397,7 @@
         }
         this.refreshStatus = setTimeout(checkStatus, 2000)
       },
+      // 코드 제출 버튼
       submitCode () {
         if (this.code.trim() === '') {
           this.$error(this.$i18n.t('m.Code_can_not_be_empty'))
@@ -407,12 +410,15 @@
           problem_id: this.problem.id,
           language: this.language,
           code: this.code,
-          contest_id: this.contestID
+          contest_id: this.contestID,
+          lecture_id: this.lectureID
         }
+        console.log('lecture id 1 ' + data.lecture_id)
         if (this.captchaRequired) {
           data.captcha = this.captchaCode
         }
         const submitFunc = (data, detailsVisible) => {
+          console.log('lecture id 2 ' + data.lecture_id)
           this.statusVisible = true
           api.submitCode(data).then(res => {
             this.submissionId = res.data.data && res.data.data.submission_id
