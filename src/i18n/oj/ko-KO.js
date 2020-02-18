@@ -18,6 +18,10 @@ export const m = {
   Tags: '태그',
   Show: '보기',
   Submit: '제출',
+  Pick_One: '랜덤 문제',
+  Reset: '초기화',
+  Total: '시도 횟수',
+  AC_Rate: '정답율',
   // About.vue
   Result_Explanation: '결과 설명',
   Pending_Juding: '곧 채점 될 예정입니다. 잠시만 기다려주세요.',

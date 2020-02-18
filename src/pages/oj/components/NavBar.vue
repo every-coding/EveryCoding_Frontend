@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <Menu theme="light" mode="horizontal" @on-select="handleRoute" :active-name="activeMenu" class="oj-menu">
-      <div class="logo"><span>{{website.website_name}}</span></div>
+      <div class="logo"><span>Code.cu.ac.kr</span></div>
       <Menu-item name="/">
         <Icon type="home"></Icon>
         {{$t('m.Home')}}
@@ -14,10 +14,10 @@
 	  	<Icon type="ios-book"></Icon>
 		{{$t('m.Lectures')}}
 	  </Menu-item>
-      <!--<Menu-item name="/contest">
+      <Menu-item name="/contest">
         <Icon type="ios-book"></Icon>
         {{$t('m.Contests')}}
-      </Menu-item><!--실습, 과제 항목은 실 서비스 기간에는 비활성화할것.-->-->
+      </Menu-item><!--실습, 과제 항목은 실 서비스 기간에는 비활성화할것.-->
       <Menu-item name="/status">
         <Icon type="ios-pulse-strong"></Icon>
         {{$t('m.NavStatus')}}

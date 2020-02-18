@@ -7,8 +7,7 @@
       </transition>
       <div class="footer">
         <p v-html="website.website_footer"></p>
-        <p>Powered by <a href="https://github.com/QingdaoU/OnlineJudge">OnlineJudge</a>
-          <span v-if="version">&nbsp; Version: {{ version }}</span>
+        <p>Powered by <a href="https://cu.ac.kr" target="_blank">Daegu Catholic university</a>
         </p>
       </div>
     </div>
