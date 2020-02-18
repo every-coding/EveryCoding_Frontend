@@ -108,7 +108,8 @@
         contests: [],
         CONTEST_STATUS_REVERSE: CONTEST_STATUS_REVERSE,
 //      for password modal use
-        cur_contest_id: ''
+        cur_contest_id: '',
+        lectureID: ''
       }
     },
     beforeRouteEnter (to, from, next) {

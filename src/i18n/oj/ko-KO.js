@@ -12,11 +12,12 @@ export const m = {
   Information: '정보',
   Time_Limit: '시간 제한',
   Memory_Limit: '메모리 제한',
-  Created: 'Created',
+  Created: '출제자',
   Level: '레벨',
   Score: '점수',
   Tags: '태그',
   Show: '보기',
+  Submit: '제출',
   // About.vue
   Result_Explanation: '결과 설명',
   Pending_Juding: '곧 채점 될 예정입니다. 잠시만 기다려주세요.',
@@ -105,5 +106,11 @@ export const m = {
   UserHomeIntro: '아직 어떠한 문제도 풀지 않았습니다.',
   Test: '테스트',
   // Lecture
-  Lectures: '수강 과목'
+  Lectures: '수강 과목',
+  // Submission
+  When: '제출 일자',
+  Time: '소요 시간',
+  Language: '언어',
+  Author: '코드 작성자 id',
+  Lecture_id: '소속 수강 과목'
 }
