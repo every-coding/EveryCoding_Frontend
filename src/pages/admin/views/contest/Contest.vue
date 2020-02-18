@@ -60,7 +60,7 @@
               </el-switch>
             </el-form-item>
           </el-col>
-          <el-col :span="24">
+          <el-col :span="16">
             <el-form-item :label="$t('m.Allowed_IP_Ranges')">
               <div v-for="(range, index) in contest.allowed_ip_ranges" :key="index">
                 <el-row :gutter="20" style="margin-bottom: 15px">
@@ -73,6 +73,11 @@
                   </el-col>
                 </el-row>
               </div>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item :label="$t('m.Contest_assigned_lecture')">
+              <el-input v-model="contest.assigned_lecture_id" :placeholder="$t('m.Contest_assigned_lecture')"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -104,6 +109,7 @@
           password: '',
           real_time_rank: true,
           visible: true,
+          assigned_lecture_id: '',
           allowed_ip_ranges: [{
             value: ''
           }]
@@ -114,6 +120,7 @@
       saveContest () {
         let funcName = this.$route.name === 'edit-contest' ? 'editContest' : 'createContest' // ../../router.js 파일 내부 참조하여 일치하는 component 가져옴
         let data = Object.assign({}, this.contest)
+        console.log(data.assigned_lecture)
         let ranges = []
         for (let v of data.allowed_ip_ranges) {
           if (v.value !== '') {

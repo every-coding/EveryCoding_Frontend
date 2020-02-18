@@ -101,6 +101,7 @@ export const m = {
   Contest_Status: '대회 상태',
   Allowed_IP_Ranges: '허용된 IP 범위',
   CIDR_Network: 'CIDR 네트워크',
+  Contest_assigned_lecture: '소속된 수강과목 id',
   // Dashboard.vue
   Last_Login: '최근 로그인',
   System_Overview: '시스템 개요',
