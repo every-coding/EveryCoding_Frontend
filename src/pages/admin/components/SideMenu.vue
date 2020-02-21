@@ -19,15 +19,15 @@
       <el-menu-item index="/problem/create">{{$t('m.Create_Problem')}}</el-menu-item>
       <el-menu-item index="/problem/batch_ops">{{$t('m.Export_Import_Problem')}}</el-menu-item>
     </el-submenu>
-    <el-submenu index="lecture">
-      <template slot="title"><i class="el-icon-fa-book"></i>{{$t('m.Lecture')}}</template>
-      <el-menu-item index="/lecture">{{$t('m.Lecture_List')}}</el-menu-item>
-      <el-menu-item index="/lecture/create">{{$t('m.Create_Lecture')}}</el-menu-item>
-    </el-submenu>
     <el-submenu index="contest">
       <template slot="title"><i class="el-icon-fa-calendar"></i>{{$t('m.Contest')}}</template>
       <el-menu-item index="/contest">{{$t('m.Contest_List')}}</el-menu-item>
       <el-menu-item index="/contest/create">{{$t('m.Create_Contest')}}</el-menu-item>
+    </el-submenu>
+    <el-submenu index="lecture">
+      <template slot="title"><i class="el-icon-fa-book"></i>{{$t('m.Lecture')}}</template>
+      <el-menu-item index="/lecture">{{$t('m.Lecture_List')}}</el-menu-item>
+      <el-menu-item index="/lecture/create">{{$t('m.Create_Lecture')}}</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>

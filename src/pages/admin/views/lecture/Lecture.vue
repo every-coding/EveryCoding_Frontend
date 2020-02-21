@@ -1,41 +1,34 @@
-<template><!--관리자 페이지의 수강과목 생성 페이지 -->
-  <div class="view">
-    <Panel :title="title">
-      <el-form label-position="top">
-        <el-row :gutter="20">
-          <el-col :span="24">
-            <el-form-item :label="$t('m.LectureTitle')" required>
-              <el-input v-model="lecture.title" :placeholder="$t('m.LectureTitle')"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="24">
-            <el-form-item :label="$t('m.LectureDescription')" required>
-              <Simditor v-model="lecture.description"></Simditor>
-            </el-form-item>
-          </el-col>
-		  <el-col :spane="8">
-		  	<el-form-item :label="$t('m.LectureStatus')" required>
-			  <el-switch
-			    v-model="lecture.status"
-				active-text=""
-				inactive-text="">
-			  </el-switch>
-			</el-form-item>
-		  </el-col>
-		  <el-col :spane="8">
-		  	<el-form-item :label="$t('m.Lecture_Password')" required>
-			  <el-input
-			    v-model="lecture.password"
-				active-text=""
-				inactive-text="">
-			  </el-input>
-			</el-form-item>
-		  </el-col>
-        </el-row>
-      </el-form>
-      <save @click.native="saveLecture"></save>
-    </Panel>
-  </div>
+<template>
+    <!--관리자 페이지의 수강과목 생성 페이지 -->
+    <div class="view">
+        <Panel :title="title">
+            <el-form label-position="top">
+                <el-row :gutter="20">
+                    <el-col :span="24">
+                        <el-form-item :label="$t('m.LectureTitle')" required="required">
+                            <el-input v-model="lecture.title" :placeholder="$t('m.LectureTitle')"></el-input>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                        <el-form-item :label="$t('m.LectureDescription')" required="required">
+                            <Simditor v-model="lecture.description"></Simditor>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item :label="$t('m.LectureStatus')" required="required">
+                            <el-switch v-model="lecture.status" active-text="" inactive-text=""></el-switch>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item :label="$t('m.Lecture_Password')" required="required">
+                            <el-input v-model="lecture.password" active-text="" inactive-text=""></el-input>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+            </el-form>
+            <save @click.native="saveLecture"></save>
+        </Panel>
+    </div>
 </template>
 
 <script>
@@ -55,7 +48,10 @@
           title: '',
           description: '',
           status: false,
-          password: ''
+          password: '',
+          contestlist: [{
+            value: ''
+          }]
         }
       }
     },
@@ -67,6 +63,15 @@
           this.$router.push({name: 'lecture-list', query: {refresh: 'true'}})
         }).catch(() => {
         })
+      },
+      addContest () {
+        this.lecture.contestlist.push({value: ''})
+      },
+      removeContest (range) {
+        let index = this.contest.contestlist.indexOf(range)
+        if (index !== -1) {
+          this.lecture.contestlist.splice(index, 1)
+        }
       }
     },
     mounted () {
@@ -77,6 +82,8 @@
           this.lecture = data
         }).catch(() => {
         })
+      } else if (this.$route.name === 'lecture-contest-list') {
+        this.title = 'Add Lecture'
       }
     }
   }

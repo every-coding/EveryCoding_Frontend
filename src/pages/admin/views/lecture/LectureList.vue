@@ -48,6 +48,7 @@
           label="Operation">
           <div slot-scope="scope">
             <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
+            <icon-btn name="Contest List" icon="list-ol" @click.native="goLectureContestList(scope.row.id)"></icon-btn>
             <icon-btn name="Student List" icon="list-ol" @click.native="goLectureStudentList(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>
@@ -107,6 +108,9 @@
       },
       goEdit (lectureId) {
         this.$router.push({name: 'edit-lecture', params: {lectureId}})
+      },
+      goLectureContestList (lectureId) {
+        this.$router.push({name: 'lecture-contest-list', params: {lectureId}})
       },
       goLectureStudentList (lectureId) {
         this.$router.push({name: 'lecture-student-list', params: {lectureId}})

@@ -52,7 +52,7 @@ export const m = {
   Rank: '랭킹',
   ACM_Rank: 'ACM 랭킹',
   OI_Rank: 'OI 랭킹',
-  About: 'About',
+  About: '정보',
   Judger: '채점 시스템',
   FAQ: 'FAQ',
   Login: '로그인',
@@ -111,6 +111,7 @@ export const m = {
   Test: '테스트',
   // Lecture
   Lectures: '수강 과목',
+  No_lecture: '수강 과목 없음',
   // Submission
   When: '제출 일자',
   Time: '소요 시간',

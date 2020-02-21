@@ -413,12 +413,11 @@
           contest_id: this.contestID,
           lecture_id: this.lectureID
         }
-        console.log('lecture id 1 ' + data.lecture_id)
+        console.log(data)
         if (this.captchaRequired) {
           data.captcha = this.captchaCode
         }
         const submitFunc = (data, detailsVisible) => {
-          console.log('lecture id 2 ' + data.lecture_id)
           this.statusVisible = true
           api.submitCode(data).then(res => {
             this.submissionId = res.data.data && res.data.data.submission_id
