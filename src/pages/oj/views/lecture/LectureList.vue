@@ -24,7 +24,7 @@
             </p>
             </Col>
             <Col :span="4" style="text-align: center ">
-			<Button @click="applyLecture(lecture)">수강 신청</Button>
+			<Button @click="applylecture(lecture)">수강 신청</Button>
 			</Col>
           </Row>
         </li>
@@ -63,7 +63,8 @@
         rows: '',
         lectures: [],
 //      for password modal use
-        cur_lecture_id: ''
+        cur_lecture_id: '',
+        sugaing: false
       }
     },
     beforeRouteEnter (to, from, next) {
@@ -108,9 +109,20 @@
         this.cur_lecture_id = lecture.id
         this.$router.push({name: 'lecture-details', params: {lectureID: lecture.id, lectureTitle: lecture.title}})
       },
-      applyLecture (lecture) {
-        // this.
-        console.log('test')
+      applylecture (lecture) {
+        if (!this.user.username) {
+          this.$error('로그인 후 가능합니다.')
+        } else {
+          let data = {
+            lecture_id: lecture.id,
+            user_id: this.user.id,
+            status: false
+          }
+          console.log(data)
+          api.applyLecture(data).then(res => {
+            this.$success('Success')
+          })
+        }
       },
       getDuration (startTime, endTime) {
         return time.duration(startTime, endTime)
