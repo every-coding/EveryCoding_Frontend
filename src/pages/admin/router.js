@@ -75,6 +75,11 @@ export default new VueRouter({
           component: Contest
         },
         {
+          path: '/lecture/:lectureId/contests/create',
+          name: 'create-lecture-contest',
+          component: Contest
+        },
+        {
           path: '/contest',
           name: 'contest-list',
           component: ContestList
@@ -115,7 +120,12 @@ export default new VueRouter({
           component: LectureList
         },
         {
-          path: '/lecture/:lectureId/student',
+          path: '/lecture/:lectureId/contests',
+          name: 'lecture-contest-list',
+          component: ContestList
+        },
+        {
+          path: '/lecture/:lectureId/students',
           name: 'lecture-student-list',
           component: StudentList
         },

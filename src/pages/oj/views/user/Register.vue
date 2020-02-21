@@ -140,6 +140,7 @@
       handleRegister () {
         this.validateForm('formRegister').then(valid => {
           let formData = Object.assign({}, this.formRegister)
+          console.log(formData)
           delete formData['passwordAgain']
           this.btnRegisterLoading = true
           api.register(formData).then(res => {

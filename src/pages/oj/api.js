@@ -162,6 +162,11 @@ export default {
       }
     })
   }, // lecture API 끝
+  applyLecture (data) {
+    return ajax('signupclass', 'post', {
+      data
+    })
+  },
   getContestList (offset, limit, searchParams) {
     let params = {
       offset,

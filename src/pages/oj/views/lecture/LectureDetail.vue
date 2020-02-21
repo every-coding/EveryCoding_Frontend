@@ -38,7 +38,7 @@
       </div>
       <p id="no-contest" v-if="contests.length == 0">{{$t('m.No_contest')}}</p>
       <ol id="contest-list">
-        <li v-for="contest in contests" v-if="contest.assigned_lecture == $route.params.lectureID" :key="contest.title">
+        <li v-for="contest in contests" :key="contest.title">
 		<!--수강 과목에 포함된 contest만을 (contest에서 assigned lecture의 값이 lecture id 값과 같은 경우) contest를 출력한다.-->
             <Row type="flex" justify="space-between" align="middle">
             <img class="trophy" src="../../../../assets/Cup.png"/><!--다른 이미지로 변경 요망-->
@@ -65,15 +65,6 @@
                   {{contest.rule_type}}
                 </Button>
               </li>
-              <!--<li>
-                Test Print : 
-                {{ contest.assigned_lecture }}
-                {{ $route.params.lectureID }}
-              </li>
-              <li>
-                Test Print : 
-                {{ contest.id }}
-              </li>-->
             </ul>
             </Col>
             <Col :span="4" style="text-align: center">

@@ -153,32 +153,6 @@ export default {
       }
     })
   },
-  createContest (data) {
-    return ajax('admin/contest', 'post', {
-      data
-    })
-  },
-  getContest (id) {
-    return ajax('admin/contest', 'get', {
-      params: {
-        id
-      }
-    })
-  },
-  editContest (data) {
-    return ajax('admin/contest', 'put', {
-      data
-    })
-  },
-  getContestList (offset, limit, keyword) {
-    let params = {paging: true, offset, limit}
-    if (keyword) {
-      params.keyword = keyword
-    }
-    return ajax('admin/contest', 'get', {
-      params: params
-    })
-  },
 
   // Contest를 포함하는 강의 테이블 생성을 위한 함수
 
@@ -241,6 +215,32 @@ export default {
   compileSPJ (data) {
     return ajax('admin/compile_spj', 'post', {
       data
+    })
+  },
+  createContest (data) {
+    return ajax('admin/contest', 'post', {
+      data
+    })
+  },
+  getContest (id) {
+    return ajax('admin/contest', 'get', {
+      params: {
+        id
+      }
+    })
+  },
+  editContest (data) {
+    return ajax('admin/contest', 'put', {
+      data
+    })
+  },
+  getContestList (offset, limit, keyword) {
+    let params = {paging: true, offset, limit}
+    if (keyword) {
+      params.keyword = keyword
+    }
+    return ajax('admin/contest', 'get', {
+      params: params
     })
   },
   createProblem (data) {
@@ -310,6 +310,11 @@ export default {
   },
   addProblemFromPublic (data) {
     return ajax('admin/contest/add_problem_from_public', 'post', {
+      data
+    })
+  },
+  addContestFromPublic (data) {
+    return ajax('admin/lecture/add_contest_from_public', 'post', {
       data
     })
   },
