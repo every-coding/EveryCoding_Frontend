@@ -83,6 +83,13 @@
         </el-table-column>
       </el-table>
       <div class="panel-options">
+        <el-button type="primary" size="small"
+                   @click="goCreateContest" icon="el-icon-plus">강의 생성
+        </el-button>
+        <el-button v-if="lectureId" type="primary"
+                   size="small" icon="el-icon-plus"
+                   @click="addContestDialogVisible = true">Add From Public Contest
+        </el-button>
         <el-pagination
           class="page"
           layout="prev, pager, next"
@@ -100,6 +107,13 @@
         <el-button type="primary" @click="downloadSubmissions">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog title="Add Lecture Contest"
+               v-if="lectureId"
+               width="80%"
+               :visible.sync="addContestDialogVisible"
+               @close-on-click-modal="false">
+      <add-contest-component :lectureID="lectureId" @on-change="getContestList"></add-contest-component>
+    </el-dialog>
   </div>
 </template>
 
@@ -107,9 +121,13 @@
   import api from '../../api.js'
   import utils from '@/utils/utils'
   import {CONTEST_STATUS_REVERSE} from '@/utils/constants'
+  import AddContestComponent from './AddPublicContest.vue'
 
   export default {
     name: 'ContestList',
+    components: {
+      AddContestComponent
+    },
     data () {
       return {
         pageSize: 10,
@@ -119,11 +137,16 @@
         loading: false,
         excludeAdmin: true,
         currentPage: 1,
+        routeName: '',
         currentId: 1,
-        downloadDialogVisible: false
+        lectureId: '',
+        downloadDialogVisible: false,
+        addContestDialogVisible: false
       }
     },
     mounted () {
+      this.routeName = this.$route.name
+      this.lectureId = this.$route.params.lectureId
       this.getContestList(this.currentPage)
     },
     filters: {
@@ -137,12 +160,28 @@
         this.currentPage = page
         this.getContestList(page)
       },
+      goCreateContest () {
+        if (this.routeName === 'contest-list') {
+          this.$router.push({name: 'create-contest'})
+        } else if (this.routeName === 'lecture-contest-list') {
+          this.$router.push({name: 'create-lecture-contest', params: {contestId: this.contestId}})
+        }
+      },
       getContestList (page) {
         this.loading = true
         api.getContestList((page - 1) * this.pageSize, this.pageSize, this.keyword).then(res => {
           this.loading = false
           this.total = res.data.data.total
           this.contestList = res.data.data.results
+          let i = 0
+          console.log(this.lectureId)
+          this.contestList.forEach(element => {
+            console.log(element.lecture_id)
+            if (element.lecture_id !== this.lectureId) {
+              delete this.contestList[i]
+            }
+            i++
+          })
         }, res => {
           this.loading = false
         })
