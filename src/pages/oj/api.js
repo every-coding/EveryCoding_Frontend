@@ -163,7 +163,7 @@ export default {
     })
   }, // lecture API 끝
   applyLecture (data) {
-    return ajax('signupclass', 'post', {
+    return ajax('lectureapply', 'post', {
       data
     })
   },

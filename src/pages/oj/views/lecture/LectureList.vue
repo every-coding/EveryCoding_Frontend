@@ -24,7 +24,8 @@
             </p>
             </Col>
             <Col :span="4" style="text-align: center ">
-			<Button @click="applylecture(lecture)">수강 신청</Button>
+          <Button v-if="lecture.isapply" @click="applylecture(lecture)" disabled>Applied</Button>
+          <Button v-else @click="applylecture(lecture)">Apply</Button>
 			</Col>
           </Row>
         </li>
@@ -64,7 +65,8 @@
         lectures: [],
 //      for password modal use
         cur_lecture_id: '',
-        sugaing: false
+        sugaing: false,
+        apptext: 'Apply'
       }
     },
     beforeRouteEnter (to, from, next) {
@@ -120,6 +122,7 @@
           }
           console.log(data)
           api.applyLecture(data).then(res => {
+            this.getLectureList(this.page)
             this.$success('Success')
           })
         }
