@@ -18,14 +18,16 @@
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
             <Col :span="18" class="lecture-main">
             <p class="title">
-              <a class="entry" @click.stop="goLecture(lecture)">
-                {{lecture.title}}
+              <a v-if="lecture.isallow" class="entry" @click.stop="goLecture(lecture)">
+                <b>{{lecture.title}}</b>
               </a>
+              <span v-else>{{lecture.title}}</span>
             </p>
             </Col>
             <Col :span="4" style="text-align: center ">
-          <Button v-if="lecture.isapply" @click="applylecture(lecture)" disabled>Applied</Button>
-          <Button v-else @click="applylecture(lecture)">Apply</Button>
+          <Button v-if="lecture.isallow" @click.stop="goLecture(lecture)">수강하기</Button>
+          <Button v-else-if="lecture.isapply" @click="applylecture(lecture)" disabled>수강신청완료</Button>
+          <Button v-else @click="applylecture(lecture)">수강신청</Button>
 			</Col>
           </Row>
         </li>

@@ -8,7 +8,7 @@
       <!--children end-->
       <div class="flex-container" v-if="route_name === 'contest-details'">
         <template>
-          <div id="contest-desc">
+          <div v-if="isvisible" id="contest-desc">
             <Panel :padding="20" shadow>
               <div slot="title">
                 {{contest.title}}
@@ -31,7 +31,7 @@
         </template>
       </div>
     </div>
-    <div v-show="showMenu" id="contest-menu">
+    <div v-if="isvisible" v-show="showMenu" id="contest-menu">
       <VerticalMenu @on-click="handleRoute">
         <VerticalMenu-item :route="{name: 'contest-details', params: {contestID: contestID, lectureID: lectureID}}">
           <Icon type="home"></Icon>
@@ -93,6 +93,7 @@
         contestID: '',
         lectureID: '',
         contestPassword: '',
+        isvisible: false,
         columns: [
           {
             title: this.$i18n.t('m.Id'),
@@ -140,6 +141,8 @@
       this.$store.dispatch('getContest').then(res => {
         this.changeDomTitle({title: res.data.data.title})
         let data = res.data.data
+        this.isvisible = res.data.data.visible
+        this.lectureID = res.data.data.lecture
         let endTime = moment(data.end_time)
         if (endTime.isAfter(moment(data.now))) {
           this.timer = setInterval(() => {
