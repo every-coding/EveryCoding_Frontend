@@ -79,15 +79,18 @@ export const CONTEST_STATUS = {
 export const CONTEST_STATUS_REVERSE = {
   '1': {
     name: 'Not Started',
-    color: 'yellow'
+    color: 'yellow',
+    display: '시작전'
   },
   '0': {
     name: 'Underway',
-    color: 'green'
+    color: 'green',
+    display: '진행중'
   },
   '-1': {
     name: 'Ended',
-    color: 'red'
+    color: 'red',
+    display: '종료'
   }
 }
 
