@@ -1,3 +1,5 @@
+#config ignore
+config/
 # Logs
 logs
 *.log

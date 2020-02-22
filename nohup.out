@@ -448,7 +448,11 @@ npm ERR! There is likely additional logging output above.
 npm ERR! Please include the following file with any support request:
 npm ERR!     /home/server/OnlineJudgeFE/OnlineJudgeFE/npm-debug.log
 
+<<<<<<< HEAD
 > onlinejudge@2.0.0 dev /home/server/OJ_FRONT/OnlineJudgeFE/OnlineJudgeFE
+=======
+> onlinejudge@2.0.0 dev /home/server/OJ_FRONT/OnlineJudgeFE_RYAN/OnlineJudgeFE
+>>>>>>> 67c9911454cdfabe3a03d2a20feb6addaeaa02f9
 > node build/dev-server.js
 
 current version is "20200222-bee3d"
@@ -459,16 +463,25 @@ oj
 admin
 - ./src/pages/admin/index.js
 
+<<<<<<< HEAD
 [HPM] Proxy created: /api  ->  http://localhost:8000
 [HPM] Proxy created: /public  ->  http://localhost:8000
 > Starting dev server...
 { parser: "babylon" } is deprecated; we now treat it as { parser: "babel" }.
  WARNING  Compiled with 1 warnings오후 3:43:25
+=======
+[HPM] Proxy created: /api  ->  http://localhost:8001
+[HPM] Proxy created: /public  ->  http://localhost:8001
+> Starting dev server...
+{ parser: "babylon" } is deprecated; we now treat it as { parser: "babel" }.
+ WARNING  Compiled with 1 warnings오후 3:39:58
+>>>>>>> 67c9911454cdfabe3a03d2a20feb6addaeaa02f9
 
  warning  in ./src/pages/admin/router.js
 
 108:17-28 "export 'StudentList' was not found in './views'
 
+<<<<<<< HEAD
 > Listening at http://localhost:8080
 
 [HPM] Error occurred while trying to proxy request /api/profile from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
@@ -492,4 +505,7 @@ admin
  warning  in ./src/pages/admin/router.js
 
 108:17-28 "export 'StudentList' was not found in './views'
+=======
+> Listening at http://localhost:8081
+>>>>>>> 67c9911454cdfabe3a03d2a20feb6addaeaa02f9
 
