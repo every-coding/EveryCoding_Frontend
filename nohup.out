@@ -1,0 +1,495 @@
+
+> onlinejudge@2.0.0 dev /home/server/OnlineJudgeFE/OnlineJudgeFE
+> node build/dev-server.js
+
+current version is "20200222-1bd09"
+All entries: 
+oj
+- ./src/pages/oj/index.js
+
+admin
+- ./src/pages/admin/index.js
+
+/home/server/OnlineJudgeFE/OnlineJudgeFE/node_modules/http-proxy-middleware/lib/config-factory.js:43
+    throw new Error(ERRORS.ERR_CONFIG_FACTORY_TARGET_MISSING)
+    ^
+
+Error: [HPM] Missing "target" option. Example: {target: "http://www.example.org"}
+    at Object.createConfig (/home/server/OnlineJudgeFE/OnlineJudgeFE/node_modules/http-proxy-middleware/lib/config-factory.js:43:11)
+    at new HttpProxyMiddleware (/home/server/OnlineJudgeFE/OnlineJudgeFE/node_modules/http-proxy-middleware/lib/index.js:17:30)
+    at module.exports (/home/server/OnlineJudgeFE/OnlineJudgeFE/node_modules/http-proxy-middleware/index.js:4:10)
+    at /home/server/OnlineJudgeFE/OnlineJudgeFE/build/dev-server.js:56:11
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (/home/server/OnlineJudgeFE/OnlineJudgeFE/build/dev-server.js:51:25)
+    at Module._compile (module.js:652:30)
+    at Object.Module._extensions..js (module.js:663:10)
+    at Module.load (module.js:565:32)
+    at tryModuleLoad (module.js:505:12)
+    at Function.Module._load (module.js:497:3)
+    at Function.Module.runMain (module.js:693:10)
+    at startup (bootstrap_node.js:188:16)
+    at bootstrap_node.js:609:3
+
+npm ERR! Linux 5.3.0-40-generic
+npm ERR! argv "/usr/bin/node" "/usr/bin/npm" "run" "dev"
+npm ERR! node v8.10.0
+npm ERR! npm  v3.5.2
+npm ERR! code ELIFECYCLE
+npm ERR! onlinejudge@2.0.0 dev: `node build/dev-server.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the onlinejudge@2.0.0 dev script 'node build/dev-server.js'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the onlinejudge package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node build/dev-server.js
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs onlinejudge
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls onlinejudge
+npm ERR! There is likely additional logging output above.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /home/server/OnlineJudgeFE/OnlineJudgeFE/npm-debug.log
+
+> onlinejudge@2.0.0 dev /home/server/OnlineJudgeFE/OnlineJudgeFE
+> node build/dev-server.js
+
+current version is "20200222-1bd09"
+All entries: 
+oj
+- ./src/pages/oj/index.js
+
+admin
+- ./src/pages/admin/index.js
+
+/home/server/OnlineJudgeFE/OnlineJudgeFE/node_modules/http-proxy-middleware/lib/config-factory.js:43
+    throw new Error(ERRORS.ERR_CONFIG_FACTORY_TARGET_MISSING)
+    ^
+
+Error: [HPM] Missing "target" option. Example: {target: "http://www.example.org"}
+    at Object.createConfig (/home/server/OnlineJudgeFE/OnlineJudgeFE/node_modules/http-proxy-middleware/lib/config-factory.js:43:11)
+    at new HttpProxyMiddleware (/home/server/OnlineJudgeFE/OnlineJudgeFE/node_modules/http-proxy-middleware/lib/index.js:17:30)
+    at module.exports (/home/server/OnlineJudgeFE/OnlineJudgeFE/node_modules/http-proxy-middleware/index.js:4:10)
+    at /home/server/OnlineJudgeFE/OnlineJudgeFE/build/dev-server.js:56:11
+    at Array.forEach (<anonymous>)
+    at Object.<anonymous> (/home/server/OnlineJudgeFE/OnlineJudgeFE/build/dev-server.js:51:25)
+    at Module._compile (module.js:652:30)
+    at Object.Module._extensions..js (module.js:663:10)
+    at Module.load (module.js:565:32)
+    at tryModuleLoad (module.js:505:12)
+    at Function.Module._load (module.js:497:3)
+    at Function.Module.runMain (module.js:693:10)
+    at startup (bootstrap_node.js:188:16)
+    at bootstrap_node.js:609:3
+
+npm ERR! Linux 5.3.0-40-generic
+npm ERR! argv "/usr/bin/node" "/usr/bin/npm" "run" "dev"
+npm ERR! node v8.10.0
+npm ERR! npm  v3.5.2
+npm ERR! code ELIFECYCLE
+npm ERR! onlinejudge@2.0.0 dev: `node build/dev-server.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the onlinejudge@2.0.0 dev script 'node build/dev-server.js'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the onlinejudge package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node build/dev-server.js
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs onlinejudge
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls onlinejudge
+npm ERR! There is likely additional logging output above.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /home/server/OnlineJudgeFE/OnlineJudgeFE/npm-debug.log
+
+> onlinejudge@2.0.0 dev /home/server/OnlineJudgeFE/OnlineJudgeFE
+> node build/dev-server.js
+
+current version is "20200222-1bd09"
+All entries: 
+oj
+- ./src/pages/oj/index.js
+
+admin
+- ./src/pages/admin/index.js
+
+[HPM] Proxy created: /api  ->  http://127.0.0.1:8000
+[HPM] Proxy created: /public  ->  http://127.0.0.1:8000
+> Starting dev server...
+{ parser: "babylon" } is deprecated; we now treat it as { parser: "babel" }.
+ WARNING  Compiled with 1 warnings오전 1:12:50
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+> Listening at http://localhost:8080
+
+ WAIT  Compiling...오전 1:35:26
+
+ ERROR  Failed to compile with 1 errors오전 1:35:28
+
+ error  in ./src/pages/admin/views/contest/ContestList.vue
+
+
+  ⚠  http://eslint.org/docs/rules/no-unused-vars      'i' is assigned a value but never used   
+  src/pages/admin/views/contest/ContestList.vue:176:15
+            let i = 0
+                 ^
+
+  ✘  http://eslint.org/docs/rules/no-trailing-spaces  Trailing spaces not allowed              
+  src/pages/admin/views/contest/ContestList.vue:178:3
+            
+     ^
+
+  ✘  http://eslint.org/docs/rules/padded-blocks       Block must not be padded by blank lines  
+  src/pages/admin/views/contest/ContestList.vue:179:9
+          }, res => {
+           ^
+
+
+✘ 3 problems (2 errors, 1 warning)
+
+
+Errors:
+  1  http://eslint.org/docs/rules/padded-blocks
+  1  http://eslint.org/docs/rules/no-trailing-spaces
+
+Warnings:
+  1  http://eslint.org/docs/rules/no-unused-vars
+
+ @ ./src/pages/admin/views/index.js 9:0-52
+ @ ./src/pages/admin/router.js
+ @ ./src/pages/admin/index.js
+ @ multi ./build/dev-client ./src/pages/admin/index.js
+
+ WAIT  Compiling...오전 1:35:51
+
+ WARNING  Compiled with 1 warnings오전 1:35:54
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+ WAIT  Compiling...오전 1:36:40
+
+ WARNING  Compiled with 1 warnings오전 1:36:44
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+ WAIT  Compiling...오전 2:17:07
+
+ WARNING  Compiled with 2 warnings오전 2:17:10
+
+
+  ⚠  http://eslint.org/docs/rules/no-unused-vars  'i' is assigned a value but never used  
+  src/pages/admin/views/contest/ContestList.vue:176:15
+            let i = 0
+                 ^
+
+
+✘ 1 problem (0 errors, 1 warning)
+
+
+Warnings:
+  1  http://eslint.org/docs/rules/no-unused-vars
+
+You may use special comments to disable some warnings.
+Use // eslint-disable-next-line to ignore the next line.
+Use /* eslint-disable */ to ignore all warnings in a file.
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+ WAIT  Compiling...오전 2:27:50
+
+ WARNING  Compiled with 1 warnings오전 2:27:54
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+ WAIT  Compiling...오전 2:34:27
+
+ ERROR  Failed to compile with 1 errors오전 2:34:29
+
+ error  in ./src/pages/admin/views/contest/ContestList.vue
+
+
+  ⚠  http://eslint.org/docs/rules/no-unused-vars   'funcName' is assigned a value but never used    
+  src/pages/admin/views/contest/ContestList.vue:172:13
+          let funcName = this.routeName === 'contest-list' ? 'getContestList' : 'getLectureContestList'
+               ^
+
+  ⚠  http://eslint.org/docs/rules/no-unused-vars   'params' is assigned a value but never used      
+  src/pages/admin/views/contest/ContestList.vue:173:13
+          let params = {
+               ^
+
+  ✘  http://eslint.org/docs/rules/space-infix-ops  Infix operators must be spaced                   
+  src/pages/admin/views/contest/ContestList.vue:175:25
+            offset: (page -1) * this.pageSize,
+                           ^
+
+  ✘  http://eslint.org/docs/rules/key-spacing      Missing space before value for key 'lecture_id'  
+  src/pages/admin/views/contest/ContestList.vue:177:22
+            lecture_id:this.lecture
+                        ^
+
+
+✘ 4 problems (2 errors, 2 warnings)
+
+
+Errors:
+  1  http://eslint.org/docs/rules/key-spacing
+  1  http://eslint.org/docs/rules/space-infix-ops
+
+Warnings:
+  2  http://eslint.org/docs/rules/no-unused-vars
+
+ @ ./src/pages/admin/views/index.js 9:0-52
+ @ ./src/pages/admin/router.js
+ @ ./src/pages/admin/index.js
+ @ multi ./build/dev-client ./src/pages/admin/index.js
+
+ WAIT  Compiling...오전 2:34:39
+
+ ERROR  Failed to compile with 1 errors오전 2:34:40
+
+ error  in ./src/pages/admin/views/contest/ContestList.vue
+
+
+  ⚠  http://eslint.org/docs/rules/no-unused-vars   'funcName' is assigned a value but never used    
+  src/pages/admin/views/contest/ContestList.vue:172:13
+          let funcName = this.routeName === 'contest-list' ? 'getContestList' : 'getLectureContestList'
+               ^
+
+  ⚠  http://eslint.org/docs/rules/no-unused-vars   'params' is assigned a value but never used      
+  src/pages/admin/views/contest/ContestList.vue:173:13
+          let params = {
+               ^
+
+  ✘  http://eslint.org/docs/rules/space-infix-ops  Infix operators must be spaced                   
+  src/pages/admin/views/contest/ContestList.vue:175:25
+            offset: (page -1) * this.pageSize,
+                           ^
+
+  ✘  http://eslint.org/docs/rules/key-spacing      Missing space before value for key 'lecture_id'  
+  src/pages/admin/views/contest/ContestList.vue:177:22
+            lecture_id:this.lectureid
+                        ^
+
+
+✘ 4 problems (2 errors, 2 warnings)
+
+
+Errors:
+  1  http://eslint.org/docs/rules/key-spacing
+  1  http://eslint.org/docs/rules/space-infix-ops
+
+Warnings:
+  2  http://eslint.org/docs/rules/no-unused-vars
+
+ @ ./src/pages/admin/views/index.js 9:0-52
+ @ ./src/pages/admin/router.js
+ @ ./src/pages/admin/index.js
+ @ multi ./build/dev-client ./src/pages/admin/index.js
+
+ WAIT  Compiling...오전 2:34:47
+
+ ERROR  Failed to compile with 1 errors오전 2:34:48
+
+ error  in ./src/pages/admin/views/contest/ContestList.vue
+
+
+  ⚠  http://eslint.org/docs/rules/no-unused-vars   'funcName' is assigned a value but never used    
+  src/pages/admin/views/contest/ContestList.vue:172:13
+          let funcName = this.routeName === 'contest-list' ? 'getContestList' : 'getLectureContestList'
+               ^
+
+  ⚠  http://eslint.org/docs/rules/no-unused-vars   'params' is assigned a value but never used      
+  src/pages/admin/views/contest/ContestList.vue:173:13
+          let params = {
+               ^
+
+  ✘  http://eslint.org/docs/rules/space-infix-ops  Infix operators must be spaced                   
+  src/pages/admin/views/contest/ContestList.vue:175:25
+            offset: (page -1) * this.pageSize,
+                           ^
+
+  ✘  http://eslint.org/docs/rules/key-spacing      Missing space before value for key 'lecture_id'  
+  src/pages/admin/views/contest/ContestList.vue:177:22
+            lecture_id:this.lectureId
+                        ^
+
+
+✘ 4 problems (2 errors, 2 warnings)
+
+
+Errors:
+  1  http://eslint.org/docs/rules/key-spacing
+  1  http://eslint.org/docs/rules/space-infix-ops
+
+Warnings:
+  2  http://eslint.org/docs/rules/no-unused-vars
+
+ @ ./src/pages/admin/views/index.js 9:0-52
+ @ ./src/pages/admin/router.js
+ @ ./src/pages/admin/index.js
+ @ multi ./build/dev-client ./src/pages/admin/index.js
+
+ WAIT  Compiling...오전 2:35:40
+
+ ERROR  Failed to compile with 1 errors오전 2:35:41
+
+ error  in ./src/pages/admin/views/contest/ContestList.vue
+
+
+  ✘  http://eslint.org/docs/rules/space-infix-ops  Infix operators must be spaced                   
+  src/pages/admin/views/contest/ContestList.vue:175:25
+            offset: (page -1) * this.pageSize,
+                           ^
+
+  ✘  http://eslint.org/docs/rules/key-spacing      Missing space before value for key 'lecture_id'  
+  src/pages/admin/views/contest/ContestList.vue:177:22
+            lecture_id:this.lectureId
+                        ^
+
+
+✘ 2 problems (2 errors, 0 warnings)
+
+
+Errors:
+  1  http://eslint.org/docs/rules/key-spacing
+  1  http://eslint.org/docs/rules/space-infix-ops
+
+ @ ./src/pages/admin/views/index.js 9:0-52
+ @ ./src/pages/admin/router.js
+ @ ./src/pages/admin/index.js
+ @ multi ./build/dev-client ./src/pages/admin/index.js
+
+ WAIT  Compiling...오전 2:35:54
+
+ ERROR  Failed to compile with 1 errors오전 2:35:55
+
+ error  in ./src/pages/admin/views/contest/ContestList.vue
+
+
+  ✘  http://eslint.org/docs/rules/space-infix-ops  Infix operators must be spaced  
+  src/pages/admin/views/contest/ContestList.vue:175:25
+            offset: (page -1) * this.pageSize,
+                           ^
+
+
+✘ 1 problem (1 error, 0 warnings)
+
+
+Errors:
+  1  http://eslint.org/docs/rules/space-infix-ops
+
+ @ ./src/pages/admin/views/index.js 9:0-52
+ @ ./src/pages/admin/router.js
+ @ ./src/pages/admin/index.js
+ @ multi ./build/dev-client ./src/pages/admin/index.js
+
+ WAIT  Compiling...오전 2:36:02
+
+ WARNING  Compiled with 1 warnings오전 2:36:05
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+ WAIT  Compiling...오전 2:39:30
+
+ WARNING  Compiled with 1 warnings오전 2:39:33
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+ WAIT  Compiling...오전 2:42:34
+
+ WARNING  Compiled with 1 warnings오전 2:42:37
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+Killed
+
+npm ERR! Linux 5.3.0-40-generic
+npm ERR! argv "/usr/bin/node" "/usr/bin/npm" "run" "dev"
+npm ERR! node v8.10.0
+npm ERR! npm  v3.5.2
+npm ERR! code ELIFECYCLE
+npm ERR! onlinejudge@2.0.0 dev: `node build/dev-server.js`
+npm ERR! Exit status 137
+npm ERR! 
+npm ERR! Failed at the onlinejudge@2.0.0 dev script 'node build/dev-server.js'.
+npm ERR! Make sure you have the latest version of node.js and npm installed.
+npm ERR! If you do, this is most likely a problem with the onlinejudge package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node build/dev-server.js
+npm ERR! You can get information on how to open an issue for this project with:
+npm ERR!     npm bugs onlinejudge
+npm ERR! Or if that isn't available, you can get their info via:
+npm ERR!     npm owner ls onlinejudge
+npm ERR! There is likely additional logging output above.
+
+npm ERR! Please include the following file with any support request:
+npm ERR!     /home/server/OnlineJudgeFE/OnlineJudgeFE/npm-debug.log
+
+> onlinejudge@2.0.0 dev /home/server/OJ_FRONT/OnlineJudgeFE/OnlineJudgeFE
+> node build/dev-server.js
+
+current version is "20200222-bee3d"
+All entries: 
+oj
+- ./src/pages/oj/index.js
+
+admin
+- ./src/pages/admin/index.js
+
+[HPM] Proxy created: /api  ->  http://localhost:8000
+[HPM] Proxy created: /public  ->  http://localhost:8000
+> Starting dev server...
+{ parser: "babylon" } is deprecated; we now treat it as { parser: "babel" }.
+ WARNING  Compiled with 1 warnings오후 3:43:25
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
+> Listening at http://localhost:8080
+
+[HPM] Error occurred while trying to proxy request /api/profile from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/website from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/profile from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/lectures?offset=0&limit=8 from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/profile from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/announcement?offset=0&limit=10 from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/contests?offset=0&limit=5&status=1 from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/website from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/profile from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/profile from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/profile from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/announcement?offset=0&limit=10 from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/contests?offset=0&limit=5&status=1 from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+[HPM] Error occurred while trying to proxy request /api/website from 203.250.33.233:8080 to http://localhost:8000 (ECONNREFUSED) (https://nodejs.org/api/errors.html#errors_common_system_errors)
+ WAIT  Compiling...오후 4:26:05
+
+ WARNING  Compiled with 1 warnings오후 4:26:09
+
+ warning  in ./src/pages/admin/router.js
+
+108:17-28 "export 'StudentList' was not found in './views'
+
