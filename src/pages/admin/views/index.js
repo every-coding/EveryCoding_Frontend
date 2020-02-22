@@ -13,9 +13,10 @@ import Home from './Home.vue'
 import ProblemImportOrExport from './problem/ImportAndExport.vue'
 import Lecture from './lecture/Lecture.vue'
 import LectureList from './lecture/LectureList.vue'
+import StudentList from './lecture/StudentList.vue'
 
 export {
   Announcement, User, Conf, JudgeServer, Problem, ProblemList, Contest,
   ContestList, Login, Home, PruneTestCase, Dashboard, ProblemImportOrExport,
-  Lecture, LectureList
+  Lecture, LectureList, StudentList
 }
