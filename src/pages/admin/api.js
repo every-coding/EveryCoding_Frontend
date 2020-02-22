@@ -54,11 +54,22 @@ export default {
       data
     })
   },
-  // 获取用户列表
   getUserList (offset, limit, keyword) {
     let params = {paging: true, offset, limit}
     if (keyword) {
       params.keyword = keyword
+    }
+    return ajax('admin/user', 'get', {
+      params: params
+    })
+  },
+  getLectureUserList (offset, limit, keyword, lectureid) {
+    let params = {paging: true, offset, limit}
+    if (keyword) {
+      params.keyword = keyword
+    }
+    if (lectureid) {
+      params.lectureid = lectureid
     }
     return ajax('admin/user', 'get', {
       params: params
