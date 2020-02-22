@@ -234,13 +234,16 @@ export default {
       data
     })
   },
-  getContestList (offset, limit, keyword) {
-    let params = {paging: true, offset, limit}
-    if (keyword) {
-      params.keyword = keyword
-    }
+  getContestList (params) {
+    params = utils.filterEmptyValue(params)
     return ajax('admin/contest', 'get', {
-      params: params
+      params
+    })
+  },
+  getLectureContestList (params) {
+    params = utils.filterEmptyValue(params)
+    return ajax('admin/lecture/contest', 'get', {
+      params
     })
   },
   createProblem (data) {

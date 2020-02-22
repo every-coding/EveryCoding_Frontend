@@ -169,19 +169,17 @@
       },
       getContestList (page) {
         this.loading = true
-        api.getContestList((page - 1) * this.pageSize, this.pageSize, this.keyword).then(res => {
+        let funcName = this.routeName === 'contest-list' ? 'getContestList' : 'getLectureContestList'
+        let params = {
+          limit: this.pageSize,
+          offset: (page - 1) * this.pageSize,
+          keyword: this.keyword,
+          lecture_id: this.lectureId
+        }
+        api[funcName](params).then(res => {
           this.loading = false
           this.total = res.data.data.total
           this.contestList = res.data.data.results
-          let i = 0
-          console.log(this.lectureId)
-          this.contestList.forEach(element => {
-            console.log(element.lecture_id)
-            if (element.lecture_id !== this.lectureId) {
-              delete this.contestList[i]
-            }
-            i++
-          })
         }, res => {
           this.loading = false
         })
