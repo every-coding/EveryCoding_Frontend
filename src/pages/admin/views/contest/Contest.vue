@@ -106,7 +106,8 @@
           visible: true,
           allowed_ip_ranges: [{
             value: ''
-          }]
+          }],
+          lecture_id: null
         }
       }
     },
@@ -137,6 +138,7 @@
       }
     },
     mounted () {
+      this.lecture_id = this.$route.params.lecture_id
       if (this.$route.name === 'edit-contest') {
         this.title = 'Edit Contest'
         this.disableRuleType = true
