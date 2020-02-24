@@ -90,12 +90,13 @@
                 <Input v-model="captchaCode" class="captcha-code"/>
               </div>
             </template>
-            <Button type="warning" icon="edit" :loading="submitting" @click="submitCode"
+            <Button v-if="problemRes" type="warning" icon="edit" :loading="submitting" @click="submitCode"
                     :disabled="problemSubmitDisabled || submitted"
                     class="fl-right">
               <span v-if="submitting">{{$t('m.Submitting')}}</span>
               <span v-else>{{$t('m.Submit')}}</span>
             </Button>
+            <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
           </Col>
         </Row>
       </Card>
@@ -224,6 +225,7 @@
         captchaRequired: false,
         graphVisible: false,
         submissionExists: false,
+        problemRes: false,
         captchaCode: '',
         captchaSrc: '',
         contestID: '',
@@ -288,8 +290,11 @@
           this.$Loading.finish()
           let problem = res.data.data
           this.changeDomTitle({title: problem.title})
-          api.submissionExists(problem.id).then(res => {
+          api.submissionExists(problem.id, this.lectureID, this.contestID).then(res => {
             this.submissionExists = res.data.data
+          })
+          api.problemResponsible(problem.id, this.lectureID, this.contestID).then(res => {
+            this.problemRes = res.data.data
           })
           problem.languages = problem.languages.sort()
           this.problem = problem
