@@ -70,7 +70,7 @@
         </el-table-column>
         <el-table-column
           fixed="right"
-          width="250"
+          width="280"
           label="Operation">
           <div slot-scope="scope">
             <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
@@ -79,6 +79,7 @@
                       @click.native="goContestAnnouncement(scope.row.id)"></icon-btn>
             <icon-btn icon="download" name="Download Accepted Submissions"
                       @click.native="openDownloadOptions(scope.row.id)"></icon-btn>
+            <icon-btn name="Delete" icon="trash" @click.native="deleteContest(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>
       </el-table>
@@ -184,6 +185,18 @@
           this.loading = false
         })
       },
+      deleteContest (id) {
+        this.$confirm('정말로 이 강의를 삭제하시겠습니까?', 'confirm', {
+          type: 'warning'
+        }).then(() => {
+          api.deleteContest(id).then(res => {
+            this.getContestList(this.currentPage)
+          }).catch(() => {
+            this.getContestList(this.currentPage)
+          })
+        }, () => {
+        })
+      },
       openDownloadOptions (contestId) {
         this.downloadDialogVisible = true
         this.currentId = contestId
@@ -203,6 +216,7 @@
         this.$router.push({name: 'contest-problem-list', params: {contestId}})
       },
       handleVisibleSwitch (row) {
+        row.lecture_id = null
         api.editContest(row)
       }
     },
