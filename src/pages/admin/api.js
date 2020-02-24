@@ -195,7 +195,11 @@ export default {
   },
 
   // 임의 함수 종료
-
+  acceptstudent (data) {
+    return ajax('admin/acceptstudent', 'post', {
+      data
+    })
+  },
   getContestAnnouncementList (contestID) {
     return ajax('admin/contest/announcement', 'get', {
       params: {

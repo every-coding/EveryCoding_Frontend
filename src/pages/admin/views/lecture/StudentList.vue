@@ -15,37 +15,37 @@
         ref="table"
         :data="userList"
         style="width: 100%">
-        <el-table-column type="selection" width="55"></el-table-column>
+        <el-table-column prop="user.username" label="사용자명"></el-table-column>
 
-        <el-table-column prop="id" label="ID"></el-table-column>
-
-        <el-table-column prop="username" label="Username"></el-table-column>
-
-        <el-table-column prop="create_time" label="Create Time">
+        <el-table-column prop="user.create_time" label="생성 날짜">
           <template slot-scope="scope">
-            {{scope.row.create_time | localtime }}
+            {{scope.row.user.create_time | localtime }}
           </template>
         </el-table-column>
 
-        <el-table-column prop="last_login" label="Last Login">
+        <el-table-column prop="last_login" label="마지막 로그인">
           <template slot-scope="scope">
-            {{scope.row.last_login | localtime }}
+            {{scope.row.user.last_login | localtime }}
           </template>
         </el-table-column>
 
-        <el-table-column prop="real_name" label="Real Name"></el-table-column>
+        <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
 
-        <el-table-column prop="email" label="Email"></el-table-column>
+        <el-table-column prop="user.email" label="이메일"></el-table-column>
 
-        <el-table-column prop="admin_type" label="User Type">
+        <el-table-column prop="user.admin_type" label="사용자 유형">
           <template slot-scope="scope">
-            {{ scope.row.admin_type }}
+            {{ scope.row.user.admin_type }}
           </template>
         </el-table-column>
-
-        <el-table-column fixed="right" label="Option" width="200">
+        <el-table-column prop="isallow" label="수강 유무">
+          <template slot-scope="scope">
+            {{ scope.row.isallow }}
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="" width="200">
           <template slot-scope="{row}">
-            <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent"></icon-btn>
+            <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
           </template>
         </el-table-column>
       </el-table>
@@ -113,7 +113,18 @@
         this.currentPage = page
         this.getUserList(page)
       },
-      // 提交修改用户的信息
+      AcceptStudent (userid) {
+        console.log(userid)
+        let data = {
+          lecture_id: this.lectureID,
+          user_id: userid
+        }
+        console.log(data)
+        api.acceptstudent(data).then(res => {
+          this.getUserList(this.page)
+          this.$success('Success')
+        })
+      },
       saveUser () {
         api.editUser(this.user).then(res => {
           // 更新列表
@@ -139,6 +150,7 @@
           this.loadingTable = false
           this.total = res.data.data.total
           this.userList = res.data.data.results
+          console.log(this.userList)
         }, res => {
           this.loadingTable = false
         })
