@@ -249,6 +249,13 @@ export default {
       data
     })
   },
+  deleteContest (id) {
+    return ajax('admin/contest', 'delete', {
+      params: {
+        id
+      }
+    })
+  },
   getContestList (params) {
     params = utils.filterEmptyValue(params)
     return ajax('admin/contest', 'get', {
