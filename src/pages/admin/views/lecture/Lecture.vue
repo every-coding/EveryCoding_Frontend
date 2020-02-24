@@ -15,12 +15,12 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item :label="$t('m.LectureStatus')" required="required">
+                        <el-form-item :label="$t('m.LectureStatus')">
                             <el-switch v-model="lecture.status" active-text="" inactive-text=""></el-switch>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item :label="$t('m.Lecture_Password')" required="required">
+                        <el-form-item :label="$t('m.Lecture_Password')">
                             <el-input v-model="lecture.password" active-text="" inactive-text=""></el-input>
                         </el-form-item>
                     </el-col>
