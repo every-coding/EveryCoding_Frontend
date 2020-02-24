@@ -253,10 +253,21 @@ export default {
       }
     })
   },
-  submissionExists (problemID) {
+  submissionExists (problemID, lectureID, contestID) {
     return ajax('submission_exists', 'get', {
       params: {
-        problem_id: problemID
+        problem_id: problemID,
+        lecture_id: lectureID,
+        contest_id: contestID
+      }
+    })
+  },
+  problemResponsible (problemID, lectureID, contestID) {
+    return ajax('problemResponsible', 'get', {
+      params: {
+        problem_id: problemID,
+        lecture_id: lectureID,
+        contest_id: contestID
       }
     })
   },
