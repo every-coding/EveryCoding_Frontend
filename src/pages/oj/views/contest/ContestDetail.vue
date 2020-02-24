@@ -142,6 +142,9 @@
         this.changeDomTitle({title: res.data.data.title})
         let data = res.data.data
         this.isvisible = res.data.data.visible
+        if (this.isvisible === false) {
+          this.$error('잘못된 경로로 진입했습니다.')
+        }
         this.lectureID = res.data.data.lecture
         let endTime = moment(data.end_time)
         if (endTime.isAfter(moment(data.now))) {

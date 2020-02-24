@@ -1,6 +1,6 @@
 <template>
   <div class="flex-container">
-    <div id="problem-main">
+    <div v-if="problemRes" id="problem-main">
       <!--problem main-->
       <Panel :padding="40" shadow>
         <div slot="title">{{problem.title}}</div>
@@ -101,6 +101,7 @@
         </Row>
       </Card>
     </div>
+    <div v-else="problemRes"></div>
 
     <div id="right-column">
       <VerticalMenu @on-click="handleRoute">
