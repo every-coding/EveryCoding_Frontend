@@ -114,8 +114,10 @@
     methods: {
       saveContest () {
         let funcName = this.$route.name === 'edit-contest' ? 'editContest' : 'createContest' // ../../router.js 파일 내부 참조하여 일치하는 component 가져옴
-        // this.lecture_id = this.$route.params.lectureId
-        this.contest.lecture_id = this.$route.params.lectureId
+        if (this.$route.params.lectureId) {
+          this.contest.lecture_id = this.$route.params.lectureId
+        }
+        console.log(this.contest.lecture_id)
         let data = Object.assign({}, this.contest)
         let ranges = []
         for (let v of data.allowed_ip_ranges) {
