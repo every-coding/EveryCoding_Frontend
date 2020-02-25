@@ -24,8 +24,12 @@
         </el-table-column>
         <el-table-column
           prop="id"
-          width="80"
+          width="50"
           label="ID">
+        </el-table-column>
+        <el-table-column
+          prop="lecture.title"
+          label="소속된 수강과목">
         </el-table-column>
         <el-table-column
           prop="title"
@@ -33,14 +37,14 @@
         </el-table-column>
         <el-table-column
           label="Rule Type"
-          width="130">
+          width="100">
           <template slot-scope="scope">
             <el-tag type="gray">{{scope.row.rule_type}}</el-tag>
           </template>
         </el-table-column>
         <el-table-column
           label="Contest Type"
-          width="180">
+          width="120">
           <template slot-scope="scope">
             <el-tag :type="scope.row.contest_type === 'Public' ? 'success' : 'primary'">
               {{ scope.row.contest_type}}
@@ -58,7 +62,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          width="100"
+          width="80"
           label="Visible">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.visible"
