@@ -116,6 +116,8 @@
         let funcName = this.$route.name === 'edit-contest' ? 'editContest' : 'createContest' // ../../router.js 파일 내부 참조하여 일치하는 component 가져옴
         if (this.$route.params.lectureId) {
           this.contest.lecture_id = this.$route.params.lectureId
+        } else {
+          this.contest.lecture_id = null
         }
         console.log(this.contest.lecture_id)
         let data = Object.assign({}, this.contest)
@@ -142,8 +144,6 @@
       }
     },
     mounted () {
-      this.lecture_id = this.$route.params.lectureId
-      console.log(this.lecture_id)
       if (this.$route.name === 'edit-contest') {
         this.title = 'Edit Contest'
         this.disableRuleType = true
@@ -163,6 +163,10 @@
       } else if (this.$route.name === 'create-lecture-contest') {
         this.title = 'Add Contest'
       }
+      console.log('test 1 ' + this.$route.params.lectureId)
+      console.log('test 2 ' + this.lecture_id)
+      this.lecture_id = this.$route.params.lectureId
+      console.log('test 3 ' + this.lecture_id)
     }
   }
 </script>
