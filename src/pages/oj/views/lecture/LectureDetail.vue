@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="contest-card" shadow>
-      <div slot="title">{{ $route.params.lectureTitle }}</div><!--LectureList.vue에서 보낸 수강과목 title 값-->
+      <div slot="title">{{ lecture_Title }}</div><!--LectureList.vue에서 보낸 수강과목 title 값-->
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -19,7 +19,7 @@
           </li>
           <li>
             <Dropdown @on-click="onStatusChange">
-              <span>{{query.status === '' ? this.$i18n.t('m.Status') : this.$i18n.t('m.' + CONTEST_STATUS_REVERSE[query.status].name.replace(/ /g,"_"))}}
+              <span>{{query.status === '' ? this.$i18n.t('m.Status') : this.$i18n.t('m.' + CONTEST_STATUS_REVERSE[query.status].display.replace(/ /g,"_"))}}
                 <Icon type="arrow-down-b"></Icon>
               </span>
               <Dropdown-menu slot="list">
@@ -68,7 +68,7 @@
             </ul>
             </Col>
             <Col :span="4" style="text-align: center">
-              <Tag type="dot" :color="CONTEST_STATUS_REVERSE[contest.status].color">{{$t('m.' + CONTEST_STATUS_REVERSE[contest.status].name.replace(/ /g, "_"))}}</Tag>
+              <Tag type="dot" :color="CONTEST_STATUS_REVERSE[contest.status].color">{{$t(CONTEST_STATUS_REVERSE[contest.status].display)}}</Tag>
             </Col>
             </Row>
         </li>
@@ -97,13 +97,15 @@
     },
     data () {
       return {
+        lecture_Title: '',
         lectureID: '',
         page: 1,
         route_name: '',
         query: {
           status: '',
           keyword: '',
-          rule_type: ''
+          rule_type: '',
+          lectureid: ''
         },
         limit: limit,
         total: 0,
@@ -115,26 +117,17 @@
       }
     },
     mounted () {
-      this.lectureID = this.$route.params.lectureID
-      this.route_name = this.$route.name
-    },
-    beforeRouteEnter (to, from, next) {
-      api.getContestList(0, limit).then((res) => {
-        next((vm) => {
-          vm.contests = res.data.data.results
-          vm.total = res.data.data.total
-        })
-      }, (res) => {
-        next()
-      })
+      this.init()
     },
     methods: {
       init () {
         let route = this.$route.query
         this.query.status = route.status || ''
         this.query.rule_type = route.rule_type || ''
-        this.query.keyword = route.keyword || 'test'
+        this.query.keyword = route.keyword
+        this.query.lectureid = this.$route.params.lectureID
         this.page = parseInt(route.page) || 1
+        this.lecture_Title = this.$route.params.lectureTitle
         this.getContestList()
       },
       getContestList (page = 1) {

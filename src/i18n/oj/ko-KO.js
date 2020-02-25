@@ -18,6 +18,7 @@ export const m = {
   Tags: '태그',
   Show: '보기',
   Submit: '제출',
+  WrongPath: '잘못된 경로로 들어오셨습니다.',
   Pick_One: '랜덤 문제',
   Reset: '초기화',
   Total: '시도 횟수',
