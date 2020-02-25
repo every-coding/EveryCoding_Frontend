@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="lecture-card" shadow>
-      <div slot="title"><b>{{$t('m.Lectures')}}</b></div>
+      <div slot="title"><b>{{$t('m.Signup_Lectures')}}</b></div>
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -12,9 +12,9 @@
         </ul>
       </div>
       <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
-      <ol id="lecture-list">
+      <ol id="course-list">
         <li v-for="lecture in lectures" v-if="lecture.status == true" :key="lecture.title"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
-          <Row v-if="!lecture.isapply" type="flex" justify="space-between" align="middle">
+          <Row v-if="lecture.isapply" type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
             <Col :span="18" class="lecture-main">
             <p class="title">
@@ -49,7 +49,7 @@
   const limit = 8
 
   export default {
-    name: 'lecture-list',
+    name: 'course-list',
     components: {
       Pagination
     },
@@ -157,7 +157,7 @@
       font-size: 16px;
       padding: 20px;
     }
-    #lecture-list {
+    #course-list {
       > li {
         padding: 20px;
         border-bottom: 1px solid rgba(187, 187, 187, 0.5);
