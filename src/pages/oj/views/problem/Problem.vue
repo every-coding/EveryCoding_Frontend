@@ -405,6 +405,7 @@
       },
       // 코드 제출 버튼
       submitCode () {
+        console.log(this.$store.state.contest.contest.lecture)
         if (this.code.trim() === '') {
           this.$error(this.$i18n.t('m.Code_can_not_be_empty'))
           return
@@ -417,7 +418,7 @@
           language: this.language,
           code: this.code,
           contest_id: this.contestID,
-          lecture_id: this.lectureID
+          lecture_id: this.$store.state.contest.contest.lecture
         }
         console.log(data)
         if (this.captchaRequired) {
