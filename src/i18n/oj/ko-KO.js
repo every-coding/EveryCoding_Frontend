@@ -8,7 +8,7 @@ export const m = {
   Sample_Output: '예시 출력',
   Hint: '힌트',
   Source: '소스코드',
-  Status: '상태',
+  Status: '제출 상태',
   Information: '정보',
   Time_Limit: '시간 제한',
   Memory_Limit: '메모리 제한',
@@ -46,8 +46,8 @@ export const m = {
 
   // NavBar.vue
   Home: '홈',
-  NavProblems: '문제',
-  Contests: '실습, 과제',
+  NavProblems: '공개 문제',
+  Contests: '대회',
   NavStatus: '상태',
   Rank: '랭킹',
   ACM_Rank: 'ACM 랭킹',
@@ -110,7 +110,9 @@ export const m = {
   UserHomeIntro: '아직 어떠한 문제도 풀지 않았습니다.',
   Test: '테스트',
   // Lecture
-  Lectures: '수강 과목',
+  Signup_Lectures: '수강 과목',
+  Lectures: '개설 과목',
+  Lecture_Contests: '문제',
   No_lecture: '수강 과목 없음',
   // Submission
   When: '제출 일자',
