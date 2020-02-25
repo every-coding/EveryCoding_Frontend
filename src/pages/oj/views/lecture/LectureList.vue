@@ -13,8 +13,8 @@
       </div>
       <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
       <ol id="lecture-list">
-        <li v-for="lecture in lectures" v-if="lecture.status == true" :key="lecture.title"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
-          <Row v-if="!lecture.isapply" type="flex" justify="space-between" align="middle">
+        <li v-for="lecture in lectures" v-if="!lecture.isapply" :key="lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
+          <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
             <Col :span="18" class="lecture-main">
             <p class="title">
