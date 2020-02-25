@@ -6,7 +6,7 @@
         <Icon type="home"></Icon>
         {{$t('m.Home')}}
       </Menu-item>
-      <Menu-item name="/lecture">
+      <Menu-item name="/CourseList">
         <Icon type="ios-book"></Icon>
       {{$t('m.Signup_Lectures')}}
       </Menu-item>

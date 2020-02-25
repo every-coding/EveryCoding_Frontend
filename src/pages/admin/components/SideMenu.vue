@@ -79,7 +79,7 @@
         background-color: #fff;
         border: 3px solid #fff;
         width: 108px;
-        height: 67px;       
+        height: 67px;
       }
     }
   }
