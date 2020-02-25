@@ -73,6 +73,12 @@ export default [
     component: SubmissionDetails
   }, // contest를 포괄하는 lecture 시작
   {
+    name: 'course-list',
+    path: '/CourseList',
+    meta: {title: 'Course List'},
+    component: Lecture.CourseList
+  },
+  {
     name: 'lecture-list',
     path: '/lecture',
     meta: {title: 'Lecture List'},
