@@ -6,18 +6,22 @@
         <Icon type="home"></Icon>
         {{$t('m.Home')}}
       </Menu-item>
+      <Menu-item name="/lecture">
+        <Icon type="ios-book"></Icon>
+      {{$t('m.Signup_Lectures')}}
+      </Menu-item>
+      <Menu-item name="/lecture">
+        <Icon type="ios-book"></Icon>
+      {{$t('m.Lectures')}}
+      </Menu-item>
+      <Menu-item name="/contest">
+        <Icon type="ios-book"></Icon>
+        {{$t('m.Contests')}}
+      </Menu-item>
       <Menu-item name="/problem">
         <Icon type="ios-keypad"></Icon>
         {{$t('m.NavProblems')}}
       </Menu-item>
-	  <Menu-item name="/lecture">
-	  	<Icon type="ios-book"></Icon>
-		{{$t('m.Lectures')}}
-	  </Menu-item>
-      <Menu-item name="/contest">
-        <Icon type="ios-book"></Icon>
-        {{$t('m.Contests')}}
-      </Menu-item><!--실습, 과제 항목은 실 서비스 기간에는 비활성화할것.-->
       <Menu-item name="/status">
         <Icon type="ios-pulse-strong"></Icon>
         {{$t('m.NavStatus')}}
