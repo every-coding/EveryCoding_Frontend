@@ -193,13 +193,21 @@ export default {
       params: params
     })
   },
-
   // 임의 함수 종료
-  acceptstudent (data) {
-    return ajax('admin/acceptstudent', 'post', {
+  // 수강신청한 학생들에 대한 함수
+  acceptStudent (data) {
+    return ajax('admin/signupstudent', 'post', {
       data
     })
   },
+  denyStudent (id) {
+    return ajax('admin/signupstudent', 'delete', {
+      params: {
+        id
+      }
+    })
+  },
+  // 수강신청한 학생들에 대한 함수 종료
   getContestAnnouncementList (contestID) {
     return ajax('admin/contest/announcement', 'get', {
       params: {

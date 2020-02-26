@@ -46,6 +46,7 @@
         <el-table-column fixed="right" label="" width="200">
           <template slot-scope="{row}">
             <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
+            <icon-btn name="Deny" icon="trash" @click.native="DenyStudent(row.user.id)"></icon-btn>
           </template>
         </el-table-column>
       </el-table>
@@ -120,9 +121,22 @@
           user_id: userid
         }
         console.log(data)
-        api.acceptstudent(data).then(res => {
+        api.acceptStudent(data).then(res => {
           this.getUserList(this.page)
           this.$success('Success')
+        })
+      },
+      DenyStudent (userid) {
+        this.$confirm('해당 학생의 수강신청을 삭제하시겠습니까?', 'confirm', {
+          type: 'warning'
+        }).then(() => {
+          console.log('userid : ' + userid)
+          api.denyStudent(userid).then(res => {
+            this.getUserList(this.page)
+          }).catch(() => {
+            this.getUserList(this.page)
+          })
+        }, () => {
         })
       },
       saveUser () {
@@ -150,7 +164,7 @@
           this.loadingTable = false
           this.total = res.data.data.total
           this.userList = res.data.data.results
-          console.log(this.userList)
+          // console.log(this.userList)
         }, res => {
           this.loadingTable = false
         })
