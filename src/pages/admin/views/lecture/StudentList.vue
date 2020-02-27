@@ -15,34 +15,27 @@
         ref="table"
         :data="userList"
         style="width: 100%">
-        <el-table-column prop="user.username" label="사용자명"></el-table-column>
-
-        <el-table-column prop="user.create_time" label="생성 날짜">
-          <template slot-scope="scope">
-            {{scope.row.user.create_time | localtime }}
-          </template>
-        </el-table-column>
-
-        <el-table-column prop="last_login" label="마지막 로그인">
-          <template slot-scope="scope">
-            {{scope.row.user.last_login | localtime }}
-          </template>
-        </el-table-column>
-
+        <el-table-column prop="user.username" label="로그인 ID"></el-table-column>
+        <el-table-column prop="" label="실제 이름"></el-table-column>
+        <el-table-column prop="" label="학번"></el-table-column>
         <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
 
-        <el-table-column prop="user.email" label="이메일"></el-table-column>
-
-        <el-table-column prop="user.admin_type" label="사용자 유형">
-          <template slot-scope="scope">
-            {{ scope.row.user.admin_type }}
-          </template>
-        </el-table-column>
+        <el-table-column prop="user.email" label="이메일" width="180"></el-table-column>
         <el-table-column prop="isallow" label="수강 유무">
           <template slot-scope="scope">
             {{ scope.row.isallow }}
           </template>
         </el-table-column>
+        <el-table-column prop="totalProblem" label="총 문제 수" width="90"></el-table-column>
+        <el-table-column prop="solveProblem" label="해결 수" width="90"></el-table-column>
+        <el-table-column prop="totalScore" label="총점" width="90"></el-table-column>
+        <el-table-column prop="avgScore" label="평균" width="90"></el-table-column>
+        <!--<el-table-column prop="user.admin_type" label="사용자 유형">
+          <template slot-scope="scope">
+            {{ scope.row.user.admin_type }}
+          </template>
+        </el-table-column>-->
+        
         <el-table-column fixed="right" label="" width="200">
           <template slot-scope="{row}">
             <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
