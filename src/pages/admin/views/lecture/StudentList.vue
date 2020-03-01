@@ -22,9 +22,14 @@
 
         <el-table-column prop="user.email" label="이메일" width="180"></el-table-column>
         <el-table-column prop="isallow" label="수강 유무">
-          <template slot-scope="scope">
-            {{ scope.row.isallow }}
-          </template>
+          <template slot-scope="scope"> <!--true 일 때 출력하는 템플릿-->
+            <span v-if="scope.row.isallow" style="background-color:green; color:white">
+              {{ scope.row.isallow }}
+            </span>
+            <span v-else style="background-color:red; color:white">
+              {{ scope.row.isallow }}
+            </span>
+          </template>template>
         </el-table-column>
         <el-table-column prop="totalProblem" label="총 문제 수" width="90"></el-table-column>
         <el-table-column prop="solveProblem" label="해결 수" width="90"></el-table-column>

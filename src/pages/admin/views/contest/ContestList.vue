@@ -28,7 +28,7 @@
           label="ID">
         </el-table-column>
         <el-table-column
-          prop="lecture.title"
+          prop="lecture_title"
           label="소속된 수강과목">
         </el-table-column>
         <el-table-column
@@ -185,6 +185,7 @@
           this.loading = false
           this.total = res.data.data.total
           this.contestList = res.data.data.results
+          console.log(this.contestList)
         }, res => {
           this.loading = false
         })
