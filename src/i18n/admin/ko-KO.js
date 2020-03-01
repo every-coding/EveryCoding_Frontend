@@ -14,6 +14,10 @@ export const m = {
   Contest: '강의',
   Contest_List: '강의 목록',
   Create_Contest: '강의 생성',
+  // 실습, 과제, 대회
+  Contests: '실습, 과제, 대회',
+  Contests_List: '실습, 과제, 대회 목록',
+  Create_Contests: '실습, 과제, 대회 생성',
   // User.vue
   User_User: '사용자',
   Import_User: '사용자 가져오기',

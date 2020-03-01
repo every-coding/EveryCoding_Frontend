@@ -20,9 +20,9 @@
       <el-menu-item index="/problem/batch_ops">{{$t('m.Export_Import_Problem')}}</el-menu-item>
     </el-submenu>
     <el-submenu index="contest">
-      <template slot="title"><i class="el-icon-fa-calendar"></i>{{$t('m.Contest')}}</template>
-      <el-menu-item index="/contest">{{$t('m.Contest_List')}}</el-menu-item>
-      <el-menu-item index="/contest/create">{{$t('m.Create_Contest')}}</el-menu-item>
+      <template slot="title"><i class="el-icon-fa-calendar"></i>{{$t('m.Contests')}}</template><!--실습, 과제, 대회-->
+      <el-menu-item index="/contest">{{$t('m.Contests_List')}}</el-menu-item>
+      <el-menu-item index="/contest/create">{{$t('m.Create_Contests')}}</el-menu-item>
     </el-submenu>
     <el-submenu index="lecture">
       <template slot="title"><i class="el-icon-fa-book"></i>{{$t('m.Lecture')}}</template>
