@@ -50,6 +50,7 @@
             <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
             <icon-btn name="Contest List" icon="list-ol" @click.native="goLectureContestList(scope.row.id)"></icon-btn>
             <icon-btn name="Student List" icon="list-ol" @click.native="goLectureStudentList(scope.row.id)"></icon-btn>
+            <icon-btn name="Delete" icon="trash" @click.native="deleteLecture(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>
       </el-table>
@@ -114,6 +115,18 @@
       },
       goLectureStudentList (lectureId) {
         this.$router.push({name: 'lecture-student-list', params: {lectureId}})
+      },
+      deleteLecture (lectureId) {
+        this.$confirm('정말로 이 수강과목을 삭제하시겠습니까?', 'confirm', {
+          type: 'warning'
+        }).then(() => {
+          api.deleteLecture(lectureId).then(res => {
+            this.getLectureList(this.currentPage)
+          }).catch(() => {
+            this.getLectureList(this.currentPage)
+          })
+        }, () => {
+        })
       },
       handleVisibleSwitch (row) {
         api.editLecture(row)

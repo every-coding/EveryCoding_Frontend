@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="lecture-card" shadow>
-      <div slot="title"><b>{{$t('m.Signup_Lectures')}}</b></div>
+      <div slot="title"><b>{{$t('m.Lectures')}}</b></div>
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -12,23 +12,15 @@
         </ul>
       </div>
       <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
-      <ol id="course-list">
-        <li v-for="lecture in lectures" v-if="lecture.status == true" :key="lecture.title"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
-          <Row v-if="lecture.isapply" type="flex" justify="space-between" align="middle">
+      <ol id="lecture-list">
+        <li v-for="lecture in lectures" :key="lecture.lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
+          <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
             <Col :span="18" class="lecture-main">
             <p class="title">
-              <a v-if="lecture.isallow" class="entry" @click.stop="goLecture(lecture)">
-                <b>{{lecture.title}}</b>
-              </a>
-              <span v-else>{{lecture.title}}</span>
+              <a class="entry" @click.stop="goLecture(lecture.lecture)"><b>{{ lecture.lecture.title }}</b></a>
             </p>
             </Col>
-            <Col :span="4" style="text-align: center ">
-              <Button v-if="lecture.isallow" @click.stop="goLecture(lecture)">수강하기</Button>
-              <Button v-else-if="lecture.isapply" @click="applylecture(lecture)" disabled>수강신청완료</Button>
-              <Button v-else @click="applylecture(lecture)">수강신청</Button>
-			      </Col>
           </Row>
         </li>
       </ol>
@@ -49,7 +41,7 @@
   const limit = 8
 
   export default {
-    name: 'course-list',
+    name: 'lecture-list',
     components: {
       Pagination
     },
@@ -72,7 +64,7 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-      api.getLectureList(0, limit).then((res) => {
+      api.getTakingLectureList(0, limit).then((res) => {
         next((vm) => {
           vm.lectures = res.data.data.results
           vm.total = res.data.data.total
@@ -91,7 +83,7 @@
       },
       getLectureList (page = 1) {
         let offset = (page - 1) * this.limit
-        api.getLectureList(offset, this.limit, this.query).then((res) => {
+        api.getTakingLectureList(offset, this.limit, this.query).then((res) => {
           this.lectures = res.data.data.results
           this.total = res.data.data.total
         })
@@ -118,7 +110,7 @@
           this.$error('로그인 후 가능합니다.')
         } else {
           let data = {
-            lecture_id: lecture.id,
+            lecture_id: lecture.lecture.id,
             user_id: this.user.id,
             status: false
           }
@@ -157,7 +149,7 @@
       font-size: 16px;
       padding: 20px;
     }
-    #course-list {
+    #lecture-list {
       > li {
         padding: 20px;
         border-bottom: 1px solid rgba(187, 187, 187, 0.5);
