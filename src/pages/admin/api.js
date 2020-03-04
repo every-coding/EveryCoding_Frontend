@@ -184,6 +184,13 @@ export default {
       data
     })
   },
+  deleteLecture (id) {
+    return ajax('admin/lecture', 'delete', {
+      params: {
+        id
+      }
+    })
+  },
   getLectureList (offset, limit, keyword) {
     let params = {paging: true, offset, limit}
     if (keyword) {
