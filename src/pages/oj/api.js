@@ -139,6 +139,22 @@ export default {
       }
     })
   }, // lecture API 시작
+  getTakingLectureList (offset, limit, searchParams) {
+    let params = {
+      offset,
+      limit
+    }
+    if (searchParams !== undefined) {
+      Object.keys(searchParams).forEach((element) => {
+        if (searchParams[element]) {
+          params[element] = searchParams[element]
+        }
+      })
+    }
+    return ajax('takinglec', 'get', {
+      params
+    })
+  },
   getLectureList (offset, limit, searchParams) {
     let params = {
       offset,

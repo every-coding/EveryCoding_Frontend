@@ -1,22 +1,46 @@
 <template>
   <div>
-    <el-input
-      v-model="keyword"
-      placeholder="Keywords"
-      prefix-icon="el-icon-search">
-    </el-input>
+    <el-row :gutter="20">
+      <el-col :span="14">
+        <el-input
+          v-model="keyword"
+          placeholder="Keywords"
+          prefix-icon="el-icon-search"
+          width="300">
+        </el-input>
+      </el-col>
+      <el-col :span="4">
+        <el-select v-model="year">
+          <el-option value="2020">2020</el-option>
+          <el-option value="2021">2021</el-option>
+          <el-option value="2022">2022</el-option>
+          <el-option value="2022">2023</el-option>
+          <el-option value="2022">2024</el-option>
+        </el-select>
+      </el-col>
+      <el-col :span="2">
+        <el-button @click="onYearChange">적용</el-button>
+      </el-col>
+    </el-row>
     <el-table :data="contests" v-loading="loading">
       <el-table-column
         label="ID"
-        width="100"
+        width="70"
         prop="id">
       </el-table-column>
       <el-table-column
-        label="Title"
+        label="생성일자"
+        width="150">
+        <template slot-scope="props">
+          {{ props.row.create_time | localtime }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="실습, 과제, 대회명"
         prop="title">
       </el-table-column>
       <el-table-column
-        label="option"
+        label="추가"
         align="center"
         width="100"
         fixed="right">
@@ -43,13 +67,15 @@
     props: ['lectureID'],
     data () {
       return {
+        year: 0,
         page: 1,
         limit: 10,
         total: 0,
         loading: false,
         contests: [],
         lecture: {},
-        keyword: ''
+        keyword: '',
+        dropdown: ''
       }
     },
     mounted () {
@@ -65,7 +91,8 @@
         let params = {
           keyword: this.keyword,
           offset: (page - 1) * this.limit,
-          limit: this.limit
+          limit: this.limit,
+          year: this.year
         }
         api.getContestList(params).then(res => {
           this.loading = false
@@ -83,11 +110,27 @@
           this.$emit('on-change')
         }, () => {
         })
+      },
+      onYearChange (page) {
+        console.log('test')
+        this.loading = true
+        let params = {
+          keyword: this.keyword,
+          offset: (page - 1) * this.limit,
+          limit: this.limit,
+          year: this.year
+        }
+        api.getContestList(params).then(res => {
+          this.loading = false
+          this.total = res.data.data.total
+          this.contests = res.data.data.results
+        }).catch(() => {
+        })
       }
     },
     watch: {
       'keyword' () {
-        this.getPublicProblem(this.page)
+        this.getPublicContest(this.page)
       }
     }
   }

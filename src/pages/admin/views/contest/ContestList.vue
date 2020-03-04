@@ -28,6 +28,7 @@
           label="ID">
         </el-table-column>
         <el-table-column
+          v-if="!this.lectureId"
           prop="lecture_title"
           label="소속된 수강과목">
         </el-table-column>

@@ -13,20 +13,16 @@
       </div>
       <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
       <ol id="lecture-list">
-        <li v-for="lecture in lectures" v-if="!lecture.isapply" :key="lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
+        <li v-for="lecture in lectures" :key="lecture.lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
           <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
             <Col :span="18" class="lecture-main">
             <p class="title">
-              <a v-if="lecture.isallow" class="entry" @click.stop="goLecture(lecture)">
-                <b>{{lecture.title}}</b>
-              </a>
-              <span v-else>{{lecture.title}}</span>
+              <span>{{ lecture.lecture.title }}</span>
             </p>
             </Col>
             <Col :span="4" style="text-align: center ">
-              <Button v-if="lecture.isallow" @click.stop="goLecture(lecture)">수강하기</Button>
-              <Button v-else-if="lecture.isapply" @click="applylecture(lecture)" disabled>수강신청완료</Button>
+              <Button v-if="lecture.isallow === false" disabled>수강 신청 완료</Button>
               <Button v-else @click="applylecture(lecture)">수강신청</Button>
 			      </Col>
           </Row>
@@ -118,7 +114,7 @@
           this.$error('로그인 후 가능합니다.')
         } else {
           let data = {
-            lecture_id: lecture.id,
+            lecture_id: lecture.lecture.id,
             user_id: this.user.id,
             status: false
           }
