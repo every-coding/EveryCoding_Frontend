@@ -130,7 +130,7 @@
           type: 'warning'
         }).then(() => {
           console.log('userid : ' + userid)
-          api.denyStudent(userid).then(res => {
+          api.denyStudent(userid, this.lectureID).then(res => {
             this.getUserList(this.page)
           }).catch(() => {
             this.getUserList(this.page)
