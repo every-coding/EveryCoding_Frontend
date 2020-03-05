@@ -207,10 +207,11 @@ export default {
       data
     })
   },
-  denyStudent (id) {
+  denyStudent (id, lectureid) {
     return ajax('admin/signupstudent', 'delete', {
       params: {
-        id
+        id,
+        lectureid
       }
     })
   },
