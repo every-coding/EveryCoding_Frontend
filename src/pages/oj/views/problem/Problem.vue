@@ -49,6 +49,8 @@
         </div>
       </Panel>
       <!--problem main end-->
+      <iframe src="https://www.onlinegdb.com/" style="width:100%; height:750px">
+      </iframe>
       <Card :padding="20" id="submit-code" dis-hover>
         <CodeMirror :value.sync="code"
                     :languages="problem.languages"
@@ -80,7 +82,6 @@
               <Alert type="warning" show-icon>{{$t('m.Contest_has_ended')}}</Alert>
             </div>
           </Col>
-
           <Col :span="12">
             <template v-if="captchaRequired">
               <div class="captcha-container">
