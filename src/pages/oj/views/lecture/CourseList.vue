@@ -18,7 +18,8 @@
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
             <Col :span="18" class="lecture-main">
             <p class="title">
-              <a class="entry" @click.stop="goLecture(lecture.lecture)"><b>{{ lecture.lecture.title }}</b></a>
+              <a class="entry" @click.stop="goLecture(lecture.lecture)" v-if="lecture.isallow"><b>{{ lecture.lecture.title }}</b></a>
+              <span class="entry" v-else>{{ lecture.lecture.title }} <small>(승인 대기중)</small></span>
             </p>
             </Col>
           </Row>
