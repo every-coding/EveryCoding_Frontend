@@ -90,9 +90,11 @@ export const m = {
   UserLogin: '로그인',
   // Register.vue
   RegisterUsername: '아이디',
+  RegisterRealname: '이름',
   Email_Address: '이메일 주소',
   RegisterPassword: '비밀번호',
   Password_Again: '비밀번호 확인',
+  schoolssn: '학번 / 교직번호',
   Captcha: 'Captcha',
   UserRegister: '회원가입',
   Already_Registed: '이미 등록하셨나요? 로그인하세요!',

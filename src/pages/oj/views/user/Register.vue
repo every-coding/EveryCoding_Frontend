@@ -6,6 +6,11 @@
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
+      <FormItem prop="realname">
+        <Input type="text" v-model="formRegister.realname" :placeholder="$t('m.RegisterRealname')" size="large" @on-enter="handleRegister">
+        <Icon type="ios-person-outline" slot="prepend"></Icon>
+        </Input>
+      </FormItem>
       <FormItem prop="email">
         <Input v-model="formRegister.email" :placeholder="$t('m.Email_Address')" size="large" @on-enter="handleRegister">
         <Icon type="ios-email-outline" slot="prepend"></Icon>
@@ -19,6 +24,11 @@
       <FormItem prop="passwordAgain">
         <Input type="password" v-model="formRegister.passwordAgain" :placeholder="$t('m.Password_Again')" size="large" @on-enter="handleRegister">
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
+        </Input>
+      </FormItem>
+      <FormItem prop="schoolssn">
+        <Input type="text" v-model="formRegister.schoolssn" :placeholder="$t('m.schoolssn')" size="large" @on-enter="handleRegister">
+        <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="captcha" style="margin-bottom:10px">
@@ -102,8 +112,10 @@
         btnRegisterLoading: false,
         formRegister: {
           username: '',
+          realname: '',
           password: '',
           passwordAgain: '',
+          schoolssn: '',
           email: '',
           captcha: ''
         },
@@ -111,6 +123,10 @@
           username: [
             {required: true, trigger: 'blur'},
             {validator: CheckUsernameNotExist, trigger: 'blur'}
+          ],
+          realname: [
+            {required: true, trigger: 'blur'},
+            {trigger: 'blur'}
           ],
           email: [
             {required: true, type: 'email', trigger: 'blur'},
@@ -122,6 +138,9 @@
           ],
           passwordAgain: [
             {required: true, validator: CheckAgainPassword, trigger: 'change'}
+          ],
+          schoolssn: [
+            {required: true, trigger: 'change'} // 위 username처럼 중복된 값 입력 방지를 위한 별도의 함수 필요
           ],
           captcha: [
             {required: true, trigger: 'blur', min: 1, max: 10}
