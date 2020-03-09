@@ -45,7 +45,15 @@
 
         <el-table-column prop="admin_type" label="User Type">
           <template slot-scope="scope">
-            {{ scope.row.admin_type }}
+            <span v-if="scope.row.admin_type === 'Regular User'">
+              Student
+            </span>
+            <span v-else-if="scope.row.admin_type === 'Admin'">
+              Professor
+            </span>
+            <span v-else>
+              Admin
+            </span>
           </template>
         </el-table-column>
 
@@ -194,9 +202,9 @@
           <el-col :span="12">
             <el-form-item :label="$t('m.User_Type')">
               <el-select v-model="user.admin_type">
-                <el-option label="Regular User" value="Regular User"></el-option>
-                <el-option label="Admin" value="Admin"></el-option>
-                <el-option label="Super Admin" value="Super Admin"></el-option>
+                <el-option label="Student" value="Regular User"></el-option>
+                <el-option label="Professor" value="Admin"></el-option>
+                <el-option label="Admin" value="Super Admin"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
