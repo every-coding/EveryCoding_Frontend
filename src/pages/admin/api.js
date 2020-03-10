@@ -103,6 +103,13 @@ export default {
       }
     })
   },
+  importStudents (users) {
+    return ajax('admin/waitstudent', 'post', {
+      data: {
+        users
+      }
+    })
+  },
   generateUser (data) {
     return ajax('admin/generate_user', 'post', {
       data
