@@ -15,9 +15,26 @@
         ref="table"
         :data="userList"
         style="width: 100%">
-        <el-table-column prop="user.username" label="로그인 ID"></el-table-column>
-        <el-table-column prop="user.realname" label="실제 이름"></el-table-column>
-        <el-table-column prop="user.schoolssn" label="학번"></el-table-column>
+        <el-table-column prop="realname" label="실제 이름">
+          <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
+            <span v-if="scope.row.realname"><!--해당 값을 출력하고-->
+              {{ scope.row.realname }}
+            </span>
+            <span v-else><!--아닌 경우에는 User 테이블에 있는 realname 값을 출력한다.-->
+              {{ scope.row.user.realname }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="schoolssn" label="학번">
+          <template slot-scope="scope"><!--마찬가지로 lecture_signup_class에 학번이 있는 경우,-->
+            <span v-if="scope.row.schoolssn"><!--해당 값을 출력하고-->
+              {{ scope.row.schoolssn }}
+            </span>
+            <span v-else><!--아닌 경우에는 User 테이블에 있는 schoolssn 값을 출력한다.-->
+              {{ scope.row.user.schoolssn }}
+            </span>
+          </template>
+        </el-table-column>
         <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
 
         <el-table-column prop="user.email" label="이메일" width="180"></el-table-column>
@@ -29,7 +46,7 @@
             <span v-else style="background-color:red; color:white">
               {{ scope.row.isallow }}
             </span>
-          </template>template>
+          </template>
         </el-table-column>
         <el-table-column prop="totalProblem" label="총 문제 수" width="90"></el-table-column>
         <el-table-column prop="solveProblem" label="해결 수" width="90"></el-table-column>
@@ -59,11 +76,57 @@
         </el-pagination>
       </div>
     </Panel>
+    <Panel>
+      <span slot="title">{{$t('m.Import_Student')}}
+        <el-popover placement="right" trigger="hover">
+          <p>설명 입력</p>
+          <i slot="reference" class="el-icon-fa-question-circle import-user-icon"></i>
+        </el-popover>
+      </span>
+      <el-upload v-if="!uploadUsers.length"
+                 action=""
+                 :show-file-list="false"
+                 accept=".csv"
+                 :before-upload="handleUsersCSV">
+        <el-button size="small" icon="el-icon-fa-upload" type="primary">엑셀 파일 선택 (.csv 확장자)</el-button><!--엑셀 형태의 사용자 정보 파일 가져오는 기능-->
+      </el-upload>
+      <template v-else>
+        <el-table :data="uploadUsersPage">
+          <el-table-column label="학번">
+            <template slot-scope="{row}">
+              {{row[0]}}
+            </template>
+          </el-table-column>
+          <el-table-column label="이름">
+            <template slot-scope="{row}">
+              {{row[1]}}
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="panel-options">
+          <el-button type="primary" size="small"
+                     icon="el-icon-fa-upload"
+                     @click="handleUsersUpload">Import All
+          </el-button>
+          <el-button type="warning" size="small"
+                     icon="el-icon-fa-undo"
+                     @click="handleResetData">Reset Data
+          </el-button>
+          <el-pagination
+            class="page"
+            layout="prev, pager, next"
+            :page-size="uploadUsersPageSize"
+            :current-page.sync="uploadUsersCurrentPage"
+            :total="uploadUsers.length">
+          </el-pagination>
+        </div>
+      </template>
+    </Panel>
   </div>
 </template>
-
 <script>
   import papa from 'papaparse'
+  import iconv from 'iconv-lite'
   import api from '../../api.js'
   import utils from '@/utils/utils'
 
@@ -73,7 +136,7 @@
       return {
         lectureID: '',
         // 一页显示的用户数
-        pageSize: 10,
+        pageSize: 50,
         // 用户总数
         total: 0,
         // 用户列表
@@ -193,9 +256,10 @@
       },
       handleUsersCSV (file) {
         papa.parse(file, {
+          encoding: 'euc-kr',
           complete: (results) => {
             let data = results.data.filter(user => {
-              return user[0] && user[1] && user[2]
+              return user[0] && user[1]
             })
             let delta = results.data.length - data.length
             if (delta > 0) {
@@ -211,7 +275,12 @@
         })
       },
       handleUsersUpload () {
-        api.importUsers(this.uploadUsers).then(res => {
+        console.log(this.uploadUsers)
+        let aJson = []
+        aJson.push(-1)
+        aJson.push(this.$route.params.lectureId)
+        this.uploadUsers.unshift(aJson)
+        api.importStudents(this.uploadUsers).then(res => {
           this.getUserList(1)
           this.handleResetData()
         }).catch(() => {

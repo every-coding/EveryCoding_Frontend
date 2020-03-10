@@ -222,7 +222,7 @@
         this.$router.push({name: 'contest-problem-list', params: {contestId}})
       },
       handleVisibleSwitch (row) {
-        row.lecture_id = null
+        row.lecture_id = row.lecture
         api.editContest(row)
       }
     },

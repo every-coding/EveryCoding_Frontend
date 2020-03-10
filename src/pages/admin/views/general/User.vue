@@ -92,7 +92,7 @@
                  :show-file-list="false"
                  accept=".csv"
                  :before-upload="handleUsersCSV">
-        <el-button size="small" icon="el-icon-fa-upload" type="primary">Choose File</el-button>
+        <el-button size="small" icon="el-icon-fa-upload" type="primary">Choose File</el-button><!--엑셀 형태의 사용자 정보 파일 가져오는 기능-->
       </el-upload>
       <template v-else>
         <el-table :data="uploadUsersPage">
