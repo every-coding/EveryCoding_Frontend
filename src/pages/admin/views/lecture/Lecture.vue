@@ -14,6 +14,11 @@
                             <Simditor v-model="lecture.description"></Simditor>
                         </el-form-item>
                     </el-col>
+                    <el-col :span="24">
+                        <el-form-item :label="$t('m.StudentUpload')">
+                            <el-button active-text="" inactive-text=""></el-button>
+                        </el-form-item>
+                    </el-col>
                     <el-col :span="12">
                         <el-form-item :label="$t('m.LectureStatus')">
                             <el-switch v-model="lecture.status" active-text="" inactive-text=""></el-switch>

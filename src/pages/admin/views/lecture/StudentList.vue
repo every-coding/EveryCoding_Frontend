@@ -16,8 +16,8 @@
         :data="userList"
         style="width: 100%">
         <el-table-column prop="user.username" label="로그인 ID"></el-table-column>
-        <el-table-column prop="" label="실제 이름"></el-table-column>
-        <el-table-column prop="" label="학번"></el-table-column>
+        <el-table-column prop="user.realname" label="실제 이름"></el-table-column>
+        <el-table-column prop="user.schoolssn" label="학번"></el-table-column>
         <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
 
         <el-table-column prop="user.email" label="이메일" width="180"></el-table-column>
