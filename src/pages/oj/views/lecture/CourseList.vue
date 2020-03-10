@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="lecture-card" shadow>
-      <div slot="title"><b>{{$t('m.Lectures')}}</b></div>
+      <div slot="title"><b>{{$t('m.Signup_Lectures')}}</b></div>
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -19,7 +19,7 @@
             <Col :span="18" class="lecture-main">
             <p class="title">
               <a class="entry" @click.stop="goLecture(lecture.lecture)" v-if="lecture.isallow"><b>{{ lecture.lecture.title }}</b></a>
-              <span class="entry" v-else>{{ lecture.lecture.title }} <small>(승인 대기중)</small></span>
+              <span id="waitlecture" class="entry" v-else>{{ lecture.lecture.title }} <small>(승인 대기중)</small></span>
             </p>
             </Col>
           </Row>
@@ -140,6 +140,9 @@
   }
 </script>
 <style lang="less" scoped>
+  #waitlecture {
+    color: #A4A4A4;
+  }
   #lecture-card {
     #keyword {
       width: 80%;

@@ -25,7 +25,11 @@
 
         <el-table-column prop="id" label="ID"></el-table-column>
 
+        <el-table-column prop="realname" label="Realname"></el-table-column>
+
         <el-table-column prop="username" label="Username"></el-table-column>
+
+        <el-table-column prop="schoolssn" label="학번 / 교직번호"></el-table-column>
 
         <el-table-column prop="create_time" label="Create Time">
           <template slot-scope="scope">
