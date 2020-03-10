@@ -115,6 +115,8 @@
           let data = {
             lecture_id: lecture.id,
             user_id: this.user.id,
+            user_realname: this.user.realname,
+            user_schoolssn: this.user.schoolssn,
             status: false
           }
           console.log(data)
