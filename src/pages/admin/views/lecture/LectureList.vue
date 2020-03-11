@@ -28,12 +28,23 @@
           label="ID">
         </el-table-column>
         <el-table-column
+          prop="year"
+          width="70"
+          label="년도">
+        </el-table-column>
+        <el-table-column
+          prop="semester"
+          width="90"
+          align="center"
+          label="분반">
+        </el-table-column>
+        <el-table-column
           prop="title"
-          label="Title">
+          label="과목명">
         </el-table-column>
 		<el-table-column
 		  width="100"
-		  label="Status">
+		  label="상태">
 		  <template slot-scope="scope">
 		    <el-switch v-model="scope.row.status"
 			           active-text=""
@@ -45,7 +56,7 @@
         <el-table-column
           fixed="right"
           width="250"
-          label="Operation">
+          label="">
           <div slot-scope="scope">
             <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
             <icon-btn name="Contest List" icon="list-ol" @click.native="goLectureContestList(scope.row.id)"></icon-btn>
