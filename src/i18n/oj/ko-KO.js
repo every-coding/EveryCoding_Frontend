@@ -95,9 +95,12 @@ export const m = {
   RegisterPassword: '비밀번호',
   Password_Again: '비밀번호 확인',
   schoolssn: '학번 / 교직번호',
+  schoolssn_Again: '학번 / 교직번호 확인',
   Captcha: 'Captcha',
   UserRegister: '회원가입',
   Already_Registed: '이미 등록하셨나요? 로그인하세요!',
+  password_does_not_match: '패스워드가 일치하지 않습니다.',
+  schoolssn_does_not_match: '학번/교직번호가 일치하지 않습니다.',
   // ResetPassword.vue and ApplyResetPassword.vue
   Reset_Password: '비밀번호 분실',
   RPassword: '비밀번호',

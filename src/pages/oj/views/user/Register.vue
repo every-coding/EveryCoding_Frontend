@@ -31,6 +31,11 @@
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
+      <FormItem prop="schoolssnAgain">
+        <Input type="text" v-model="formRegister.schoolssnAgain" :placeholder="$t('m.schoolssn_Again')" size="large" @on-enter="handleRegister">
+        <Icon type="ios-person-outline" slot="prepend"></Icon>
+        </Input>
+      </FormItem>
       <FormItem prop="captcha" style="margin-bottom:10px">
         <div class="oj-captcha">
           <div class="oj-captcha-code">
@@ -76,7 +81,7 @@
     },
     data () {
       const CheckUsernameNotExist = (rule, value, callback) => {
-        api.checkUsernameOrEmail(value, undefined).then(res => {
+        api.checkUsernameOrEmail(value, undefined, undefined).then(res => {
           if (res.data.data.username === true) {
             callback(new Error(this.$i18n.t('m.The_username_already_exists')))
           } else {
@@ -85,9 +90,18 @@
         }, _ => callback())
       }
       const CheckEmailNotExist = (rule, value, callback) => {
-        api.checkUsernameOrEmail(undefined, value).then(res => {
+        api.checkUsernameOrEmail(undefined, value, undefined).then(res => {
           if (res.data.data.email === true) {
             callback(new Error(this.$i18n.t('m.The_email_already_exists')))
+          } else {
+            callback()
+          }
+        }, _ => callback())
+      }
+      const CheckSchoolssnNotExist = (rule, value, callback) => {
+        api.checkUsernameOrEmail(undefined, undefined, value).then(res => {
+          if (res.data.data.schoolssn === true) {
+            callback(new Error(this.$i18n.t('m.The_schoolssn_already_exists')))
           } else {
             callback()
           }
@@ -100,10 +114,22 @@
         }
         callback()
       }
-
+      const CheckSchoolssn = (rule, value, callback) => {
+        if (this.formRegister.schoolssn !== '') {
+          // 对第二个密码框再次验证
+          this.$refs.formRegister.validateField('schoolssnAgain')
+        }
+        callback()
+      }
       const CheckAgainPassword = (rule, value, callback) => {
         if (value !== this.formRegister.password) {
           callback(new Error(this.$i18n.t('m.password_does_not_match')))
+        }
+        callback()
+      }
+      const CheckAgainSchoolssn = (rule, value, callback) => {
+        if (value !== this.formRegister.schoolssn) {
+          callback(new Error(this.$i18n.t('m.schoolssn_does_not_match')))
         }
         callback()
       }
@@ -116,6 +142,7 @@
           password: '',
           passwordAgain: '',
           schoolssn: '',
+          schoolssnAgain: '',
           email: '',
           captcha: ''
         },
@@ -140,7 +167,11 @@
             {required: true, validator: CheckAgainPassword, trigger: 'change'}
           ],
           schoolssn: [
-            {required: true, trigger: 'change'} // 위 username처럼 중복된 값 입력 방지를 위한 별도의 함수 필요
+            {required: true, trigger: 'blur'},
+            {validator: CheckSchoolssnNotExist, required: true, trigger: 'blur'}
+          ],
+          schoolssnAgain: [
+            {required: true, validator: CheckAgainSchoolssn, trigger: 'change'}
           ],
           captcha: [
             {required: true, trigger: 'blur', min: 1, max: 10}

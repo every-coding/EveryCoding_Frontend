@@ -125,6 +125,8 @@ export const m = {
   Lecture_Password: '수강 과목 비밀번호',
   Lecture_ContestList: '수강 과목 강의 목록',
   Contest_id: '강의 id',
+  Lecture_UserList: '수강 학생 목록',
+  Import_Student: '학생 가져오기',
   // 수강과목 학생
   Student: '학생',
   Student_List: '학생 목록'

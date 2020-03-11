@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <Panel :title="$t('m.User_User') ">
+    <Panel :title="$t('m.Lecture_UserList') ">
       <div slot="header">
         <el-row :gutter="20">
           <el-col :span="selectedUsers.length ? 16: 24">
@@ -8,6 +8,7 @@
           </el-col>
         </el-row>
       </div>
+      <strong>총 수강 학생 : {{ userList.length }}명</strong>
       <el-table
         v-loading="loadingTable"
         element-loading-text="loading"

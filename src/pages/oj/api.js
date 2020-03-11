@@ -27,11 +27,19 @@ export default {
       data
     })
   },
-  checkUsernameOrEmail (username, email) {
+  checkUsernameOrEmail (username, email, schoolssn) {
     return ajax('check_username_or_email', 'post', {
       data: {
         username,
-        email
+        email,
+        schoolssn
+      }
+    })
+  },
+  checkSchoolssn (schoolssn) {
+    return ajax('check_schoolssn', 'post', {
+      data: {
+        schoolssn
       }
     })
   },
