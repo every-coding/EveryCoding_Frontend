@@ -115,6 +115,8 @@ export const m = {
   CDN_HOST: 'CDN 호스트',
   // 수강과목
   Lecture: '수강과목',
+  Lecture_Year: '수강과목 년도',
+  Lecture_Semester: '학기',
   Lecture_List: '수강과목 목록',
   Create_Lecture: '수강과목 생성',
   LectureDescription: '강의계획',
