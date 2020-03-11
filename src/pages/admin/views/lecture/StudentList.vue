@@ -127,7 +127,6 @@
 </template>
 <script>
   import papa from 'papaparse'
-  import iconv from 'iconv-lite'
   import api from '../../api.js'
   import utils from '@/utils/utils'
 
