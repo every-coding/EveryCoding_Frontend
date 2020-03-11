@@ -13,14 +13,33 @@
       </div>
       <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
       <ol id="lecture-list">
+        <li v-if="lectures != 0"><!--표시될 수강과목 수가 0이 아닌 경우에만 출력-->
+          <Row type="flex" justify="space-between" align="middle">
+            <Col :span="1" style="text-align: center">
+              년도
+			      </Col>
+            <Col :span="1" style="text-align: center">
+              학기
+			      </Col>
+            <Col :span="22">
+              과목명
+            </Col>
+          </Row>
+        </li>
         <li v-for="lecture in lectures" :key="lecture.lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
           <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
-            <Col :span="18" class="lecture-main">
-            <p class="title">
-              <a class="entry" @click.stop="goLecture(lecture.lecture)" v-if="lecture.isallow"><b>{{ lecture.lecture.title }}</b></a>
-              <span id="waitlecture" class="entry" v-else>{{ lecture.lecture.title }} <small>(승인 대기중)</small></span>
-            </p>
+            <Col :span="1" style="text-align: center">
+              {{ lecture.lecture.year }}
+			      </Col>
+            <Col :span="1" style="text-align: center">
+              {{ lecture.lecture.semester }}
+			      </Col>
+            <Col :span="22" class="lecture-main">
+              <p class="title">
+                <a class="entry" @click.stop="goLecture(lecture.lecture)" v-if="lecture.isallow"><b>{{ lecture.lecture.title }}</b></a>
+                <span id="waitlecture" class="entry" v-else>{{ lecture.lecture.title }} <small>(승인 대기중)</small></span>
+              </p>
             </Col>
           </Row>
         </li>

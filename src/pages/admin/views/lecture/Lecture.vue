@@ -4,6 +4,24 @@
         <Panel :title="title">
             <el-form label-position="top">
                 <el-row :gutter="20">
+                    <el-col :span="3">
+                      <el-form-item :label="$t('m.Lecture_Year')" required="required">
+                          <el-select v-model="lecture.year">
+                            <el-option value="2020">2020</el-option>
+                            <el-option value="2021">2021</el-option>
+                            <el-option value="2022">2022</el-option>
+                            <el-option value="2022">2023</el-option>
+                          </el-select>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-form-item :label="$t('m.Lecture_Semester')" required="required">
+                          <el-select v-model="lecture.semester">
+                            <el-option value="1">1</el-option>
+                            <el-option value="2">2</el-option>
+                          </el-select>
+                        </el-form-item>
+                    </el-col>
                     <el-col :span="24">
                         <el-form-item :label="$t('m.LectureTitle')" required="required">
                             <el-input v-model="lecture.title" :placeholder="$t('m.LectureTitle')"></el-input>
@@ -12,11 +30,6 @@
                     <el-col :span="24">
                         <el-form-item :label="$t('m.LectureDescription')" required="required">
                             <Simditor v-model="lecture.description"></Simditor>
-                        </el-form-item>
-                    </el-col>
-                    <el-col :span="24">
-                        <el-form-item :label="$t('m.StudentUpload')">
-                            <el-button active-text="" inactive-text=""></el-button>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -54,6 +67,8 @@
           description: '',
           status: false,
           password: '',
+          year: 0,
+          semester: 0,
           contestlist: [{
             value: ''
           }]
