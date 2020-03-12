@@ -39,6 +39,12 @@
           label="분반">
         </el-table-column>
         <el-table-column
+          prop="created_by.realname"
+          width="80"
+          align="center"
+          label="담당교수">
+        </el-table-column>
+        <el-table-column
           prop="title"
           label="과목명">
         </el-table-column>
@@ -82,7 +88,7 @@
   import api from '../../api.js'
 
   export default {
-    name: 'LectureList',
+    name: '수강과목 목록',
     data () {
       return {
         pageSize: 10,
