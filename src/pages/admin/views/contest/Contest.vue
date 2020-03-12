@@ -93,7 +93,7 @@
     },
     data () {
       return {
-        title: 'Create Contest',
+        title: '실습, 과제, 대회 생성',
         disableRuleType: false,
         contest: {
           title: '',
@@ -145,7 +145,7 @@
     },
     mounted () {
       if (this.$route.name === 'edit-contest') {
-        this.title = 'Edit Contest'
+        this.title = '실습, 과제, 대회 수정'
         this.disableRuleType = true
         api.getContest(this.$route.params.contestId).then(res => {
           let data = res.data.data
