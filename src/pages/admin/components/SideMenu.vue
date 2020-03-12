@@ -2,7 +2,7 @@
   <el-menu class="vertical_menu"
            :router="true" :default-active="currentPath">
     <div class="logo_2">
-      <img src="../../../assets/logo_3.png" alt="oj admin"/><!--해당 이미지를 학교 로고로 변경-->
+      <img src="../../../assets/logo.jpg" alt="oj admin"/><!--해당 이미지를 학교 로고로 변경-->
     </div>
     <el-menu-item index="/"><i class="el-icon-fa-dashboard"></i>{{$t('m.Dashboard')}}</el-menu-item>
     <el-submenu v-if="isSuperAdmin" index="general">
@@ -78,8 +78,7 @@
       img {
         background-color: #fff;
         border: 3px solid #fff;
-        width: 108px;
-        height: 67px;
+        width: 175px;
       }
     }
   }
