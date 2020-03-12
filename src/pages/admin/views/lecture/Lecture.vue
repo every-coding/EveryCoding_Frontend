@@ -37,11 +37,6 @@
                             <el-switch v-model="lecture.status" active-text="" inactive-text=""></el-switch>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
-                        <el-form-item :label="$t('m.Lecture_Password')">
-                            <el-input v-model="lecture.password" active-text="" inactive-text=""></el-input>
-                        </el-form-item>
-                    </el-col>
                 </el-row>
             </el-form>
             <save @click.native="saveLecture"></save>
@@ -60,12 +55,12 @@
     },
     data () {
       return {
-        title: 'Create Lecture',
+        title: '수강과목 생성',
         disableRuleType: false,
         lecture: {
           title: '',
           description: '',
-          status: false,
+          status: true,
           password: '',
           year: 0,
           semester: 0,
