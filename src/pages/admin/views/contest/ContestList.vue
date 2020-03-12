@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <Panel title="실습, 과제, 대회 목록">
+    <Panel title="주차 별 실습 과제 목록">
       <div slot="header">
         <el-input
           v-model="keyword"
