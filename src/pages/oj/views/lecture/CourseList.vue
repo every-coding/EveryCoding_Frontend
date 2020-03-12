@@ -21,9 +21,12 @@
             <Col :span="1" style="text-align: center">
               학기
 			      </Col>
-            <Col :span="22">
+            <Col :span="18">
               과목명
             </Col>
+            <Col :span="4" style="text-align: center">
+              수강신청 상태
+			      </Col>
           </Row>
         </li>
         <li v-for="lecture in lectures" :key="lecture.lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
@@ -35,12 +38,16 @@
             <Col :span="1" style="text-align: center">
               {{ lecture.lecture.semester }}
 			      </Col>
-            <Col :span="22" class="lecture-main">
+            <Col :span="18" class="lecture-main">
               <p class="title">
-                <a class="entry" @click.stop="goLecture(lecture.lecture)" v-if="lecture.isallow"><b>{{ lecture.lecture.title }}</b></a>
-                <span id="waitlecture" class="entry" v-else>{{ lecture.lecture.title }} <small>(승인 대기중)</small></span>
+                <span class="entry" v-if="lecture.isallow">{{ lecture.lecture.title }}</span>
+                <span id="waitlecture" class="entry" v-else>{{ lecture.lecture.title }}</span>
               </p>
             </Col>
+            <Col :span="4" style="text-align: center">
+              <Button @click="goLecture(lecture.lecture)" v-if="lecture.isallow">수강하기</Button>
+              <Button v-else disabled>수강대기</Button>
+			      </Col>
           </Row>
         </li>
       </ol>
