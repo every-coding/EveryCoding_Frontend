@@ -74,6 +74,7 @@ export const m = {
   Input_Samples: '입력 예시',
   Output_Samples: '출력 예시',
   Add_Sample: '샘플 추가',
+  Add_Problem: '문제 추가',
   Code_Template: '코드 템플릿',
   Special_Judge: '스페셜 저지',
   Use_Special_Judge: '스페셜 저지 사용',
