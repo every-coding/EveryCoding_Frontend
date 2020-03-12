@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <Panel title="Lecture List">
+    <Panel title="수강과목 목록">
       <div slot="header">
         <el-input
           v-model="keyword"

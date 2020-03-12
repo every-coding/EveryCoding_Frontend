@@ -86,7 +86,7 @@ export default [
   },
   {
     name: 'lecture-details',
-    path: '/lecture/:lectureID/',
+    path: '/CourseList/:lectureID/',
     component: Lecture.LectureDetails,
     meta: {title: 'Lecture Details'}
   }, // lecture 끝
