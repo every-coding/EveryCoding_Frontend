@@ -24,7 +24,7 @@
             <Col :span="16">
               과목명
             </Col>
-            <Col :span="2">
+            <Col :span="2" style="text-align: center">
               담당교수
 			      </Col>
             <Col :span="4" style="text-align: center">
@@ -46,7 +46,7 @@
                 <span>{{ lecture.title }}</span>
               </p>
             </Col>
-            <Col :span="2">
+            <Col :span="2" style="text-align: center">
               {{ lecture.created_by.realname }}
 			      </Col>
             <Col :span="4" style="text-align: center">
