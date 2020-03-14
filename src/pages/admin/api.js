@@ -214,10 +214,10 @@ export default {
       data
     })
   },
-  denyStudent (id, lectureid) {
+  denyStudent (schoolssn, lectureid) {
     return ajax('admin/signupstudent', 'delete', {
       params: {
-        id,
+        schoolssn,
         lectureid
       }
     })
