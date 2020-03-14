@@ -1,4 +1,4 @@
-<template>
+<template><!--해당 정보 Code.cu.ac.kr에 맞게 수정 필요-->
   <panel>
     <div slot="title">{{$t('m.Frequently_Asked_Questions')}}</div>
     <div class="content markdown-body">

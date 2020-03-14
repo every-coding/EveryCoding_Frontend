@@ -43,7 +43,7 @@
 			      </Col>
             <Col :span="16" class="lecture-main">
               <p class="title">
-                <span class="entry" v-if="lecture.isallow">{{ lecture.lecture.title }}</span>
+                <span class="entry" v-if="lecture.isallow"><a id="lecture-title" @click="goLecture(lecture.lecture)">{{ lecture.lecture.title }}</a></span>
                 <span id="waitlecture" class="entry" v-else>{{ lecture.lecture.title }}</span>
               </p>
             </Col>
@@ -220,6 +220,13 @@
     #tb-column {
       font-weight: bold;
       font-size: 18px;
+    }
+    #lecture-title {
+      font-weight: bold;
+      color: black;
+      &:hover {
+        color: #2d8cf0;
+      }
     }
   }
 </style>
