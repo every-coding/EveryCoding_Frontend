@@ -63,7 +63,7 @@
         <el-table-column fixed="right" label="" width="200">
           <template slot-scope="{row}">
             <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
-            <icon-btn name="Deny" icon="trash" @click.native="DenyStudent(row.user.id)"></icon-btn>
+            <icon-btn name="Deny" icon="trash" @click.native="DenyStudent(row.schoolssn)"></icon-btn>
           </template>
         </el-table-column>
       </el-table>
@@ -188,12 +188,12 @@
           this.$success('Success')
         })
       },
-      DenyStudent (userid) {
+      DenyStudent (schoolssn) {
         this.$confirm('해당 학생의 수강신청을 삭제하시겠습니까?', 'confirm', {
           type: 'warning'
         }).then(() => {
-          console.log('userid : ' + userid)
-          api.denyStudent(userid, this.lectureID).then(res => {
+          console.log('schoolssn : ' + schoolssn)
+          api.denyStudent(schoolssn, this.lectureID).then(res => {
             this.getUserList(this.page)
           }).catch(() => {
             this.getUserList(this.page)
