@@ -35,6 +35,9 @@ export const m = {
   System_Error: '채점 시스템에 오류가 발생했습니다. 관리자에게 문의하세요.',
   // FAQ.vue
   Frequently_Asked_Questions: '자주 물어보는 질문들',
+  Java_specifications: 'Java specifications?',
+  About_presentation_error: '',
+  How_to_report_bugs: '시스템 버그 제보',
   // ContestDetail.vue
   Problems: '문제',
   Announcements: '공지사항',

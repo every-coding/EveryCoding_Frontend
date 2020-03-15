@@ -115,7 +115,7 @@ export const m = {
   Force_HTTPS: '강제 HTTPS',
   CDN_HOST: 'CDN 호스트',
   // 수강과목
-  Lecture: '수강과목',
+  Lecture: '개설과목',
   Lecture_Year: '수강과목 년도',
   Lecture_Semester: '학기',
   Lecture_List: '수강과목 목록',

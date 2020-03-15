@@ -36,7 +36,7 @@
           prop="semester"
           width="90"
           align="center"
-          label="분반">
+          label="학기">
         </el-table-column>
         <el-table-column
           prop="created_by.realname"
@@ -91,7 +91,7 @@
     name: '수강과목 목록',
     data () {
       return {
-        pageSize: 10,
+        pageSize: 25,
         total: 0,
         lectureList: [],
         keyword: '',
