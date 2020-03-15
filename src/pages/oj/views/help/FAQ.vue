@@ -3,7 +3,7 @@
     <div slot="title">{{$t('m.Frequently_Asked_Questions')}}</div>
     <div class="content markdown-body">
       <ul>
-        <li>{{$t('m.Where_is_the_input_and_the_output')}} 
+        <!--<li>{{$t('m.Where_is_the_input_and_the_output')}} 
           <p>{{$t('m.Where_is_the_input_and_the_output_answer_part_1')}} <code>stdin</code> ('{{$t('m.Standard_Input')}}') {{$t('m.Where_is_the_input_and_the_output_answer_part_3')}} <code>stdout</code>
             ('{{$t('m.Standard_Output')}}') {{$t('m.Where_is_the_input_and_the_output_answer_part_5')}} <code>scanf</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_6')}} <code>cin</code>
             {{$t('m.Where_is_the_input_and_the_output_answer_part_7')}} <code>printf</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_8')}} <code>cout</code> {{$t('m.Where_is_the_input_and_the_output_answer_part_9')}} <code>{{$t('m.Runtime_Error')}}</code>.
@@ -21,10 +21,10 @@
         </li>
         <li>{{$t('m.About_presentation_error')}}
           <p>{{$t('m.About_presentation_error_answer_part_1')}} <b>{{$t('m.last')}}</b> {{$t('m.About_presentation_error_answer_part_2')}} <code> {{$t('m.Wrong_Answer')}}</code>.</p>
-        </li>
+        </li>-->
         <li>{{$t('m.How_to_report_bugs')}}
-          <p>{{$t('m.How_to_report_bugs_answer_part_1')}} <a href="https://github.com/QingdaoU/OnlineJudge">Github</a>
-            {{$t('m.How_to_report_bugs_answer_part_2')}}
+          <p>
+            버그 제보는 여기로
           </p>
         </li>
       </ul>

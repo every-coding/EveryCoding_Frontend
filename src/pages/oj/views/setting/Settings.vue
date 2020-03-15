@@ -21,7 +21,6 @@
             <Menu-item name="/setting/profile">{{$t('m.Profile')}}</Menu-item>
             <Menu-item name="/setting/account">{{$t('m.Account')}}</Menu-item>
             <Menu-item name="/setting/security">{{$t('m.Security')}}</Menu-item>
-            <Menu-item name="/setting/test">{{$t('m.Test')}}</Menu-item>
           </Menu>
         </div>
         <div class="panel">

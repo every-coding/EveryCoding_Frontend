@@ -117,7 +117,7 @@
         if (this.$route.params.lectureId) {
           this.contest.lecture_id = this.$route.params.lectureId
         } else {
-          this.contest.lecture_id = this.contest.lecture
+          this.contest.lecture_id = null
         }
         console.log(this.contest.lecture_id)
         let data = Object.assign({}, this.contest)
