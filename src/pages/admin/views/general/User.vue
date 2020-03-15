@@ -43,8 +43,6 @@
           </template>
         </el-table-column>
 
-        <el-table-column prop="real_name" label="Real Name"></el-table-column>
-
         <el-table-column prop="email" label="Email"></el-table-column>
 
         <el-table-column prop="admin_type" label="User Type">
