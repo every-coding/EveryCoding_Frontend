@@ -24,7 +24,7 @@
         </li>-->
         <li>{{$t('m.How_to_report_bugs')}}
           <p>
-            버그 제보는 여기로
+            버그 제보는 <a href="mailto:dcucode@gmail.com">dcucode@gmail.com</a>로 보내주시면 감사하겠습니다.
           </p>
         </li>
       </ul>
