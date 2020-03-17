@@ -66,7 +66,7 @@
           <div slot-scope="scope">
             <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
             <icon-btn name="Contest List" icon="list-ol" @click.native="goLectureContestList(scope.row.id)"></icon-btn>
-            <icon-btn name="Student List" icon="list-ol" @click.native="goLectureStudentList(scope.row.id)"></icon-btn>
+            <icon-btn name="Student List" icon="list-ol" @click.native="goLectureStudentList(scope.row.id, scope.row.title)"></icon-btn>
             <icon-btn name="Delete" icon="trash" @click.native="deleteLecture(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>
@@ -130,8 +130,8 @@
       goLectureContestList (lectureId) {
         this.$router.push({name: 'lecture-contest-list', params: {lectureId}})
       },
-      goLectureStudentList (lectureId) {
-        this.$router.push({name: 'lecture-student-list', params: {lectureId}})
+      goLectureStudentList (lectureId, lectureTitle) {
+        this.$router.push({name: 'lecture-student-list', params: {lectureId, lectureTitle}})
       },
       deleteLecture (lectureId) {
         this.$confirm('정말로 이 수강과목을 삭제하시겠습니까?', 'confirm', {
