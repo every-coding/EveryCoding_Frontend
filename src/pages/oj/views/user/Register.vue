@@ -44,7 +44,7 @@
             </Input>
           </div>
           <div class="oj-captcha-img">
-            <Tooltip content="Click to refresh" placement="top">
+            <Tooltip content="클릭하여 새로고침" placement="top">
               <img :src="captchaSrc" @click="getCaptchaSrc"/>
             </Tooltip>
           </div>
@@ -100,7 +100,9 @@
       }
       const CheckSchoolssnNotExist = (rule, value, callback) => {
         api.checkUsernameOrEmail(undefined, undefined, value).then(res => {
-          if (res.data.data.schoolssn === true) {
+          if (this.formRegister.schoolssn.length < 5 || this.formRegister.schoolssn.length > 8) {
+            callback(new Error(this.$i18n.t('학번/교직번호는 5자 이상, 8자 이하로 입력하세요.')))
+          } else if (res.data.data.schoolssn === true) {
             callback(new Error(this.$i18n.t('m.The_schoolssn_already_exists')))
           } else {
             callback()
@@ -167,11 +169,11 @@
             {required: true, validator: CheckAgainPassword, trigger: 'change'}
           ],
           schoolssn: [
-            {required: true, trigger: 'blur', min: 5, max: 8},
+            {required: true, trigger: 'blur'},
             {validator: CheckSchoolssnNotExist, required: true, trigger: 'blur'}
           ],
           schoolssnAgain: [
-            {required: true, validator: CheckAgainSchoolssn, trigger: 'change'}
+            {required: true, validator: CheckAgainSchoolssn, trigger: 'blur'}
           ],
           captcha: [
             {required: true, trigger: 'blur', min: 1, max: 10}
