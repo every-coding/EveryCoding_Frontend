@@ -167,7 +167,7 @@
             {required: true, validator: CheckAgainPassword, trigger: 'change'}
           ],
           schoolssn: [
-            {required: true, trigger: 'blur'},
+            {required: true, trigger: 'blur', min: 5, max: 8},
             {validator: CheckSchoolssnNotExist, required: true, trigger: 'blur'}
           ],
           schoolssnAgain: [

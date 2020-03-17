@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <Panel :title="$t('m.Lecture_UserList') ">
+    <Panel :title="this.lectureTitle + ' ' + $t('m.Lecture_UserList') ">
       <div slot="header">
         <el-row :gutter="20">
           <el-col :span="selectedUsers.length ? 16: 24">
@@ -63,7 +63,7 @@
         <el-table-column fixed="right" label="" width="200">
           <template slot-scope="{row}">
             <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
-            <icon-btn name="Deny" icon="trash" @click.native="DenyStudent(row.schoolssn)"></icon-btn>
+            <icon-btn name="Deny" icon="trash" @click.native="DenyStudent(row.id)"></icon-btn>
           </template>
         </el-table-column>
       </el-table>
@@ -167,6 +167,7 @@
     },
     mounted () {
       this.lectureID = this.$route.params.lectureId
+      this.lectureTitle = this.$route.params.lectureTitle
       this.getUserList(1)
       console.log(this.lectureID)
     },
@@ -188,12 +189,11 @@
           this.$success('Success')
         })
       },
-      DenyStudent (schoolssn) {
+      DenyStudent (id) {
         this.$confirm('해당 학생의 수강신청을 삭제하시겠습니까?', 'confirm', {
           type: 'warning'
         }).then(() => {
-          console.log('schoolssn : ' + schoolssn)
-          api.denyStudent(schoolssn, this.lectureID).then(res => {
+          api.denyStudent(id, this.lectureID).then(res => {
             this.getUserList(this.page)
           }).catch(() => {
             this.getUserList(this.page)
