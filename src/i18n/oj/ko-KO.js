@@ -105,6 +105,9 @@ export const m = {
   password_does_not_match: '패스워드가 일치하지 않습니다.',
   schoolssn_does_not_match: '학번/교직번호가 일치하지 않습니다.',
   schoolssn_invalid: '테스트',
+  The_username_already_exists: '사용자 id가 이미 있습니다.',
+  The_email_already_exists: '이미 존재하는 이메일입니다.',
+  The_schoolssn_already_exists: '학번/교직번호가 이미 있습니다.',
   // ResetPassword.vue and ApplyResetPassword.vue
   Reset_Password: '비밀번호 분실',
   RPassword: '비밀번호',
