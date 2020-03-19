@@ -109,6 +109,8 @@ export const m = {
   The_email_already_exists: '이미 존재하는 이메일입니다.',
   The_schoolssn_already_exists: '학번/교직번호가 이미 있습니다.',
   // ResetPassword.vue and ApplyResetPassword.vue
+  Success: '완료',
+  Password_reset_mail_sent: '비밀번호 초기화 메일을 전송했습니다.',
   Reset_Password: '비밀번호 분실',
   RPassword: '비밀번호',
   RPassword_Again: '비밀번호 확인',

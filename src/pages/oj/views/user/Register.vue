@@ -116,13 +116,6 @@
         }
         callback()
       }
-      const CheckSchoolssn = (rule, value, callback) => {
-        if (this.formRegister.schoolssn !== '') {
-          // 对第二个密码框再次验证
-          this.$refs.formRegister.validateField('schoolssnAgain')
-        }
-        callback()
-      }
       const CheckAgainPassword = (rule, value, callback) => {
         if (value !== this.formRegister.password) {
           callback(new Error(this.$i18n.t('m.password_does_not_match')))

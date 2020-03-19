@@ -1,5 +1,6 @@
 <template>
   <div class="view">
+    <p>개설자 : {{ this.lectureFounder }}</p>
     <Panel :title="this.lectureTitle + ' ' + $t('m.Lecture_UserList') ">
       <div slot="header">
         <el-row :gutter="20">
@@ -145,6 +146,10 @@
         uploadUsersPage: [],
         uploadUsersCurrentPage: 1,
         uploadUsersPageSize: 15,
+        // 학생 유형별 카운트
+        signup: 0, // 정상 수강 인원
+        notgegistered: 0, // 미등록된 인원
+        outoflecture: 0, // 정원 외 인원 (학생 개인 임의 수강신청)
         // 搜索关键字
         keyword: '',
         // 是否显示用户对话框
@@ -168,6 +173,7 @@
     mounted () {
       this.lectureID = this.$route.params.lectureId
       this.lectureTitle = this.$route.params.lectureTitle
+      this.lectureFounder = this.$route.params.lectureFounder
       this.getUserList(1)
       console.log(this.lectureID)
     },
@@ -226,6 +232,9 @@
           this.loadingTable = false
           this.total = res.data.data.total
           this.userList = res.data.data.results
+          this.userList.forEach(user => {
+            console.log(user)
+          })
           // console.log(this.userList)
         }, res => {
           this.loadingTable = false
