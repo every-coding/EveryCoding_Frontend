@@ -77,7 +77,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <save @click.native="saveContest"></save>
+      <save @click.native="saveContest()"></save>
     </Panel>
   </div>
 </template>
@@ -113,13 +113,14 @@
     },
     methods: {
       saveContest () {
+        console.log(this.contest.lecture)
+        let lectureId = this.contest.lecture
         let funcName = this.$route.name === 'edit-contest' ? 'editContest' : 'createContest' // ../../router.js 파일 내부 참조하여 일치하는 component 가져옴
-        if (this.$route.params.lectureId) {
-          this.contest.lecture_id = this.$route.params.lectureId
+        if (this.contest.lecture) {
+          this.contest.lecture_id = this.contest.lecture
         } else {
           this.contest.lecture_id = null
         }
-        console.log(this.contest.lecture_id)
         let data = Object.assign({}, this.contest)
         let ranges = []
         for (let v of data.allowed_ip_ranges) {
@@ -129,7 +130,7 @@
         }
         data.allowed_ip_ranges = ranges
         api[funcName](data).then(res => {
-          this.$router.push({name: 'contest-list', query: {refresh: 'true'}})
+          this.$router.push({name: 'lecture-contest-list', params: {lectureId}, query: {refresh: 'true'}})
         }).catch(() => {
         })
       },
@@ -158,15 +159,13 @@
           }
           data.allowed_ip_ranges = ranges
           this.contest = data
+          console.log('아이디값' + this.contest.lecture)
+          this.lecture_id = this.contest.lecture
         }).catch(() => {
         })
       } else if (this.$route.name === 'create-lecture-contest') {
         this.title = 'Add Contest'
       }
-      console.log('test 1 ' + this.$route.params.lectureId)
-      console.log('test 2 ' + this.lecture_id)
-      this.lecture_id = this.$route.params.lectureId
-      console.log('test 3 ' + this.lecture_id)
     }
   }
 </script>
