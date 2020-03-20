@@ -18,6 +18,14 @@
 <script>
   import { mapActions, mapState } from 'vuex'
   import NavBar from '@oj/components/NavBar.vue'
+  import Vue from 'vue'
+  import router from './router'
+  import VueAnalytics from 'vue-analytics'
+
+  Vue.use(VueAnalytics, {
+    id: 'UA-161262014-1',
+    router
+  })
 
   export default {
     name: 'app',
