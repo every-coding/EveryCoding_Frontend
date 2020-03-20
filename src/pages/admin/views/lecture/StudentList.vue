@@ -1,7 +1,9 @@
 <template>
   <div class="view">
-    <p>개설자 : {{ this.lectureFounder }}</p>
-    <Panel :title="this.lectureTitle + ' ' + $t('m.Lecture_UserList') ">
+    <Panel :title="this.lectureTitle + ' ' + $t('m.Lecture_UserList')">
+      <div>
+        <strong>개설자 : {{ this.lectureFounder }}</strong>
+      </div>
       <div slot="header">
         <el-row :gutter="20">
           <el-col :span="selectedUsers.length ? 16: 24">
@@ -136,11 +138,10 @@
     data () {
       return {
         lectureID: '',
-        // 一页显示的用户数
+        lectureFounder: '', // 강의 개설자 realname
+        lectureTitle: '', // 수강과목 title
         pageSize: 50,
-        // 用户总数
         total: 0,
-        // 用户列表
         userList: [],
         uploadUsers: [],
         uploadUsersPage: [],
@@ -150,15 +151,11 @@
         signup: 0, // 정상 수강 인원
         notgegistered: 0, // 미등록된 인원
         outoflecture: 0, // 정원 외 인원 (학생 개인 임의 수강신청)
-        // 搜索关键字
         keyword: '',
-        // 是否显示用户对话框
         showUserDialog: false,
-        // 当前用户model
         user: {},
         loadingTable: false,
         loadingGenerate: false,
-        // 当前页码
         currentPage: 0,
         selectedUsers: [],
         formGenerateUser: {
