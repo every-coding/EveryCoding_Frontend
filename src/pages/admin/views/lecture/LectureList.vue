@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <Panel title="수강과목 목록">
+    <Panel :title="$t('m.Lecture_List')">
       <div slot="header">
         <el-input
           v-model="keyword"
@@ -88,7 +88,7 @@
   import api from '../../api.js'
 
   export default {
-    name: '수강과목 목록',
+    name: '',
     data () {
       return {
         pageSize: 25,
