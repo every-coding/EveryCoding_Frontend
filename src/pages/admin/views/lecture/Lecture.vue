@@ -62,8 +62,8 @@
           description: '',
           status: true,
           password: '',
-          year: 0,
-          semester: 0,
+          year: 2020,
+          semester: 1,
           contestlist: [{
             value: ''
           }]
