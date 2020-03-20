@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <Panel title="주차 별 실습 과제 목록">
+    <Panel :title="$t('m.WeeklyContest_List')">
       <div slot="header">
         <el-input
           v-model="keyword"

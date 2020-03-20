@@ -97,6 +97,7 @@ export const m = {
   New_Tag: 'New Tag',
   // Contest.vue
   ContestTitle: '제목',
+  LectureContestType: '유형 선택',
   ContestDescription: '설명',
   Contest_Start_Time: '시작 시간',
   Contest_End_Time: '종료 시간',
@@ -107,6 +108,7 @@ export const m = {
   Allowed_IP_Ranges: '허용된 IP 범위',
   CIDR_Network: 'CIDR 네트워크',
   Contest_assigned_lecture: '소속된 개설과목 id',
+  WeeklyContest_List: '실습, 과제, 대회 목록',
   // Dashboard.vue
   Last_Login: '최근 로그인',
   System_Overview: '시스템 개요',
