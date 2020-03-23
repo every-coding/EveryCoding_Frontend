@@ -53,10 +53,12 @@
           </template>
         </el-table-column>
         <el-table-column prop="totalProblem" label="총 문제 수" width="90"></el-table-column>
+        <el-table-column prop="tryProblem" label="시도 수" width="90"></el-table-column>
         <el-table-column prop="solveProblem" label="해결 수" width="90"></el-table-column>
+        <el-table-column prop="maxScore" label="만점" width="90"></el-table-column>
         <el-table-column prop="totalScore" label="총점" width="90"></el-table-column>
-        <el-table-column prop="maxScore" label="최대점" width="90"></el-table-column>
         <el-table-column prop="avgScore" label="평균" width="90"></el-table-column>
+        <el-table-column prop="progress" label="진행율" width="90">%</el-table-column>
         <!--<el-table-column prop="user.admin_type" label="사용자 유형">
           <template slot-scope="scope">
             {{ scope.row.user.admin_type }}
