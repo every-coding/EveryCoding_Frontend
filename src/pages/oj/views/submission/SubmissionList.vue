@@ -170,6 +170,13 @@
             }
           },
           {
+            title: this.$i18n.t('m.AuthorRealname'),
+            align: 'center',
+            render: (h, params) => {
+              return h('span', params.row.user.realname)
+            }
+          },
+          {
             title: this.$i18n.t('m.Lecture_id'),
             align: 'center',
             key: 'lecture'

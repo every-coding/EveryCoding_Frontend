@@ -1,6 +1,7 @@
 export const m = {
   // Test
   // Problem.vue
+  Problem_Submissions: '문제 제출 현황',
   Description: '설명',
   Input: '입력',
   Output: '출력',
@@ -130,6 +131,7 @@ export const m = {
   Lecture_Contests: '문제',
   No_lecture: '수강 과목 없음',
   // Submission
+  AuthorRealname: '코드 작성자',
   When: '제출 일자',
   Time: '소요 시간',
   Language: '언어',
