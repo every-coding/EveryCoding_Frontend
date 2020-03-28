@@ -147,10 +147,14 @@ export default {
       }
     })
   }, // lecture API 시작
-  getTakingLectureList (offset, limit, searchParams) {
+  getTakingLectureList (offset, limit, searchParams, yearSort, subjSort, profSort) {
     let params = {
       offset,
-      limit
+      limit,
+      searchParams,
+      yearSort,
+      subjSort,
+      profSort
     }
     if (searchParams !== undefined) {
       Object.keys(searchParams).forEach((element) => {
