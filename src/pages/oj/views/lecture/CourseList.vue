@@ -16,7 +16,7 @@
         <li v-if="lectures != 0"><!--표시될 수강과목 수가 0이 아닌 경우에만 출력-->
           <Row id="tb-column" type="flex" justify="space-between" align="middle">
             <Col :span="1" style="text-align: center">
-              년도
+              <a id=listing @click="sortYear()">년도</a>
 			      </Col>
             <Col :span="1" style="text-align: center">
               학기
@@ -81,6 +81,9 @@
     data () {
       return {
         page: 1,
+        yearsort: 0,
+        subjsort: 0,
+        profsort: 0,
         query: {
           status: '',
           keyword: '',
@@ -114,9 +117,41 @@
         this.page = parseInt(route.page) || 1
         this.getLectureList()
       },
+      sortYear () {
+        console.log('test')
+        if (this.yearsort === 0 || this.yearsort === -1) {
+          this.yearsort = 1
+        } else {
+          this.yearsort = -1
+        }
+        let route = this.$route.query
+        this.query.rule_type = route.rule_type || ''
+        this.query.keyword = route.keyword || ''
+        this.page = parseInt(route.page) || 1
+        this.getSortedLectureList(this.page, 'year')
+      },
+      getSortedLectureList (page = 1, sorttype) {
+        let offset = (page - 1) * this.limit
+        if (sorttype === 'year') {
+          api.getTakingLectureList(offset, this.limit, this.query, this.yearsort, undefined, undefined).then((res) => {
+            this.lectures = res.data.data.results
+            this.total = res.data.data.total
+          })
+        } else if (sorttype === 'subj') {
+          api.getTakingLectureList(offset, this.limit, this.query, undefined, this.subjsort, undefined).then((res) => {
+            this.lectures = res.data.data.results
+            this.total = res.data.data.total
+          })
+        } else {
+          api.getTakingLectureList(offset, this.limit, this.query, undefined, undefined, this.profsort).then((res) => {
+            this.lectures = res.data.data.results
+            this.total = res.data.data.total
+          })
+        }
+      },
       getLectureList (page = 1) {
         let offset = (page - 1) * this.limit
-        api.getTakingLectureList(offset, this.limit, this.query).then((res) => {
+        api.getTakingLectureList(offset, this.limit, this.query, undefined, undefined, undefined).then((res) => {
           this.lectures = res.data.data.results
           this.total = res.data.data.total
         })
@@ -172,6 +207,9 @@
   }
 </script>
 <style lang="less" scoped>
+  #listing {
+    color: black
+  }
   #waitlecture {
     color: #A4A4A4;
   }
@@ -229,4 +267,5 @@
       }
     }
   }
+  
 </style>
