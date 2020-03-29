@@ -177,7 +177,7 @@
         </el-form-item>
       </el-form>
     </Panel>
-    <!--对话框-->
+    <!--사용자 정보 수정 다이얼로그-->
     <el-dialog :title="$t('m.User_Info')" :visible.sync="showUserDialog" :close-on-click-modal="false">
       <el-form :model="user" label-width="120px" label-position="left">
         <el-row :gutter="20">
@@ -188,7 +188,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item :label="$t('m.User_Real_Name')" required>
-              <el-input v-model="user.real_name"></el-input>
+              <el-input v-model="user.realname"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -265,7 +265,7 @@
     data () {
       return {
         // 一页显示的用户数
-        pageSize: 10,
+        pageSize: 100,
         // 用户总数
         total: 0,
         // 用户列表

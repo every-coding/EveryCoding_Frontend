@@ -22,10 +22,10 @@
               학기
 			      </Col>
             <Col :span="16">
-              과목명
+              <a id=listing @click="sortYear()">과목명</a>
             </Col>
             <Col :span="2">
-              담당교수
+              <a id=listing @click="sortYear()">담당교수</a>
 			      </Col>
             <Col :span="4" style="text-align: center">
               수강신청 상태
