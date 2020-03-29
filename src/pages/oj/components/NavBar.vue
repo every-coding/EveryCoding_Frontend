@@ -16,7 +16,7 @@
       </Menu-item>
       <Menu-item name="/contest">
         <Icon type="ios-book"></Icon>
-        {{$t('m.Contests')}}
+        {{$t('m.Public_Contests')}}
       </Menu-item>
       <Menu-item name="/problem">
         <Icon type="ios-keypad"></Icon>
