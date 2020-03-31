@@ -11,7 +11,7 @@
           </el-col>
         </el-row>
       </div>
-      <strong>총 수강 학생 : {{ userList.length }}명</strong>
+      <strong>총 수강 학생/등록/미등록 : {{ userList.length }}명 / {{ RegistUser }}명 / {{ noRegistUser }}명</strong>
       <el-table
         v-loading="loadingTable"
         element-loading-text="loading"
@@ -19,7 +19,7 @@
         ref="table"
         :data="userList"
         style="width: 100%">
-        <el-table-column prop="realname" label="실제 이름">
+        <el-table-column prop="realname" label="이름">
           <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
             <span v-if="scope.row.realname"><!--해당 값을 출력하고-->
               {{ scope.row.realname }}
@@ -41,7 +41,6 @@
         </el-table-column>
         <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
 
-        <el-table-column prop="user.email" label="이메일" width="180"></el-table-column>
         <el-table-column prop="isallow" label="수강 유무">
           <template slot-scope="scope"> <!--true 일 때 출력하는 템플릿-->
             <span v-if="scope.row.isallow" style="background-color:green; color:white">
@@ -52,9 +51,16 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column prop="totalProblem" label="총 문제 수" width="90"></el-table-column>
-        <el-table-column prop="tryProblem" label="시도 수" width="90"></el-table-column>
-        <el-table-column prop="solveProblem" label="해결 수" width="90"></el-table-column>
+        <el-table-column label="총실습/도전/해결">
+	</el-table-column>
+        <el-table-column label="총과제/도전/해결">10</el-table-column>
+        <el-table-column label="총문제/도전/해결" align="center">
+          <template slot-scope="scope">
+            <span style="background-color:green; color:white; text-align:center">
+               {{ scope.row.totalProblem }}/{{ scope.row.tryProblem }}/{{ scope.row.solveProblem }}
+            </span>
+          </template>
+	</el-table-column>
         <el-table-column prop="maxScore" label="만점" width="90"></el-table-column>
         <el-table-column prop="totalScore" label="총점" width="90"></el-table-column>
         <el-table-column prop="avgScore" label="평균" width="90"></el-table-column>
@@ -146,6 +152,8 @@
         lectureTitle: '', // 수강과목 title
         pageSize: 50,
         total: 0,
+        RegistUser: 0,
+        noRegistUser: 0,
         userList: [],
         uploadUsers: [],
         uploadUsersPage: [],
@@ -236,6 +244,13 @@
           this.userList.forEach(user => {
             console.log(user)
           })
+          this.noRegistUser = 0
+          for (let uu of this.userList) {
+            if (uu.isallow === false) {
+              this.noRegistUser = this.noRegistUser + 1
+            }
+          }
+          this.RegistUser = this.userList.length - this.noRegistUser
           // console.log(this.userList)
         }, res => {
           this.loadingTable = false
