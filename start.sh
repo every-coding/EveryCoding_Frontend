@@ -1,3 +1,3 @@
-export TARGET=http://127.0.0.1:8000
+export TARGET=http://203.250.32.235:8000
 
 npm start nohup.out &

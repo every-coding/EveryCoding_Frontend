@@ -19,7 +19,7 @@
         ref="table"
         :data="userList"
         style="width: 100%">
-        <el-table-column prop="realname" label="이름">
+        <el-table-column prop="realname" label="이름" align="center">
           <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
             <span v-if="scope.row.realname"><!--해당 값을 출력하고-->
               {{ scope.row.realname }}
@@ -29,7 +29,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column prop="schoolssn" label="학번">
+        <el-table-column prop="schoolssn" label="학번" align="center">
           <template slot-scope="scope"><!--마찬가지로 lecture_signup_class에 학번이 있는 경우,-->
             <span v-if="scope.row.schoolssn"><!--해당 값을 출력하고-->
               {{ scope.row.schoolssn }}
@@ -41,7 +41,7 @@
         </el-table-column>
         <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
 
-        <el-table-column prop="isallow" label="수강 유무">
+        <el-table-column prop="isallow" label="수강 유무" align="center">
           <template slot-scope="scope"> <!--true 일 때 출력하는 템플릿-->
             <span v-if="scope.row.isallow" style="background-color:green; color:white">
               {{ scope.row.isallow }}
@@ -51,20 +51,31 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column label="총실습/도전/해결">
+        <el-table-column label="총실습/도전/해결" align="center">
+          <template slot-scope="scope">
+            <span style="text-align:center">
+               {{ scope.row.totalPractice }}/{{ scope.row.subPractice }}/{{ scope.row.solvePractice }}
+            </span>
+          </template>
 	</el-table-column>
-        <el-table-column label="총과제/도전/해결">10</el-table-column>
+        <el-table-column label="총과제/도전/해결" align="center">
+          <template slot-scope="scope">
+            <span style="text-align:center">
+               {{ scope.row.totalAssign }}/{{ scope.row.subAssign }}/{{ scope.row.solveAssign }}
+            </span>
+          </template>
+	</el-table-column>
         <el-table-column label="총문제/도전/해결" align="center">
           <template slot-scope="scope">
-            <span style="background-color:green; color:white; text-align:center">
+            <span style="text-align:center">
                {{ scope.row.totalProblem }}/{{ scope.row.tryProblem }}/{{ scope.row.solveProblem }}
             </span>
           </template>
 	</el-table-column>
-        <el-table-column prop="maxScore" label="만점" width="90"></el-table-column>
-        <el-table-column prop="totalScore" label="총점" width="90"></el-table-column>
-        <el-table-column prop="avgScore" label="평균" width="90"></el-table-column>
-        <el-table-column prop="progress" label="진행율" width="90"></el-table-column>
+        <el-table-column prop="maxScore" label="만점" width="90" align="center"></el-table-column>
+        <el-table-column prop="totalScore" label="총점" width="90" align="center"></el-table-column>
+        <el-table-column prop="avgScore" label="평균" width="90" align="center"></el-table-column>
+        <el-table-column prop="progress" label="진행율" width="90" align="center"></el-table-column>
         <!--<el-table-column prop="user.admin_type" label="사용자 유형">
           <template slot-scope="scope">
             {{ scope.row.user.admin_type }}
