@@ -12,83 +12,97 @@
         </el-row>
       </div>
       <strong>총 수강 학생/등록/미등록 : {{ userList.length }}명 / {{ RegistUser }}명 / {{ noRegistUser }}명</strong>
-      <el-table
-        v-loading="loadingTable"
-        element-loading-text="loading"
-        @selection-change="handleSelectionChange"
-        ref="table"
-        :data="userList"
-        style="width: 100%">
-        <el-table-column prop="realname" label="이름" align="center">
-          <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
-            <span v-if="scope.row.realname"><!--해당 값을 출력하고-->
-              {{ scope.row.realname }}
-            </span>
-            <span v-else><!--아닌 경우에는 User 테이블에 있는 realname 값을 출력한다.-->
-              {{ scope.row.user.realname }}
-            </span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="schoolssn" label="학번" align="center">
-          <template slot-scope="scope"><!--마찬가지로 lecture_signup_class에 학번이 있는 경우,-->
-            <span v-if="scope.row.schoolssn"><!--해당 값을 출력하고-->
-              {{ scope.row.schoolssn }}
-            </span>
-            <span v-else><!--아닌 경우에는 User 테이블에 있는 schoolssn 값을 출력한다.-->
-              {{ scope.row.user.schoolssn }}
-            </span>
-          </template>
-        </el-table-column>
-        <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
+      <!---->
+      <template>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+          <el-tab-pane label="학생 목록" name="student">
+            <el-table
+              v-loading="loadingTable"
+              element-loading-text="loading"
+              @selection-change="handleSelectionChange"
+              ref="table"
+              :data="userList"
+              style="width: 100%">
+              <el-table-column prop="realname" label="이름" align="center">
+                <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
+                  <span v-if="scope.row.realname"><!--해당 값을 출력하고-->
+                    {{ scope.row.realname }}
+                  </span>
+                  <span v-else><!--아닌 경우에는 User 테이블에 있는 realname 값을 출력한다.-->
+                    {{ scope.row.user.realname }}
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="schoolssn" label="학번" align="center">
+                <template slot-scope="scope"><!--마찬가지로 lecture_signup_class에 학번이 있는 경우,-->
+                  <span v-if="scope.row.schoolssn"><!--해당 값을 출력하고-->
+                    {{ scope.row.schoolssn }}
+                  </span>
+                  <span v-else><!--아닌 경우에는 User 테이블에 있는 schoolssn 값을 출력한다.-->
+                    {{ scope.row.user.schoolssn }}
+                  </span>
+                </template>
+              </el-table-column>
+              <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
 
-        <el-table-column prop="isallow" label="수강 유무" align="center">
-          <template slot-scope="scope"> <!--true 일 때 출력하는 템플릿-->
-            <span v-if="scope.row.isallow" style="background-color:green; color:white">
-              {{ scope.row.isallow }}
-            </span>
-            <span v-else style="background-color:red; color:white">
-              {{ scope.row.isallow }}
-            </span>
-          </template>
-        </el-table-column>
-        <el-table-column label="총실습/도전/해결" align="center">
-          <template slot-scope="scope">
-            <span style="text-align:center">
-               {{ scope.row.totalPractice }}/{{ scope.row.subPractice }}/{{ scope.row.solvePractice }}
-            </span>
-          </template>
-	</el-table-column>
-        <el-table-column label="총과제/도전/해결" align="center">
-          <template slot-scope="scope">
-            <span style="text-align:center">
-               {{ scope.row.totalAssign }}/{{ scope.row.subAssign }}/{{ scope.row.solveAssign }}
-            </span>
-          </template>
-	</el-table-column>
-        <el-table-column label="총문제/도전/해결" align="center">
-          <template slot-scope="scope">
-            <span style="text-align:center">
-               {{ scope.row.totalProblem }}/{{ scope.row.tryProblem }}/{{ scope.row.solveProblem }}
-            </span>
-          </template>
-	</el-table-column>
-        <el-table-column prop="maxScore" label="만점" width="90" align="center"></el-table-column>
-        <el-table-column prop="totalScore" label="총점" width="90" align="center"></el-table-column>
-        <el-table-column prop="avgScore" label="평균" width="90" align="center"></el-table-column>
-        <el-table-column prop="progress" label="진행율" width="90" align="center"></el-table-column>
-        <!--<el-table-column prop="user.admin_type" label="사용자 유형">
-          <template slot-scope="scope">
-            {{ scope.row.user.admin_type }}
-          </template>
-        </el-table-column>-->
-        
-        <el-table-column fixed="right" label="" width="200">
-          <template slot-scope="{row}">
-            <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
-            <icon-btn name="Deny" icon="trash" @click.native="DenyStudent(row.id)"></icon-btn>
-          </template>
-        </el-table-column>
-      </el-table>
+              <el-table-column prop="isallow" label="수강 유무" align="center">
+                <template slot-scope="scope"> <!--true 일 때 출력하는 템플릿-->
+                  <span v-if="scope.row.isallow" style="background-color:green; color:white">
+                    {{ scope.row.isallow }}
+                  </span>
+                  <span v-else style="background-color:red; color:white">
+                    {{ scope.row.isallow }}
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column label="총실습/도전/해결" align="center">
+                <template slot-scope="scope">
+                  <span style="text-align:center">
+                    {{ scope.row.totalPractice }}/{{ scope.row.subPractice }}/{{ scope.row.solvePractice }}
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column label="총과제/도전/해결" align="center">
+                <template slot-scope="scope">
+                  <span style="text-align:center">
+                    {{ scope.row.totalAssign }}/{{ scope.row.subAssign }}/{{ scope.row.solveAssign }}
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column label="총문제/도전/해결" align="center">
+                <template slot-scope="scope">
+                  <span style="text-align:center">
+                    {{ scope.row.totalProblem }}/{{ scope.row.tryProblem }}/{{ scope.row.solveProblem }}
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column prop="maxScore" label="만점" width="90" align="center"></el-table-column>
+              <el-table-column prop="totalScore" label="총점" width="90" align="center"></el-table-column>
+              <el-table-column prop="avgScore" label="평균" width="90" align="center"></el-table-column>
+              <el-table-column prop="progress" label="진행율" width="90" align="center"></el-table-column>
+              <!--<el-table-column prop="user.admin_type" label="사용자 유형">
+                <template slot-scope="scope">
+                  {{ scope.row.user.admin_type }}
+                </template>
+              </el-table-column>-->
+              
+              <el-table-column fixed="right" label="" width="200">
+                <template slot-scope="{row}">
+                  <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
+                  <icon-btn name="Deny" icon="trash" @click.native="DenyStudent(row.id)"></icon-btn>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+          <el-tab-pane label="실습, 과제 현황" name="contest">
+            현재 수강과목 실습, 과제 각 주차별 현황
+          </el-tab-pane>
+          <el-tab-pane label="기타" name="extra">
+            Extra
+          </el-tab-pane>
+        </el-tabs>
+      </template>
+      <!---->
       <div class="panel-options">
         <el-pagination
           class="page"
@@ -158,6 +172,8 @@
     name: 'User',
     data () {
       return {
+        activeName: 'student', // 페이지 내 여러 탭 표현을 위한 변수
+        showContestDialog: false,
         lectureID: '',
         lectureFounder: '', // 강의 개설자 realname
         lectureTitle: '', // 수강과목 title
@@ -198,7 +214,6 @@
       console.log(this.lectureID)
     },
     methods: {
-      // 切换页码回调
       currentChange (page) {
         this.currentPage = page
         this.getUserList(page)

@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="contest-card" shadow>
-      <div slot="title">{{ lecture_Title }}</div><!--LectureList.vue에서 보낸 수강과목 title 값-->
+      <div slot="title">{{ this.lecture_title }} <p>개설자 : {{ this.lecture_creator }}</p></div><!--LectureList.vue에서 보낸 수강과목 title 값-->
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -97,8 +97,8 @@
     },
     data () {
       return {
-        lecture_Title: '',
-        lectureID: '',
+        lecture_title: '',
+        lecture_creator: '',
         page: 1,
         route_name: '',
         query: {
@@ -127,7 +127,6 @@
         this.query.keyword = route.keyword
         this.query.lectureid = this.$route.params.lectureID
         this.page = parseInt(route.page) || 1
-        this.lecture_Title = this.$route.params.lectureTitle
         this.getContestList()
       },
       getContestList (page = 1) {
@@ -135,6 +134,8 @@
         api.getContestList(offset, this.limit, this.query).then((res) => {
           this.contests = res.data.data.results
           this.total = res.data.data.total
+          this.lecture_title = this.contests[0].lecture_title
+          this.lecture_creator = this.contests[0].created_by.realname
         })
       },
       changeRoute () {
@@ -161,7 +162,7 @@
           this.$error(this.$i18n.t('m.Please_login_first'))
           this.$store.dispatch('changeModalStatus', {visible: true})
         } else {
-          this.$router.push({name: 'contest-details', params: {contestID: contest.id, lectureID: this.lectureID}})
+          this.$router.push({name: 'lecture-contest-details', params: {contestID: contest.id, lectureID: this.query.lectureid}})
         }
       },
 

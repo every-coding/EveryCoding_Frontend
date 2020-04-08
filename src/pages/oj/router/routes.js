@@ -89,6 +89,44 @@ export default [
     path: '/CourseList/:lectureID/',
     component: Lecture.LectureDetails,
     meta: {title: 'Lecture Details'}
+  },
+  {
+    name: 'lecture-contest-details',
+    path: '/CourseList/:lectureID/:contestID/',
+    component: Lecture.LectureContestDetails,
+    meta: {title: 'Contest Details'},
+    children: [
+      {
+        name: 'lecture-contest-submission-list',
+        path: 'submissions',
+        component: SubmissionList
+      },
+      {
+        name: 'lecture-contest-problem-list',
+        path: 'problems',
+        component: Lecture.LectureContestProblemList
+      },
+      {
+        name: 'lecture-contest-problem-details',
+        path: 'problem/:problemID/',
+        component: Problem
+      },
+      {
+        name: 'lecture-contest-announcement-list',
+        path: 'announcements',
+        component: Announcements
+      },
+      {
+        name: 'lecture-contest-rank',
+        path: 'rank',
+        component: Lecture.LectureContestRank
+      },
+      {
+        name: 'lecture-acm-helper',
+        path: 'helper',
+        component: Lecture.LectureACMContestHelper
+      }
+    ]
   }, // lecture 끝
   {
     name: 'contest-list',
