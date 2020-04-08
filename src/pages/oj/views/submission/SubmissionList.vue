@@ -155,7 +155,7 @@
               return h('a', {
                 style: {
                   'display': 'inline-block',
-                  'max-width': '150px'
+                  'max-width': '100px'
                 },
                 on: {
                   click: () => {

@@ -131,6 +131,7 @@ export const m = {
   Lecture_Contests: '문제',
   No_lecture: '수강 과목 없음',
   // Submission
+  Signal: 'Signal',
   AuthorRealname: '코드 작성자',
   When: '제출 일자',
   Time: '소요 시간',
