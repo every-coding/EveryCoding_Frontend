@@ -1,67 +1,43 @@
 <template>
   <Row type="flex" justify="space-around">
     <Col :span="22">
-    <panel>
+    <panel class="lecture">
       <div slot="title">
         나의 수강과목 진행 현황
       </div>
-      <div class="echarts">
-        <ECharts :options="options" ref="chart" auto-resize></ECharts>
-      </div>
-      <div class="lecturetitle">
-        강의별 현황
-      </div>
-      <div>
-        <div class="lecturetitle">
-          코딩: 생각을현실로
-        </div>
-        <div class="divTable">
-          <div class="divTableBody">
-            <div class="divTableRow">
-              <div class="divTableCell">&nbsp;실습<br/>(총계/도전/성공)</div>
-              <div class="divTableCell">과제<br/>(총계/도전/성공)&nbsp;</div>
-              <div class="divTableCell">문제<br/>(총계/도전/성공)&nbsp;</div>
-            </div>
-            <div class="divTableRow">
-              <div class="divTableCell">&nbsp;3/2/2</div>
-              <div class="divTableCell">1/1/1&nbsp;</div>
-              <div class="divTableCell">20/10/10&nbsp;</div>
-            </div>
-            <div class="divTableRow">
-              <div class="divScore">20%&nbsp;</div>
-              <div class="divScore">30%&nbsp;</div>
-              <div class="divScore">20%&nbsp;</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <!-- DivTable.com -->
+      <template v-for="pie in pielist">
+        <h3>{{ pie.title }}</h3>
+        <el-table
+          :data="tablerow"
+          border
+          class="dashboard">
+          <el-table-column
+            label="실습"
+            align="center">
+            <Card>
+              <div class="echarts">
+                <ECharts :options="pie.pie_1"></ECharts>
+              </div>
+            </Card>
+          </el-table-column>
+          <el-table-column
+            label="과제"
+            align="center">
+            <Card>
+              <div class="echarts">
+                <ECharts :options="pie.pie_2"></ECharts>
+              </div>
+            </Card>
+          </el-table-column>
+        </el-table>
+      </template>
     </panel>
     <panel shadow v-if="contests.length" class="contest">
       <div slot="title">
         <Button type="text"  class="contest-title" @click="goContest">{{contests[index].title}}</Button>
       </div>
-      <Carousel v-model="index" trigger="hover" autoplay :autoplay-speed="6000" class="contest">
-        <CarouselItem v-for="(contest, index) of contests" :key="index">
-          <div class="contest-content">
-            <div class="contest-content-tags">
-              <Button type="info" shape="circle" size="small" icon="calendar">
-                {{contest.start_time | localtime('YYYY-M-D HH:mm') }}
-              </Button>
-              <Button type="success" shape="circle" size="small" icon="android-time">
-                {{getDuration(contest.start_time, contest.end_time)}}
-              </Button>
-              <Button type="warning" shape="circle" size="small" icon="trophy">
-                {{contest.rule_type}}
-              </Button>
-            </div>
-            <div class="contest-content-description">
-              <blockquote v-html="contest.description"></blockquote>
-            </div>
-          </div>
-        </CarouselItem>
-      </Carousel>
+      <Table stripe :loading="loading" :disabled-hover="true" :columns="columns" :data="dashboard"></Table>
     </panel>
     <Announcements class="announcement"></Announcements>
     </Col>
@@ -69,10 +45,30 @@
 </template>
 
 <script>
+  import Vue from 'vue'
+  import Element from 'element-ui'
+  import ECharts from 'vue-echarts'
+  import 'element-ui/lib/theme-chalk/index.css'
   import Announcements from './Announcements.vue'
   import api from '@oj/api'
   import time from '@/utils/time'
   import { CONTEST_STATUS } from '@/utils/constants'
+
+  Vue.use(Element)
+
+  const pieColorMap = {
+    '해결': {color: '#409EFF'},
+    '미해결': {color: '#F56C6C'},
+    'TLE': {color: '#ff9300'},
+    'MLE': {color: '#f7de00'},
+    'RE': {color: '#ff6104'},
+    'CE': {color: '#80848f'},
+    'PAC': {color: '#2d8cf0'}
+  }
+
+  function getItemColor (obj) {
+    return pieColorMap[obj.name].color
+  }
 
   export default {
     name: 'home',
@@ -81,47 +77,58 @@
     },
     data () {
       return {
-        contests: [],
-        index: 0,
-        options: {
-          tooltip: {
-            trigger: 'axis'
-          },
+        pie: {
           legend: {
-            data: ['전체 진행률', '실습', '과제']
-          },
-          xAxis: {
-            type: 'value',
-            boundaryGap: [0, 0]
-          },
-          yAxis: {
-            type: 'category',
-            data: ['코딩:생각을현실로', '자바프로그래밍실습']
+            left: 'center',
+            top: '10',
+            orient: 'horizontal',
+            data: ['해결', '미해결']
           },
           series: [
             {
-              name: '전체 진행률',
-              type: 'bar',
-              data: [80, 100]
-            },
-            {
-              name: '실습',
-              type: 'bar',
-              data: [100, 100]
-            },
-            {
-              name: '과제',
-              type: 'bar',
-              data: [70, 100]
+              name: 'Summary',
+              type: 'pie',
+              radius: '80%',
+              center: ['50%', '50%'],
+              itemStyle: {
+                normal: {color: getItemColor}
+              },
+              data: [
+                {value: 0, name: '미해결'},
+                {value: 0, name: '해결'}
+              ],
+              label: {
+                normal: {
+                  position: 'inner',
+                  show: true,
+                  formatter: '{b}: {c}\n {d}%',
+                  textStyle: {
+                    fontWeight: 'bold'
+                  }
+                }
+              }
             }
           ]
-        }
+        },
+        pielist: [],
+        tablerow: ['1'],
+        lecturelist: [],
+        contests: [],
+        index: 0
       }
     },
     mounted () {
       let params = {status: CONTEST_STATUS.NOT_START}
       api.getContestList(0, 5, params).then(res => {
         this.contests = res.data.data.results
+      })
+      console.log('test')
+      api.getDashboardinfo().then(res => {
+        this.lecturelist = res.data.data.results
+        this.lecturelist.forEach(lecture => {
+          let jsonpie = {title: lecture.lecture.title, pie_1: {legend: {left: 'center', top: '10', orient: 'horizontal', data: ['해결', '미해결']}, series: {name: 'Summary', type: 'pie', radius: '80%', center: ['50%', '50%'], itemStyle: {normal: {color: getItemColor}}, data: [{value: 0, name: '미해결'}, {value: 0, name: '해결'}], label: {normal: {position: 'inner', show: true, formatter: '{b}: {c}\n {d}%', textStyle: {fontWeight: 'bold'}}}}}, pie_2: {legend: {left: 'center', top: '10', orient: 'horizontal', data: ['해결', '미해결']}, series: {name: 'Summary', type: 'pie', radius: '80%', center: ['50%', '50%'], itemStyle: {normal: {color: getItemColor}}, data: [{value: 0, name: '미해결'}, {value: 0, name: '해결'}], label: {normal: {position: 'inner', show: true, formatter: '{b}: {c}\n {d}%', textStyle: {fontWeight: 'bold'}}}}}}
+          this.pielist.push(jsonpie)
+        })
       })
     },
     methods: {
@@ -139,6 +146,17 @@
 </script>
 
 <style lang="less" scoped>
+  h3 {
+    padding-left: 25px;
+  }
+
+  .dashboard {
+    margin-left: 25px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    width: 97%;
+  }
+
   .contest {
     &-title {
       font-style: italic;

@@ -36,11 +36,18 @@
         </template>
       </el-table-column>
       <el-table-column
+        label="소속 수강과목"
+        width="150">
+        <template slot-scope="props">
+          {{ props.row.create_time | localtime }}
+        </template>
+      </el-table-column>
+      <el-table-column
         label="실습, 과제, 대회명"
         prop="title">
       </el-table-column>
       <el-table-column
-        label="추가"
+        label="추가하기"
         align="center"
         width="100"
         fixed="right">

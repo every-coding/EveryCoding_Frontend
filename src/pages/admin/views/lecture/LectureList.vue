@@ -64,10 +64,13 @@
           width="250"
           label="">
           <div slot-scope="scope">
-            <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
-            <icon-btn name="Contest List" icon="list-ol" @click.native="goLectureContestList(scope.row.id)"></icon-btn>
-            <icon-btn name="Student List" icon="list-ol" @click.native="goLectureStudentList(scope.row.id, scope.row.title, scope.row.created_by.realname)"></icon-btn>
-            <icon-btn name="Delete" icon="trash" @click.native="deleteLecture(scope.row.id)"></icon-btn>
+            <icon-btn name="과목 수정" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
+            <icon-btn name="실습, 과제 목록" icon="list-ol" @click.native="goLectureContestList(scope.row.id)"></icon-btn>
+            <!--<icon-btn name="Student List" icon="list-ol" @click.native="goLectureStudentList(scope.row.id, scope.row.title, scope.row.created_by.realname)"></icon-btn>-->
+            <el-tooltip class="item" effect="dark" content="학생 목록" placement="top">
+              <el-button name="Student List" size="mini" icon="el-icon-user" @click.native="goLectureStudentList(scope.row.id, scope.row.title, scope.row.created_by.realname)"></el-button>
+            </el-tooltip>
+            <icon-btn name="과목 삭제" icon="trash" @click.native="deleteLecture(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>
       </el-table>
