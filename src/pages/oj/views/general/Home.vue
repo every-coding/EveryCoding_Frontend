@@ -30,6 +30,7 @@
               </div>
             </Card>
           </el-table-column>
+          
         </el-table>
       </template>
     </panel>
@@ -47,7 +48,6 @@
 <script>
   import Vue from 'vue'
   import Element from 'element-ui'
-  import ECharts from 'vue-echarts'
   import 'element-ui/lib/theme-chalk/index.css'
   import Announcements from './Announcements.vue'
   import api from '@oj/api'
@@ -57,11 +57,11 @@
   Vue.use(Element)
 
   const pieColorMap = {
-    '해결': {color: '#409EFF'},
-    '미해결': {color: '#F56C6C'},
-    'TLE': {color: '#ff9300'},
-    'MLE': {color: '#f7de00'},
-    'RE': {color: '#ff6104'},
+    '성공': {color: '#409EFF'},
+    '시작 전': {color: '#F56C6C'},
+    '도전 중': {color: '#E6A23C'},
+    '진행도(%)': {color: '#67C23A'},
+    '': {color: 'Transparent'},
     'CE': {color: '#80848f'},
     'PAC': {color: '#2d8cf0'}
   }
@@ -77,41 +77,8 @@
     },
     data () {
       return {
-        pie: {
-          legend: {
-            left: 'center',
-            top: '10',
-            orient: 'horizontal',
-            data: ['해결', '미해결']
-          },
-          series: [
-            {
-              name: 'Summary',
-              type: 'pie',
-              radius: '80%',
-              center: ['50%', '50%'],
-              itemStyle: {
-                normal: {color: getItemColor}
-              },
-              data: [
-                {value: 0, name: '미해결'},
-                {value: 0, name: '해결'}
-              ],
-              label: {
-                normal: {
-                  position: 'inner',
-                  show: true,
-                  formatter: '{b}: {c}\n {d}%',
-                  textStyle: {
-                    fontWeight: 'bold'
-                  }
-                }
-              }
-            }
-          ]
-        },
         pielist: [],
-        tablerow: ['1'],
+        tablerow: ['1'], // 테이블 출력 수 조절을 위한 값. 지우거나 값 수정하지 말 것
         lecturelist: [],
         contests: [],
         index: 0
@@ -126,7 +93,121 @@
       api.getDashboardinfo().then(res => {
         this.lecturelist = res.data.data.results
         this.lecturelist.forEach(lecture => {
-          let jsonpie = {title: lecture.lecture.title, pie_1: {legend: {left: 'center', top: '10', orient: 'horizontal', data: ['해결', '미해결']}, series: {name: 'Summary', type: 'pie', radius: '80%', center: ['50%', '50%'], itemStyle: {normal: {color: getItemColor}}, data: [{value: 0, name: '미해결'}, {value: 0, name: '해결'}], label: {normal: {position: 'inner', show: true, formatter: '{b}: {c}\n {d}%', textStyle: {fontWeight: 'bold'}}}}}, pie_2: {legend: {left: 'center', top: '10', orient: 'horizontal', data: ['해결', '미해결']}, series: {name: 'Summary', type: 'pie', radius: '80%', center: ['50%', '50%'], itemStyle: {normal: {color: getItemColor}}, data: [{value: 0, name: '미해결'}, {value: 0, name: '해결'}], label: {normal: {position: 'inner', show: true, formatter: '{b}: {c}\n {d}%', textStyle: {fontWeight: 'bold'}}}}}}
+          let jsonpie = {
+            title: lecture.lecture.title, // 시도 - 해결 = 도전중
+            pie_1: {
+              legend: {
+                left: '0', top: '5', orient: 'vertical', data: ['성공', '도전 중', '시작 전', '진행도(%)']
+              },
+              series: [
+                {
+                  name: 'Progress',
+                  type: 'pie',
+                  radius: ['83%', '88%'],
+                  center: ['50%', '50%'],
+                  itemStyle: {
+                    normal: {color: getItemColor}
+                  },
+                  data: [
+                    {
+                      value: lecture.tryProblem + lecture.solveProblem, name: '진행도(%)' // 시도한 문제 + 해결한 문제
+                    },
+                    {
+                      value: lecture.totalProblem - lecture.tryProblem - lecture.solveProblem, name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
+                    }
+                  ],
+                  label: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  hoverAnimation: false
+                },
+                {
+                  name: 'Summary',
+                  type: 'pie',
+                  radius: '78%',
+                  center: ['50%', '50%'],
+                  itemStyle: {
+                    normal: {color: getItemColor}
+                  },
+                  data: [
+                    {
+                      value: lecture.totalProblem - lecture.tryProblem - lecture.solveProblem, name: '시작 전'
+                    },
+                    {
+                      value: lecture.tryProblem, name: '도전 중'
+                    },
+                    {
+                      value: lecture.solveProblem, name: '성공'
+                    }
+                  ],
+                  label: {
+                    normal: {
+                      margin: '0', show: true, formatter: '{b}: {c}\n {d}%', textStyle: {fontWeight: 'bold'}
+                    }
+                  },
+                  hoverAnimation: false
+                }
+              ]
+            },
+            pie_2: {
+              legend: {
+                left: '0', top: '5', orient: 'vertical', data: ['성공', '도전 중', '시작 전', '진행도(%)']
+              },
+              series: [
+                {
+                  name: 'Progress',
+                  type: 'pie',
+                  radius: ['83%', '88%'],
+                  center: ['50%', '50%'],
+                  itemStyle: {
+                    normal: {color: getItemColor}
+                  },
+                  data: [
+                    {
+                      value: lecture.tryProblem + lecture.solveProblem, name: '진행도(%)' // 시도한 문제 + 해결한 문제
+                    },
+                    {
+                      value: lecture.totalProblem - lecture.tryProblem - lecture.solveProblem, name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
+                    }
+                  ],
+                  label: {
+                    normal: {
+                      show: false
+                    }
+                  },
+                  hoverAnimation: false
+                },
+                {
+                  name: 'Summary',
+                  type: 'pie',
+                  radius: '78%',
+                  center: ['50%', '50%'],
+                  itemStyle: {
+                    normal: {color: getItemColor}
+                  },
+                  data: [
+                    {
+                      value: lecture.totalProblem - lecture.tryProblem - lecture.solveProblem, name: '시작 전'
+                    },
+                    {
+                      value: lecture.tryProblem, name: '도전 중'
+                    },
+                    {
+                      value: lecture.solveProblem, name: '성공'
+                    }
+                  ],
+                  label: {
+                    normal: {
+                      margin: '0', show: true, formatter: '{b}: {c}\n {d}%', textStyle: {fontWeight: 'bold'}
+                    }
+                  },
+                  hoverAnimation: false
+                }
+              ]
+            }
+          }
           this.pielist.push(jsonpie)
         })
       })
