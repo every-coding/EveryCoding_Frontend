@@ -13,24 +13,14 @@
           border
           class="dashboard">
           <el-table-column
-            label="실습"
+            label="실습 / 과제"
             align="center">
-            <Card>
+            <Card style="width:40%">
               <div class="echarts">
-                <ECharts :options="pie.pie_1"></ECharts>
+                <ECharts :options="pie.pie" auto-resize></ECharts>
               </div>
             </Card>
           </el-table-column>
-          <el-table-column
-            label="과제"
-            align="center">
-            <Card>
-              <div class="echarts">
-                <ECharts :options="pie.pie_2"></ECharts>
-              </div>
-            </Card>
-          </el-table-column>
-          
         </el-table>
       </template>
     </panel>
@@ -60,7 +50,7 @@
     '성공': {color: '#409EFF'},
     '시작 전': {color: '#F56C6C'},
     '도전 중': {color: '#E6A23C'},
-    '진행도(%)': {color: '#67C23A'},
+    '진행도(%)': {color: '#9BCCFF'},
     '': {color: 'Transparent'},
     'CE': {color: '#80848f'},
     'PAC': {color: '#2d8cf0'}
@@ -95,112 +85,123 @@
         this.lecturelist.forEach(lecture => {
           let jsonpie = {
             title: lecture.lecture.title, // 시도 - 해결 = 도전중
-            pie_1: {
+            pie: {
+              title: [
+                {
+                  subtext: '실습 진행 현황 (문제 수)',
+                  left: '25%',
+                  top: '85%',
+                  textAlign: 'center'
+                }, {
+                  subtext: '과제 진행 현황 (문제 수)',
+                  left: '75%',
+                  top: '85%',
+                  textAlign: 'center'
+                } /*, {
+                  subtext: '문제 진행 현황',
+                  left: '75%',
+                  top: '75%',
+                  textAlign: 'center'
+                } */
+              ],
               legend: {
-                left: '0', top: '5', orient: 'vertical', data: ['성공', '도전 중', '시작 전', '진행도(%)']
+                data: ['성공', '도전 중', '시작 전']
               },
               series: [
                 {
-                  name: 'Progress',
+                  name: 'Progress_1',
                   type: 'pie',
-                  radius: ['83%', '88%'],
-                  center: ['50%', '50%'],
+                  radius: ['45%', '55%'],
+                  center: ['25%', '50%'],
                   itemStyle: {
                     normal: {color: getItemColor}
                   },
                   data: [
                     {
-                      value: lecture.tryProblem + lecture.solveProblem, name: '진행도(%)' // 시도한 문제 + 해결한 문제
+                      value: lecture.solvePractice, name: '진행도(%)' // 시도한 문제 + 해결한 문제
                     },
                     {
-                      value: lecture.totalProblem - lecture.tryProblem - lecture.solveProblem, name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
+                      value: lecture.totalPractice - lecture.solvePractice, name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
                     }
                   ],
                   label: {
                     normal: {
-                      show: false
+                      formatter: '{d}%', textStyle: {fontWeight: 'bold'}
                     }
                   },
                   hoverAnimation: false
                 },
                 {
-                  name: 'Summary',
+                  name: 'Summary_1',
                   type: 'pie',
-                  radius: '78%',
-                  center: ['50%', '50%'],
+                  radius: '40%',
+                  center: ['25%', '50%'],
                   itemStyle: {
                     normal: {color: getItemColor}
                   },
                   data: [
                     {
-                      value: lecture.totalProblem - lecture.tryProblem - lecture.solveProblem, name: '시작 전'
+                      value: (lecture.totalPractice - lecture.subPractice || ''), name: '시작 전'
                     },
                     {
-                      value: lecture.tryProblem, name: '도전 중'
+                      value: (lecture.subPractice - lecture.solvePractice || ''), name: '도전 중'
                     },
                     {
-                      value: lecture.solveProblem, name: '성공'
+                      value: (lecture.solvePractice || ''), name: '성공'
                     }
                   ],
                   label: {
                     normal: {
-                      margin: '0', show: true, formatter: '{b}: {c}\n {d}%', textStyle: {fontWeight: 'bold'}
-                    }
-                  },
-                  hoverAnimation: false
-                }
-              ]
-            },
-            pie_2: {
-              legend: {
-                left: '0', top: '5', orient: 'vertical', data: ['성공', '도전 중', '시작 전', '진행도(%)']
-              },
-              series: [
-                {
-                  name: 'Progress',
-                  type: 'pie',
-                  radius: ['83%', '88%'],
-                  center: ['50%', '50%'],
-                  itemStyle: {
-                    normal: {color: getItemColor}
-                  },
-                  data: [
-                    {
-                      value: lecture.tryProblem + lecture.solveProblem, name: '진행도(%)' // 시도한 문제 + 해결한 문제
-                    },
-                    {
-                      value: lecture.totalProblem - lecture.tryProblem - lecture.solveProblem, name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
-                    }
-                  ],
-                  label: {
-                    normal: {
-                      show: false
+                      position: 'inner', margin: '0', show: true, formatter: '{b}: {c}', textStyle: {fontWeight: 'bold'}
                     }
                   },
                   hoverAnimation: false
                 },
                 {
-                  name: 'Summary',
+                  name: 'Progress_2',
                   type: 'pie',
-                  radius: '78%',
-                  center: ['50%', '50%'],
+                  radius: ['45%', '55%'],
+                  center: ['75%', '50%'],
                   itemStyle: {
                     normal: {color: getItemColor}
                   },
                   data: [
                     {
-                      value: lecture.totalProblem - lecture.tryProblem - lecture.solveProblem, name: '시작 전'
+                      value: lecture.solveAssign, name: '진행도(%)' // 시도한 문제 + 해결한 문제
                     },
                     {
-                      value: lecture.tryProblem, name: '도전 중'
-                    },
-                    {
-                      value: lecture.solveProblem, name: '성공'
+                      value: lecture.totalAssign - lecture.solveAssign, name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
                     }
                   ],
                   label: {
                     normal: {
-                      margin: '0', show: true, formatter: '{b}: {c}\n {d}%', textStyle: {fontWeight: 'bold'}
+                      formatter: '{d}%', textStyle: {fontWeight: 'bold'}
+                    }
+                  },
+                  hoverAnimation: false
+                },
+                {
+                  name: 'Summary_2',
+                  type: 'pie',
+                  radius: '40%',
+                  center: ['75%', '50%'],
+                  itemStyle: {
+                    normal: {color: getItemColor}
+                  },
+                  data: [
+                    {
+                      value: (lecture.totalAssign - lecture.subAssign || ''), name: '시작 전'
+                    },
+                    {
+                      value: (lecture.subAssign - lecture.solveAssign || ''), name: '도전 중'
+                    },
+                    {
+                      value: (lecture.solveAssign || ''), name: '성공'
+                    }
+                  ],
+                  label: {
+                    normal: {
+                      position: 'inner', margin: '0', show: true, formatter: '{b}: {c}', textStyle: {fontWeight: 'bold'}
                     }
                   },
                   hoverAnimation: false
