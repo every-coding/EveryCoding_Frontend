@@ -19,7 +19,6 @@ streamHandler = logging.StreamHandler()
 
 file_max_bytes = 5 * 1024 * 1024
 fileHandler = logging.handlers.RotatingFileHandler('./oj_server.log', maxBytes=file_max_bytes, backupCount=50)
-#fileHandler = logging.FileHandler('./server.log')
 
 streamHandler.setFormatter(formatter)
 fileHandler.setFormatter(formatter)
@@ -46,7 +45,6 @@ def sendEmail(error): # 전송할 메일 내용 정의
     print("Email has been sent")
 
 while True:
-    print(backend_conn)
     if backend_conn > 5:
             # os.system('echo "08502740" | sudo -S docker restart oj-backend') # 본 서버 사용 시 아래 코드 주석 처리 후 해당 코드 사용
             os.system('echo "akqthtk1!" | sudo -S docker restart oj-backend') # 에러 카운트가 5를 넘은 경우, (백엔드가 25초 이상 무응답 시) 백엔드 컨테이너를 재시작한다.
@@ -63,7 +61,6 @@ while True:
         jsonerr = r.json()['error']
 
         postgres = r.json()['data']['postgres']
-        print("postgres status",postgres)
 
         if postgres is False: # Postgres 미동작하는 경우
             db_conn = db_conn + 1
@@ -78,8 +75,7 @@ while True:
             logger.info(json)
     except Exception as e:
         # catastrophic error. bail.
-        print("Exception", e)
-        print(e)
+        logger.info(e)
         backend_conn = backend_conn + 1
 
     time.sleep(5)
