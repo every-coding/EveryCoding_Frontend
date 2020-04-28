@@ -15,11 +15,20 @@
           <el-table-column
             label="실습 / 과제"
             align="center">
-            <Card style="width:40%">
-              <div class="echarts">
-                <ECharts :options="pie.pie" auto-resize></ECharts>
-              </div>
-            </Card>
+            <el-row :gutter="12">
+                <el-col :span="8">
+                  <el-card shadow="always">
+                    <div class="echarts">
+                      <ECharts :options="pie.pie" auto-resize></ECharts>
+                    </div>
+                  </el-card>
+                </el-col>
+                <el-col :span="16">
+                  <el-card shadow="always">
+                    Test
+                  </el-card>
+                </el-col>
+              </el-row>
           </el-table-column>
         </el-table>
       </template>
@@ -111,17 +120,17 @@
                 {
                   name: 'Progress_1',
                   type: 'pie',
-                  radius: ['45%', '55%'],
+                  radius: ['40%', '45%'],
                   center: ['25%', '50%'],
                   itemStyle: {
                     normal: {color: getItemColor}
                   },
                   data: [
                     {
-                      value: lecture.solvePractice, name: '진행도(%)' // 시도한 문제 + 해결한 문제
+                      value: (lecture.solvePractice || ''), name: '진행도(%)' // 시도한 문제 + 해결한 문제
                     },
                     {
-                      value: lecture.totalPractice - lecture.solvePractice, name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
+                      value: (lecture.totalPractice - lecture.solvePractice || ''), name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
                     }
                   ],
                   label: {
@@ -134,7 +143,7 @@
                 {
                   name: 'Summary_1',
                   type: 'pie',
-                  radius: '40%',
+                  radius: '35%',
                   center: ['25%', '50%'],
                   itemStyle: {
                     normal: {color: getItemColor}
@@ -160,17 +169,17 @@
                 {
                   name: 'Progress_2',
                   type: 'pie',
-                  radius: ['45%', '55%'],
+                  radius: ['40%', '45%'],
                   center: ['75%', '50%'],
                   itemStyle: {
                     normal: {color: getItemColor}
                   },
                   data: [
                     {
-                      value: lecture.solveAssign, name: '진행도(%)' // 시도한 문제 + 해결한 문제
+                      value: (lecture.solveAssign || ''), name: '진행도(%)' // 시도한 문제 + 해결한 문제
                     },
                     {
-                      value: lecture.totalAssign - lecture.solveAssign, name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
+                      value: (lecture.totalAssign - lecture.solveAssign || ''), name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
                     }
                   ],
                   label: {
@@ -183,7 +192,7 @@
                 {
                   name: 'Summary_2',
                   type: 'pie',
-                  radius: '40%',
+                  radius: '35%',
                   center: ['75%', '50%'],
                   itemStyle: {
                     normal: {color: getItemColor}
