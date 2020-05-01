@@ -25,7 +25,26 @@
                 </el-col>
                 <el-col :span="16">
                   <el-card shadow="always">
-                    Test
+                    <template>
+                      <el-table
+                        :data="tableData"
+                        style="width: 100%">
+                        <el-table-column
+                          prop="date"
+                          label="Date"
+                          width="180">
+                        </el-table-column>
+                        <el-table-column
+                          prop="name"
+                          label="Name"
+                          width="180">
+                        </el-table-column>
+                        <el-table-column
+                          prop="address"
+                          label="Address">
+                        </el-table-column>
+                      </el-table>
+                    </template>
                   </el-card>
                 </el-col>
               </el-row>
@@ -80,7 +99,24 @@
         tablerow: ['1'], // 테이블 출력 수 조절을 위한 값. 지우거나 값 수정하지 말 것
         lecturelist: [],
         contests: [],
-        index: 0
+        index: 0,
+        tableData: [{
+          date: '2016-05-03',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-02',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-04',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }, {
+          date: '2016-05-01',
+          name: 'Tom',
+          address: 'No. 189, Grove St, Los Angeles'
+        }]
       }
     },
     mounted () {
