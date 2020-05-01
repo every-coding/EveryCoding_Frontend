@@ -94,7 +94,7 @@
         </el-button>
         <el-button v-if="lectureId" type="primary"
                    size="small" icon="el-icon-plus"
-                   @click="addContestDialogVisible = true">실습, 과제 가져오기
+                   @click="addContestDialogVisible = true">실습, 과제 Import
         </el-button>
         <el-pagination
           class="page"
