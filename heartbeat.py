@@ -1,8 +1,10 @@
+#-*- coding:utf-8 -*-
 import requests
 import time
 import logging
 import logging.handlers
 
+import psutil
 import os
 import signal
 import argparse
@@ -55,9 +57,12 @@ while True:
             logger.info(jdata)
             backend_conn = 0
     try:
-        # r = requests.get("http://localhost:8080/api/heartbeat") # 본 서버 사용 시 아래 코드 주석 처리 후 해당 코드 사용
-        r = requests.get("http://localhost:8085/api/heartbeat") # 프론트엔드 주소 입력
-
+        requesttime = time.time()
+        r = requests.get("http://localhost:8085/api/heartbeat") # 프론트엔드 주소 입력 (환경에 따라 포트 변경 필요)
+        requesttime = time.time() - requesttime
+        print("백엔드 하트비트 앱 요청에 걸리는 시간", requesttime)
+        print("logging app cpu usage", psutil.cpu_percent())
+        print("logging app memory usage", psutil.virtual_memory().percent)
         jsonerr = r.json()['error']
 
         postgres = r.json()['data']['postgres']
