@@ -62,7 +62,7 @@
               </li>
               <li>
                 <Icon type="android-time" color="#3091f2"></Icon>
-                {{ remainDuration(contest.end_time) }}
+                남은시간 : {{ remainDuration(contest.end_time) }}
               </li>
               <!--<li>
                 <Icon type="android-time" color="#3091f2"></Icon>
