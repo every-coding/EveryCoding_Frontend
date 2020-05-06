@@ -198,8 +198,7 @@
           let diffDay = Math.floor(dateGap / (1000 * 60 * 60 * 24))
           let diffHour = timeGap.getHours()
           let diffMin = timeGap.getMinutes()
-          let diffSec = timeGap.getSeconds()
-          return diffDay + '일' + diffHour + '시간' + diffMin + '분' + diffSec + '초'
+          return diffDay + '일' + diffHour + '시간' + diffMin + '분'
           // console.log('안 지남')
         }
         return remain
