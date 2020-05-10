@@ -54,7 +54,19 @@
             <ul class="detail">
               <li>
                 <Icon type="calendar" color="#3091f2"></Icon>
-                {{contest.start_time | localtime('YYYY-M-D HH:mm') }}
+                시작일 : {{ contest.start_time | localtime('YYYY-M-D HH:mm') }}
+              </li>
+              <li>
+                <Icon type="calendar" color="#3091f2"></Icon>
+                종료일 : {{ contest.end_time | localtime('YYYY-M-D HH:mm') }}
+              </li>
+              <li>
+                <Icon type="android-time" color="#3091f2"></Icon>
+                남은시간 : {{ remainDuration(contest.end_time) }}
+              </li>
+              <!--<li>
+                <Icon type="android-time" color="#3091f2"></Icon>
+                {{ getDuration(contest.start_time, contest.end_time) }}
               </li>
               <li>
                 <Icon type="android-time" color="#3091f2"></Icon>
@@ -64,7 +76,7 @@
                 <Button size="small" shape="circle" @click="onRuleChange(contest.rule_type)">
                   {{contest.rule_type}}
                 </Button>
-              </li>
+              </li>-->
             </ul>
             </Col>
             <Col :span="4" style="text-align: center">
@@ -88,7 +100,7 @@
   import time from '@/utils/time'
   import { CONTEST_STATUS_REVERSE, CONTEST_TYPE } from '@/utils/constants'
 
-  const limit = 8
+  const limit = 50
 
   export default {
     name: 'contest-list',
@@ -168,6 +180,29 @@
 
       getDuration (startTime, endTime) {
         return time.duration(startTime, endTime)
+      },
+
+      remainDuration (endTime) {
+        let remain
+        if (new Date() - new Date(endTime) > 0) {
+          remain = '종료됨'
+          // console.log('이미 지남')
+        } else {
+          remain = time.duration(new Date(), endTime)
+          let current = new Date()
+          let end = new Date(endTime)
+          console.log(current)
+          console.log(end)
+          console.log(end - current)
+          let dateGap = end.getTime() - current.getTime()
+          let timeGap = new Date(0, 0, 0, 0, 0, 0, end - current)
+          let diffDay = Math.floor(dateGap / (1000 * 60 * 60 * 24))
+          let diffHour = timeGap.getHours()
+          let diffMin = timeGap.getMinutes()
+          return diffDay + '일' + diffHour + '시간' + diffMin + '분'
+          // console.log('안 지남')
+        }
+        return remain
       }
     },
     computed: {
