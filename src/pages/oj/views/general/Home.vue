@@ -7,7 +7,7 @@
       </div>
       <!-- DivTable.com -->
       <template v-for="pie in pielist">
-        <h3>{{ pie.title }}</h3>
+        <h2 slot="title" style="margin-top:20px">{{ pie.title }}</h2>
         <el-table
           :data="tablerow"
           border
@@ -16,35 +16,47 @@
             label="실습 / 과제"
             align="center">
             <el-row :gutter="12">
-                <el-col :span="8">
+                <el-col :span="10">
                   <el-card shadow="always">
                     <div class="echarts">
                       <ECharts :options="pie.pie" auto-resize></ECharts>
                     </div>
                   </el-card>
                 </el-col>
-                <el-col :span="16">
+                <el-col :span="14">
                   <el-card shadow="always">
-                    <template>
-                      <el-table
-                        :data="tableData"
-                        style="width: 100%">
-                        <el-table-column
-                          prop="date"
-                          label="Date"
-                          width="180">
-                        </el-table-column>
-                        <el-table-column
-                          prop="name"
-                          label="Name"
-                          width="180">
-                        </el-table-column>
-                        <el-table-column
-                          prop="address"
-                          label="Address">
-                        </el-table-column>
-                      </el-table>
-                    </template>
+                    <ul class="announcements-container" key="list">
+                      <li>
+                        <div class="flex-container">
+                          <div class="title">
+                            <div class="entry">
+                              실습/과제
+                            </div>
+                          </div>
+                          <div class="date">
+                            남은 기간
+                          </div>
+                          <div class="creator">
+                            ㄴ
+                          </div>
+                        </div>
+                      </li>
+                      <li v-for="contest in pie.contestlist">
+                        <div class="flex-container">
+                          <div class="title">
+                            <a class="entry" @click="goAnnouncement(announcement)">
+                              {{ contest.title }}
+                            </a>
+                          </div>
+                          <div class="date">
+                            {{ contest.end_time }}
+                          </div>
+                          <div class="creator">
+                            {{ contest.title }}
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
                   </el-card>
                 </el-col>
               </el-row>
@@ -101,22 +113,13 @@
         contests: [],
         index: 0,
         tableData: [{
-          date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          contest: '2016-05-03',
+          end_time: 'No. 189, Grove St, Los Angeles'
         }, {
-          date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }, {
-          date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
-        }]
+          contest: '2016-05-03',
+          end_time: 'No. 189, Grove St, Los Angeles'
+        }],
+        contestlist: []
       }
     },
     mounted () {
@@ -252,9 +255,11 @@
                   hoverAnimation: false
                 }
               ]
-            }
+            },
+            contestlist: lecture.contestlist
           }
           this.pielist.push(jsonpie)
+          // this.contestlist.push(lecture.contestlist)
         })
       })
     },
@@ -342,6 +347,45 @@
   }
   .divTableBody {
     display: table-row-group;
+  }
+  .announcements-container {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    li {
+      padding-top: 15px;
+      list-style: none;
+      padding-bottom: 15px;
+      margin-left: 20px;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(187, 187, 187, 0.5);
+      &:last-child {
+        border-bottom: none;
+      }
+      .flex-container {
+        .title {
+          flex: 1 1;
+          text-align: center;
+          padding-left: 10px;
+          a.entry {
+            color: #495060;
+            &:hover {
+              color: #2d8cf0;
+              border-bottom: 1px solid #2d8cf0;
+            }
+          }
+        }
+        .creator {
+          flex: none;
+          width: 35%;
+          text-align: center;
+        }
+        .date {
+          flex: none;
+          width: 25%;
+          text-align: center;
+        }
+      }
+    }
   }
 </style>
 
