@@ -13,7 +13,6 @@
           border
           class="dashboard">
           <el-table-column
-            label="실습 / 과제"
             align="center">
             <el-row :gutter="12">
                 <el-col :span="10">
@@ -34,25 +33,25 @@
                             </div>
                           </div>
                           <div class="date">
-                            남은 기간
+                            종료일
                           </div>
                           <div class="creator">
-                            ㄴ
+                            남은 기간
                           </div>
                         </div>
                       </li>
                       <li v-for="contest in pie.contestlist">
                         <div class="flex-container">
                           <div class="title">
-                            <a class="entry" @click="goAnnouncement(announcement)">
+                            <a class="entry" v-bind:href="'/CourseList/' + pie.lecture_id + '/' + contest.id">
                               {{ contest.title }}
                             </a>
                           </div>
                           <div class="date">
-                            {{ contest.end_time }}
+                            {{ contest.end_time | localtime('YYYY-M-D HH:mm') }}
                           </div>
                           <div class="creator">
-                            {{ contest.title }}
+                            {{ remainDuration(contest.end_time) }}
                           </div>
                         </div>
                       </li>
@@ -256,7 +255,8 @@
                 }
               ]
             },
-            contestlist: lecture.contestlist
+            contestlist: lecture.contestlist,
+            lecture_id: lecture.lecture.id
           }
           this.pielist.push(jsonpie)
           // this.contestlist.push(lecture.contestlist)
@@ -272,6 +272,28 @@
           name: 'contest-details',
           params: {contestID: this.contests[this.index].id}
         })
+      },
+      remainDuration (endTime) {
+        let remain
+        if (new Date() - new Date(endTime) > 0) {
+          remain = '종료됨'
+          // console.log('이미 지남')
+        } else {
+          remain = time.duration(new Date(), endTime)
+          let current = new Date()
+          let end = new Date(endTime)
+          console.log(current)
+          console.log(end)
+          console.log(end - current)
+          let dateGap = end.getTime() - current.getTime()
+          let timeGap = new Date(0, 0, 0, 0, 0, 0, end - current)
+          let diffDay = Math.floor(dateGap / (1000 * 60 * 60 * 24))
+          let diffHour = timeGap.getHours()
+          let diffMin = timeGap.getMinutes()
+          return diffDay + '일 ' + diffHour + '시간 ' + diffMin + '분'
+          // console.log('안 지남')
+        }
+        return remain
       }
     }
   }
