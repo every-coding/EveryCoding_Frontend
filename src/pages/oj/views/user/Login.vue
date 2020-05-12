@@ -87,6 +87,8 @@
             this.changeModalStatus({visible: false})
             this.getProfile()
             this.$success(this.$i18n.t('m.Welcome_back'))
+            console.log('test')
+            console.log('test2')
           }, _ => {
             this.btnLoginLoading = false
           })

@@ -7,11 +7,8 @@
       </div>
       <!-- DivTable.com -->
       <template v-for="pie in pielist">
-        <h2 slot="title" style="margin-top:20px">{{ pie.title }}</h2>
-        <el-table
-          :data="tablerow"
-          border
-          class="dashboard">
+        <el-Card style="margin:20px">
+          <h2 style="margin-bottom:10px">{{ pie.title }}</h2>
           <el-table-column
             align="center">
             <el-row :gutter="12">
@@ -29,14 +26,17 @@
                         <div class="flex-container">
                           <div class="title">
                             <div class="entry">
-                              실습/과제
+                              <strong>실습/과제</strong>
                             </div>
                           </div>
                           <div class="date">
-                            종료일
+                            <strong>종료일</strong>
                           </div>
                           <div class="creator">
-                            남은 기간
+                            <strong>남은 기간</strong>
+                          </div>
+                          <div class="problem">
+                            <strong>남은 문제 수</strong>
                           </div>
                         </div>
                       </li>
@@ -53,6 +53,9 @@
                           <div class="creator">
                             {{ remainDuration(contest.end_time) }}
                           </div>
+                          <div class="problem">
+                            {{ contest.remainproblem }}
+                          </div>
                         </div>
                       </li>
                     </ul>
@@ -60,7 +63,7 @@
                 </el-col>
               </el-row>
           </el-table-column>
-        </el-table>
+        </el-Card>
       </template>
     </panel>
     <panel shadow v-if="contests.length" class="contest">
@@ -111,161 +114,155 @@
         lecturelist: [],
         contests: [],
         index: 0,
-        tableData: [{
-          contest: '2016-05-03',
-          end_time: 'No. 189, Grove St, Los Angeles'
-        }, {
-          contest: '2016-05-03',
-          end_time: 'No. 189, Grove St, Los Angeles'
-        }],
         contestlist: []
       }
     },
     mounted () {
-      let params = {status: CONTEST_STATUS.NOT_START}
-      api.getContestList(0, 5, params).then(res => {
-        this.contests = res.data.data.results
-      })
-      console.log('test')
-      api.getDashboardinfo().then(res => {
-        this.lecturelist = res.data.data.results
-        this.lecturelist.forEach(lecture => {
-          let jsonpie = {
-            title: lecture.lecture.title, // 시도 - 해결 = 도전중
-            pie: {
-              title: [
-                {
-                  subtext: '실습 진행 현황 (문제 수)',
-                  left: '25%',
-                  top: '85%',
-                  textAlign: 'center'
-                }, {
-                  subtext: '과제 진행 현황 (문제 수)',
-                  left: '75%',
-                  top: '85%',
-                  textAlign: 'center'
-                } /*, {
-                  subtext: '문제 진행 현황',
-                  left: '75%',
-                  top: '75%',
-                  textAlign: 'center'
-                } */
-              ],
-              legend: {
-                data: ['성공', '도전 중', '시작 전']
-              },
-              series: [
-                {
-                  name: 'Progress_1',
-                  type: 'pie',
-                  radius: ['40%', '45%'],
-                  center: ['25%', '50%'],
-                  itemStyle: {
-                    normal: {color: getItemColor}
-                  },
-                  data: [
-                    {
-                      value: (lecture.solvePractice || ''), name: '진행도(%)' // 시도한 문제 + 해결한 문제
-                    },
-                    {
-                      value: (lecture.totalPractice - lecture.solvePractice || ''), name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
-                    }
-                  ],
-                  label: {
-                    normal: {
-                      formatter: '{d}%', textStyle: {fontWeight: 'bold'}
-                    }
-                  },
-                  hoverAnimation: false
-                },
-                {
-                  name: 'Summary_1',
-                  type: 'pie',
-                  radius: '35%',
-                  center: ['25%', '50%'],
-                  itemStyle: {
-                    normal: {color: getItemColor}
-                  },
-                  data: [
-                    {
-                      value: (lecture.totalPractice - lecture.subPractice || ''), name: '시작 전'
-                    },
-                    {
-                      value: (lecture.subPractice - lecture.solvePractice || ''), name: '도전 중'
-                    },
-                    {
-                      value: (lecture.solvePractice || ''), name: '성공'
-                    }
-                  ],
-                  label: {
-                    normal: {
-                      position: 'inner', margin: '0', show: true, formatter: '{b}: {c}', textStyle: {fontWeight: 'bold'}
-                    }
-                  },
-                  hoverAnimation: false
-                },
-                {
-                  name: 'Progress_2',
-                  type: 'pie',
-                  radius: ['40%', '45%'],
-                  center: ['75%', '50%'],
-                  itemStyle: {
-                    normal: {color: getItemColor}
-                  },
-                  data: [
-                    {
-                      value: (lecture.solveAssign || ''), name: '진행도(%)' // 시도한 문제 + 해결한 문제
-                    },
-                    {
-                      value: (lecture.totalAssign - lecture.solveAssign || ''), name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
-                    }
-                  ],
-                  label: {
-                    normal: {
-                      formatter: '{d}%', textStyle: {fontWeight: 'bold'}
-                    }
-                  },
-                  hoverAnimation: false
-                },
-                {
-                  name: 'Summary_2',
-                  type: 'pie',
-                  radius: '35%',
-                  center: ['75%', '50%'],
-                  itemStyle: {
-                    normal: {color: getItemColor}
-                  },
-                  data: [
-                    {
-                      value: (lecture.totalAssign - lecture.subAssign || ''), name: '시작 전'
-                    },
-                    {
-                      value: (lecture.subAssign - lecture.solveAssign || ''), name: '도전 중'
-                    },
-                    {
-                      value: (lecture.solveAssign || ''), name: '성공'
-                    }
-                  ],
-                  label: {
-                    normal: {
-                      position: 'inner', margin: '0', show: true, formatter: '{b}: {c}', textStyle: {fontWeight: 'bold'}
-                    }
-                  },
-                  hoverAnimation: false
-                }
-              ]
-            },
-            contestlist: lecture.contestlist,
-            lecture_id: lecture.lecture.id
-          }
-          this.pielist.push(jsonpie)
-          // this.contestlist.push(lecture.contestlist)
-        })
-      })
+      this.setDashboard()
     },
     methods: {
       getDuration (startTime, endTime) {
         return time.duration(startTime, endTime)
+      },
+      setDashboard () {
+        let params = {status: CONTEST_STATUS.NOT_START}
+        api.getContestList(0, 5, params).then(res => {
+          this.contests = res.data.data.results
+        })
+        api.getDashboardinfo().then(res => {
+          this.lecturelist = res.data.data.results
+          this.lecturelist.forEach(lecture => {
+            let jsonpie = {
+              title: lecture.lecture.title, // 시도 - 해결 = 도전중
+              pie: {
+                title: [
+                  {
+                    subtext: '실습 진행 현황 (문제 수)',
+                    left: '25%',
+                    top: '85%',
+                    textAlign: 'center'
+                  }, {
+                    subtext: '과제 진행 현황 (문제 수)',
+                    left: '75%',
+                    top: '85%',
+                    textAlign: 'center'
+                  } /*, {
+                    subtext: '문제 진행 현황',
+                    left: '75%',
+                    top: '75%',
+                    textAlign: 'center'
+                  } */
+                ],
+                legend: {
+                  data: ['성공', '도전 중', '시작 전']
+                },
+                series: [
+                  {
+                    name: 'Progress_1',
+                    type: 'pie',
+                    radius: ['40%', '45%'],
+                    center: ['25%', '50%'],
+                    itemStyle: {
+                      normal: {color: getItemColor}
+                    },
+                    data: [
+                      {
+                        value: (lecture.solvePractice || ''), name: '진행도(%)' // 시도한 문제 + 해결한 문제
+                      },
+                      {
+                        value: (lecture.totalPractice - lecture.solvePractice || ''), name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
+                      }
+                    ],
+                    label: {
+                      normal: {
+                        formatter: '{d}%', textStyle: {fontWeight: 'bold'}
+                      }
+                    },
+                    hoverAnimation: false
+                  },
+                  {
+                    name: 'Summary_1',
+                    type: 'pie',
+                    radius: '35%',
+                    center: ['25%', '50%'],
+                    itemStyle: {
+                      normal: {color: getItemColor}
+                    },
+                    data: [
+                      {
+                        value: (lecture.totalPractice - lecture.subPractice || ''), name: '시작 전'
+                      },
+                      {
+                        value: (lecture.subPractice - lecture.solvePractice || ''), name: '도전 중'
+                      },
+                      {
+                        value: (lecture.solvePractice || ''), name: '성공'
+                      }
+                    ],
+                    label: {
+                      normal: {
+                        position: 'inner', margin: '0', show: true, formatter: '{b}: {c}', textStyle: {fontWeight: 'bold'}
+                      }
+                    },
+                    hoverAnimation: false
+                  },
+                  {
+                    name: 'Progress_2',
+                    type: 'pie',
+                    radius: ['40%', '45%'],
+                    center: ['75%', '50%'],
+                    itemStyle: {
+                      normal: {color: getItemColor}
+                    },
+                    data: [
+                      {
+                        value: (lecture.solveAssign || ''), name: '진행도(%)' // 시도한 문제 + 해결한 문제
+                      },
+                      {
+                        value: (lecture.totalAssign - lecture.solveAssign || ''), name: '' // 총 문제 수 - 시도한 문제 - 해결한 문제
+                      }
+                    ],
+                    label: {
+                      normal: {
+                        formatter: '{d}%', textStyle: {fontWeight: 'bold'}
+                      }
+                    },
+                    hoverAnimation: false
+                  },
+                  {
+                    name: 'Summary_2',
+                    type: 'pie',
+                    radius: '35%',
+                    center: ['75%', '50%'],
+                    itemStyle: {
+                      normal: {color: getItemColor}
+                    },
+                    data: [
+                      {
+                        value: (lecture.totalAssign - lecture.subAssign || ''), name: '시작 전'
+                      },
+                      {
+                        value: (lecture.subAssign - lecture.solveAssign || ''), name: '도전 중'
+                      },
+                      {
+                        value: (lecture.solveAssign || ''), name: '성공'
+                      }
+                    ],
+                    label: {
+                      normal: {
+                        position: 'inner', margin: '0', show: true, formatter: '{b}: {c}', textStyle: {fontWeight: 'bold'}
+                      }
+                    },
+                    hoverAnimation: false
+                  }
+                ]
+              },
+              contestlist: lecture.contestlist,
+              lecture_id: lecture.lecture.id
+            }
+            this.pielist.push(jsonpie)
+          })
+        })
       },
       goContest () {
         this.$router.push({
@@ -398,12 +395,17 @@
         }
         .creator {
           flex: none;
-          width: 35%;
+          width: 25%;
           text-align: center;
         }
         .date {
           flex: none;
           width: 25%;
+          text-align: center;
+        }
+        .problem {
+          flex: none;
+          width: 20%;
           text-align: center;
         }
       }
