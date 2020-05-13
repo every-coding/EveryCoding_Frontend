@@ -21,7 +21,7 @@
                 </el-col>
                 <el-col :span="14">
                   <h2 style="padding-bottom:10px">진행중인 실습 및 과제</h2>
-                  <el-card shadow="always">
+                  <el-card v-if="pie.contestlist[0]" shadow="always">
                     <ul class="announcements-container" key="list">
                       <li>
                         <div class="flex-container">
@@ -39,11 +39,6 @@
                           <div class="problem">
                             <strong>남은 문제 수</strong>
                           </div>
-                        </div>
-                      </li>
-                      <li v-if="!pie.contestlist[0]">
-                        <div class="flex-container">
-                          없음
                         </div>
                       </li>
                       <li v-for="contest in pie.contestlist">
@@ -65,6 +60,9 @@
                         </div>
                       </li>
                     </ul>
+                  </el-card>
+                  <el-card v-else style="text-align:center">
+                    <strong>없음</strong>
                   </el-card>
                 </el-col>
               </el-row>
