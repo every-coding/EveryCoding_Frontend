@@ -6,6 +6,7 @@ import {
   ApplyResetPassword,
   FAQ,
   Home,
+  Login_,
   Logout,
   NotFound,
   OIRank,
@@ -35,6 +36,12 @@ export default [
     path: '/logout',
     meta: {title: 'Logout'},
     component: Logout
+  },
+  {
+    name: 'login',
+    path: '/login',
+    meta: {title: 'Login_'},
+    component: Login_
   },
   {
     name: 'apply-reset-password',

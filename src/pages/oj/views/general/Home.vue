@@ -1,13 +1,13 @@
 <template>
   <Row type="flex" justify="space-around">
     <Col :span="22">
-    <panel class="lecture">
+    <panel class="lecture" v-if="$store.state.user.profile.id !== undefined">
       <div slot="title">
         나의 수강과목 진행 현황
       </div>
       <!-- DivTable.com -->
       <template v-for="pie in pielist">
-        <el-Card style="margin:20px">
+        <el-Card class="lecture-card">
           <h2 style="margin-bottom:10px">{{ pie.title }}</h2>
           <el-table-column
             align="center">
@@ -20,6 +20,7 @@
                   </el-card>
                 </el-col>
                 <el-col :span="14">
+                  <h2 style="padding-bottom:10px">진행중인 실습 및 과제</h2>
                   <el-card shadow="always">
                     <ul class="announcements-container" key="list">
                       <li>
@@ -38,6 +39,11 @@
                           <div class="problem">
                             <strong>남은 문제 수</strong>
                           </div>
+                        </div>
+                      </li>
+                      <li v-if="!pie.contestlist[0]">
+                        <div class="flex-container">
+                          없음
                         </div>
                       </li>
                       <li v-for="contest in pie.contestlist">
@@ -113,8 +119,7 @@
         tablerow: ['1'], // 테이블 출력 수 조절을 위한 값. 지우거나 값 수정하지 말 것
         lecturelist: [],
         contests: [],
-        index: 0,
-        contestlist: []
+        index: 0
       }
     },
     mounted () {
@@ -306,6 +311,12 @@
     margin-bottom: 15px;
     margin-top: 10px;
     width: 97%;
+  }
+
+  .lecture-card {
+    margin-left:20px;
+    margin-right:20px;
+    margin-bottom:10px
   }
 
   .contest {
