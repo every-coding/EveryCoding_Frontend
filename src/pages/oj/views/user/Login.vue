@@ -22,7 +22,8 @@
         type="primary"
         @click="handleLogin"
         class="btn" long
-        :loading="btnLoginLoading">
+        :loading="btnLoginLoading"
+        name="/login">
         {{$t('m.UserLogin')}}
       </Button>
       <a v-if="website.allow_register" @click.stop="handleBtnClick('register')">{{$t('m.No_Account')}}</a>
@@ -88,7 +89,9 @@
             this.getProfile()
             this.$success(this.$i18n.t('m.Welcome_back'))
             console.log('test')
-            console.log('test2')
+            this.$router.replace({
+              path: '/login'
+            })
           }, _ => {
             this.btnLoginLoading = false
           })
