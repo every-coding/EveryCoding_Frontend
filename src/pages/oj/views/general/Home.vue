@@ -21,7 +21,7 @@
                 </el-col>
                 <el-col :span="14">
                   <h2 style="padding-bottom:10px">진행중인 실습 및 과제</h2>
-                  <el-card v-if="pie.contestlist[0]" shadow="always">
+                  <el-card v-if="clsize > 0" shadow="always">
                     <ul class="announcements-container" key="list">
                       <li>
                         <div class="flex-container">
@@ -117,7 +117,8 @@
         tablerow: ['1'], // 테이블 출력 수 조절을 위한 값. 지우거나 값 수정하지 말 것
         lecturelist: [],
         contests: [],
-        index: 0
+        index: 0,
+        clsize: 0
       }
     },
     mounted () {
@@ -134,6 +135,7 @@
         })
         api.getDashboardinfo().then(res => {
           this.lecturelist = res.data.data.results
+          this.clsize = Object.keys(this.lecturelist[0].contestlist).length
           this.lecturelist.forEach(lecture => {
             let jsonpie = {
               title: lecture.lecture.title, // 시도 - 해결 = 도전중
