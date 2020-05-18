@@ -33,7 +33,7 @@
         </el-table-column>
         <el-table-column
           prop="title"
-          label="Title">
+          label="타이틀">
           <template slot-scope="{row}">
             <span v-show="!row.isEditing">{{row.title}}</span>
             <el-input v-show="row.isEditing" v-model="row.title"
@@ -43,12 +43,12 @@
         </el-table-column>
         <el-table-column
           prop="created_by.username"
-          label="Author">
+          label="작성자">
         </el-table-column>
         <el-table-column
           width="200"
           prop="create_time"
-          label="Create Time">
+          label="생성일자">
           <template slot-scope="scope">
             {{scope.row.create_time | localtime }}
           </template>
