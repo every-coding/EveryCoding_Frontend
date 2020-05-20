@@ -25,19 +25,19 @@
 
         <el-table-column prop="id" label="ID"></el-table-column>
 
-        <el-table-column prop="realname" label="Realname"></el-table-column>
+        <el-table-column prop="realname" label="실명"></el-table-column>
 
-        <el-table-column prop="username" label="Username"></el-table-column>
+        <el-table-column prop="username" label="닉네임"></el-table-column>
 
         <el-table-column prop="schoolssn" label="학번 / 교직번호"></el-table-column>
 
-        <el-table-column prop="create_time" label="Create Time">
+        <el-table-column prop="create_time" label="계정 생성일">
           <template slot-scope="scope">
             {{scope.row.create_time | localtime }}
           </template>
         </el-table-column>
 
-        <el-table-column prop="last_login" label="Last Login">
+        <el-table-column prop="last_login" label="마지막 접속일">
           <template slot-scope="scope">
             {{scope.row.last_login | localtime }}
           </template>
@@ -45,7 +45,7 @@
 
         <el-table-column prop="email" label="Email"></el-table-column>
 
-        <el-table-column prop="admin_type" label="User Type">
+        <el-table-column prop="admin_type" label="사용자 권한">
           <template slot-scope="scope">
             <span v-if="scope.row.admin_type === 'Regular User'">
               Student
@@ -59,7 +59,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column fixed="right" label="Option" width="200">
+        <el-table-column fixed="right" label="선택사항" width="200">
           <template slot-scope="{row}">
             <icon-btn name="Edit" icon="edit" @click.native="openUserDialog(row.id)"></icon-btn>
             <icon-btn name="Delete" icon="trash" @click.native="deleteUsers([row.id])"></icon-btn>
