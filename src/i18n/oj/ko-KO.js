@@ -46,6 +46,7 @@ export const m = {
   Rankings: '랭킹',
   Overview: 'Overview',
   Admin_Helper: 'Admin Helper',
+  Contest_Announcements: '실습 및 과제 공지사항',
   // ContestProblemList
   Problems_List: '문제 목록',
 
