@@ -15,30 +15,30 @@
           </el-table-column>
           <el-table-column
             prop="title"
-            label="Title">
+            label="제목">
           </el-table-column>
           <el-table-column
             prop="create_time"
-            label="CreateTime">
+            label="작성일">
             <template slot-scope="scope">
               {{ scope.row.create_time | localtime }}
             </template>
           </el-table-column>
           <el-table-column
             prop="last_update_time"
-            label="LastUpdateTime">
+            label="마지막 수정 시간">
             <template slot-scope="scope">
               {{scope.row.last_update_time | localtime }}
             </template>
           </el-table-column>
           <el-table-column
             prop="created_by.username"
-            label="Author">
+            label="작성자">
           </el-table-column>
           <el-table-column
             width="100"
             prop="visible"
-            label="Visible">
+            label="공개여부">
             <template slot-scope="scope">
               <el-switch v-model="scope.row.visible"
                          active-text=""
@@ -49,7 +49,7 @@
           </el-table-column>
           <el-table-column
             fixed="right"
-            label="Option"
+            label="선택사항"
             width="200">
             <div slot-scope="scope">
               <icon-btn name="Edit" icon="edit" @click.native="openAnnouncementDialog(scope.row.id)"></icon-btn>
@@ -149,6 +149,7 @@
           this.getAnnouncementList(1)
         }
       },
+      // test
       // 切换页码回调
       currentChange (page) {
         this.currentPage = page

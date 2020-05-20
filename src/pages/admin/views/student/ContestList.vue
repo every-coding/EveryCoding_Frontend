@@ -132,7 +132,7 @@
       }
     },
     methods: {
-      // 切换页码回调
+      // 切换页码回调 페이지 번호 콜백 전환
       currentChange (page) {
         this.currentPage = page
         this.getContestList(page)
@@ -160,7 +160,7 @@
         this.$router.push({name: 'edit-contest', params: {contestId}})
       },
       goContestAnnouncement (contestId) {
-        this.$router.push({name: 'contest-announcement', params: {contestId}})
+        this.$router.push({name: '실습 및 과제 공지사항', params: {contestId}})
       },
       goContestProblemList (contestId) {
         this.$router.push({name: 'contest-problem-list', params: {contestId}})

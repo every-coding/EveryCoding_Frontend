@@ -94,39 +94,39 @@
         lectureID: '',
         contestPassword: '',
         isvisible: false,
-        columns: [
+        columns: [ // 수강과목 세부 페이지의 내부 항목 제목
           {
-            title: this.$i18n.t('m.Id'),
+            title: this.$i18n.t('Id'),
             render: (h, params) => {
               return h('span', params.row.id)
             }
           },
           {
-            title: this.$i18n.t('m.StartAt'),
+            title: this.$i18n.t('시작일'),
             render: (h, params) => {
               return h('span', time.utcToLocal(params.row.start_time))
             }
           },
           {
-            title: this.$i18n.t('m.EndAt'),
+            title: this.$i18n.t('종료일'),
             render: (h, params) => {
               return h('span', time.utcToLocal(params.row.end_time))
             }
           },
           {
-            title: this.$i18n.t('m.ContestType'),
+            title: this.$i18n.t('공개유형'),
             render: (h, params) => {
               return h('span', this.$i18n.t('m.' + params.row.contest_type))
             }
           },
           {
-            title: this.$i18n.t('m.Rule'),
+            title: this.$i18n.t('랭킹 산정 방식'),
             render: (h, params) => {
               return h('span', this.$i18n.t('m.' + params.row.rule_type))
             }
           },
           {
-            title: this.$i18n.t('m.Creator'),
+            title: this.$i18n.t('출제자'),
             render: (h, data) => {
               return h('span', data.row.created_by.username)
             }
