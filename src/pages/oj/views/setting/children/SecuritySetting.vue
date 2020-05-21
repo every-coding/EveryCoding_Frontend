@@ -6,25 +6,26 @@
         <Card :padding="20" class="flex-child">
           <span slot="title" style="line-height: 20px">{{session.ip}}</span>
           <div slot="extra">
-            <Tag v-if="session.current_session" color="green">Current</Tag>
+            <Tag v-if="session.current_session" color="green">현재</Tag>
             <Button v-else
                     type="warning"
                     size="small"
-                    @click="deleteSession(session.session_key)">Revoke
+                    @click="deleteSession(session.session_key)">삭제
             </Button>
           </div>
           <Form :label-width="100">
-            <FormItem label="OS :" class="item">
+            <FormItem label="운영체제 :" class="item">
               {{session.user_agent | platform}}
             </FormItem>
-            <FormItem label="Browser :" class="item">
+            <FormItem label="브라우저 :" class="item">
               {{session.user_agent | browser}}
             </FormItem>
-            <FormItem label="Last Activity :" class="item">
+            <FormItem label="마지막 활동 :" class="item">
               {{session.last_activity | localtime }}
             </FormItem>
           </Form>
         </Card>
+
       </template>
     </div>
 
@@ -44,7 +45,7 @@
         </FormItem>
         <template v-if="!loadingQRcode">
           <FormItem style="width: 250px">
-            <Input v-model="formTwoFactor.code" placeholder="Enter the code from your application"/>
+            <Input v-model="formTwoFactor.code" placeholder="이중 인증을 위해 QR코드를 인식하세요."/>
           </FormItem>
           <Button type="primary"
                   :loading="loadingBtn"
@@ -124,7 +125,7 @@
       deleteSession (sessionKey) {
         this.$Modal.confirm({
           title: 'Confirm',
-          content: 'Are you sure to revoke the session?',
+          content: '세션을 삭제하시겠습니까?',
           onOk: () => {
             api.deleteSession(sessionKey).then(res => {
               this.getSessions()
@@ -136,7 +137,7 @@
       closeTFA () {
         this.$Modal.confirm({
           title: 'Confirm',
-          content: 'Two-factor Authentication is a powerful tool to protect your account, are you sure to close it?',
+          content: '이중 인증은 계정을 보호하는 강력한 도구입니다. 닫으시겠습니까?',
           onOk: () => {
             this.updateTFA(true)
           }

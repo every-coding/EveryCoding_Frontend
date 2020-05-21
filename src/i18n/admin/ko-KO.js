@@ -118,6 +118,10 @@ export const m = {
   HTTPS_Status: 'HTTPS 상태',
   Force_HTTPS: '강제 HTTPS',
   CDN_HOST: 'CDN 호스트',
+  Details: '세부사항',
+  Level: '수준',
+  Disabled: '비활성화',
+  Enabled: '활성화',
   // 수강과목
   Lecture: '개설과목',
   Lecture_Year: '개설과목 년도',
