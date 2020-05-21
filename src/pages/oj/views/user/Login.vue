@@ -87,7 +87,7 @@
             this.btnLoginLoading = false
             this.changeModalStatus({visible: false})
             this.getProfile()
-            this.$success(this.$i18n.t('m.Welcome_back'))
+            this.$success(this.$i18n.t('돌아오신 것을 환영합니다 !'))
             console.log('test')
             this.$router.replace({
               path: '/login'
