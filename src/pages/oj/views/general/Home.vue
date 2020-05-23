@@ -142,12 +142,12 @@
               pie: {
                 title: [
                   {
-                    subtext: '실습 진행 현황 (문제 수)',
+                    subtext: '실습 진행 현황',
                     left: '25%',
                     top: '85%',
                     textAlign: 'center'
                   }, {
-                    subtext: '과제 진행 현황 (문제 수)',
+                    subtext: '과제 진행 현황',
                     left: '75%',
                     top: '85%',
                     textAlign: 'center'
