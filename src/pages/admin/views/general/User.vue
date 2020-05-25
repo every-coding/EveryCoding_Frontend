@@ -204,18 +204,18 @@
           <el-col :span="12">
             <el-form-item :label="$t('m.User_Type')">
               <el-select v-model="user.admin_type">
-                <el-option label="Student" value="Regular User"></el-option>
-                <el-option label="Professor" value="Admin"></el-option>
-                <el-option label="Admin" value="Super Admin"></el-option>
+                <el-option label="학생" value="Regular User"></el-option>
+                <el-option label="교수" value="Admin"></el-option>
+                <el-option label="관리자" value="Super Admin"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item :label="$t('m.Problem_Permission')">
               <el-select v-model="user.problem_permission" :disabled="user.admin_type!=='Admin'">
-                <el-option label="None" value="None"></el-option>
-                <el-option label="Own" value="Own"></el-option>
-                <el-option label="All" value="All"></el-option>
+                <el-option label="승인불가" value="None"></el-option>
+                <el-option label="자신만" value="Own"></el-option>
+                <el-option label="모든사람" value="All"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -334,7 +334,7 @@
         })
       },
       deleteUsers (ids) {
-        this.$confirm('Sure to delete the user? The associated resources created by this user will be deleted as well, like problem, contest, announcement, etc.', 'confirm', {
+        this.$confirm('사용자를 삭제 하시겠습니까? 이 사용자가 생성 한 관련 리소스 (예 : 문제, 컨테스트, 발표 등)도 삭제됩니다.', '확인', {
           type: 'warning'
         }).then(() => {
           api.deleteUsers(ids.join(',')).then(res => {
@@ -351,7 +351,7 @@
       generateUser () {
         this.$refs['formGenerateUser'].validate((valid) => {
           if (!valid) {
-            this.$error('Please validate the error fields')
+            this.$error('오류 필드를 확인하십시오')
             return
           }
           this.loadingGenerate = true
@@ -360,7 +360,7 @@
             this.loadingGenerate = false
             let url = '/admin/generate_user?file_id=' + res.data.data.file_id
             utils.downloadFile(url).then(() => {
-              this.$alert('All users created successfully, the users sheets have downloaded to your disk.', 'Notice')
+              this.$alert('모든 사용자가 성공적으로 작성되었으며 사용자 시트가 디스크로 다운로드되었습니다.', '알림')
             })
             this.getUserList(1)
           }).catch(() => {
