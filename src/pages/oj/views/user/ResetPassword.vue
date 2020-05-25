@@ -59,7 +59,7 @@
 
       const CheckAgainPassword = (rule, value, callback) => {
         if (value !== this.formResetPassword.password) {
-          callback(new Error(this.$i18n.t('m.password_does_not_match')))
+          callback(new Error(this.$i18n.t('m.비밀번호가 일치하지 않습니다.')))
         }
         callback()
       }
