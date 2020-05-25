@@ -52,13 +52,13 @@
             label="선택사항"
             width="200">
             <div slot-scope="scope">
-              <icon-btn name="Edit" icon="edit" @click.native="openAnnouncementDialog(scope.row.id)"></icon-btn>
-              <icon-btn name="Delete" icon="trash" @click.native="deleteAnnouncement(scope.row.id)"></icon-btn>
+              <icon-btn name="편집" icon="edit" @click.native="openAnnouncementDialog(scope.row.id)"></icon-btn>
+              <icon-btn name="삭제" icon="trash" @click.native="deleteAnnouncement(scope.row.id)"></icon-btn>
             </div>
           </el-table-column>
         </el-table>
         <div class="panel-options">
-          <el-button type="primary" size="small" @click="openAnnouncementDialog(null)" icon="el-icon-plus">Create</el-button>
+          <el-button type="primary" size="small" @click="openAnnouncementDialog(null)" icon="el-icon-plus">새 글 작성 </el-button>
           <el-pagination
             v-if="!contestID"
             class="page"
@@ -70,7 +70,7 @@
         </div>
       </div>
     </Panel>
-    <!--对话框-->
+    <!--대화상자-->
     <el-dialog :title="announcementDialogTitle" :visible.sync="showEditAnnouncementDialog"
                @open="onOpenEditDialog" :close-on-click-modal="false">
       <el-form label-position="top">
@@ -112,7 +112,7 @@
     data () {
       return {
         contestID: '',
-        // 显示编辑公告对话框
+        // 공지 사항 편집 대화 상자 표시
         showEditAnnouncementDialog: false,
         // 公告列表
         announcementList: [],
@@ -150,7 +150,7 @@
         }
       },
       // test
-      // 切换页码回调
+      // 페이지 번호 콜백 전환
       currentChange (page) {
         this.currentPage = page
         this.getAnnouncementList(page)
@@ -174,10 +174,10 @@
           this.loading = false
         })
       },
-      // 打开编辑对话框的回调
+      // 콜백하여 편집 대화 상자 열기
       onOpenEditDialog () {
-        // todo 优化
-        // 暂时解决 文本编辑器显示异常bug
+        // todo 최적화
+        // 일시적으로 해결 文本编辑器显示异常bug
         setTimeout(() => {
           if (document.createEvent) {
             let event = document.createEvent('HTMLEvents')
@@ -188,7 +188,7 @@
           }
         }, 0)
       },
-      // 提交编辑
+      // 편집 제출
       // 默认传入MouseEvent
       submitAnnouncement (data = undefined) {
         let funcName = ''
@@ -211,9 +211,9 @@
           this.init()
         }).catch()
       },
-      // 删除公告
+      // 공지 사항 삭제
       deleteAnnouncement (announcementId) {
-        this.$confirm('Are you sure you want to delete this announcement?', 'Warning', {
+        this.$confirm('이 공지 사항을 삭제 하시겠습니까?', '경고', {
           confirmButtonText: 'Delete',
           cancelButtonText: 'Cancel',
           type: 'warning'
@@ -234,7 +234,7 @@
         this.showEditAnnouncementDialog = true
         if (id !== null) {
           this.currentAnnouncementId = id
-          this.announcementDialogTitle = 'Edit Announcement'
+          this.announcementDialogTitle = '공지 사항 편집'
           this.announcementList.find(item => {
             if (item.id === this.currentAnnouncementId) {
               this.announcement.title = item.title
@@ -244,7 +244,7 @@
             }
           })
         } else {
-          this.announcementDialogTitle = 'Create Announcement'
+          this.announcementDialogTitle = '새 공지 사항 작성'
           this.announcement.title = ''
           this.announcement.visible = true
           this.announcement.content = ''
