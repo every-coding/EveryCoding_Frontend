@@ -48,13 +48,13 @@
         <el-table-column prop="admin_type" label="사용자 권한">
           <template slot-scope="scope">
             <span v-if="scope.row.admin_type === 'Regular User'">
-              Student
+              학생
             </span>
             <span v-else-if="scope.row.admin_type === 'Admin'">
-              Professor
+              교수
             </span>
             <span v-else>
-              Admin
+              관리자
             </span>
           </template>
         </el-table-column>
