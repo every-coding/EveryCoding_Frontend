@@ -49,7 +49,7 @@
               this.logining = false
             })
           } else {
-            this.$error('Please check the error fields')
+            this.$error('오류 메시지를 확인하세요')
           }
         })
       }
