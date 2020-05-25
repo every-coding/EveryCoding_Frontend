@@ -6,7 +6,7 @@
           <el-col :span="8">
             <el-button v-show="selectedUsers.length"
                        type="warning" icon="el-icon-fa-trash"
-                       @click="deleteUsers(selectedUserIDs)">Delete
+                       @click="deleteUsers(selectedUserIDs)">삭제
             </el-button>
           </el-col>
           <el-col :span="selectedUsers.length ? 16: 24">
@@ -80,8 +80,8 @@
     <Panel>
       <span slot="title">{{$t('m.Import_User')}}
         <el-popover placement="right" trigger="hover">
-          <p>Only support csv file without headers, check the <a
-            href="http://docs.onlinejudge.me/#/onlinejudge/guide/import_users">link</a> for details</p>
+          <p>헤더가없는 CSV 파일 만 선택하십시오. 자세한 내용은 <a
+            href="http://docs.onlinejudge.me/#/onlinejudge/guide/import_users">링크</a> 를 확인 하십시오</p>
           <i slot="reference" class="el-icon-fa-question-circle import-user-icon"></i>
         </el-popover>
       </span>
@@ -90,7 +90,7 @@
                  :show-file-list="false"
                  accept=".csv"
                  :before-upload="handleUsersCSV">
-        <el-button size="small" icon="el-icon-fa-upload" type="primary">Choose File</el-button><!--엑셀 형태의 사용자 정보 파일 가져오는 기능-->
+        <el-button size="small" icon="el-icon-fa-upload" type="primary">파일 선택</el-button><!--엑셀 형태의 사용자 정보 파일 가져오는 기능-->
       </el-upload>
       <template v-else>
         <el-table :data="uploadUsersPage">
@@ -134,35 +134,35 @@
       <el-form :model="formGenerateUser" ref="formGenerateUser">
         <el-row type="flex" justify="space-between">
           <el-col :span="4">
-            <el-form-item label="Prefix" prop="prefix">
-              <el-input v-model="formGenerateUser.prefix" placeholder="Prefix"></el-input>
+            <el-form-item label="접두어" prop="prefix">
+              <el-input v-model="formGenerateUser.prefix" placeholder="접두어"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="Suffix" prop="suffix">
-              <el-input v-model="formGenerateUser.suffix" placeholder="Suffix"></el-input>
+            <el-form-item label="접미어" prop="suffix">
+              <el-input v-model="formGenerateUser.suffix" placeholder="접미어"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="Start Number" prop="number_from" required>
+            <el-form-item label="시작 번호" prop="number_from" required>
               <el-input-number v-model="formGenerateUser.number_from" style="width: 100%"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="End Number" prop="number_to" required>
+            <el-form-item label="끝 번호" prop="number_to" required>
               <el-input-number v-model="formGenerateUser.number_to" style="width: 100%"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="Password Length" prop="password_length" required>
+            <el-form-item label="비밀번호 길이" prop="password_length" required>
               <el-input v-model="formGenerateUser.password_length"
-                        placeholder="Password Length"></el-input>
+                        placeholder="비밀번호 길이"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
 
         <el-form-item>
-          <el-button type="primary" @click="generateUser" icon="el-icon-fa-users" :loading="loadingGenerate">Generate & Export
+          <el-button type="primary" @click="generateUser" icon="el-icon-fa-users" :loading="loadingGenerate">생성 및 내보내기
           </el-button>
           <span class="userPreview" v-if="formGenerateUser.number_from && formGenerateUser.number_to &&
                                           formGenerateUser.number_from <= formGenerateUser.number_to">
