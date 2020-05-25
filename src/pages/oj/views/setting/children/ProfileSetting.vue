@@ -85,7 +85,7 @@
         </Col>
 
         <Col :span="11">
-          <Form-item label="학번">
+          <Form-item label="닉네임">
             <Input v-model="formProfile.mood"/>
           </Form-item>
           <Form-item label="Blog주소">
