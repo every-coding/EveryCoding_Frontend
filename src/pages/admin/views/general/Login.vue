@@ -49,7 +49,7 @@
               this.logining = false
             })
           } else {
-            this.$error('오류 메시지를 확인하세요')
+            this.$error('오류 메시지를 확인하세요제발')
           }
         })
       }
