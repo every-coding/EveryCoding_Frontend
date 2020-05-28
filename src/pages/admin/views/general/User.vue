@@ -61,8 +61,8 @@
 
         <el-table-column fixed="right" label="선택사항" width="200">
           <template slot-scope="{row}">
-            <icon-btn name="Edit" icon="edit" @click.native="openUserDialog(row.id)"></icon-btn>
-            <icon-btn name="Delete" icon="trash" @click.native="deleteUsers([row.id])"></icon-btn>
+            <icon-btn name="편집" icon="edit" @click.native="openUserDialog(row.id)"></icon-btn>
+            <icon-btn name="삭제" icon="trash" @click.native="deleteUsers([row.id])"></icon-btn>
           </template>
         </el-table-column>
       </el-table>
