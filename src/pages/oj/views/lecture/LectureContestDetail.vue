@@ -95,12 +95,12 @@
         contestPassword: '',
         isvisible: false,
         columns: [ // 수강과목 세부 페이지의 내부 항목 제목
-          {
-            title: this.$i18n.t('Id'),
-            render: (h, params) => {
-              return h('span', params.row.id)
-            }
-          },
+          // {
+          //   title: this.$i18n.t('Id'),
+          //   render: (h, params) => {
+          //     return h('span', params.row.id)
+          //   }
+          // },
           {
             title: this.$i18n.t('시작일'),
             render: (h, params) => {
