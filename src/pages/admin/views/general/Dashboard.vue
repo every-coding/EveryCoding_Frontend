@@ -54,7 +54,7 @@
       <div class="info-container">
         <info-card color="#909399" icon="el-icon-fa-users" message="전체 사용자 수" iconSize="30px" class="info-item"
                    :value="infoData.user_count"></info-card>
-        <info-card color="#67C23A" icon="el-icon-fa-list" message="오늘 제출한 과제 수" class="info-item"
+        <info-card color="#67C23A" icon="el-icon-fa-list" message="오늘 제출한 소스코드 수" class="info-item"
                    :value="infoData.today_submission_count"></info-card>
         <info-card color="#409EFF" icon="el-icon-fa-trophy" message="최근 과제 및 실습" class="info-item"
                    :value="infoData.recent_contest_count"></info-card>
