@@ -120,7 +120,7 @@
             }
           },
           {
-            title: this.$i18n.t('랭킹 산정 방식'),
+            title: this.$i18n.t('대회 진행 방식'),
             render: (h, params) => {
               return h('span', this.$i18n.t('m.' + params.row.rule_type))
             }
