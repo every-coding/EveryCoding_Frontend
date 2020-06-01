@@ -6,7 +6,7 @@
           <el-col :span="8">
             <el-button v-show="selectedUsers.length"
                        type="warning" icon="el-icon-fa-trash"
-                       @click="deleteUsers(selectedUserIDs)">Delete
+                       @click="deleteUsers(selectedUserIDs)">삭제
             </el-button>
           </el-col>
           <el-col :span="selectedUsers.length ? 16: 24">
@@ -25,19 +25,19 @@
 
         <el-table-column prop="id" label="ID"></el-table-column>
 
-        <el-table-column prop="realname" label="Realname"></el-table-column>
+        <el-table-column prop="realname" label="실명"></el-table-column>
 
-        <el-table-column prop="username" label="Username"></el-table-column>
+        <el-table-column prop="username" label="닉네임"></el-table-column>
 
         <el-table-column prop="schoolssn" label="학번 / 교직번호"></el-table-column>
 
-        <el-table-column prop="create_time" label="Create Time">
+        <el-table-column prop="create_time" label="계정 생성일">
           <template slot-scope="scope">
             {{scope.row.create_time | localtime }}
           </template>
         </el-table-column>
 
-        <el-table-column prop="last_login" label="Last Login">
+        <el-table-column prop="last_login" label="마지막 접속일">
           <template slot-scope="scope">
             {{scope.row.last_login | localtime }}
           </template>
@@ -45,24 +45,24 @@
 
         <el-table-column prop="email" label="Email"></el-table-column>
 
-        <el-table-column prop="admin_type" label="User Type">
+        <el-table-column prop="admin_type" label="사용자 권한">
           <template slot-scope="scope">
             <span v-if="scope.row.admin_type === 'Regular User'">
-              Student
+              학생
             </span>
             <span v-else-if="scope.row.admin_type === 'Admin'">
-              Professor
+              교수
             </span>
             <span v-else>
-              Admin
+              관리자
             </span>
           </template>
         </el-table-column>
 
-        <el-table-column fixed="right" label="Option" width="200">
+        <el-table-column fixed="right" label="선택사항" width="200">
           <template slot-scope="{row}">
-            <icon-btn name="Edit" icon="edit" @click.native="openUserDialog(row.id)"></icon-btn>
-            <icon-btn name="Delete" icon="trash" @click.native="deleteUsers([row.id])"></icon-btn>
+            <icon-btn name="편집" icon="edit" @click.native="openUserDialog(row.id)"></icon-btn>
+            <icon-btn name="삭제" icon="trash" @click.native="deleteUsers([row.id])"></icon-btn>
           </template>
         </el-table-column>
       </el-table>
@@ -80,8 +80,8 @@
     <Panel>
       <span slot="title">{{$t('m.Import_User')}}
         <el-popover placement="right" trigger="hover">
-          <p>Only support csv file without headers, check the <a
-            href="http://docs.onlinejudge.me/#/onlinejudge/guide/import_users">link</a> for details</p>
+          <p>헤더가없는 CSV 파일 만 선택하십시오. 자세한 내용은 <a
+            href="http://docs.onlinejudge.me/#/onlinejudge/guide/import_users">링크</a> 를 확인 하십시오</p>
           <i slot="reference" class="el-icon-fa-question-circle import-user-icon"></i>
         </el-popover>
       </span>
@@ -90,7 +90,7 @@
                  :show-file-list="false"
                  accept=".csv"
                  :before-upload="handleUsersCSV">
-        <el-button size="small" icon="el-icon-fa-upload" type="primary">Choose File</el-button><!--엑셀 형태의 사용자 정보 파일 가져오는 기능-->
+        <el-button size="small" icon="el-icon-fa-upload" type="primary">파일 선택</el-button><!--엑셀 형태의 사용자 정보 파일 가져오는 기능-->
       </el-upload>
       <template v-else>
         <el-table :data="uploadUsersPage">
@@ -134,35 +134,35 @@
       <el-form :model="formGenerateUser" ref="formGenerateUser">
         <el-row type="flex" justify="space-between">
           <el-col :span="4">
-            <el-form-item label="Prefix" prop="prefix">
-              <el-input v-model="formGenerateUser.prefix" placeholder="Prefix"></el-input>
+            <el-form-item label="접두어" prop="prefix">
+              <el-input v-model="formGenerateUser.prefix" placeholder="접두어"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="Suffix" prop="suffix">
-              <el-input v-model="formGenerateUser.suffix" placeholder="Suffix"></el-input>
+            <el-form-item label="접미어" prop="suffix">
+              <el-input v-model="formGenerateUser.suffix" placeholder="접미어"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="Start Number" prop="number_from" required>
+            <el-form-item label="시작 번호" prop="number_from" required>
               <el-input-number v-model="formGenerateUser.number_from" style="width: 100%"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="End Number" prop="number_to" required>
+            <el-form-item label="끝 번호" prop="number_to" required>
               <el-input-number v-model="formGenerateUser.number_to" style="width: 100%"></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="Password Length" prop="password_length" required>
+            <el-form-item label="비밀번호 길이" prop="password_length" required>
               <el-input v-model="formGenerateUser.password_length"
-                        placeholder="Password Length"></el-input>
+                        placeholder="비밀번호 길이"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
 
         <el-form-item>
-          <el-button type="primary" @click="generateUser" icon="el-icon-fa-users" :loading="loadingGenerate">Generate & Export
+          <el-button type="primary" @click="generateUser" icon="el-icon-fa-users" :loading="loadingGenerate">생성 및 내보내기
           </el-button>
           <span class="userPreview" v-if="formGenerateUser.number_from && formGenerateUser.number_to &&
                                           formGenerateUser.number_from <= formGenerateUser.number_to">
@@ -204,18 +204,18 @@
           <el-col :span="12">
             <el-form-item :label="$t('m.User_Type')">
               <el-select v-model="user.admin_type">
-                <el-option label="Student" value="Regular User"></el-option>
-                <el-option label="Professor" value="Admin"></el-option>
-                <el-option label="Admin" value="Super Admin"></el-option>
+                <el-option label="학생" value="Regular User"></el-option>
+                <el-option label="교수" value="Admin"></el-option>
+                <el-option label="관리자" value="Super Admin"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item :label="$t('m.Problem_Permission')">
               <el-select v-model="user.problem_permission" :disabled="user.admin_type!=='Admin'">
-                <el-option label="None" value="None"></el-option>
-                <el-option label="Own" value="Own"></el-option>
-                <el-option label="All" value="All"></el-option>
+                <el-option label="승인불가" value="None"></el-option>
+                <el-option label="자신만" value="Own"></el-option>
+                <el-option label="모든사람" value="All"></el-option>
               </el-select>
             </el-form-item>
           </el-col>
@@ -334,7 +334,7 @@
         })
       },
       deleteUsers (ids) {
-        this.$confirm('Sure to delete the user? The associated resources created by this user will be deleted as well, like problem, contest, announcement, etc.', 'confirm', {
+        this.$confirm('사용자를 삭제 하시겠습니까? 이 사용자가 생성 한 관련 리소스 (예 : 문제, 컨테스트, 발표 등)도 삭제됩니다.', '확인', {
           type: 'warning'
         }).then(() => {
           api.deleteUsers(ids.join(',')).then(res => {
@@ -351,7 +351,7 @@
       generateUser () {
         this.$refs['formGenerateUser'].validate((valid) => {
           if (!valid) {
-            this.$error('Please validate the error fields')
+            this.$error('오류 필드를 확인하십시오')
             return
           }
           this.loadingGenerate = true
@@ -360,7 +360,7 @@
             this.loadingGenerate = false
             let url = '/admin/generate_user?file_id=' + res.data.data.file_id
             utils.downloadFile(url).then(() => {
-              this.$alert('All users created successfully, the users sheets have downloaded to your disk.', 'Notice')
+              this.$alert('모든 사용자가 성공적으로 작성되었으며 사용자 시트가 디스크로 다운로드되었습니다.', '알림')
             })
             this.getUserList(1)
           }).catch(() => {

@@ -9,7 +9,7 @@
               :before-upload="handleSelectFile">
         <div style="padding: 30px 0">
           <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-          <p>Drop here, or click to select manually</p>
+          <p>이미지 파일을 여기로 드롭하거나, 이곳을 클릭하세요</p>
         </div>
       </Upload>
     </template>
@@ -52,13 +52,12 @@
       </div>
     </template>
     <Modal v-model="uploadModalVisible"
-           title="Upload the avatar">
+           title="아바타 업로드하기">
       <div class="upload-modal">
-        <p class="notice">Your avatar will be set to:</p>
         <img :src="uploadImgSrc"/>
       </div>
       <div slot="footer">
-        <Button @click="uploadAvatar" :loading="loadingUploadBtn">upload</Button>
+        <Button @click="uploadAvatar" :loading="loadingUploadBtn">업로드</Button>
       </div>
     </Modal>
 
@@ -66,33 +65,33 @@
     <Form ref="formProfile" :model="formProfile">
       <Row type="flex" :gutter="30" justify="space-around">
         <Col :span="11">
-          <FormItem label="Real Name">
+          <FormItem label="실명">
             <Input v-model="formProfile.real_name"/>
           </FormItem>
-          <Form-item label="School">
+          <Form-item label="학교">
             <Input v-model="formProfile.school"/>
           </Form-item>
-          <Form-item label="Major">
+          <Form-item label="전공">
             <Input v-model="formProfile.major"/>
           </Form-item>
-          <FormItem label="Language">
+          <FormItem label="언어/Language/語言/语言">
             <Select v-model="formProfile.language">
               <Option v-for="lang in languages" :key="lang.value" :value="lang.value">{{lang.label}}</Option>
             </Select>
           </FormItem>
           <Form-item>
-            <Button type="primary" @click="updateProfile" :loading="loadingSaveBtn">Save All</Button>
+            <Button type="primary" @click="updateProfile" :loading="loadingSaveBtn">저장하기</Button>
           </Form-item>
         </Col>
 
         <Col :span="11">
-          <Form-item label="Mood">
+          <Form-item label="닉네임">
             <Input v-model="formProfile.mood"/>
           </Form-item>
-          <Form-item label="Blog">
+          <Form-item label="Blog주소">
             <Input v-model="formProfile.blog"/>
           </Form-item>
-          <Form-item label="Github">
+          <Form-item label="Github주소">
             <Input v-model="formProfile.github"/>
           </Form-item>
         </Col>
@@ -148,8 +147,8 @@
       checkFileType (file) {
         if (!/\.(gif|jpg|jpeg|png|bmp|GIF|JPG|PNG)$/.test(file.name)) {
           this.$Notice.warning({
-            title: 'File type not support',
-            desc: 'The format of ' + file.name + ' is incorrect ，please choose image only.'
+            title: '지원되지 않는 형식의 파일입니다.',
+            desc: '파일 ' + file.name + ' 의 형식이 올바르지 않습니다. 이미지파일만 업로드 해주세요.'
           })
           return false
         }
@@ -159,8 +158,8 @@
         // max size is 2MB
         if (file.size > 2 * 1024 * 1024) {
           this.$Notice.warning({
-            title: 'Exceed max size limit',
-            desc: 'File ' + file.name + ' is too big, you can upload a image up to 2MB in size'
+            title: '파일의 최대 사이즈를 초과하였습니다.',
+            desc: '파일 ' + file.name + ' 이(가) 너무 큽니다, 2MB이내의 크기의 이미지파일을 업로드 해주세요.'
           })
           return false
         }
@@ -190,7 +189,7 @@
       },
       reselect () {
         this.$Modal.confirm({
-          content: 'Are you sure to disgard the changes?',
+          content: '변경사항을 취소하시겠습니까?',
           onOk: () => {
             this.avatarOption.imgSrc = ''
           }
@@ -215,7 +214,7 @@
             headers: {'content-type': 'multipart/form-data'}
           }).then(res => {
             this.loadingUploadBtn = false
-            this.$success('Successfully set new avatar')
+            this.$success('성공적으로 새 아바타를 설정하였습니다.')
             this.uploadModalVisible = false
             this.avatarOption.imgSrc = ''
             this.$store.dispatch('getProfile')

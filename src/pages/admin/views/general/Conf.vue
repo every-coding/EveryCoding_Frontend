@@ -20,7 +20,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item :label="$t('m.Password')" label-width="90px" required>
-              <el-input v-model="smtp.password" type="password" placeholder="SMTP Server Password"></el-input>
+              <el-input v-model="smtp.password" type="password" placeholder="SMTP 서버 비밀번호"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="24">
@@ -32,7 +32,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <el-button type="primary" @click="saveSMTPConfig">Save</el-button>
+      <el-button type="primary" @click="saveSMTPConfig">저장</el-button>
       <el-button type="warning" @click="testSMTPConfig"
                  v-if="saved" :loading="loadingBtnTest">Send Test Email</el-button>
     </Panel>
@@ -114,7 +114,7 @@
           this.smtp = res.data.data
         } else {
           this.init = true
-          this.$warning('Please setup SMTP config at first')
+          this.$warning('먼저 SMTP config를 설정하십시오')
         }
       })
       api.getWebsiteConfig().then(res => {
