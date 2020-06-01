@@ -16,7 +16,7 @@
       <Form-item prop="captcha" style="margin-bottom:10px">
         <div id="captcha">
           <div id="captchaCode">
-            <Input v-model="formResetPassword.captcha" :placeholder="$t('m.RCaptcha')" size="large">
+            <Input v-model="formResetPassword.captcha" :placeholder="$t('자동 입력 방지문자')" size="large">
             <Icon type="ios-lightbulb-outline" slot="prepend"></Icon>
             </Input>
           </div>
@@ -59,7 +59,7 @@
 
       const CheckAgainPassword = (rule, value, callback) => {
         if (value !== this.formResetPassword.password) {
-          callback(new Error(this.$i18n.t('m.password_does_not_match')))
+          callback(new Error(this.$i18n.t('m.비밀번호가 일치하지 않습니다.')))
         }
         callback()
       }
