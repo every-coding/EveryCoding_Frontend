@@ -124,7 +124,7 @@
       },
       deleteSession (sessionKey) {
         this.$Modal.confirm({
-          title: 'Confirm',
+          title: '확인',
           content: '세션을 삭제하시겠습니까?',
           onOk: () => {
             api.deleteSession(sessionKey).then(res => {
