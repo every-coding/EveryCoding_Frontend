@@ -15,7 +15,7 @@
       <!---->
       <template>
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="학생 목록" name="student">
+          <el-tab-pane label="종합" name="synthesis">
             <el-table
               v-loading="loadingTable"
               element-loading-text="loading"
@@ -80,11 +80,6 @@
               <el-table-column prop="totalScore" label="총점" width="90" align="center"></el-table-column>
               <el-table-column prop="avgScore" label="평균" width="90" align="center"></el-table-column>
               <el-table-column prop="progress" label="진행율" width="90" align="center"></el-table-column>
-              <!--<el-table-column prop="user.admin_type" label="사용자 유형">
-                <template slot-scope="scope">
-                  {{ scope.row.user.admin_type }}
-                </template>
-              </el-table-column>-->
               
               <el-table-column fixed="right" label="" width="200">
                 <template slot-scope="{row}">
@@ -94,11 +89,50 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-tab-pane label="실습, 과제 현황" name="contest">
-            현재 수강과목 실습, 과제 각 주차별 현황
+          <el-tab-pane label="실습" name="train">
+            <el-table
+              v-loading="loadingTable"
+              element-loading-text="loading"
+              @selection-change="handleSelectionChange"
+              ref="table"
+              :data="userList"
+              style="width: 100%">
+              <el-table-column prop="realname" label="이름" align="center">
+                <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
+                  <span v-if="scope.row.realname"><!--해당 값을 출력하고-->
+                    {{ scope.row.realname }}
+                  </span>
+                  <span v-else><!--아닌 경우에는 User 테이블에 있는 realname 값을 출력한다.-->
+                    {{ scope.row.user.realname }}
+                  </span>
+                </template>
+              </el-table-column>
+              <template>
+              </template>
+              <el-table-column label="총실습/도전/해결" align="center">
+                <template slot-scope="scope">
+                  <span style="text-align:center">
+                    {{ scope.row.totalPractice }}/{{ scope.row.subPractice }}/{{ scope.row.solvePractice }}
+                  </span>
+                </template>
+              </el-table-column>
+              <el-table-column label="총과제/도전/해결" align="center">
+                <template slot-scope="scope">
+                  <span style="text-align:center">
+                    {{ scope.row.totalAssign }}/{{ scope.row.subAssign }}/{{ scope.row.solveAssign }}
+                  </span>
+                </template>
+              </el-table-column>
+            </el-table>
           </el-tab-pane>
-          <el-tab-pane label="기타" name="extra">
-            Extra
+          <el-tab-pane label="과제" name="assign">
+            과제
+          </el-tab-pane>
+          <el-tab-pane label="대회" name="contest">
+            대회
+          </el-tab-pane>
+          <el-tab-pane label="Excel export" name="export">
+            Export
           </el-tab-pane>
         </el-tabs>
       </template>
@@ -172,7 +206,8 @@
     name: 'User',
     data () {
       return {
-        activeName: 'student', // 페이지 내 여러 탭 표현을 위한 변수
+        // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
+        activeName: 'train', // 임시 지정
         showContestDialog: false,
         lectureID: '',
         lectureFounder: '', // 강의 개설자 realname
