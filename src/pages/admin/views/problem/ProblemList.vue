@@ -56,7 +56,7 @@
         <el-table-column
           width="100"
           prop="visible"
-          label="Visible">
+          label="출력유무">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.visible"
                        active-text=""
