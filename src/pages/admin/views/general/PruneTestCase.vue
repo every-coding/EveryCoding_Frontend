@@ -24,7 +24,7 @@
           fixed="right"
           width="200">
           <template slot-scope="{row}">
-            <icon-btn name="Delete" icon="trash" @click.native="deleteTestCase(row.id)"></icon-btn>
+            <icon-btn name="삭제" icon="trash" @click.native="deleteTestCase(row.id)"></icon-btn>
           </template>
         </el-table-column>
       </el-table>
@@ -32,7 +32,7 @@
         <el-button type="warning" size="small"
                    :loading="loading"
                    icon="el-icon-fa-trash"
-                   @click="deleteTestCase()">Delete All
+                   @click="deleteTestCase()">모두 삭제
         </el-button>
       </div>
     </panel>
