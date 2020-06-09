@@ -92,9 +92,9 @@ export const m = {
   Source: '소스코드',
   Edit_Problem: '문제 수정',
   Add_Problme: '문제 작성',
-  High: 'High',
-  Mid: 'Mid',
-  Low: 'Low',
+  High: '상',
+  Mid: '중',
+  Low: '하',
   Tag: 'Tag',
   New_Tag: 'New Tag',
   // ContestList.vue
