@@ -2,6 +2,7 @@ export const m = {
   // Test
   // Problem.vue
   Problem_Submissions: '문제 제출 현황',
+  Display_ID: '문제 ID',
   Description: '설명',
   Input: '입력',
   Output: '출력',
