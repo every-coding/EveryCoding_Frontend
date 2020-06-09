@@ -20,7 +20,7 @@
           label="테스트 케이스 ID">
         </el-table-column>
         <el-table-column
-          label="선택사항"
+          label="옵션"
           fixed="right"
           width="200">
           <template slot-scope="{row}">
