@@ -144,5 +144,7 @@ export const m = {
   Time: '소요 시간',
   Language: '언어',
   Author: '코드 작성자 id',
-  Lecture_id: '소속 수강 과목'
+  Lecture_id: '소속 수강 과목',
+  // Save.vue
+  save: '저장'
 }
