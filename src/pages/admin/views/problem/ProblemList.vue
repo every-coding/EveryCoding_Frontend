@@ -71,7 +71,7 @@
           width="250">
           <div slot-scope="scope">
             <icon-btn name="편집" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
-            <icon-btn v-if="contestId" name="Make Public" icon="clone"
+            <icon-btn v-if="contestId" name="공개 문제화 하기" icon="clone"
                       @click.native="makeContestProblemPublic(scope.row.id)"></icon-btn>
             <icon-btn icon="download" name="테스트케이스 다운로드"
                       @click.native="downloadTestCase(scope.row.id)"></icon-btn>
@@ -82,11 +82,11 @@
       </el-table>
       <div class="panel-options">
         <el-button type="primary" size="small"
-                   @click="goCreateProblem" icon="el-icon-plus">생성
+                   @click="goCreateProblem" icon="el-icon-plus">문제 만들기
         </el-button>
         <el-button v-if="contestId" type="primary"
                    size="small" icon="el-icon-plus"
-                   @click="addProblemDialogVisible = true">Add From Public Problem
+                   @click="addProblemDialogVisible = true">공개문제에서 가져오기
         </el-button>
         <el-pagination
           class="page"

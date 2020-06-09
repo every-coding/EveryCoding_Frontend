@@ -97,6 +97,8 @@ export const m = {
   Low: '하',
   Tag: 'Tag',
   New_Tag: 'New Tag',
+  // ProblemList.vue
+  Contest_Problem_List: '실습 및 과제 문제 목록',
   // ContestList.vue
   Rule: '대회 진행 방식',
   OI: 'OI',
