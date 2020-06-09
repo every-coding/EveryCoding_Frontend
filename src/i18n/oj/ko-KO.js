@@ -49,7 +49,13 @@ export const m = {
   Contest_Announcements: '실습 및 과제 공지사항',
   // ContestProblemList
   Problems_List: '문제 목록',
-
+// OIRank.vue
+  OI_Ranklist: 'OI 순위표',
+  // ACMRank.vue
+  ACM_Ranklist: 'ACM 순위표',
+  mood: 'mood',
+  AC: '맞춘 문제 수',
+  Rating: '정답률',
   // NavBar.vue
   Home: '홈',
   NavProblems: '공개 문제',
