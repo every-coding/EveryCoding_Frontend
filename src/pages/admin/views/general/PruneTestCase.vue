@@ -3,23 +3,24 @@
     <panel>
       <span slot="title">{{$t('m.Test_Case_Prune_Test_Case')}}
         <el-popover placement="right" trigger="hover">
-          These test cases are not owned by any problem, you can clean them safely.
+         이 테스트 케이스는 어떤 문제도 소유하지 않으므로 안전하게 제거할 수 있습니다.
+         <!-- These test cases are not owned by any problem, you can clean them safely. -->
           <i slot="reference" class="el-icon-fa-question-circle import-user-icon"></i>
         </el-popover>
       </span>
       <el-table :data="data">
         <el-table-column
-          label="Last Modified">
+          label="마지막 수정">
           <template slot-scope="{row}">
             {{row.create_time | timestampFormat }}
           </template>
         </el-table-column>
         <el-table-column
           prop="id"
-          label="Test Case ID">
+          label="테스트 케이스 ID">
         </el-table-column>
         <el-table-column
-          label="Option"
+          label="선택사항"
           fixed="right"
           width="200">
           <template slot-scope="{row}">

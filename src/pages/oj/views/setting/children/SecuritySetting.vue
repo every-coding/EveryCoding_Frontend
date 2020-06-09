@@ -136,7 +136,7 @@
       },
       closeTFA () {
         this.$Modal.confirm({
-          title: 'Confirm',
+          title: '확인',
           content: '이중 인증은 계정을 보호하는 강력한 도구입니다. 닫으시겠습니까?',
           onOk: () => {
             this.updateTFA(true)
