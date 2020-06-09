@@ -105,7 +105,7 @@ export const m = {
   All: '모두 보기',
   Not_Started: '시작전',
   Ended: '종료됨',
-  No_contest: 'No contest',
+  No_contest: '대회가 없습니다.',
   Please_login_first: '먼저 로그인을 해주세요!',
   // Contest.vue
   ContestTitle: '제목',
