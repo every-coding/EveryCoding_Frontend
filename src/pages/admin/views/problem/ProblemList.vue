@@ -197,7 +197,7 @@
         })
       },
       deleteProblem (id) {
-        this.$confirm('Sure to delete this problem? The associated submissions will be deleted as well.', 'Delete Problem', {
+        this.$confirm('이 문제를 삭제 하시겠습니까? 관련 제출물도 삭제됩니다.', '문제 삭제', {
           type: 'warning'
         }).then(() => {
           let funcName = this.routeName === 'problem-list' ? 'deleteProblem' : 'deleteContestProblem'
@@ -209,7 +209,7 @@
         })
       },
       makeContestProblemPublic (problemID) {
-        this.$prompt('Please input display id for the public problem', 'confirm').then(({value}) => {
+        this.$prompt('공개 문제의 문제 ID를 입력하십시오', '확인').then(({value}) => {
           api.makeContestProblemPublic({id: problemID, display_id: value}).catch()
         }, () => {
         })
