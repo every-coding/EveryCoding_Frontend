@@ -14,7 +14,7 @@
       <strong>총 수강 학생/등록/미등록 : {{ userList.length }}명 / {{ RegistUser }}명 / {{ noRegistUser }}명</strong>
       <!---->
       <template>
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName">
           <el-tab-pane label="종합" name="synthesis">
             <el-table
               v-loading="loadingTable"
@@ -43,8 +43,6 @@
                   </span>
                 </template>
               </el-table-column>
-              <!--<el-table-column prop="real_name" label="실제 이름"></el-table-column>// 사용자명을 실제 이름으로 할 것 같은데, 필요한지?-->
-
               <el-table-column prop="isallow" label="수강 유무" align="center">
                 <template slot-scope="scope"> <!--true 일 때 출력하는 템플릿-->
                   <span v-if="scope.row.isallow" style="background-color:green; color:white">
@@ -76,6 +74,7 @@
                   </span>
                 </template>
               </el-table-column>
+              
               <el-table-column prop="maxScore" label="만점" width="90" align="center"></el-table-column>
               <el-table-column prop="totalScore" label="총점" width="90" align="center"></el-table-column>
               <el-table-column prop="avgScore" label="평균" width="90" align="center"></el-table-column>
@@ -89,51 +88,151 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
+          <!---->
           <el-tab-pane label="실습" name="train">
-            <el-table
-              v-loading="loadingTable"
-              element-loading-text="loading"
-              @selection-change="handleSelectionChange"
-              ref="table"
-              :data="userList"
-              style="width: 100%">
-              <el-table-column prop="realname" label="이름" align="center">
-                <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
-                  <span v-if="scope.row.realname"><!--해당 값을 출력하고-->
-                    {{ scope.row.realname }}
-                  </span>
-                  <span v-else><!--아닌 경우에는 User 테이블에 있는 realname 값을 출력한다.-->
-                    {{ scope.row.user.realname }}
-                  </span>
-                </template>
-              </el-table-column>
-              <template>
-              </template>
-              <el-table-column label="총실습/도전/해결" align="center">
-                <template slot-scope="scope">
-                  <span style="text-align:center">
-                    {{ scope.row.totalPractice }}/{{ scope.row.subPractice }}/{{ scope.row.solvePractice }}
-                  </span>
-                </template>
-              </el-table-column>
-              <el-table-column label="총과제/도전/해결" align="center">
-                <template slot-scope="scope">
-                  <span style="text-align:center">
-                    {{ scope.row.totalAssign }}/{{ scope.row.subAssign }}/{{ scope.row.solveAssign }}
-                  </span>
-                </template>
-              </el-table-column>
-            </el-table>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    이름
+                  </th>
+                  <th>
+                    학번
+                  </th>
+                  <template v-for="(contests, index) in scoreListTable['0'].score.traincolumnscore.contests">
+                    <th>
+                      {{ index + 1 }}주차
+                    </th>
+                  </template>
+                  <th>
+                    총점
+                  </th>
+                  <th>
+                    평균
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="user in scoreListTable">
+                  <td>
+                    {{ user.realname }}
+                  </td>
+                  <td>
+                    {{ user.schoolssn }}
+                  </td>
+                  <td v-for="contest in user.score.traincolumnscore.contests">
+                    {{ contest.Info.score }}
+                  </td>
+                  <td>
+                    {{ user.score.traincolumnscore.totalscore }}
+                  </td>
+                  <td>
+                    {{ user.score.traincolumnscore.avg }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </el-tab-pane>
+          <!---->
           <el-tab-pane label="과제" name="assign">
-            과제
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    이름
+                  </th>
+                  <th>
+                    학번
+                  </th>
+                  <template v-for="(contests, index) in scoreListTable['0'].score.assigncolumnscore.contests">
+                    <th>
+                      {{ index + 1 }}주차
+                    </th>
+                  </template>
+                  <th>
+                    총점
+                  </th>
+                  <th>
+                    평균
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="user in scoreListTable">
+                  <td>
+                    {{ user.realname }}
+                  </td>
+                  <td>
+                    {{ user.schoolssn }}
+                  </td>
+                  <td v-for="contest in user.score.assigncolumnscore.contests">
+                    {{ contest.Info.score }}
+                  </td>
+                  <td>
+                    {{ user.score.assigncolumnscore.totalscore }}
+                  </td>
+                  <td>
+                    {{ user.score.assigncolumnscore.avg }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </el-tab-pane>
+          <!---->
           <el-tab-pane label="대회" name="contest">
-            대회
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    이름
+                  </th>
+                  <th>
+                    학번
+                  </th>
+                  <template v-for="(contests, index) in scoreListTable['0'].score.contestcolumnscore.contests">
+                    <th>
+                      {{ index + 1 }}주차
+                    </th>
+                  </template>
+                  <th>
+                    총점
+                  </th>
+                  <th>
+                    평균
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="user in scoreListTable">
+                  <td>
+                    {{ user.realname }}
+                  </td>
+                  <td>
+                    {{ user.schoolssn }}
+                  </td>
+                  <td v-for="contest in user.score.contestcolumnscore.contests">
+                    {{ contest.Info.score }}
+                  </td>
+                  <td>
+                    {{ user.score.contestcolumnscore.totalscore }}
+                  </td>
+                  <td>
+                    {{ user.score.contestcolumnscore.avg }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </el-tab-pane>
+          <!---->
           <el-tab-pane label="Excel export" name="export">
-            Export
+            <el-checkbox-group v-model="checkList">
+              <el-checkbox label="실습"></el-checkbox>
+              <el-checkbox label="과제"></el-checkbox>
+              <el-checkbox label="대회"></el-checkbox>
+            </el-checkbox-group>
+            <el-button type="primary">Export excel</el-button>
           </el-tab-pane>
+          <!---->
         </el-tabs>
       </template>
       <!---->
@@ -167,12 +266,12 @@
         <el-table :data="uploadUsersPage">
           <el-table-column label="학번">
             <template slot-scope="{row}">
-              {{row[0]}}
+              {{ row[0] }}
             </template>
           </el-table-column>
           <el-table-column label="이름">
             <template slot-scope="{row}">
-              {{row[1]}}
+              {{ row[1] }}
             </template>
           </el-table-column>
         </el-table>
@@ -206,6 +305,7 @@
     name: 'User',
     data () {
       return {
+        checkList: ['실습', '과제', '대회'],
         // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
         activeName: 'train', // 임시 지정
         showContestDialog: false,
@@ -217,6 +317,7 @@
         RegistUser: 0,
         noRegistUser: 0,
         userList: [],
+        scoreListTable: [],
         uploadUsers: [],
         uploadUsersPage: [],
         uploadUsersCurrentPage: 1,
@@ -286,7 +387,6 @@
         }).catch(() => {
         })
       },
-      // 打开用户对话框
       openUserDialog (id) {
         this.showUserDialog = true
         api.getUser(id).then(res => {
@@ -302,8 +402,46 @@
           this.loadingTable = false
           this.total = res.data.data.total
           this.userList = res.data.data.results
+          this.contestCount = this.userList[0].score.ContestAnalysis.실습.Info.numofcontents
+          console.log(this.contestCount)
+          console.log(this.userList[0].score.ContestAnalysis.실습.Info.numofcontents)
           this.userList.forEach(user => {
-            console.log(user)
+            if (user.score !== null) {
+              var userinfo = {}
+              userinfo['realname'] = user.realname
+              userinfo['schoolssn'] = user.schoolssn
+              var trains = []
+              var assigns = []
+              var contests = []
+              for (var i in user.score.ContestAnalysis.실습.contests) {
+                trains.push(user.score.ContestAnalysis.실습.contests[i])
+              }
+              for (var j in user.score.ContestAnalysis.과제.contests) {
+                assigns.push(user.score.ContestAnalysis.과제.contests[j])
+              }
+              for (var k in user.score.ContestAnalysis.대회.contests) {
+                contests.push(user.score.ContestAnalysis.대회.contests[k])
+              }
+              var columnscore = {
+                traincolumnscore: {
+                  contests: trains,
+                  totalscore: user.score.ContestAnalysis.실습.Info.score,
+                  avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                },
+                assigncolumnscore: {
+                  contests: assigns,
+                  totalscore: user.score.ContestAnalysis.과제.Info.score,
+                  avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.과제.Info.numofcontents
+                },
+                contestcolumnscore: {
+                  contests: contests,
+                  totalscore: user.score.ContestAnalysis.대회.Info.score,
+                  avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.대회.Info.numofcontents
+                }
+              }
+              userinfo.score = columnscore
+              this.scoreListTable.push(userinfo)
+            }
           })
           this.noRegistUser = 0
           for (let uu of this.userList) {
@@ -418,5 +556,65 @@
       margin: 0;
       text-align: left;
     }
+  }
+
+  body {
+    font-family: Helvetica Neue, Arial, sans-serif;
+    font-size: 14px;
+    color: #444;
+  }
+
+  table {
+    border: 2px solid #929292;
+    border-radius: 3px;
+    background-color: #fff;
+  }
+
+  th {
+    background-color: #929292;
+    color: rgba(255,255,255,0.66);
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  td {
+    background-color: #f9f9f9;
+  }
+
+  th, td {
+    min-width: 100px;
+    padding: 10px 20px;
+  }
+
+  th.active {
+    color: #fff;
+  }
+
+  th.active .arrow {
+    opacity: 1;
+  }
+
+  .arrow {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    opacity: 0.66;
+  }
+
+  .arrow.asc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #fff;
+  }
+
+  .arrow.dsc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #fff;
   }
 </style>
