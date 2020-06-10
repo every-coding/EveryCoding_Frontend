@@ -347,7 +347,6 @@
       this.lectureTitle = this.$route.params.lectureTitle
       this.lectureFounder = this.$route.params.lectureFounder
       this.getUserList(1)
-      console.log(this.lectureID)
     },
     methods: {
       currentChange (page) {
@@ -403,8 +402,6 @@
           this.total = res.data.data.total
           this.userList = res.data.data.results
           this.contestCount = this.userList[0].score.ContestAnalysis.실습.Info.numofcontents
-          console.log(this.contestCount)
-          console.log(this.userList[0].score.ContestAnalysis.실습.Info.numofcontents)
           this.userList.forEach(user => {
             if (user.score !== null) {
               var userinfo = {}
@@ -558,63 +555,25 @@
     }
   }
 
-  body {
-    font-family: Helvetica Neue, Arial, sans-serif;
-    font-size: 14px;
-    color: #444;
+  table {
+    width: 100%;
   }
 
-  table {
-    border: 2px solid #929292;
-    border-radius: 3px;
-    background-color: #fff;
+  tr {
+    border-bottom: 1.5px solid rgba(220, 220, 220, 0.5);
   }
 
   th {
-    background-color: #929292;
-    color: rgba(255,255,255,0.66);
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    color: rgba(75, 75, 75, 0.5);
   }
 
   td {
-    background-color: #f9f9f9;
+    text-align: center;
   }
 
   th, td {
     min-width: 100px;
-    padding: 10px 20px;
-  }
-
-  th.active {
-    color: #fff;
-  }
-
-  th.active .arrow {
-    opacity: 1;
-  }
-
-  .arrow {
-    display: inline-block;
-    vertical-align: middle;
-    width: 0;
-    height: 0;
-    margin-left: 5px;
-    opacity: 0.66;
-  }
-
-  .arrow.asc {
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 4px solid #fff;
-  }
-
-  .arrow.dsc {
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid #fff;
+    padding: 20px;
+    border-bottom: 1.5px solid rgba(220, 220, 220, 0.5);
   }
 </style>
