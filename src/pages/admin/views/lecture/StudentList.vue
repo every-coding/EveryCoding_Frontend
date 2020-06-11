@@ -230,7 +230,9 @@
               <el-checkbox label="과제"></el-checkbox>
               <el-checkbox label="대회"></el-checkbox>
             </el-checkbox-group>
-            <el-button type="primary">Export excel</el-button>
+            <template>
+              <button type="button" @click="exportToExcel">Excel download</button>
+            </template>
           </el-tab-pane>
           <!---->
         </el-tabs>
@@ -300,12 +302,17 @@
   import papa from 'papaparse'
   import api from '../../api.js'
   import utils from '@/utils/utils'
+  import XLSX from 'xlsx'
 
   export default {
     name: 'User',
     data () {
       return {
-        checkList: ['실습', '과제', '대회'],
+        checkList: [
+          '실습',
+          '과제',
+          '대회'
+        ],
         // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
         activeName: 'train', // 임시 지정
         showContestDialog: false,
@@ -509,6 +516,86 @@
       },
       handleResetData () {
         this.uploadUsers = []
+      },
+      exportToExcel () {
+        var wb = XLSX.utils.book_new()
+        var exceldata = {
+          '실습': [
+
+          ],
+          '과제': [
+
+          ],
+          '대회': [
+
+          ]
+        }
+        for (var exportval in this.checkList) {
+          console.log(this.checkList[exportval])
+          if (this.checkList[exportval] === '실습') {
+            this.scoreListTable.forEach(user => {
+              var traindata = {}
+              traindata.이름 = user.realname
+              traindata.학번 = user.schoolssn
+              for (var i in user.score.traincolumnscore.contests) {
+                console.log(user.score.traincolumnscore.contests[i].Info.score)
+                traindata[Number(i) + 1 + '주차'] = user.score.traincolumnscore.contests[i].Info.score
+              }
+              traindata.총점 = user.score.traincolumnscore.totalscore
+              traindata.평균 = user.score.traincolumnscore.avg
+              exceldata['실습'].push(traindata)
+            })
+            var trainxls = XLSX.utils.json_to_sheet(exceldata.실습)
+            XLSX.utils.book_append_sheet(wb, trainxls, '실습')
+          } else if (this.checkList[exportval] === '과제') {
+            this.scoreListTable.forEach(user => {
+              var assigndata = {}
+              assigndata.이름 = user.realname
+              assigndata.학번 = user.schoolssn
+              for (var i in user.score.assigncolumnscore.contests) {
+                console.log(user.score.assigncolumnscore.contests[i].Info.score)
+                assigndata[Number(i) + 1 + '주차'] = user.score.assigncolumnscore.contests[i].Info.score
+              }
+              assigndata.총점 = user.score.assigncolumnscore.totalscore
+              assigndata.평균 = user.score.assigncolumnscore.avg
+              exceldata['과제'].push(assigndata)
+            })
+            var assignxls = XLSX.utils.json_to_sheet(exceldata.과제)
+            XLSX.utils.book_append_sheet(wb, assignxls, '과제')
+          } else if (this.checkList[exportval] === '대회') {
+            this.scoreListTable.forEach(user => {
+              var contestdata = {}
+              contestdata.이름 = user.realname
+              contestdata.학번 = user.schoolssn
+              for (var i in user.score.contestcolumnscore.contests) {
+                console.log(user.score.contestcolumnscore.contests[i].Info.score)
+                contestdata[Number(i) + 1 + '주차'] = user.score.contestcolumnscore.contests[i].Info.score
+              }
+              contestdata.총점 = user.score.contestcolumnscore.totalscore
+              contestdata.평균 = user.score.contestcolumnscore.avg
+              exceldata['대회'].push(contestdata)
+            })
+            var contestxls = XLSX.utils.json_to_sheet(exceldata.대회)
+            XLSX.utils.book_append_sheet(wb, contestxls, '대회')
+          }
+        }
+        console.log(exceldata)
+        /* 'animals': [
+                  {"name": "cat", "category": "animal"}
+                  ,{"name": "dog", "category": "animal"}
+                  ,{"name": "pig", "category": "animal"}
+                ],
+        'pokemons': [
+                  {"name": "pikachu", "category": "pokemon"}
+                  ,{"name": "Arbok", "category": "pokemon"}
+                  ,{"name": "Eevee", "category": "pokemon"}
+                ]
+        var animalWS = XLSX.utils.json_to_sheet(this.Datas.animals)
+        var pokemonWS = XLSX.utils.json_to_sheet(this.Datas.pokemons)
+        var wb = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(wb, animalWS, '테스트')
+        XLSX.utils.book_append_sheet(wb, pokemonWS, '테스트_2') */
+        XLSX.writeFile(wb, 'book.xlsx')
       }
     },
     computed: {
