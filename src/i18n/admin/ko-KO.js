@@ -63,7 +63,7 @@ export const m = {
   // PruneTestCase
   Test_Case_Prune_Test_Case: '테스트 케이스 가지치기',
   // Problem.vue
-  Display_ID: '번호',
+  Display_ID: '문제 번호',
   Title: '제목',
   Description: '설명',
   Input_Description: '입력 설명',
@@ -92,11 +92,23 @@ export const m = {
   Source: '소스코드',
   Edit_Problem: '문제 수정',
   Add_Problme: '문제 작성',
-  High: 'High',
-  Mid: 'Mid',
-  Low: 'Low',
+  High: '상',
+  Mid: '중',
+  Low: '하',
   Tag: 'Tag',
   New_Tag: 'New Tag',
+  // ProblemList.vue
+  Contest_Problem_List: '실습 및 과제 문제 목록',
+  // ContestList.vue
+  Rule: '대회 진행 방식',
+  OI: 'OI',
+  ACM: 'ACM',
+  Underway: '진행중',
+  All: '모두 보기',
+  Not_Started: '시작전',
+  Ended: '종료됨',
+  No_contest: '대회가 없습니다.',
+  Please_login_first: '먼저 로그인을 해주세요!',
   // Contest.vue
   ContestTitle: '제목',
   LectureContestType: '유형 선택',

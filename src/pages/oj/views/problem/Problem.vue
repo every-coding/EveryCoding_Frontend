@@ -441,7 +441,7 @@
             this.checkSubmissionStatus()
           }, res => {
             this.getCaptchaSrc()
-            if (res.data.data.startsWith('Captcha is required')) {
+            if (res.data.data.startsWith('보안 문자가 필요합니다')) {
               this.captchaRequired = true
             }
             this.submitting = false
