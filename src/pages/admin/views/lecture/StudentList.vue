@@ -179,7 +179,7 @@
             </table>
           </el-tab-pane>
           <!---->
-          <el-tab-pane label="대회" name="contest">
+          <el-tab-pane label="시험" name="contest">
             <table>
               <thead>
                 <tr>
@@ -228,7 +228,7 @@
             <el-checkbox-group v-model="checkList">
               <el-checkbox label="실습"></el-checkbox>
               <el-checkbox label="과제"></el-checkbox>
-              <el-checkbox label="대회"></el-checkbox>
+              <el-checkbox label="시험"></el-checkbox>
             </el-checkbox-group>
             <template>
               <button type="button" @click="exportToExcel">Excel download</button>
@@ -311,7 +311,7 @@
         checkList: [
           '실습',
           '과제',
-          '대회'
+          '시험'
         ],
         // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
         activeName: 'train', // 임시 지정
@@ -526,7 +526,7 @@
           '과제': [
 
           ],
-          '대회': [
+          '시험': [
 
           ]
         }
@@ -562,7 +562,7 @@
             })
             var assignxls = XLSX.utils.json_to_sheet(exceldata.과제)
             XLSX.utils.book_append_sheet(wb, assignxls, '과제')
-          } else if (this.checkList[exportval] === '대회') {
+          } else if (this.checkList[exportval] === '시험') {
             this.scoreListTable.forEach(user => {
               var contestdata = {}
               contestdata.이름 = user.realname
@@ -573,29 +573,14 @@
               }
               contestdata.총점 = user.score.contestcolumnscore.totalscore
               contestdata.평균 = user.score.contestcolumnscore.avg
-              exceldata['대회'].push(contestdata)
+              exceldata['시험'].push(contestdata)
             })
-            var contestxls = XLSX.utils.json_to_sheet(exceldata.대회)
-            XLSX.utils.book_append_sheet(wb, contestxls, '대회')
+            var contestxls = XLSX.utils.json_to_sheet(exceldata.시험)
+            XLSX.utils.book_append_sheet(wb, contestxls, '시험')
           }
         }
         console.log(exceldata)
-        /* 'animals': [
-                  {"name": "cat", "category": "animal"}
-                  ,{"name": "dog", "category": "animal"}
-                  ,{"name": "pig", "category": "animal"}
-                ],
-        'pokemons': [
-                  {"name": "pikachu", "category": "pokemon"}
-                  ,{"name": "Arbok", "category": "pokemon"}
-                  ,{"name": "Eevee", "category": "pokemon"}
-                ]
-        var animalWS = XLSX.utils.json_to_sheet(this.Datas.animals)
-        var pokemonWS = XLSX.utils.json_to_sheet(this.Datas.pokemons)
-        var wb = XLSX.utils.book_new()
-        XLSX.utils.book_append_sheet(wb, animalWS, '테스트')
-        XLSX.utils.book_append_sheet(wb, pokemonWS, '테스트_2') */
-        XLSX.writeFile(wb, 'book.xlsx')
+        XLSX.writeFile(wb, 'export.xlsx')
       }
     },
     computed: {
