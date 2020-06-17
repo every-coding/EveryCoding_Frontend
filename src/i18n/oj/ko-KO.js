@@ -2,6 +2,7 @@ export const m = {
   // Test
   // Problem.vue
   Problem_Submissions: '문제 제출 현황',
+  Display_ID: '문제 ID',
   Description: '설명',
   Input: '입력',
   Output: '출력',
@@ -49,7 +50,13 @@ export const m = {
   Contest_Announcements: '실습 및 과제 공지사항',
   // ContestProblemList
   Problems_List: '문제 목록',
-
+// OIRank.vue
+  OI_Ranklist: 'OI 순위표',
+  // ACMRank.vue
+  ACM_Ranklist: 'ACM 순위표',
+  mood: 'mood',
+  AC: '맞춘 문제 수',
+  Rating: '정답률',
   // NavBar.vue
   Home: '홈',
   NavProblems: '공개 문제',
@@ -138,5 +145,7 @@ export const m = {
   Time: '소요 시간',
   Language: '언어',
   Author: '코드 작성자 id',
-  Lecture_id: '소속 수강 과목'
+  Lecture_id: '소속 수강 과목',
+  // Save.vue
+  save: '저장'
 }

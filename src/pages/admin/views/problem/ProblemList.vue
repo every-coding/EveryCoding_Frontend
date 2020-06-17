@@ -22,7 +22,7 @@
         </el-table-column>
         <el-table-column
           width="150"
-          label="Display ID">
+          label="문제 ID">
           <template slot-scope="{row}">
             <span v-show="!row.isEditing">{{row._id}}</span>
             <el-input v-show="row.isEditing" v-model="row._id"
@@ -56,7 +56,7 @@
         <el-table-column
           width="100"
           prop="visible"
-          label="Visible">
+          label="공개여부">
           <template slot-scope="scope">
             <el-switch v-model="scope.row.visible"
                        active-text=""
@@ -67,26 +67,26 @@
         </el-table-column>
         <el-table-column
           fixed="right"
-          label="Operation"
+          label="추가선택"
           width="250">
           <div slot-scope="scope">
-            <icon-btn name="Edit" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
-            <icon-btn v-if="contestId" name="Make Public" icon="clone"
+            <icon-btn name="편집" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
+            <icon-btn v-if="contestId" name="공개 문제화 하기" icon="clone"
                       @click.native="makeContestProblemPublic(scope.row.id)"></icon-btn>
-            <icon-btn icon="download" name="Download TestCase"
+            <icon-btn icon="download" name="테스트케이스 다운로드"
                       @click.native="downloadTestCase(scope.row.id)"></icon-btn>
-            <icon-btn icon="trash" name="Delete Problem"
+            <icon-btn icon="trash" name="문제 삭제"
                       @click.native="deleteProblem(scope.row.id)"></icon-btn>
           </div>
         </el-table-column>
       </el-table>
       <div class="panel-options">
         <el-button type="primary" size="small"
-                   @click="goCreateProblem" icon="el-icon-plus">Create
+                   @click="goCreateProblem" icon="el-icon-plus">문제 만들기
         </el-button>
         <el-button v-if="contestId" type="primary"
                    size="small" icon="el-icon-plus"
-                   @click="addProblemDialogVisible = true">Add From Public Problem
+                   @click="addProblemDialogVisible = true">공개문제에서 가져오기
         </el-button>
         <el-pagination
           class="page"
@@ -197,7 +197,7 @@
         })
       },
       deleteProblem (id) {
-        this.$confirm('Sure to delete this problem? The associated submissions will be deleted as well.', 'Delete Problem', {
+        this.$confirm('이 문제를 삭제 하시겠습니까? 관련 제출물도 삭제됩니다.', '문제 삭제', {
           type: 'warning'
         }).then(() => {
           let funcName = this.routeName === 'problem-list' ? 'deleteProblem' : 'deleteContestProblem'
@@ -209,7 +209,7 @@
         })
       },
       makeContestProblemPublic (problemID) {
-        this.$prompt('Please input display id for the public problem', 'confirm').then(({value}) => {
+        this.$prompt('공개 문제의 문제 ID를 입력하십시오', '확인').then(({value}) => {
           api.makeContestProblemPublic({id: problemID, display_id: value}).catch()
         }, () => {
         })

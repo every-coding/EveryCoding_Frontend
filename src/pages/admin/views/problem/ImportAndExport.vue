@@ -2,7 +2,7 @@
   <div>
     <div style="padding-bottom: 10px;">
     </div>
-    <panel title="Export Problems (beta)">
+    <panel title="문제 추출 (beta)">
       <div slot="header">
         <el-input
           v-model="keyword"
@@ -27,16 +27,16 @@
           prop="_id">
         </el-table-column>
         <el-table-column
-          label="Title"
+          label="제목"
           prop="title">
         </el-table-column>
         <el-table-column
           prop="created_by.username"
-          label="Author">
+          label="작성자">
         </el-table-column>
         <el-table-column
           prop="create_time"
-          label="Create Time">
+          label="작성 시간">
           <template slot-scope="scope">
             {{scope.row.create_time | localtime }}
           </template>
@@ -56,7 +56,7 @@
         </el-pagination>
       </div>
     </panel>
-    <panel title="Import QDUOJ Problems (beta)">
+    <panel title="QDUOJ 문제 가져 오기 (beta)">
       <el-upload
         ref="QDU"
         action="/api/admin/import_problem"
@@ -69,12 +69,12 @@
         :auto-upload="false"
         :on-success="uploadSucceeded"
         :on-error="uploadFailed">
-        <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">Choose File</el-button>
-        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('QDU')">Upload</el-button>
+        <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">파일 선택</el-button>
+        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('QDU')">업로드</el-button>
       </el-upload>
     </panel>
 
-    <panel title="Import FPS Problems (beta)">
+    <panel title="FPS 문제 가져 오기 (beta)">
       <el-upload
         ref="FPS"
         action="/api/admin/import_fps"
@@ -87,8 +87,8 @@
         :auto-upload="false"
         :on-success="uploadSucceeded"
         :on-error="uploadFailed">
-        <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">Choose File</el-button>
-        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('FPS')">Upload</el-button>
+        <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">파일 선택</el-button>
+        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('FPS')">업로드</el-button>
       </el-upload>
     </panel>
   </div>

@@ -62,11 +62,11 @@
               }, params.row.user.username)
             }
           },
-          {
-            title: this.$i18n.t('m.mood'),
-            align: 'center',
-            key: 'mood'
-          },
+          // {
+          //   title: this.$i18n.t('m.mood'),
+          //   align: 'center',
+          //   key: 'mood'
+          // },
           {
             title: this.$i18n.t('m.AC'),
             align: 'center',
