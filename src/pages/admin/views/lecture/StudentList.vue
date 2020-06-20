@@ -230,6 +230,9 @@
               <el-checkbox label="과제"></el-checkbox>
               <el-checkbox label="시험"></el-checkbox>
             </el-checkbox-group>
+            <el-checkbox-group v-model="exceloption">
+              <el-checkbox label="최종 제출일 포함"></el-checkbox>
+            </el-checkbox-group>
             <template>
               <button type="button" @click="exportToExcel">Excel download</button>
             </template>
@@ -312,6 +315,8 @@
           '실습',
           '과제',
           '시험'
+        ],
+        exceloption: [
         ],
         // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
         activeName: 'train', // 임시 지정
@@ -540,6 +545,10 @@
               for (var i in user.score.traincolumnscore.contests) {
                 console.log(user.score.traincolumnscore.contests[i].Info.score)
                 traindata[Number(i) + 1 + '주차'] = user.score.traincolumnscore.contests[i].Info.score
+                if (this.exceloption[0] === '최종 제출일 포함') {
+                  traindata[Number(i) + 1 + '주 최종 제출일'] = 0
+                  console.log('0')
+                }
               }
               traindata.총점 = user.score.traincolumnscore.totalscore
               traindata.평균 = user.score.traincolumnscore.avg
@@ -647,5 +656,9 @@
     min-width: 100px;
     padding: 20px;
     border-bottom: 1.5px solid rgba(220, 220, 220, 0.5);
+  }
+
+  .el-checkbox-group { // el 로 시작하는 tag들은 class에 css를 적용하는것과 비슷하게 적용하면 된다.
+    padding-bottom: 20px;
   }
 </style>
