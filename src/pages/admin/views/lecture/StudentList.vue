@@ -99,10 +99,12 @@
                   <th>
                     학번
                   </th>
-                  <template v-for="(contests, index) in scoreListTable['0'].score.traincolumnscore.contests">
-                    <th>
-                      {{ index + 1 }}주차
-                    </th>
+                  <template v-if="scoreListTable[0] !== undefined">
+                    <template v-for="(contests, index) in scoreListTable['0'].score.traincolumnscore.contests">
+                      <th>
+                        {{ index + 1 }}주차
+                      </th>
+                    </template>
                   </template>
                   <th>
                     총점
@@ -144,10 +146,12 @@
                   <th>
                     학번
                   </th>
-                  <template v-for="(contests, index) in scoreListTable['0'].score.assigncolumnscore.contests">
-                    <th>
-                      {{ index + 1 }}주차
-                    </th>
+                  <template v-if="scoreListTable[0] !== undefined">
+                    <template v-for="(contests, index) in scoreListTable['0'].score.assigncolumnscore.contests">
+                      <th>
+                        {{ index + 1 }}주차
+                      </th>
+                    </template>
                   </template>
                   <th>
                     총점
@@ -189,10 +193,12 @@
                   <th>
                     학번
                   </th>
-                  <template v-for="(contests, index) in scoreListTable['0'].score.contestcolumnscore.contests">
-                    <th>
-                      {{ index + 1 }}주차
-                    </th>
+                  <template v-if="scoreListTable[0] !== undefined">
+                    <template v-for="(contests, index) in scoreListTable['0'].score.contestcolumnscore.contests">
+                      <th>
+                        {{ index + 1 }}주차
+                      </th>
+                    </template>
                   </template>
                   <th>
                     총점
@@ -408,50 +414,56 @@
       },
       // 获取用户列表
       getUserList (page) {
+        console.log('getUserList Called')
         this.loadingTable = true
         api.getLectureUserList((page - 1) * this.pageSize, this.pageSize, this.keyword, this.lectureID).then(res => {
           this.loadingTable = false
           this.total = res.data.data.total
           this.userList = res.data.data.results
-          this.contestCount = this.userList[0].score.ContestAnalysis.실습.Info.numofcontents
-          this.userList.forEach(user => {
-            if (user.score !== null) {
-              var userinfo = {}
-              userinfo['realname'] = user.realname
-              userinfo['schoolssn'] = user.schoolssn
-              var trains = []
-              var assigns = []
-              var contests = []
-              for (var i in user.score.ContestAnalysis.실습.contests) {
-                trains.push(user.score.ContestAnalysis.실습.contests[i])
-              }
-              for (var j in user.score.ContestAnalysis.과제.contests) {
-                assigns.push(user.score.ContestAnalysis.과제.contests[j])
-              }
-              for (var k in user.score.ContestAnalysis.대회.contests) {
-                contests.push(user.score.ContestAnalysis.대회.contests[k])
-              }
-              var columnscore = {
-                traincolumnscore: {
-                  contests: trains,
-                  totalscore: user.score.ContestAnalysis.실습.Info.score,
-                  avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                },
-                assigncolumnscore: {
-                  contests: assigns,
-                  totalscore: user.score.ContestAnalysis.과제.Info.score,
-                  avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.과제.Info.numofcontents
-                },
-                contestcolumnscore: {
-                  contests: contests,
-                  totalscore: user.score.ContestAnalysis.대회.Info.score,
-                  avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.대회.Info.numofcontents
+          console.log(this.userList)
+          if (this.userList.length === 0) {
+            console.log('null')
+          } else {
+            this.userList.forEach(user => {
+              console.log('userList forEach')
+              if (user.score !== null) {
+                var userinfo = {}
+                userinfo['realname'] = user.realname
+                userinfo['schoolssn'] = user.schoolssn
+                var trains = []
+                var assigns = []
+                var contests = []
+                for (var i in user.score.ContestAnalysis.실습.contests) {
+                  trains.push(user.score.ContestAnalysis.실습.contests[i])
                 }
+                for (var j in user.score.ContestAnalysis.과제.contests) {
+                  assigns.push(user.score.ContestAnalysis.과제.contests[j])
+                }
+                for (var k in user.score.ContestAnalysis.대회.contests) {
+                  contests.push(user.score.ContestAnalysis.대회.contests[k])
+                }
+                var columnscore = {
+                  traincolumnscore: {
+                    contests: trains,
+                    totalscore: user.score.ContestAnalysis.실습.Info.score,
+                    avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                  },
+                  assigncolumnscore: {
+                    contests: assigns,
+                    totalscore: user.score.ContestAnalysis.과제.Info.score,
+                    avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.과제.Info.numofcontents
+                  },
+                  contestcolumnscore: {
+                    contests: contests,
+                    totalscore: user.score.ContestAnalysis.대회.Info.score,
+                    avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.대회.Info.numofcontents
+                  }
+                }
+                userinfo.score = columnscore
+                this.scoreListTable.push(userinfo)
               }
-              userinfo.score = columnscore
-              this.scoreListTable.push(userinfo)
-            }
-          })
+            })
+          }
           this.noRegistUser = 0
           for (let uu of this.userList) {
             if (uu.isallow === false) {
