@@ -12,10 +12,9 @@
         </el-row>
       </div>
       <strong>총 수강 학생/등록/미등록 : {{ userList.length }}명 / {{ RegistUser }}명 / {{ noRegistUser }}명</strong>
-      <!---->
-      <div style="padding-top:10px">
+      <!--<div style="padding-top:10px">
         <el-checkbox v-model="persentage">실습, 과제, 시험 점수 진행도(%)로 보기</el-checkbox>
-      </div>
+      </div>-->
       <template>
         <el-tabs v-model="activeName">
           <el-tab-pane label="종합" name="synthesis">
@@ -129,13 +128,16 @@
                     {{ contest.Info.score }}
                   </td>
                   <td v-if="persentage == true" v-for="contest in user.score.traincolumnscore.contests">
-                    {{ contest.Info.average }}%
+                    {{ contest.Info.average }}
                   </td>
                   <td>
-                    {{ user.score.traincolumnscore.totalscore }}
+                    {{ user.score.traincolumnscore.persentSum.toFixed(2) }}
                   </td>
-                  <td>
-                    {{ user.score.traincolumnscore.avg }}
+                  <td v-if="persentage == true">
+                    {{ user.score.traincolumnscore.persentavg.toFixed(2) }}
+                  </td>
+                  <td v-else>
+                    {{ user.score.traincolumnscore.persentavg.toFixed(2) }}
                   </td>
                 </tr>
               </tbody>
@@ -179,13 +181,16 @@
                     {{ contest.Info.score }}
                   </td>
                   <td v-if="persentage == true" v-for="contest in user.score.assigncolumnscore.contests">
-                    {{ contest.Info.average }}%
+                    {{ contest.Info.average }}
                   </td>
                   <td>
-                    {{ user.score.assigncolumnscore.totalscore }}
+                    {{ user.score.assigncolumnscore.persentSum.toFixed(2) }}
                   </td>
-                  <td>
-                    {{ user.score.assigncolumnscore.avg }}
+                  <td v-if="persentage == true">
+                    {{ user.score.assigncolumnscore.persentavg.toFixed(2) }}
+                  </td>
+                  <td v-else>
+                    {{ user.score.assigncolumnscore.persentavg.toFixed(2) }}
                   </td>
                 </tr>
               </tbody>
@@ -229,12 +234,15 @@
                     {{ contest.Info.score }}
                   </td>
                   <td v-if="persentage == true" v-for="contest in user.score.contestcolumnscore.contests">
-                    {{ contest.Info.average }}%
+                    {{ contest.Info.average }}
                   </td>
                   <td>
-                    {{ user.score.contestcolumnscore.totalscore }}
+                    {{ user.score.contestcolumnscore.persentSum.toFixed(2) }}
                   </td>
-                  <td>
+                  <td v-if="persentage == true">
+                    {{ user.score.contestcolumnscore.persentavg.toFixed(2) }}
+                  </td>
+                  <td v-else>
                     {{ user.score.contestcolumnscore.avg }}
                   </td>
                 </tr>
@@ -326,7 +334,6 @@
   import XLSX from 'xlsx'
 
   export default {
-    name: 'User',
     data () {
       return {
         persentage: true,
@@ -445,6 +452,18 @@
                 var trains = []
                 var assigns = []
                 var contests = []
+                var trainpersentSum = 0
+                var assignpersentSum = 0
+                var contestpersentSum = 0
+                for (var train in user.score.ContestAnalysis.실습.contests) {
+                  trainpersentSum = trainpersentSum + user.score.ContestAnalysis.실습.contests[train].Info.average
+                }
+                for (var assign in user.score.ContestAnalysis.과제.contests) {
+                  assignpersentSum = assignpersentSum + user.score.ContestAnalysis.과제.contests[assign].Info.average
+                }
+                for (var contest in user.score.ContestAnalysis.대회.contests) {
+                  contestpersentSum = contestpersentSum + user.score.ContestAnalysis.대회.contests[contest].Info.average
+                }
                 for (var i in user.score.ContestAnalysis.실습.contests) {
                   trains.push(user.score.ContestAnalysis.실습.contests[i])
                 }
@@ -459,19 +478,25 @@
                     contests: trains,
                     totalscore: user.score.ContestAnalysis.실습.Info.score,
                     // avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                    avg: user.score.ContestAnalysis.실습.Info.average
+                    avg: user.score.ContestAnalysis.실습.Info.average,
+                    persentSum: trainpersentSum,
+                    persentavg: trainpersentSum / user.score.ContestAnalysis.실습.Info.numofcontents
                   },
                   assigncolumnscore: {
                     contests: assigns,
                     totalscore: user.score.ContestAnalysis.과제.Info.score,
                     // avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                    avg: user.score.ContestAnalysis.과제.Info.average
+                    avg: user.score.ContestAnalysis.과제.Info.average,
+                    persentSum: assignpersentSum,
+                    persentavg: assignpersentSum / user.score.ContestAnalysis.과제.Info.numofcontents
                   },
                   contestcolumnscore: {
                     contests: contests,
                     totalscore: user.score.ContestAnalysis.대회.Info.score,
                     // avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                    avg: user.score.ContestAnalysis.대회.Info.average
+                    avg: user.score.ContestAnalysis.대회.Info.average,
+                    persentSum: contestpersentSum,
+                    persentavg: contestpersentSum / user.score.ContestAnalysis.대회.Info.numofcontents
                   }
                 }
                 userinfo.score = columnscore
@@ -581,7 +606,11 @@
                 }
               }
               traindata.총점 = user.score.traincolumnscore.totalscore
-              traindata.평균 = user.score.traincolumnscore.avg
+              if (this.persentage === true) {
+                traindata.평균 = user.score.traincolumnscore.persentavg.toFixed(2)
+              } else {
+                traindata.평균 = user.score.traincolumnscore.avg
+              }
               exceldata['실습'].push(traindata)
             })
             var trainxls = XLSX.utils.json_to_sheet(exceldata.실습)
@@ -599,7 +628,11 @@
                 }
               }
               assigndata.총점 = user.score.assigncolumnscore.totalscore
-              assigndata.평균 = user.score.assigncolumnscore.avg
+              if (this.persentage === true) {
+                assigndata.평균 = user.score.assigncolumnscore.persentavg.toFixed(2)
+              } else {
+                assigndata.평균 = user.score.assigncolumnscore.avg
+              }
               exceldata['과제'].push(assigndata)
             })
             var assignxls = XLSX.utils.json_to_sheet(exceldata.과제)
@@ -617,7 +650,11 @@
                 }
               }
               contestdata.총점 = user.score.contestcolumnscore.totalscore
-              contestdata.평균 = user.score.contestcolumnscore.avg
+              if (this.persentage === true) {
+                contestdata.평균 = user.score.contestcolumnscore.persentavg.toFixed(2)
+              } else {
+                contestdata.평균 = user.score.contestcolumnscore.avg
+              }
               exceldata['시험'].push(contestdata)
             })
             var contestxls = XLSX.utils.json_to_sheet(exceldata.시험)
