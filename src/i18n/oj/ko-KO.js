@@ -51,9 +51,9 @@ export const m = {
   // ContestProblemList
   Problems_List: '문제 목록',
   // OIRank.vue
-  OI_Ranklist: '이름',
+  OI_Ranklist: 'OI 순위표',
   // OIContestRank.vue
-  Realname: 'OI 순위표',
+  Realname: '이름',
   // ACMRank.vue
   ACM_Ranklist: 'ACM 순위표',
   mood: 'mood',
