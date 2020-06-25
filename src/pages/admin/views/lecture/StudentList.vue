@@ -13,6 +13,9 @@
       </div>
       <strong>총 수강 학생/등록/미등록 : {{ userList.length }}명 / {{ RegistUser }}명 / {{ noRegistUser }}명</strong>
       <!---->
+      <div style="padding-top:10px">
+        <el-checkbox v-model="persentage">실습, 과제, 시험 점수 진행도(%)로 보기</el-checkbox>
+      </div>
       <template>
         <el-tabs v-model="activeName">
           <el-tab-pane label="종합" name="synthesis">
@@ -122,8 +125,11 @@
                   <td>
                     {{ user.schoolssn }}
                   </td>
-                  <td v-for="contest in user.score.traincolumnscore.contests">
+                  <td v-if="persentage == false" v-for="contest in user.score.traincolumnscore.contests">
                     {{ contest.Info.score }}
+                  </td>
+                  <td v-if="persentage == true" v-for="contest in user.score.traincolumnscore.contests">
+                    {{ contest.Info.average }}%
                   </td>
                   <td>
                     {{ user.score.traincolumnscore.totalscore }}
@@ -169,8 +175,11 @@
                   <td>
                     {{ user.schoolssn }}
                   </td>
-                  <td v-for="contest in user.score.assigncolumnscore.contests">
+                  <td v-if="persentage == false" v-for="contest in user.score.assigncolumnscore.contests">
                     {{ contest.Info.score }}
+                  </td>
+                  <td v-if="persentage == true" v-for="contest in user.score.assigncolumnscore.contests">
+                    {{ contest.Info.average }}%
                   </td>
                   <td>
                     {{ user.score.assigncolumnscore.totalscore }}
@@ -216,8 +225,11 @@
                   <td>
                     {{ user.schoolssn }}
                   </td>
-                  <td v-for="contest in user.score.contestcolumnscore.contests">
+                  <td v-if="persentage == false" v-for="contest in user.score.contestcolumnscore.contests">
                     {{ contest.Info.score }}
+                  </td>
+                  <td v-if="persentage == true" v-for="contest in user.score.contestcolumnscore.contests">
+                    {{ contest.Info.average }}%
                   </td>
                   <td>
                     {{ user.score.contestcolumnscore.totalscore }}
@@ -317,6 +329,7 @@
     name: 'User',
     data () {
       return {
+        persentage: true,
         checkList: [
           '실습',
           '과제',
@@ -325,7 +338,7 @@
         exceloption: [
         ],
         // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
-        activeName: 'train', // 임시 지정
+        activeName: 'synthesis', // 임시 지정
         showContestDialog: false,
         lectureID: '',
         lectureFounder: '', // 강의 개설자 realname
@@ -425,7 +438,6 @@
             console.log('null')
           } else {
             this.userList.forEach(user => {
-              console.log('userList forEach')
               if (user.score !== null) {
                 var userinfo = {}
                 userinfo['realname'] = user.realname
@@ -446,17 +458,20 @@
                   traincolumnscore: {
                     contests: trains,
                     totalscore: user.score.ContestAnalysis.실습.Info.score,
-                    avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                    // avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                    avg: user.score.ContestAnalysis.실습.Info.average
                   },
                   assigncolumnscore: {
                     contests: assigns,
                     totalscore: user.score.ContestAnalysis.과제.Info.score,
-                    avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.과제.Info.numofcontents
+                    // avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                    avg: user.score.ContestAnalysis.과제.Info.average
                   },
                   contestcolumnscore: {
                     contests: contests,
                     totalscore: user.score.ContestAnalysis.대회.Info.score,
-                    avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.대회.Info.numofcontents
+                    // avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                    avg: user.score.ContestAnalysis.대회.Info.average
                   }
                 }
                 userinfo.score = columnscore
@@ -555,11 +570,14 @@
               traindata.이름 = user.realname
               traindata.학번 = user.schoolssn
               for (var i in user.score.traincolumnscore.contests) {
-                console.log(user.score.traincolumnscore.contests[i].Info.score)
-                traindata[Number(i) + 1 + '주차'] = user.score.traincolumnscore.contests[i].Info.score
+                if (this.persentage === true) {
+                  traindata[Number(i) + 1 + '주차'] = user.score.traincolumnscore.contests[i].Info.average
+                } else {
+                  traindata[Number(i) + 1 + '주차'] = user.score.traincolumnscore.contests[i].Info.score
+                }
                 if (this.exceloption[0] === '최종 제출일 포함') {
                   traindata[Number(i) + 1 + '주 최종 제출일'] = 0
-                  console.log('0')
+                  console.log('date added')
                 }
               }
               traindata.총점 = user.score.traincolumnscore.totalscore
@@ -574,8 +592,11 @@
               assigndata.이름 = user.realname
               assigndata.학번 = user.schoolssn
               for (var i in user.score.assigncolumnscore.contests) {
-                console.log(user.score.assigncolumnscore.contests[i].Info.score)
-                assigndata[Number(i) + 1 + '주차'] = user.score.assigncolumnscore.contests[i].Info.score
+                if (this.persentage === true) {
+                  assigndata[Number(i) + 1 + '주차'] = user.score.assigncolumnscore.contests[i].Info.average
+                } else {
+                  assigndata[Number(i) + 1 + '주차'] = user.score.assigncolumnscore.contests[i].Info.score
+                }
               }
               assigndata.총점 = user.score.assigncolumnscore.totalscore
               assigndata.평균 = user.score.assigncolumnscore.avg
@@ -589,8 +610,11 @@
               contestdata.이름 = user.realname
               contestdata.학번 = user.schoolssn
               for (var i in user.score.contestcolumnscore.contests) {
-                console.log(user.score.contestcolumnscore.contests[i].Info.score)
-                contestdata[Number(i) + 1 + '주차'] = user.score.contestcolumnscore.contests[i].Info.score
+                if (this.persentage === true) {
+                  contestdata[Number(i) + 1 + '주차'] = user.score.contestcolumnscore.contests[i].Info.average
+                } else {
+                  contestdata[Number(i) + 1 + '주차'] = user.score.contestcolumnscore.contests[i].Info.score
+                }
               }
               contestdata.총점 = user.score.contestcolumnscore.totalscore
               contestdata.평균 = user.score.contestcolumnscore.avg
@@ -667,7 +691,7 @@
   th, td {
     min-width: 100px;
     padding: 20px;
-    border-bottom: 1.5px solid rgba(220, 220, 220, 0.5);
+    border-bottom: 1px solid rgba(220, 220, 220, 0.5);
   }
 
   .el-checkbox-group { // el 로 시작하는 tag들은 class에 css를 적용하는것과 비슷하게 적용하면 된다.
