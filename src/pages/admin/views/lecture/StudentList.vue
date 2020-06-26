@@ -446,61 +446,65 @@
           } else {
             this.userList.forEach(user => {
               if (user.score !== null) {
-                var userinfo = {}
-                userinfo['realname'] = user.realname
-                userinfo['schoolssn'] = user.schoolssn
-                var trains = []
-                var assigns = []
-                var contests = []
-                var trainpersentSum = 0
-                var assignpersentSum = 0
-                var contestpersentSum = 0
-                for (var train in user.score.ContestAnalysis.실습.contests) {
-                  trainpersentSum = trainpersentSum + user.score.ContestAnalysis.실습.contests[train].Info.average
-                }
-                for (var assign in user.score.ContestAnalysis.과제.contests) {
-                  assignpersentSum = assignpersentSum + user.score.ContestAnalysis.과제.contests[assign].Info.average
-                }
-                for (var contest in user.score.ContestAnalysis.대회.contests) {
-                  contestpersentSum = contestpersentSum + user.score.ContestAnalysis.대회.contests[contest].Info.average
-                }
-                for (var i in user.score.ContestAnalysis.실습.contests) {
-                  trains.push(user.score.ContestAnalysis.실습.contests[i])
-                }
-                for (var j in user.score.ContestAnalysis.과제.contests) {
-                  assigns.push(user.score.ContestAnalysis.과제.contests[j])
-                }
-                for (var k in user.score.ContestAnalysis.대회.contests) {
-                  contests.push(user.score.ContestAnalysis.대회.contests[k])
-                }
-                var columnscore = {
-                  traincolumnscore: {
-                    contests: trains,
-                    totalscore: user.score.ContestAnalysis.실습.Info.score,
-                    // avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                    avg: user.score.ContestAnalysis.실습.Info.average,
-                    persentSum: trainpersentSum,
-                    persentavg: trainpersentSum / user.score.ContestAnalysis.실습.Info.numofcontents
-                  },
-                  assigncolumnscore: {
-                    contests: assigns,
-                    totalscore: user.score.ContestAnalysis.과제.Info.score,
-                    // avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                    avg: user.score.ContestAnalysis.과제.Info.average,
-                    persentSum: assignpersentSum,
-                    persentavg: assignpersentSum / user.score.ContestAnalysis.과제.Info.numofcontents
-                  },
-                  contestcolumnscore: {
-                    contests: contests,
-                    totalscore: user.score.ContestAnalysis.대회.Info.score,
-                    // avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                    avg: user.score.ContestAnalysis.대회.Info.average,
-                    persentSum: contestpersentSum,
-                    persentavg: contestpersentSum / user.score.ContestAnalysis.대회.Info.numofcontents
+                if (user.score.constructor === Object && Object.keys(user.score).length === 0) {
+                  console.log('empty object')
+                } else {
+                  var userinfo = {}
+                  userinfo['realname'] = user.realname
+                  userinfo['schoolssn'] = user.schoolssn
+                  var trains = []
+                  var assigns = []
+                  var contests = []
+                  var trainpersentSum = 0
+                  var assignpersentSum = 0
+                  var contestpersentSum = 0
+                  for (var train in user.score.ContestAnalysis.실습.contests) {
+                    trainpersentSum = trainpersentSum + user.score.ContestAnalysis.실습.contests[train].Info.average
                   }
+                  for (var assign in user.score.ContestAnalysis.과제.contests) {
+                    assignpersentSum = assignpersentSum + user.score.ContestAnalysis.과제.contests[assign].Info.average
+                  }
+                  for (var contest in user.score.ContestAnalysis.대회.contests) {
+                    contestpersentSum = contestpersentSum + user.score.ContestAnalysis.대회.contests[contest].Info.average
+                  }
+                  for (var i in user.score.ContestAnalysis.실습.contests) {
+                    trains.push(user.score.ContestAnalysis.실습.contests[i])
+                  }
+                  for (var j in user.score.ContestAnalysis.과제.contests) {
+                    assigns.push(user.score.ContestAnalysis.과제.contests[j])
+                  }
+                  for (var k in user.score.ContestAnalysis.대회.contests) {
+                    contests.push(user.score.ContestAnalysis.대회.contests[k])
+                  }
+                  var columnscore = {
+                    traincolumnscore: {
+                      contests: trains,
+                      totalscore: user.score.ContestAnalysis.실습.Info.score,
+                      // avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                      avg: user.score.ContestAnalysis.실습.Info.average,
+                      persentSum: trainpersentSum,
+                      persentavg: trainpersentSum / user.score.ContestAnalysis.실습.Info.numofcontents
+                    },
+                    assigncolumnscore: {
+                      contests: assigns,
+                      totalscore: user.score.ContestAnalysis.과제.Info.score,
+                      // avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                      avg: user.score.ContestAnalysis.과제.Info.average,
+                      persentSum: assignpersentSum,
+                      persentavg: assignpersentSum / user.score.ContestAnalysis.과제.Info.numofcontents
+                    },
+                    contestcolumnscore: {
+                      contests: contests,
+                      totalscore: user.score.ContestAnalysis.대회.Info.score,
+                      // avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
+                      avg: user.score.ContestAnalysis.대회.Info.average,
+                      persentSum: contestpersentSum,
+                      persentavg: contestpersentSum / user.score.ContestAnalysis.대회.Info.numofcontents
+                    }
+                  }
+                  userinfo.score = columnscore
+                  this.scoreListTable.push(userinfo)
                 }
-                userinfo.score = columnscore
-                this.scoreListTable.push(userinfo)
               }
             })
           }
