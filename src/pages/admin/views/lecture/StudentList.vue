@@ -605,7 +605,7 @@
                   console.log('date added')
                 }
               }
-              traindata.총점 = user.score.traincolumnscore.totalscore
+              traindata.총점 = user.score.traincolumnscore.persentSum.toFixed(2)
               if (this.persentage === true) {
                 traindata.평균 = user.score.traincolumnscore.persentavg.toFixed(2)
               } else {
@@ -627,7 +627,7 @@
                   assigndata[Number(i) + 1 + '주차'] = user.score.assigncolumnscore.contests[i].Info.score
                 }
               }
-              assigndata.총점 = user.score.assigncolumnscore.totalscore
+              assigndata.총점 = user.score.assigncolumnscore.persentSum.toFixed(2)
               if (this.persentage === true) {
                 assigndata.평균 = user.score.assigncolumnscore.persentavg.toFixed(2)
               } else {
@@ -649,7 +649,7 @@
                   contestdata[Number(i) + 1 + '주차'] = user.score.contestcolumnscore.contests[i].Info.score
                 }
               }
-              contestdata.총점 = user.score.contestcolumnscore.totalscore
+              contestdata.총점 = user.score.contestcolumnscore.persentSum.toFixed(2)
               if (this.persentage === true) {
                 contestdata.평균 = user.score.contestcolumnscore.persentavg.toFixed(2)
               } else {
