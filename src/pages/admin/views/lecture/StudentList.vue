@@ -336,7 +336,7 @@
   export default {
     data () {
       return {
-        persentage: true,
+        persentage: true, // 학생 관리 페이지의 점수 산정 방식을 결정하는 boolean 변수, 기존 점수 산정 방식은 사용하지 않으므로 항상 true로 두어야 함.
         checkList: [
           '실습',
           '과제',
