@@ -277,6 +277,64 @@
         </el-pagination>
       </div>
     </Panel>
+    <Panel :title="$t('TA/RA 학생 추가')">
+      <div slot="header">
+        <el-row :gutter="20">
+          <el-col :span="selectedUsers.length ? 16: 24">
+            <el-input v-model="ta_ssn" v-on:keyup.native.enter="onEnter" prefix-icon="el-icon-search" placeholder="TA/RA 학생 학번"></el-input>
+          </el-col>
+        </el-row>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              이름
+            </th>
+            <th>
+              학번
+            </th>
+            <th>
+              문제 접근 권한
+            </th>
+            <th>
+              학생 답안 접근
+            </th>
+            <th>
+              학생 점수 확인
+            </th>
+          </tr>
+        </thead>
+        <tbody v-for="n in 2">
+          <tr>
+            <td>
+              <!--{{ user.realname }}-->
+              test
+            </td>
+            <td>
+              <!--{{ user.schoolssn }}-->
+              test
+            </td>
+            <td>
+              <el-checkbox></el-checkbox>
+            </td>
+            <td>
+              <el-checkbox></el-checkbox>
+            </td>
+            <td>
+              <el-checkbox></el-checkbox>
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+         <!--
+          <tr v-for="user in scoreListTable">
+
+          </tr>
+          -->
+        </tbody>
+      </table>
+    </Panel>
     <Panel>
       <span slot="title">{{$t('m.Import_Student')}}
         <el-popover placement="right" trigger="hover">
@@ -365,6 +423,7 @@
         notgegistered: 0, // 미등록된 인원
         outoflecture: 0, // 정원 외 인원 (학생 개인 임의 수강신청)
         keyword: '',
+        ta_ssn: '',
         showUserDialog: false,
         user: {},
         loadingTable: false,
@@ -387,6 +446,17 @@
       this.getUserList(1)
     },
     methods: {
+      onEnter: function () {
+        console.log('on enter event')
+        let data = {
+          lecture_id: this.lectureID,
+          ta_ssn: this.ta_ssn
+        }
+        api.getUserInfo(data).then(res => {
+          console.log(res)
+        })
+        this.ta_ssn = ''
+      },
       currentChange (page) {
         this.currentPage = page
         this.getUserList(page)
@@ -679,6 +749,9 @@
       }
     },
     watch: {
+      'ta_ssn' () {
+        console.log(this.ta_ssn)
+      },
       'keyword' () {
         this.currentChange(1)
       },
