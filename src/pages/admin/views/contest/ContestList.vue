@@ -113,7 +113,7 @@
         <el-button type="primary" @click="downloadSubmissions">确 定</el-button>
       </span>
     </el-dialog>
-    <el-dialog title="Add Lecture Contest"
+    <el-dialog title="이전 과목의 문제 불러오기"
                v-if="lectureId"
                width="80%"
                :visible.sync="addContestDialogVisible"

@@ -172,8 +172,15 @@ export default {
     })
   },
 
-  // Contest를 포함하는 강의 테이블 생성을 위한 함수
+  // TA/RA 인원 추가를 위한 함수
+  getUserInfo (data) {
+    console.log(data)
+    return ajax('admin/addingtauser', 'post', {
+      data
+    })
+  },
 
+  // Contest를 포함하는 강의 테이블 생성을 위한 함수
   createLecture (data) {
     return ajax('admin/lecture', 'post', {
       data
@@ -209,9 +216,12 @@ export default {
   },
   // 임의 함수 종료
   // 수강신청한 학생들에 대한 함수
-  acceptStudent (data) {
+  acceptStudent (data, lectureid) {
     return ajax('admin/signupstudent', 'post', {
-      data
+      params: {
+        data,
+        lectureid
+      }
     })
   },
   denyStudent (id, lectureid) {
