@@ -56,6 +56,29 @@
         prop="title">
       </el-table-column>
       <el-table-column
+        label="세부 설정"
+        align="center"
+        width="200"
+        fixed="right">
+        <template slot-scope="{row}">
+          <div>
+            <vue-multi-select
+              v-model="values"
+              search
+              historyButton
+              :filters="filters"
+              :options="options"
+              :btnLabel="btnLabel"
+              @click.native="getContestProblemList(row.id)"
+              :selectOptions="data"/>
+              <button v-show=false
+                @click="reloadFunction" >
+                Change v-model
+              </button>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column
         label="추가하기"
         align="center"
         width="100"
@@ -77,14 +100,43 @@
 </template>
 <script>
   import api from '@admin/api'
+  import vueMultiSelect from 'vue-multi-select'
+  import 'vue-multi-select/dist/lib/vue-multi-select.css'
 
   export default {
     name: 'add-contest-from-public',
     props: ['lectureID'],
     data () {
       return {
+        name: 'first group',
+        btnLabel: values => `문제 선택`,
+        values: [
+          // { label: '2' },
+          // { label: '3' }
+        ],
+        data: [{
+          title: '문제 이름',
+          elements: [],
+          elements_id: []
+        }],
+        filters: [{
+          nameAll: 'Select all',
+          nameNotAll: 'Deselect all',
+          func () {
+            return true
+          }
+        }],
+        options: {
+          multi: true,
+          groups: true,
+          labelName: 'label',
+          labelList: 'elements',
+          groupName: 'title',
+          cssSelected: option => (option.selected ? { 'background-color': '#5764c6' } : '')
+        },
+        element: [],
         year: 0,
-        semester: 1,
+        semester: 0,
         page: 1,
         limit: 10,
         total: 0,
@@ -96,14 +148,32 @@
       }
     },
     mounted () {
+      // 현재 년도, 월 기준으로 default 값 세팅 수행
+      let today = new Date()
+      this.year = today.getFullYear()
+      if (today.getMonth() >= 3 & today.getMonth() <= 8) {
+        this.semester = 1
+      } else {
+        this.semester = 2
+      }
       api.getLecture(this.lectureID).then(res => {
         this.lecture = res.data.data
-        console.log(this.lecture)
         this.getPublicContest()
       }).catch(() => {
       })
     },
     methods: {
+      getContestProblemList (id) {
+        api.getContProblemList(id).then(res => {
+          this.data[0].elements = []
+          console.log(res.data.data.results)
+          for (let element in res.data.data.results) {
+            this.data[0].elements.push(res.data.data.results[element].title)
+            this.data[0].elements_id.push(res.data.data.results[element].id)
+          }
+        })
+        console.log(this.data[0])
+      },
       getPublicContest (page) {
         this.loading = true
         let params = {
@@ -120,14 +190,31 @@
         })
       },
       handleAddContest (contestID) {
+        let selectProb = []
+        for (let val in this.values) {
+          selectProb.push(this.data[0].elements_id[this.data[0].elements.indexOf(this.values[val])])
+        }
+        console.log(selectProb)
         let data = {
+          prob_id: selectProb,
           contest_id: contestID,
           lecture_id: this.lectureID
         }
+        // initialize values
+        this.data[0].elements = []
+        this.data[0].elements_id = []
+        console.log(data)
+        // data send to server
         api.addContestFromPublic(data).then(() => {
           this.$emit('on-change')
         }, () => {
         })
+      },
+      reloadFunction () {
+        this.values = [
+          { label: '2' },
+          { label: '3' }
+        ]
       },
       onYearChange (page) {
         this.loading = true
@@ -149,6 +236,9 @@
       'keyword' () {
         this.getPublicContest(this.page)
       }
+    },
+    components: {
+      vueMultiSelect
     }
   }
 </script>

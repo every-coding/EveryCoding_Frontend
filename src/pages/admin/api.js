@@ -331,6 +331,14 @@ export default {
       params
     })
   },
+  getContProblemList (id) {
+    console.log(id)
+    return ajax('admin/contest/contproblem', 'get', {
+      params: {
+        id
+      }
+    })
+  },
   getContestProblemList (params) {
     params = utils.filterEmptyValue(params)
     return ajax('admin/contest/problem', 'get', {
