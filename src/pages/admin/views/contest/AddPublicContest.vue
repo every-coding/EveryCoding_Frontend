@@ -48,7 +48,7 @@
       </el-table-column>
       <el-table-column
         label="소속 수강과목"
-        width="150"
+        width="200"
         prop="lecture_title">
       </el-table-column>
       <el-table-column
@@ -68,6 +68,7 @@
               historyButton
               :filters="filters"
               :options="options"
+              :position="position"
               :btnLabel="btnLabel"
               @click.native="getContestProblemList(row.id)"
               :selectOptions="data"/>
@@ -140,6 +141,7 @@
         page: 1,
         limit: 10,
         total: 0,
+        position: 'top-left',
         loading: false,
         contests: [],
         lecture: {},
