@@ -116,6 +116,7 @@
     <el-dialog title="이전 과목의 문제 불러오기"
                v-if="lectureId"
                width="80%"
+               :modal-append-to-body='true'
                :visible.sync="addContestDialogVisible"
                @close-on-click-modal="false">
       <add-contest-component :lectureID="lectureId" @on-change="getContestList"></add-contest-component>
