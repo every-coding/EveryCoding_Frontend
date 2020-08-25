@@ -74,6 +74,7 @@
             title: this.$i18n.t('m.ID'),
             align: 'center',
             render: (h, params) => {
+              console.log(params)
               if (params.row.show_link) {
                 return h('span', {
                   style: {
