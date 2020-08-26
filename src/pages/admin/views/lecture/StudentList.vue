@@ -281,60 +281,64 @@
       <div slot="header">
         <el-row :gutter="20">
           <el-col :span="selectedUsers.length ? 16: 24">
-            <el-input v-model="ta_ssn" v-on:keyup.native.enter="onEnter" prefix-icon="el-icon-search" placeholder="TA/RA 학생 학번"></el-input>
+            <el-input v-model="ta_name" @click.native="onEnter" v-on:keyup.native.enter="onEnter" prefix-icon="el-icon-search" placeholder="TA/RA 학생 학번"></el-input>
           </el-col>
         </el-row>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>
-              이름
-            </th>
-            <th>
-              학번
-            </th>
-            <th>
-              문제 접근 권한
-            </th>
-            <th>
-              학생 답안 접근
-            </th>
-            <th>
-              학생 점수 확인
-            </th>
-          </tr>
-        </thead>
-        <tbody v-for="n in 2">
-          <tr>
-            <td>
-              <!--{{ user.realname }}-->
-              test
-            </td>
-            <td>
-              <!--{{ user.schoolssn }}-->
-              test
-            </td>
-            <td>
-              <el-checkbox></el-checkbox>
-            </td>
-            <td>
-              <el-checkbox></el-checkbox>
-            </td>
-            <td>
-              <el-checkbox></el-checkbox>
-            </td>
-          </tr>
-        </tbody>
-        <tbody>
-         <!--
-          <tr v-for="user in scoreListTable">
-
-          </tr>
-          -->
-        </tbody>
-      </table>
+      <el-table :data="talist" v-loading="loading">
+        <el-table-column
+          label="이름"
+          prop="realname">
+        </el-table-column>
+        <el-table-column
+          label="학번"
+          prop="schoolssn">
+        </el-table-column>
+        <el-table-column
+          label="문제 접근 권한"
+          align="center">
+          <template slot-scope="props">
+            <el-checkbox-group @change="checkboxChange(props.row.checklist, props.row.schoolssn)" v-bind:style="checkboxstyle" v-model="props.row.checklist">
+              <el-checkbox label="문제 수정"></el-checkbox>
+            </el-checkbox-group>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="답안 접근 권한"
+          align="center">
+          <template slot-scope="props">
+            <el-checkbox-group @change="checkboxChange(props.row.checklist, props.row.schoolssn)" v-bind:style="checkboxstyle" v-model="props.row.checklist">
+              <el-checkbox label="답안 확인"></el-checkbox>
+            </el-checkbox-group>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="점수 확인 권한"
+          align="center">
+          <template slot-scope="props">
+            <el-checkbox-group @change="checkboxChange(props.row.checklist, props.row.schoolssn)" v-bind:style="checkboxstyle" v-model="props.row.checklist">
+              <el-checkbox label="점수 확인"></el-checkbox>
+            </el-checkbox-group>
+          </template>
+        </el-table-column>
+        <el-table-column
+        label="삭제하기"
+        align="center">
+        <template slot-scope="{row}">
+          <icon-btn icon="close" name="Delete the TA User"
+                    @click.native="deleteTaUser(row.schoolssn)"></icon-btn>
+        </template>
+      </el-table-column>
+      </el-table>
     </Panel>
+    <el-dialog title="TA/RA 이름 검색 결과"
+               v-if="lectureID"
+               width="80%"
+               :modal-append-to-body='true'
+               @close-on-click-modal="false"
+               :visible.sync="outerVisible">
+                <add-t-a-user :lectureID.sync="lectureID" :studentName.sync="ta_name" @on-change="updateTAList"></add-t-a-user>
+    </el-dialog>
     <Panel>
       <span slot="title">{{$t('m.Import_Student')}}
         <el-popover placement="right" trigger="hover">
@@ -390,10 +394,12 @@
   import api from '../../api.js'
   import utils from '@/utils/utils'
   import XLSX from 'xlsx'
+  import AddTAUser from './addTAUserLecture'
 
   export default {
     data () {
       return {
+        outerVisible: false,
         persentage: true, // 학생 관리 페이지의 점수 산정 방식을 결정하는 boolean 변수, 기존 점수 산정 방식은 사용하지 않으므로 항상 true로 두어야 함.
         checkList: [
           '실습',
@@ -402,16 +408,23 @@
         ],
         exceloption: [
         ],
+        checkboxstyle: {
+          'padding-bottom': '0px'
+        },
         // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
         activeName: 'synthesis', // 임시 지정
         showContestDialog: false,
         lectureID: '',
+        searchUser: '',
+        addTAUserDialogVisible: false,
         lectureFounder: '', // 강의 개설자 realname
         lectureTitle: '', // 수강과목 title
         pageSize: 50,
         total: 0,
         RegistUser: 0,
         noRegistUser: 0,
+        loading: false,
+        border: false,
         userList: [],
         scoreListTable: [],
         uploadUsers: [],
@@ -423,12 +436,13 @@
         notgegistered: 0, // 미등록된 인원
         outoflecture: 0, // 정원 외 인원 (학생 개인 임의 수강신청)
         keyword: '',
-        ta_ssn: '',
+        ta_name: '',
         showUserDialog: false,
         user: {},
         loadingTable: false,
         loadingGenerate: false,
         currentPage: 0,
+        talist: [],
         selectedUsers: [],
         formGenerateUser: {
           prefix: '',
@@ -444,30 +458,46 @@
       this.lectureTitle = this.$route.params.lectureTitle
       this.lectureFounder = this.$route.params.lectureFounder
       this.getUserList(1)
+      this.getTAList(this.lectureID)
+    },
+    components: {
+      AddTAUser
     },
     methods: {
-      onEnter: function () {
-        console.log('on enter event')
-        let data = {
-          lecture_id: this.lectureID,
-          ta_ssn: this.ta_ssn
-        }
-        api.getUserInfo(data).then(res => {
+      checkboxChange (check, ssn) {
+        api.updateTAuserPermit(check, ssn, this.lectureID).then(res => {
           console.log(res)
         })
-        this.ta_ssn = ''
+      },
+      deleteTaUser (schoolssn) {
+        let result = this.talist.findIndex(ssn => ssn.schoolssn === schoolssn)
+        api.deleteTAUser(this.talist[result].schoolssn, this.lectureID).then(res => {
+          console.log(res)
+        })
+        this.talist.splice(result, 1)
+      },
+      updateTAList () {
+        api.getTAUserList(this.lectureID).then(res => {
+          this.talist = res.data.data.results
+        })
+      },
+      getTAList (lectureID) {
+        api.getTAUserList(lectureID).then(res => {
+          this.talist = res.data.data.results
+        })
+      },
+      onEnter: function () {
+        this.outerVisible = true
       },
       currentChange (page) {
         this.currentPage = page
         this.getUserList(page)
       },
       AcceptStudent (userid) {
-        console.log(userid)
         let data = {
           lecture_id: this.lectureID,
           user_id: userid
         }
-        console.log(data)
         api.acceptStudent(data).then(res => {
           this.getUserList(this.page)
           this.$success('Success')
@@ -510,7 +540,6 @@
           this.loadingTable = false
           this.total = res.data.data.total
           this.userList = res.data.data.results
-          console.log(this.userList)
           if (this.userList.length === 0) {
             console.log('null')
           } else {
@@ -749,9 +778,6 @@
       }
     },
     watch: {
-      'ta_ssn' () {
-        console.log(this.ta_ssn)
-      },
       'keyword' () {
         this.currentChange(1)
       },

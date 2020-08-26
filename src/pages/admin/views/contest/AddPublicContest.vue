@@ -168,13 +168,11 @@
       getContestProblemList (id) {
         api.getContProblemList(id).then(res => {
           this.data[0].elements = []
-          console.log(res.data.data.results)
           for (let element in res.data.data.results) {
             this.data[0].elements.push(res.data.data.results[element].title)
             this.data[0].elements_id.push(res.data.data.results[element].id)
           }
         })
-        console.log(this.data[0])
       },
       getPublicContest (page) {
         this.loading = true
@@ -196,7 +194,6 @@
         for (let val in this.values) {
           selectProb.push(this.data[0].elements_id[this.data[0].elements.indexOf(this.values[val])])
         }
-        console.log(selectProb)
         let data = {
           prob_id: selectProb,
           contest_id: contestID,
@@ -205,7 +202,6 @@
         // initialize values
         this.data[0].elements = []
         this.data[0].elements_id = []
-        console.log(data)
         // data send to server
         api.addContestFromPublic(data).then(() => {
           this.$emit('on-change')
