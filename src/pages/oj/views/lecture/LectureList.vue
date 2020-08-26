@@ -11,21 +11,20 @@
           </li>
         </ul>
       </div>
-      <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
       <ol id="lecture-list">
-        <li v-if="lectures != 0"><!--표시될 개설과목 수가 0이 아닌 경우에만 출력-->
+        <li><!--표시될 개설과목 수가 0이 아닌 경우에만 출력-->
           <Row id="tb-column" type="flex" justify="space-between" align="middle">
-            <Col :span="1" style="text-align: center">
-              년도
-			      </Col>
-            <Col :span="1" style="text-align: center">
-              학기
-			      </Col>
-            <Col :span="16">
-              과목명
-            </Col>
             <Col :span="2" style="text-align: center">
-              담당교수
+                <span>{{ yearsort }} 년도</span>
+            </Col>
+            <Col :span="1" style="text-align: center">
+                <span>{{ semestersort }} 학기</span>
+            </Col>
+            <Col :span="12">
+              <p>과목명</p>
+            </Col>
+            <Col :span="1">
+              <p>담당교수</p>
 			      </Col>
             <Col :span="4" style="text-align: center">
               수강신청 상태
@@ -35,13 +34,13 @@
         <li v-for="lecture in lectures" :key="lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
           <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
-            <Col :span="1" style="text-align: center">
+            <Col :span="2" style="text-align: center">
               {{ lecture.year }}
 			      </Col>
-            <Col :span="1" style="text-align: center">
+            <Col :span="2" style="text-align: center">
               {{ lecture.semester }}
 			      </Col>
-            <Col :span="16" class="lecture-main">
+            <Col :span="12" class="lecture-main">
               <p class="title">
                 <span>{{ lecture.title }}</span>
               </p>
@@ -55,6 +54,7 @@
           </Row>
         </li>
       </ol>
+      <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
     </Panel>
     <Pagination :total="total" :pageSize="limit" @on-change="getLectureList" :current.sync="page"></Pagination>
     </Col>
@@ -79,6 +79,8 @@
     data () {
       return {
         page: 1,
+        yearsort: 2020,
+        semestersort: 1,
         query: {
           status: '',
           keyword: '',
@@ -110,6 +112,9 @@
         this.query.rule_type = route.rule_type || ''
         this.query.keyword = route.keyword || ''
         this.page = parseInt(route.page) || 1
+        let d = new Date()
+        this.yearsort = d.getFullYear()
+        this.semestersort = (((d.getMonth() + 1) <= 8 && (d.getMonth() + 1) >= 3) ? 1 : 2)
         this.getLectureList()
       },
       getLectureList (page = 1) {
