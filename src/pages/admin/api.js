@@ -237,12 +237,9 @@ export default {
   },
   // 임의 함수 종료
   // 수강신청한 학생들에 대한 함수
-  acceptStudent (data, lectureid) {
+  acceptStudent (data) {
     return ajax('admin/signupstudent', 'post', {
-      params: {
-        data,
-        lectureid
-      }
+      data
     })
   },
   denyStudent (id, lectureid) {
