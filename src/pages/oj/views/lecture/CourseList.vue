@@ -11,21 +11,37 @@
           </li>
         </ul>
       </div>
-      <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
       <ol id="lecture-list">
-        <li v-if="lectures != 0"><!--표시될 수강과목 수가 0이 아닌 경우에만 출력-->
+        <li><!--표시될 수강과목 수가 0이 아닌 경우에만 출력-->
           <Row id="tb-column" type="flex" justify="space-between" align="middle">
+            <Col :span="2" style="text-align: center">
+              <Dropdown @on-click="sortYear">
+                <span>{{ yearsort }} 년도 <Icon type="arrow-down-b"></Icon>
+                </span>
+                <!-- 구현 예정 -->
+                <Dropdown-menu slot="list">
+                  <Dropdown-item name="2020">2020</Dropdown-item>
+                  <Dropdown-item name="2021">2021</Dropdown-item>
+                  <Dropdown-item name="2022">2022</Dropdown-item>
+                </Dropdown-menu>
+              </Dropdown>
+            </Col>
             <Col :span="1" style="text-align: center">
-              <a id=listing @click="sortYear()">년도</a>
-			      </Col>
-            <Col :span="1" style="text-align: center">
-              학기
-			      </Col>
-            <Col :span="16">
-              <a id=listing @click="sortYear()">과목명</a>
+              <Dropdown @on-click="sortSemester">
+                <span>{{ semestersort }} 학기 <Icon type="arrow-down-b"></Icon>
+                </span>
+                <!-- 구현 예정 -->
+                <Dropdown-menu slot="list">
+                  <Dropdown-item name='1'>1</Dropdown-item>
+                  <Dropdown-item name='2'>2</Dropdown-item>
+                </Dropdown-menu>
+              </Dropdown>
+            </Col>
+            <Col :span="12">
+              <p>과목명</p>
             </Col>
             <Col :span="2">
-              <a id=listing @click="sortYear()">담당교수</a>
+              <p>담당교수</p>
 			      </Col>
             <Col :span="4" style="text-align: center">
               수강신청 상태
@@ -35,13 +51,13 @@
         <li v-for="lecture in lectures" :key="lecture.lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
           <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
-            <Col :span="1" style="text-align: center">
+            <Col :span="2" style="text-align: center">
               {{ lecture.lecture.year }}
 			      </Col>
             <Col :span="1" style="text-align: center">
               {{ lecture.lecture.semester }}
 			      </Col>
-            <Col :span="16" class="lecture-main">
+            <Col :span="12" class="lecture-main">
               <p class="title">
                 <span class="entry" v-if="lecture.isallow"><a id="lecture-title" @click="goLecture(lecture.lecture)">{{ lecture.lecture.title }}</a></span>
                 <span id="waitlecture" class="entry" v-else>{{ lecture.lecture.title }}</span>
@@ -57,6 +73,7 @@
           </Row>
         </li>
       </ol>
+      <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
     </Panel>
     <Pagination :total="total" :pageSize="limit" @on-change="getLectureList" :current.sync="page"></Pagination>
     </Col>
@@ -81,8 +98,8 @@
     data () {
       return {
         page: 1,
-        yearsort: 0,
-        subjsort: 0,
+        yearsort: 2020,
+        semestersort: 1,
         profsort: 0,
         query: {
           status: '',
@@ -100,7 +117,10 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-      api.getTakingLectureList(0, limit).then((res) => {
+      let d = new Date()
+      let semester = (((d.getMonth() + 1) <= 8 && (d.getMonth() + 1) >= 3) ? 1 : 2)
+
+      api.getTakingLectureList(0, limit, undefined, d.getFullYear(), semester).then((res) => {
         next((vm) => {
           vm.lectures = res.data.data.results
           vm.total = res.data.data.total
@@ -117,44 +137,36 @@
         this.page = parseInt(route.page) || 1
         this.getLectureList()
       },
-      sortYear () {
-        console.log('test')
-        if (this.yearsort === 0 || this.yearsort === -1) {
-          this.yearsort = 1
-        } else {
-          this.yearsort = -1
-        }
+      sortYear (year) {
+        this.yearsort = year
         let route = this.$route.query
         this.query.rule_type = route.rule_type || ''
         this.query.keyword = route.keyword || ''
-        this.page = parseInt(route.page) || 1
-        this.getSortedLectureList(this.page, 'year')
+        this.page = 1
+        this.getSortedLectureList(this.page)
       },
-      getSortedLectureList (page = 1, sorttype) {
-        let offset = (page - 1) * this.limit
-        if (sorttype === 'year') {
-          api.getTakingLectureList(offset, this.limit, this.query, this.yearsort, undefined, undefined).then((res) => {
-            this.lectures = res.data.data.results
-            this.total = res.data.data.total
-          })
-        } else if (sorttype === 'subj') {
-          api.getTakingLectureList(offset, this.limit, this.query, undefined, this.subjsort, undefined).then((res) => {
-            this.lectures = res.data.data.results
-            this.total = res.data.data.total
-          })
-        } else {
-          api.getTakingLectureList(offset, this.limit, this.query, undefined, undefined, this.profsort).then((res) => {
-            this.lectures = res.data.data.results
-            this.total = res.data.data.total
-          })
-        }
+      sortSemester (semester) {
+        this.semestersort = semester
+        let route = this.$route.query
+        this.query.rule_type = route.rule_type || ''
+        this.query.keyword = route.keyword || ''
+        this.page = 1
+        this.getSortedLectureList(this.page)
       },
-      getLectureList (page = 1) {
+      getSortedLectureList (page = 1) {
         let offset = (page - 1) * this.limit
-        api.getTakingLectureList(offset, this.limit, this.query, undefined, undefined, undefined).then((res) => {
+        api.getTakingLectureList(offset, this.limit, this.query, this.yearsort, this.semestersort, undefined).then((res) => {
           this.lectures = res.data.data.results
           this.total = res.data.data.total
         })
+      },
+      getLectureList (page = 1) {
+        let offset = (page - 1) * this.limit
+        api.getTakingLectureList(offset, this.limit, this.query, this.yearsort, this.semestersort, undefined).then((res) => {
+          this.lectures = res.data.data.results
+          this.total = res.data.data.total
+        })
+        console.log(this.lectures)
       },
       changeRoute () {
         let query = Object.assign({}, this.query)
