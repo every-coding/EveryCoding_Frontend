@@ -81,7 +81,7 @@
         </el-table-column>
       </el-table>
       <div class="panel-options">
-        <el-button type="primary" size="small"
+        <el-button v-if="contestId" type="primary" size="small"
                    @click="goCreateProblem" icon="el-icon-plus">문제 만들기
         </el-button>
         <el-button v-if="contestId" type="primary"

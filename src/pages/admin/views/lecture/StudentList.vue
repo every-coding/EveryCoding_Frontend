@@ -277,7 +277,7 @@
         </el-pagination>
       </div>
     </Panel>
-    <Panel :title="$t('TA/RA 학생 추가')">
+    <Panel :title="$t('TA/RA 학생 추가')" v-if="isAdmin">
       <div slot="header">
         <el-row :gutter="20">
           <el-col :span="selectedUsers.length ? 16: 24">
@@ -395,6 +395,7 @@
   import utils from '@/utils/utils'
   import XLSX from 'xlsx'
   import AddTAUser from './addTAUserLecture'
+  import { mapGetters } from 'vuex'
 
   export default {
     data () {
@@ -769,6 +770,7 @@
       }
     },
     computed: {
+      ...mapGetters(['isAdmin']),
       selectedUserIDs () {
         let ids = []
         for (let user of this.selectedUsers) {
