@@ -402,6 +402,18 @@ export default {
       data
     })
   },
+  addLectureCopy (params) {
+    params = utils.filterEmptyValue(params)
+    return ajax('admin/lecture/add_lecture_copy', 'get', {
+      params
+    })
+  },
+  LectureCopy (params) {
+    params = utils.filterEmptyValue(params)
+    return ajax('admin/lecture/add_lecture_copy', 'post', {
+      params
+    })
+  },
   getReleaseNotes () {
     return ajax('admin/versions', 'get')
   },

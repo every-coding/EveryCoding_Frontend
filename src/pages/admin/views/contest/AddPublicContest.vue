@@ -1,22 +1,22 @@
 <template>
   <div>
-    <el-row :gutter="20">
+    <el-row>
       <el-col :span="4">
         <el-select v-model="year">
-          <el-option value="2020">2020</el-option>
-          <el-option value="2021">2021</el-option>
-          <el-option value="2022">2022</el-option>
-          <el-option value="2022">2023</el-option>
-          <el-option value="2022">2024</el-option>
+          <el-option value="2020">2020년도</el-option>
+          <el-option value="2021">2021년도</el-option>
+          <el-option value="2022">2022년도</el-option>
+          <el-option value="2022">2023년도</el-option>
+          <el-option value="2022">2024년도</el-option>
         </el-select>
       </el-col>
-      <el-col :span="4">
+      <el-col :span="2">
         <el-select v-model="semester">
           <el-option value="1">1학기</el-option>
           <el-option value="2">2학기</el-option>
         </el-select>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="12">
         <el-input
           v-model="keyword"
           placeholder="과목 검색"
@@ -26,7 +26,7 @@
       <el-col :span="2">
         <el-button @click="searchLecture">검색</el-button>
       </el-col>
-      <el-col :span="2">
+      <el-col :span="4">
         <el-checkbox v-model="showPublic" label="공개 문제 보기" border></el-checkbox>
         <!-- <el-checkbox-button :label="showPublicCont"></el-checkbox-button> -->
       </el-col>
@@ -146,7 +146,7 @@
         page: 1,
         limit: 5,
         total: 0,
-        position: 'top-left',
+        position: 'top-right',
         loading: false,
         contests: [],
         lecture: {},
