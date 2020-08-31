@@ -16,16 +16,15 @@
           <el-option value="2">2학기</el-option>
         </el-select>
       </el-col>
-      <el-col :span="10">
+      <el-col :span="8">
         <el-input
           v-model="keyword"
-          placeholder="Keywords"
-          prefix-icon="el-icon-search"
-          width="150">
+          placeholder="과목 검색"
+          width="100">
         </el-input>
       </el-col>
       <el-col :span="2">
-        <el-button @click="onYearChange">검색</el-button>
+        <el-button @click="searchLecture">검색</el-button>
       </el-col>
       <el-col :span="2">
         <el-checkbox v-model="showPublic" label="공개 문제 보기" border></el-checkbox>
@@ -159,7 +158,7 @@
       // 현재 년도, 월 기준으로 default 값 세팅 수행
       let today = new Date()
       this.year = today.getFullYear()
-      if (today.getMonth() >= 3 & today.getMonth() <= 8) {
+      if (today.getMonth() >= 3 & today.getMonth() < 8) {
         this.semester = 1
       } else {
         this.semester = 2
@@ -228,6 +227,22 @@
           { label: '3' }
         ]
       },
+      searchLecture () {
+        let params = {
+          keyword: this.keyword,
+          offset: this.page,
+          limit: this.limit,
+          year: this.year,
+          semester: this.semester,
+          publicProb: this.showPublic
+        }
+        api.getContestList(params).then(res => {
+          this.loading = false
+          this.total = res.data.data.total
+          this.contests = res.data.data.results
+        }).catch(() => {
+        })
+      },
       onYearChange (page) {
         this.loading = true
         let params = {
@@ -245,8 +260,8 @@
       }
     },
     watch: {
-      'keyword' () {
-        this.getPublicContest(this.page)
+      keyword: function (val) {
+        this.keyword = val
       }
     },
     components: {

@@ -98,11 +98,9 @@
               <span v-else>{{$t('m.Submit')}}</span>
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-            <Button v-if="problemRes" type="warning" icon="edit" :loading="submitting" @click="submitCode"
-                    :disabled="problemSubmitDisabled || submitted"
+            <Button :disabled="true"
                     class="fl-right">
-              <span v-if="submitting">{{$t('m.Submitting')}}</span>
-              <span v-else>{{$t('m.Submit')}}</span>
+              <span>조교에게 문의하기</span>
             </Button>
           </Col>
         </Row>
