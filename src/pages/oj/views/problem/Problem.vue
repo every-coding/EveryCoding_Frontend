@@ -100,7 +100,7 @@
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
             <Button :disabled="true"
                     class="fl-right">
-              <span>조교에게 문의하기</span>
+              <span>{{$t('m.calltara')}}</span>
             </Button>
           </Col>
         </Row>
