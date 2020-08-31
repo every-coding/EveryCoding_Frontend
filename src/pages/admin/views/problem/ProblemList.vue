@@ -86,7 +86,7 @@
         </el-button>
         <el-button v-if="contestId" type="primary"
                    size="small" icon="el-icon-plus"
-                   @click="addProblemDialogVisible = true">공개문제에서 가져오기
+                   @click="addProblemDialogVisible = true">문제 가져오기
         </el-button>
         <el-pagination
           class="page"
