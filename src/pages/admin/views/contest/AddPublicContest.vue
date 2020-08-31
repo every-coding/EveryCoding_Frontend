@@ -193,7 +193,9 @@
           keyword: this.keyword,
           offset: (page - 1) * this.limit,
           limit: this.limit,
-          year: this.year
+          year: this.year,
+          semester: this.semester,
+          publicProb: this.showPublic
         }
         api.getContestList(params).then(res => {
           this.loading = false
@@ -227,29 +229,14 @@
           { label: '3' }
         ]
       },
-      searchLecture () {
-        let params = {
-          keyword: this.keyword,
-          offset: this.page,
-          limit: this.limit,
-          year: this.year,
-          semester: this.semester,
-          publicProb: this.showPublic
-        }
-        api.getContestList(params).then(res => {
-          this.loading = false
-          this.total = res.data.data.total
-          this.contests = res.data.data.results
-        }).catch(() => {
-        })
-      },
-      onYearChange (page) {
-        this.loading = true
+      searchLecture (page) {
         let params = {
           keyword: this.keyword,
           offset: (page - 1) * this.limit,
           limit: this.limit,
-          year: this.year
+          year: this.year,
+          semester: this.semester,
+          publicProb: this.showPublic
         }
         api.getContestList(params).then(res => {
           this.loading = false
