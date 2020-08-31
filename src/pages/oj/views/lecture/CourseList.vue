@@ -118,7 +118,7 @@
     },
     beforeRouteEnter (to, from, next) {
       let d = new Date()
-      let semester = (((d.getMonth() + 1) <= 8 && (d.getMonth() + 1) >= 3) ? 1 : 2)
+      let semester = (((d.getMonth() + 1) < 8 && (d.getMonth() + 1) >= 3) ? 1 : 2)
 
       api.getTakingLectureList(0, limit, undefined, d.getFullYear(), semester).then((res) => {
         next((vm) => {
