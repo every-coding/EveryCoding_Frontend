@@ -21,11 +21,15 @@
           v-model="keyword"
           placeholder="Keywords"
           prefix-icon="el-icon-search"
-          width="300">
+          width="150">
         </el-input>
       </el-col>
       <el-col :span="2">
         <el-button @click="onYearChange">검색</el-button>
+      </el-col>
+      <el-col :span="2">
+        <el-checkbox v-model="showPublic" label="공개 문제 보기" border></el-checkbox>
+        <!-- <el-checkbox-button :label="showPublicCont"></el-checkbox-button> -->
       </el-col>
     </el-row>
     <el-table :data="contests" v-loading="loading">
@@ -111,6 +115,8 @@
       return {
         name: 'first group',
         btnLabel: values => `문제 선택`,
+        showPublic: false,
+        showPublicCont: '공개 문제 보기',
         values: [
           // { label: '2' },
           // { label: '3' }
@@ -139,7 +145,7 @@
         year: 0,
         semester: 0,
         page: 1,
-        limit: 10,
+        limit: 5,
         total: 0,
         position: 'top-left',
         loading: false,
@@ -165,6 +171,14 @@
       })
     },
     methods: {
+      handleVisibleSwitch () {
+        if (this.showPublic) {
+          this.showPublic = true
+        } else {
+          this.showPublic = false
+        }
+        console.log(this.showPublic)
+      },
       getContestProblemList (id) {
         api.getContProblemList(id).then(res => {
           this.data[0].elements = []
