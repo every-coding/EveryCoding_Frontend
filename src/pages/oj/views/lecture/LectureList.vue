@@ -106,6 +106,10 @@
         next()
       })
     },
+    mounted () {
+      let d = new Date()
+      this.semestersort = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : 2)
+    },
     methods: {
       init () {
         let route = this.$route.query
@@ -114,7 +118,7 @@
         this.page = parseInt(route.page) || 1
         let d = new Date()
         this.yearsort = d.getFullYear()
-        this.semestersort = (((d.getMonth() + 1) < 8 && (d.getMonth() + 1) >= 3) ? 1 : 2)
+        this.semestersort = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : 2)
         this.getLectureList()
       },
       getLectureList (page = 1) {
