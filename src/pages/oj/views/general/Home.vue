@@ -1,7 +1,7 @@
 <template>
   <Row type="flex" justify="space-around">
     <Col :span="22">
-    <panel class="lecture" v-if="$store.state.user.profile.id !== undefined && !isAdmin">
+    <panel class="lecture" v-if="$store.state.user.profile.id !== undefined && false">
       <div slot="title">
         나의 수강과목 진행 현황
       </div>
