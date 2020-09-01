@@ -131,7 +131,8 @@
         contests: [],
         index: 0,
         activeName: '',
-        clsize: 0
+        clsize: 0,
+        resize: true
       }
     },
     mounted () {
@@ -173,6 +174,10 @@
                 ],
                 legend: {
                   data: ['성공', '도전 중', '시작 전']
+                },
+                opts: {
+                  width: 'auto',
+                  height: 'auto'
                 },
                 series: [
                   {
@@ -440,4 +445,15 @@
       }
     }
   }
+</style>
+<style>
+/**
+ * The default size is 600px×400px, for responsive charts
+ * you may need to set percentage values as follows (also
+ * don't forget to provide a size for the container).
+ */
+.echarts {
+  width: auto!important;
+  height: auto;
+}
 </style>
