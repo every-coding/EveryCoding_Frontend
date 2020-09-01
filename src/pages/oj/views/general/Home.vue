@@ -1,7 +1,7 @@
 <template>
   <Row type="flex" justify="space-around">
     <Col :span="22">
-    <panel class="lecture" v-if="$store.state.user.profile.id !== undefined && false">
+    <panel class="lecture" v-if="$store.state.user.profile.id !== undefined && !isAdmin">
       <div slot="title">
         나의 수강과목 진행 현황
       </div>
@@ -15,14 +15,14 @@
               <el-table-column
                 align="center">
                 <el-row :gutter="12">
-                    <el-col :span="10">
+                    <el-col :span="12">
                       <el-card shadow="always">
                         <div class="echarts">
                           <ECharts :options="pie.pie" auto-resize></ECharts>
                         </div>
                       </el-card>
                     </el-col>
-                    <el-col :span="14">
+                    <el-col :span="12">
                       <h2 style="padding-bottom:10px">진행중인 실습 및 과제</h2>
                       <el-card v-if="clsize > 0" shadow="always">
                         <ul class="announcements-container" key="list">
@@ -439,13 +439,5 @@
         }
       }
     }
-  }
-</style>
-
-<style scoped lang="less">
-  .echarts {
-    margin: 0 auto;
-    width: 95%;
-    height: 400px;
   }
 </style>
