@@ -425,7 +425,6 @@
           code: this.code,
           contest_id: this.contestID
         }
-        console.log(data)
         if (this.captchaRequired) {
           data.captcha = this.captchaCode
         }
