@@ -47,8 +47,6 @@ const getters = {
       (state.contest.created_by.id === rootGetters.user.id || rootGetters.user.admin_type === USER_TYPE.SUPER_ADMIN)
   },
   contestMenuDisabled: (state, getters) => {
-    console.log(state)
-    console.log(getters)
     if (getters.isContestAdmin) return false
     if (state.contest.contest_type === CONTEST_TYPE.PUBLIC) {
       // return ((getters.contestStatus === CONTEST_STATUS.NOT_START)
