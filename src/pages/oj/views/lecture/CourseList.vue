@@ -170,7 +170,6 @@
           this.lectures = res.data.data.results
           this.total = res.data.data.total
         })
-        console.log(this.lectures)
       },
       changeRoute () {
         let query = Object.assign({}, this.query)
@@ -198,7 +197,6 @@
             user_id: this.user.id,
             status: false
           }
-          console.log(data)
           api.applyLecture(data).then(res => {
             this.getLectureList(this.page)
             this.$success('Success')
