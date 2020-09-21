@@ -15,7 +15,7 @@ export const m = {
   Contest_List: '강의 목록',
   Create_Contest: '강의 생성',
   // 실습, 과제, 대회
-  Public_Contests: '공개 대회',
+  Public_Contests: '경진 대회',
   Contests: '실습, 과제, 대회',
   // Contests: '실습, 과제, 대회',
   Contests_List: '실습, 과제, 대회 목록',

@@ -18,7 +18,7 @@
                     <el-col :span="12">
                       <el-card shadow="always">
                         <div class="echarts">
-                          <ECharts :options="pie.pie" auto-resize></ECharts>
+                          <ECharts :options="pie.pie" autoresize></ECharts>
                         </div>
                       </el-card>
                     </el-col>

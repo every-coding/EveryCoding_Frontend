@@ -75,6 +75,20 @@ export default {
       params: params
     })
   },
+  getContestUserList (offset, limit, keyword, contestid) {
+    let params = {paging: true, offset, limit}
+    if (keyword) {
+      params.keyword = keyword
+    }
+    console.log(contestid)
+    if (contestid) {
+      console.log(contestid)
+      params.contestid = contestid
+    }
+    return ajax('admin/user', 'get', {
+      params: params
+    })
+  },
   // 获取单个用户信息
   getUser (id) {
     return ajax('admin/user', 'get', {
@@ -240,6 +254,14 @@ export default {
   acceptStudent (data) {
     return ajax('admin/signupstudent', 'post', {
       data
+    })
+  },
+  denyContStudent (id, contestId) {
+    return ajax('admin/signupstudent', 'delete', {
+      params: {
+        id,
+        contestId
+      }
     })
   },
   denyStudent (id, lectureid) {

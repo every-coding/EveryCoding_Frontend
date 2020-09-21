@@ -4,7 +4,7 @@
     <Panel :padding="10">
       <div slot="title">{{$t('m.ACM_Ranklist')}}</div>
       <div class="echarts">
-        <ECharts :options="options" ref="chart" auto-resize></ECharts>
+        <ECharts :options="options" ref="chart" autoresize></ECharts>
       </div>
     </Panel>
     <Table :data="dataRank" :columns="columns" :loading="loadingTable" size="large"></Table>

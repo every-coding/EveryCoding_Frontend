@@ -26,6 +26,12 @@
         <Icon type="ios-pulse-strong"></Icon>
         {{$t('m.NavStatus')}}
       </Menu-item>
+      <!--
+      <Menu-item name="/question">
+        <Icon type="help"></Icon>
+        {{$t('m.publicQA')}}
+      </Menu-item>
+      -->
       <Submenu name="rank">
         <template slot="title">
           <Icon type="podium"></Icon>

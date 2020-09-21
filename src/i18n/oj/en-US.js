@@ -15,6 +15,7 @@ export const m = {
   Memory_Limit: 'Memory Limit',
   Created: 'Created By',
   Level: 'Level',
+  Solved: 'Solved',
   Score: 'Score',
   Tags: 'Tags',
   Show: 'Show',
