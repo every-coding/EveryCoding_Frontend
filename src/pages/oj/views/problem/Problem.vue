@@ -135,6 +135,10 @@
             <Icon type="stats-bars"></Icon>
             {{$t('m.Rankings')}}
           </VerticalMenu-item>
+          <VerticalMenu-item :route="{name: 'constest-problem-qna', params: {lectureID: lectureID, problemID: problemID ,contestID: contestID}}">
+            <Icon type="help"></Icon>
+             {{$t('m.qa')}}
+          </VerticalMenu-item>
           <VerticalMenu-item :route="{name: 'contest-details', params: {contestID: contestID}}">
             <Icon type="home"></Icon>
             {{$t('m.View_Contest')}}
@@ -238,7 +242,7 @@
         captchaSrc: '',
         contestID: '',
         problemID: '',
-        lecture_id: '',
+        lectureID: '',
         submitting: false,
         code: '',
         language: 'C++',
@@ -359,6 +363,7 @@
         this.largePie.series[0].data = largePieData
       },
       handleRoute (route) {
+        console.log(route)
         this.$router.push(route)
       },
       onChangeLang (newLang) {

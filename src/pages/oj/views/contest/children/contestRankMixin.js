@@ -12,6 +12,7 @@ export default {
     getContestRankData (page = 1, refresh = false) {
       let offset = (page - 1) * this.limit
       if (this.showChart && !refresh) {
+        console.log(this.$refs)
         this.$refs.chart.showLoading({maskColor: 'rgba(250, 250, 250, 0.8)'})
       }
       let params = {

@@ -40,7 +40,7 @@
 </template>
 <script>
   import { mapActions } from 'vuex'
-
+  import 'echarts/lib/chart/bar'
   import Pagination from '@oj/components/Pagination'
   import ContestRankMixin from './contestRankMixin'
   import utils from '@/utils/utils'
