@@ -11,11 +11,13 @@ import {
   NotFound,
   OIRank,
   Problem,
+  ProblemQnA,
   ProblemList,
   ResetPassword,
   SubmissionDetails,
   SubmissionList,
-  UserHome
+  UserHome,
+  ProblemQnADetail
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -36,6 +38,18 @@ export default [
     path: '/logout',
     meta: {title: 'Logout'},
     component: Logout
+  },
+  {
+    name: 'problem-qna-list',
+    path: '/question',
+    meta: {requiresAuth: true, title: 'questions'},
+    component: ProblemQnA
+  },
+  {
+    name: 'problem-qna-detail',
+    path: '/question/:questionID',
+    meta: {requiresAuth: true, title: 'questions'},
+    component: ProblemQnADetail
   },
   {
     name: 'login',
@@ -115,6 +129,16 @@ export default [
         component: SubmissionList
       },
       {
+        name: 'constest-problem-qna',
+        path: 'question',
+        component: ProblemQnA
+      },
+      {
+        name: 'constest-problem-qna-detail',
+        path: 'question/:questionID',
+        component: ProblemQnADetail
+      },
+      {
         name: 'lecture-contest-problem-list',
         path: 'problems',
         component: Lecture.LectureContestProblemList
@@ -167,6 +191,11 @@ export default [
         name: 'contest-problem-details',
         path: 'problem/:problemID/',
         component: Problem
+      },
+      {
+        name: 'constest-problem-qna',
+        path: 'problem/:problemID/problemqa',
+        component: ProblemQnA
       },
       {
         name: 'contest-announcement-list',
