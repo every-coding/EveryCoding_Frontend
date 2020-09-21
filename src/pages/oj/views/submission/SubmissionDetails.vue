@@ -27,6 +27,7 @@
     </Col>
     <Col v-if="submission.can_unshare" :span="20">
       <div id="share-btn">
+        <!--
         <Button v-if="submission.shared"
                 type="warning" size="large" @click="shareSubmission(false)">
           {{$t('m.UnShare')}}
@@ -35,6 +36,28 @@
                 type="primary" size="large" @click="shareSubmission(true)">
           {{$t('m.Share')}}
         </Button>
+        -->
+
+        <el-button type="primary" v-b-toggle.sidebar-right>{{$t('m.qna')}}</el-button>
+        <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
+          <div class="sidebar" id="wrapper">
+            <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
+            <h2 class="sidebar-header">{{$t('m.qna')}}</h2>
+            <hr/>
+            <div class="sidebar-content">
+              <br/>
+              <span>내용</span>
+              <el-input class="sidebar-content-margin" placeholder="제목을 입력해주세요." v-model="qnaContent.title"></el-input>
+              <Simditor class="sidebar-content-margin" v-model="qnaContent.content"></Simditor>
+              <el-button class="sidebar-margin d-block mr-0 ml-auto" type="primary" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
+            </div>
+          </div>
+        </b-sidebar>
+        <!--
+        <Button type="primary" size="large" @click.native="QnAWrite">
+          {{$t('m.qna')}}
+        </Button>
+        -->
       </div>
     </Col>
   </Row>
@@ -46,14 +69,33 @@
   import {JUDGE_STATUS} from '@/utils/constants'
   import utils from '@/utils/utils'
   import Highlight from '@/pages/oj/components/Highlight'
+  import ProblemQnA from '@oj/views/qna/AddProblemQnA.vue'
+  import { SidebarPlugin } from 'bootstrap-vue'
+  import 'bootstrap-vue/dist/bootstrap-vue.css'
+  import Vue from 'vue'
+  import Simditor from '../../components/Simditor.vue'
+  Vue.use(SidebarPlugin)
+  Simditor.locale = 'en-US'
 
   export default {
     name: 'submissionDetails',
     components: {
-      Highlight
+      Highlight,
+      ProblemQnA,
+      Simditor
     },
+
     data () {
       return {
+        qna: false,
+        input: '',
+        qnaContent: {
+          title: '',
+          content: ''
+        },
+        myStyle: {
+          backgroundColor: 'white'
+        },
         columns: [
           {
             title: this.$i18n.t('m.ID'),
@@ -105,6 +147,11 @@
       this.getSubmission()
     },
     methods: {
+      QnAWrite () {
+        // console.log(this.submission)
+        let data = { 'id': this.submission.id, 'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
+        api.writeQnAPost(data).then(res => { })
+      },
       getSubmission () {
         this.loading = true
         api.getSubmission(this.$route.params.id).then(res => {
@@ -174,6 +221,7 @@
 </script>
 
 <style scoped lang="less">
+  @import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css');
   #status {
     .title {
       font-size: 20px;
@@ -191,7 +239,23 @@
       }
     }
   }
-
+  .sidebar {
+    background: white;
+    border: 2px solid #bcbcbc;
+  }
+  .sidebar-header {
+    float: right;
+    margin: 10px;
+    margin-top: 17px;
+  }
+  .sidebar-content {
+    font-family: 'Noto Sans KR', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    margin: 10px;
+  }
+  .sidebar-content-margin {
+    margin-top: 10px;
+  }
   .admin-info {
     margin: 5px 0;
     &-content {
@@ -199,7 +263,18 @@
       padding: 10px;
     }
   }
-
+  .sidebar-margin {
+    margin: 10px;
+  }
+  .mr-0 {
+    margin-right: 10px;
+  }
+  .ml-auto {
+    margin-left:auto;
+  }
+  .d-block {
+    display:block;
+  }
   #share-btn {
     float: right;
     margin-top: 5px;
@@ -210,4 +285,5 @@
     border: none;
     background: none;
   }
+
 </style>

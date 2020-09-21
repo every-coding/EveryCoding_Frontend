@@ -56,6 +56,11 @@
           <Icon type="navicon-round"></Icon>
           {{$t('m.Submissions')}}
         </VerticalMenu-item>
+        <VerticalMenu-item v-if="OIContestRealTimePermission"
+                           :route="{name: 'constest-problem-qna', params: {contestID: contestID, lectureID: lectureID}}">
+          <Icon type="help"></Icon>
+          {{$t('m.qa')}}
+        </VerticalMenu-item>
 
         <VerticalMenu-item v-if="OIContestRealTimePermission"
                            :disabled="contestMenuDisabled"

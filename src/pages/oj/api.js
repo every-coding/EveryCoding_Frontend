@@ -8,6 +8,43 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 axios.defaults.xsrfCookieName = 'csrftoken'
 
 export default {
+  deleteComment (id) {
+    return ajax('comment', 'delete', {
+      params: {
+        id
+      }
+    })
+  },
+  getQnACommentList (params) {
+    return ajax('comment', 'get', {
+      params
+    })
+  },
+  writeComment (data) {
+    return ajax('comment', 'post', {
+      data
+    })
+  },
+  getQnAPostDetail (params) {
+    return ajax('qapostdetail', 'get', {
+      params
+    })
+  },
+  solvedQuestion (data) {
+    return ajax('qapostdetail', 'post', {
+      data
+    })
+  },
+  writeQnAPost (data) {
+    return ajax('qapost', 'post', {
+      data
+    })
+  },
+  getQnAPost (params) {
+    return ajax('qapost', 'get', {
+      params
+    })
+  },
   getDashboardinfo (data) {
     return ajax('userprogress', 'get', {
       data

@@ -1,9 +1,6 @@
 <template>
   <div class="view">
-    <Panel :title="this.lectureTitle + ' ' + $t('m.Lecture_UserList')">
-      <div>
-        <strong>개설자 : {{ this.lectureFounder }}</strong>
-      </div>
+    <Panel :title="this.ContestTitle + ' ' + $t('m.Lecture_UserList')">
       <div slot="header">
         <el-row :gutter="20">
           <el-col :span="selectedUsers.length ? 16: 24">
@@ -91,7 +88,7 @@
             </el-table>
           </el-tab-pane>
           <!---->
-          <el-tab-pane label="실습" name="train">
+          <el-tab-pane label="대회" name="train">
             <table>
               <thead>
                 <tr>
@@ -144,126 +141,6 @@
             </table>
           </el-tab-pane>
           <!---->
-          <el-tab-pane label="과제" name="assign">
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    이름
-                  </th>
-                  <th>
-                    학번
-                  </th>
-                  <template v-if="scoreListTable[0] !== undefined">
-                    <template v-for="(contests, index) in scoreListTable['0'].score.assigncolumnscore.contests">
-                      <th>
-                        {{ index + 1 }}주차
-                      </th>
-                    </template>
-                  </template>
-                  <th>
-                    총점
-                  </th>
-                  <th>
-                    평균
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="user in scoreListTable">
-                  <td>
-                    {{ user.realname }}
-                  </td>
-                  <td>
-                    {{ user.schoolssn }}
-                  </td>
-                  <td v-if="persentage == false" v-for="contest in user.score.assigncolumnscore.contests">
-                    {{ contest.Info.score }}
-                  </td>
-                  <td v-if="persentage == true" v-for="contest in user.score.assigncolumnscore.contests">
-                    {{ contest.Info.average }}
-                  </td>
-                  <td>
-                    {{ user.score.assigncolumnscore.persentSum.toFixed(2) }}
-                  </td>
-                  <td v-if="persentage == true">
-                    {{ user.score.assigncolumnscore.persentavg.toFixed(2) }}
-                  </td>
-                  <td v-else>
-                    {{ user.score.assigncolumnscore.persentavg.toFixed(2) }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </el-tab-pane>
-          <!---->
-          <el-tab-pane label="시험" name="contest">
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    이름
-                  </th>
-                  <th>
-                    학번
-                  </th>
-                  <template v-if="scoreListTable[0] !== undefined">
-                    <template v-for="(contests, index) in scoreListTable['0'].score.contestcolumnscore.contests">
-                      <th>
-                        {{ index + 1 }}주차
-                      </th>
-                    </template>
-                  </template>
-                  <th>
-                    총점
-                  </th>
-                  <th>
-                    평균
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="user in scoreListTable">
-                  <td>
-                    {{ user.realname }}
-                  </td>
-                  <td>
-                    {{ user.schoolssn }}
-                  </td>
-                  <td v-if="persentage == false" v-for="contest in user.score.contestcolumnscore.contests">
-                    {{ contest.Info.score }}
-                  </td>
-                  <td v-if="persentage == true" v-for="contest in user.score.contestcolumnscore.contests">
-                    {{ contest.Info.average }}
-                  </td>
-                  <td>
-                    {{ user.score.contestcolumnscore.persentSum.toFixed(2) }}
-                  </td>
-                  <td v-if="persentage == true">
-                    {{ user.score.contestcolumnscore.persentavg.toFixed(2) }}
-                  </td>
-                  <td v-else>
-                    {{ user.score.contestcolumnscore.avg }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </el-tab-pane>
-          <!---->
-          <el-tab-pane label="Excel export" name="export">
-            <el-checkbox-group v-model="checkList">
-              <el-checkbox label="실습"></el-checkbox>
-              <el-checkbox label="과제"></el-checkbox>
-              <el-checkbox label="시험"></el-checkbox>
-            </el-checkbox-group>
-            <el-checkbox-group v-model="exceloption">
-              <el-checkbox label="최종 제출일 포함"></el-checkbox>
-            </el-checkbox-group>
-            <template>
-              <button type="button" @click="exportToExcel">Excel download</button>
-            </template>
-          </el-tab-pane>
-          <!---->
         </el-tabs>
       </template>
       <!---->
@@ -277,68 +154,7 @@
         </el-pagination>
       </div>
     </Panel>
-    <Panel :title="$t('TA/RA 학생 추가')" v-if="isAdmin">
-      <div slot="header">
-        <el-row :gutter="20">
-          <el-col :span="selectedUsers.length ? 16: 24">
-            <el-input v-model="ta_name" @click.native="onEnter" v-on:keyup.native.enter="onEnter" prefix-icon="el-icon-search" placeholder="TA/RA 학생 학번"></el-input>
-          </el-col>
-        </el-row>
-      </div>
-      <el-table :data="talist" v-loading="loading">
-        <el-table-column
-          label="이름"
-          prop="realname">
-        </el-table-column>
-        <el-table-column
-          label="학번"
-          prop="schoolssn">
-        </el-table-column>
-        <el-table-column
-          label="문제 접근 권한"
-          align="center">
-          <template slot-scope="props">
-            <el-checkbox-group @change="checkboxChange(props.row.checklist, props.row.schoolssn)" v-bind:style="checkboxstyle" v-model="props.row.checklist">
-              <el-checkbox label="문제 수정"></el-checkbox>
-            </el-checkbox-group>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="답안 접근 권한"
-          align="center">
-          <template slot-scope="props">
-            <el-checkbox-group @change="checkboxChange(props.row.checklist, props.row.schoolssn)" v-bind:style="checkboxstyle" v-model="props.row.checklist">
-              <el-checkbox label="답안 확인"></el-checkbox>
-            </el-checkbox-group>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="점수 확인 권한"
-          align="center">
-          <template slot-scope="props">
-            <el-checkbox-group @change="checkboxChange(props.row.checklist, props.row.schoolssn)" v-bind:style="checkboxstyle" v-model="props.row.checklist">
-              <el-checkbox label="점수 확인"></el-checkbox>
-            </el-checkbox-group>
-          </template>
-        </el-table-column>
-        <el-table-column
-        label="삭제하기"
-        align="center">
-        <template slot-scope="{row}">
-          <icon-btn icon="close" name="Delete the TA User"
-                    @click.native="deleteTaUser(row.schoolssn)"></icon-btn>
-        </template>
-      </el-table-column>
-      </el-table>
-    </Panel>
-    <el-dialog title="TA/RA 이름 검색 결과"
-               v-if="lectureID"
-               width="80%"
-               :modal-append-to-body='true'
-               @close-on-click-modal="false"
-               :visible.sync="outerVisible">
-                <add-t-a-user :lectureID.sync="lectureID" :studentName.sync="ta_name" @on-change="updateTAList"></add-t-a-user>
-    </el-dialog>
+    
     <Panel>
       <span slot="title">{{$t('m.Import_Student')}}
         <el-popover placement="right" trigger="hover">
@@ -394,7 +210,6 @@
   import api from '../../api.js'
   import utils from '@/utils/utils'
   import XLSX from 'xlsx'
-  import AddTAUser from './addTAUserLecture'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -415,9 +230,9 @@
         // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
         activeName: 'synthesis', // 임시 지정
         showContestDialog: false,
-        lectureID: '',
+        ContestTitle: '',
         searchUser: '',
-        addTAUserDialogVisible: false,
+        contestId: '',
         lectureFounder: '', // 강의 개설자 realname
         lectureTitle: '', // 수강과목 title
         pageSize: 50,
@@ -455,36 +270,16 @@
       }
     },
     mounted () {
-      this.lectureID = this.$route.params.lectureId
-      this.lectureTitle = this.$route.params.lectureTitle
-      this.lectureFounder = this.$route.params.lectureFounder
+      this.contestId = this.$route.params.contestId
+      this.ContestTitle = this.$route.params.ContestTitle
       this.getUserList(1)
-      this.getTAList(this.lectureID)
     },
     components: {
-      AddTAUser
     },
     methods: {
       checkboxChange (check, ssn) {
         api.updateTAuserPermit(check, ssn, this.lectureID).then(res => {
           console.log(res)
-        })
-      },
-      deleteTaUser (schoolssn) {
-        let result = this.talist.findIndex(ssn => ssn.schoolssn === schoolssn)
-        api.deleteTAUser(this.talist[result].schoolssn, this.lectureID).then(res => {
-          console.log(res)
-        })
-        this.talist.splice(result, 1)
-      },
-      updateTAList () {
-        api.getTAUserList(this.lectureID).then(res => {
-          this.talist = res.data.data.results
-        })
-      },
-      getTAList (lectureID) {
-        api.getTAUserList(lectureID).then(res => {
-          this.talist = res.data.data.results
         })
       },
       onEnter: function () {
@@ -508,10 +303,10 @@
         this.$confirm('해당 학생의 수강신청을 삭제하시겠습니까?', 'confirm', {
           type: 'warning'
         }).then(() => {
-          api.denyStudent(id, this.lectureID).then(res => {
-            this.getUserList(this.page)
+          api.denyContStudent(id, this.contestId).then(res => {
+            this.getUserList(0)
           }).catch(() => {
-            this.getUserList(this.page)
+            this.getUserList(0)
           })
         }, () => {
         })
@@ -537,7 +332,9 @@
       getUserList (page) {
         console.log('getUserList Called')
         this.loadingTable = true
-        api.getLectureUserList((page - 1) * this.pageSize, this.pageSize, this.keyword, this.lectureID).then(res => {
+        api.getContestUserList((page - 1) * this.pageSize, this.pageSize, this.keyword, this.contestId).then(res => {
+          console.log('res')
+          console.log(res)
           this.loadingTable = false
           this.total = res.data.data.total
           this.userList = res.data.data.results
@@ -666,8 +463,8 @@
       handleUsersUpload () {
         console.log(this.uploadUsers)
         let aJson = []
-        aJson.push('lectureId')
-        aJson.push(this.$route.params.lectureId)
+        aJson.push('contestId')
+        aJson.push(this.$route.params.contestId)
         this.uploadUsers.unshift(aJson)
         api.importStudents(this.uploadUsers).then(res => {
           this.getUserList(1)
