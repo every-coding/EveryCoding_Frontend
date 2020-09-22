@@ -117,6 +117,7 @@ export const m = {
   Contest_End_Time: '종료 시간',
   Contest_Password: '비밀번호',
   Contest_Rule_Type: '대회 규칙 유형',
+  Private_Contest: '비공개 대회',
   Real_Time_Rank: '실시간 랭킹',
   Contest_Status: '대회 상태',
   Allowed_IP_Ranges: '허용된 IP 범위',
