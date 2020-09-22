@@ -85,7 +85,7 @@
             <icon-btn name="통과한 제출 목록 내려받기" icon="download" 
                       @click.native="openDownloadOptions(scope.row.id)"></icon-btn>
             <icon-btn name="실습, 과제 삭제" icon="trash" @click.native="deleteContest(scope.row.id)"></icon-btn>
-            <el-tooltip v-if="!scope.row.lecture_title" class="item" effect="dark" content="대회 접근 권한" placement="top">
+            <el-tooltip v-if="scope.row.private" class="item" effect="dark" content="대회 접근 권한" placement="top">
               <el-button name="대회 접근 권한" size="mini" icon="el-icon-user" @click.native="goContestStudentList(scope.row.id, scope.row.title)"></el-button>
             </el-tooltip>
             <!--<icon-btn name="대회 접근 권한" icon="el-icon-user" @click.native="deleteContest(scope.row.id)"></icon-btn>-->

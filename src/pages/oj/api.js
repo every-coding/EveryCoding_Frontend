@@ -35,6 +35,13 @@ export default {
       data
     })
   },
+  deletePost (questionID) {
+    return ajax('qapostdetail', 'delete', {
+      params: {
+        questionID
+      }
+    })
+  },
   writeQnAPost (data) {
     return ajax('qapost', 'post', {
       data

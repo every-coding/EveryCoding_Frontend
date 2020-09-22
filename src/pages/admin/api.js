@@ -318,6 +318,7 @@ export default {
     })
   },
   editContest (data) {
+    console.log(data)
     return ajax('admin/contest', 'put', {
       data
     })

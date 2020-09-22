@@ -15,11 +15,14 @@
             <h2 class="article-title">{{ qnaList.title }}</h2>
 	          <br/>
             <div class="article-content" v-html="qnaList.content"></div>
-            <a @click="showDetailCode">자세히 보기</a>
-            <div v-if="detailCode">
-              <submission-details :submissionID.sync="qnaList.submission.id"></submission-details>
+            <div v-if="qnaList.submission">
+              <a @click="showDetailCode">자세히 보기</a>
+              <div v-if="detailCode">
+                <submission-details :submissionID.sync="qnaList.submission.id"></submission-details>
+              </div>
             </div>
 	          <hr/>
+            <el-button class="mr-0" @click="deletePost()">삭제 하기</el-button>
             <el-button class="d-block mr-0 ml-auto" @click="solvedQnA">해결 완료</el-button>
           </el-card>
         </el-col>
@@ -171,6 +174,27 @@
       currentChange (page) {
         this.currentPage = page
         this.getCommentListPage(page, this.limit)
+      },
+      deletePost () {
+        if (this.total > 0) {
+          this.$alert('댓글이 작성되어 있어 삭제가 불가능 합니다.<br/>관리자에게 문의해주세요.', '삭제 불가', {
+            confirmButtonText: '확인',
+            dangerouslyUseHTMLString: true
+          })
+        } else {
+          this.$confirm('정말로 이 질문을 삭제하시겠습니까?', 'confirm', {
+            type: 'warning',
+            confirmButtonText: '확인',
+            cancelButtonText: '취소'
+          }).then(() => {
+            api.deletePost(this.qnaList.id).then(res => {
+              this.getCommentListPage(this.currentPage, this.limit)
+            }).catch(() => {
+              this.getCommentListPage(this.currentPage, this.limit)
+            })
+          }, () => {
+          })
+        }
       },
       deleteComment (lectureId) {
         this.$confirm('정말로 이 댓글을 삭제하시겠습니까?', 'confirm', {

@@ -46,6 +46,15 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
+            <el-form-item :label="$t('m.Private_Contest')">
+              <el-switch
+                v-model="contest.private"
+                active-text=""
+                inactive-text="">
+              </el-switch>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item :label="$t('m.Contest_Rule_Type')">
               <el-radio class="radio" v-model="contest.rule_type" label="ACM" :disabled="disableRuleType">ACM</el-radio>
               <el-radio class="radio" v-model="contest.rule_type" label="OI" :disabled="disableRuleType">OI</el-radio>
@@ -114,6 +123,7 @@
           password: '',
           real_time_rank: true,
           visible: true,
+          private: false,
           allowed_ip_ranges: [{
             value: ''
           }],
@@ -142,6 +152,7 @@
         data.allowed_ip_ranges = ranges
         console.log(this.title)
         console.log(this.contest.lecture_id)
+        console.log(data)
         api[funcName](data).then(res => {
           if (this.contest.lecture_id === null) {
             this.$router.push({name: 'contest-list', query: {refresh: 'true'}})
