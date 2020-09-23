@@ -91,6 +91,7 @@
                 <Input v-model="captchaCode" class="captcha-code"/>
               </div>
             </template>
+            
             <Button v-if="problemRes" type="warning" icon="edit" :loading="submitting" @click="submitCode"
                     :disabled="problemSubmitDisabled || submitted"
                     class="fl-right">
@@ -98,12 +99,14 @@
               <span v-else>{{$t('m.Submit')}}</span>
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-            <!--
-            <Button :disabled="true"
+            
+            <Button v-b-toggle.sidebar-right
+                    :disabled=askbutton
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
+              
             </Button>
-            -->
+            
           </Col>
         </Row>
       </Card>
@@ -135,7 +138,7 @@
             <Icon type="stats-bars"></Icon>
             {{$t('m.Rankings')}}
           </VerticalMenu-item>
-          <VerticalMenu-item :route="{name: 'constest-problem-qna', params: {lectureID: lectureID, problemID: problemID ,contestID: contestID}}">
+          <VerticalMenu-item @click.native="goContestQnA">
             <Icon type="help"></Icon>
              {{$t('m.qa')}}
           </VerticalMenu-item>
@@ -200,7 +203,20 @@
         </div>
       </Card>
     </div>
-
+    <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
+      <div class="sidebar" id="wrapper">
+        <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
+        <h2 class="sidebar-header">{{$t('m.qna')}}</h2>
+        <hr/>
+        <div class="sidebar-content">
+          <br/>
+          <span>내용</span>
+          <el-input class="sidebar-content-margin" placeholder="제목을 입력해주세요." v-model="qnaContent.title"></el-input>
+          <Simditor class="sidebar-content-margin" v-model="qnaContent.content"></Simditor>
+          <el-button type="primary" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
+        </div>
+      </div>
+    </b-sidebar>
     <Modal v-model="graphVisible">
       <div id="pieChart-detail">
         <ECharts :options="largePie" :initOptions="largePieInitOpts"></ECharts>
@@ -221,6 +237,12 @@
   import {JUDGE_STATUS, CONTEST_STATUS, buildProblemCodeKey} from '@/utils/constants'
   import api from '@oj/api'
   import {pie, largePie} from './chartData'
+  // SidebarPlugin
+  import { SidebarPlugin } from 'bootstrap-vue'
+  import 'bootstrap-vue/dist/bootstrap-vue.css'
+  import Vue from 'vue'
+  import Simditor from '../../components/Simditor.vue'
+  Vue.use(SidebarPlugin)
 
   // 只显示这些状态的图形占用
   const filtedStatus = ['-1', '-2', '0', '1', '2', '3', '4', '8']
@@ -228,7 +250,8 @@
   export default {
     name: 'Problem',
     components: {
-      CodeMirror
+      CodeMirror,
+      Simditor
     },
     mixins: [FormMixin],
     data () {
@@ -243,7 +266,12 @@
         contestID: '',
         problemID: '',
         lectureID: '',
+        askbutton: false,
         submitting: false,
+        qnaContent: {
+          title: '',
+          content: ''
+        },
         code: '',
         language: 'C++',
         theme: 'solarized',
@@ -292,11 +320,31 @@
     },
     methods: {
       ...mapActions(['changeDomTitle']),
+      goContestQnA () {
+        if (this.lectureID === undefined) {
+          let data = { contestID: this.contestID }
+          api.getlectureid(data).then(res => {
+            this.lectureID = res.data.data
+          })
+        }
+        this.$router.push({
+          name: 'constest-problem-qna',
+          // path: '/CourseList/:lectureID/:contestID/question',
+          params: {
+            lectureID: this.lectureID,
+            problemID: this.problemID,
+            contestID: this.contestID
+          }
+        })
+      },
       init () {
         this.$Loading.start()
         this.contestID = this.$route.params.contestID
         this.problemID = this.$route.params.problemID
         this.lectureID = this.$route.params.lectureID
+        console.log(this.lectureID)
+        console.log(this.contestID)
+        console.log(this.problemID)
         let func = this.$route.name === 'problem-details' ? 'getProblem' : 'getContestProblem'
         api[func](this.problemID, this.contestID).then(res => {
           this.$Loading.finish()
@@ -324,6 +372,20 @@
           }
         }, () => {
           this.$Loading.error()
+        })
+        let params = {lectureID: this.lectureID, contestID: this.contestID, problemID: this.problemID}
+        api.checkSubmissionLog(params).then(res => {
+          this.code = res.data.data.code
+          this.submissionId = res.data.data.id
+        }).catch(() => {
+          this.askbutton = true
+        })
+      },
+      QnAWrite () {
+        // console.log(this.submission)
+        let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problemID, 'content': this.qnaContent, 'private': false }
+        api.writeQnAPost(data).then(res => {
+          this.goContestQnA()
         })
       },
       changePie (problemData) {
@@ -480,6 +542,7 @@
         } else {
           submitFunc(data, true)
         }
+        this.askbutton = false
       },
       onCopy (event) {
         this.$success('Code copied')
@@ -644,3 +707,71 @@
   }
 </style>
 
+
+<style scoped lang="less">
+  @import url('https://fonts.googleapis.com/earlyaccess/notosanskr.css');
+  #status {
+    .title {
+      font-size: 20px;
+    }
+    .content {
+      margin-top: 10px;
+      font-size: 14px;
+      span {
+        margin-right: 10px;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+    }
+  }
+  .sidebar {
+    background: white;
+    border: 2px solid #bcbcbc;
+  }
+  .sidebar-header {
+    float: right;
+    margin: 10px;
+    margin-top: 17px;
+  }
+  .sidebar-content {
+    font-family: 'Noto Sans KR', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    margin: 10px;
+  }
+  .sidebar-content-margin {
+    margin-top: 10px;
+  }
+  .admin-info {
+    margin: 5px 0;
+    &-content {
+      font-size: 16px;
+      padding: 10px;
+    }
+  }
+  .sidebar-margin {
+    margin: 10px;
+  }
+  .mr-0 {
+    margin-right: 10px;
+  }
+  .ml-auto {
+    margin-left:auto;
+  }
+  .d-block {
+    display:block;
+  }
+  #share-btn {
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+
+  pre {
+    border: none;
+    background: none;
+  }
+
+</style>
