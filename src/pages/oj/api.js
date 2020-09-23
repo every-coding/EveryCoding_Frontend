@@ -8,6 +8,11 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 axios.defaults.xsrfCookieName = 'csrftoken'
 
 export default {
+  getlectureid (data) {
+    return ajax('lecture', 'post', {
+      data
+    })
+  },
   deleteComment (id) {
     return ajax('comment', 'delete', {
       params: {
@@ -309,6 +314,11 @@ export default {
   submitCode (data) {
     return ajax('submission', 'post', {
       data
+    })
+  },
+  checkSubmissionLog (params) {
+    return ajax('submissionslog', 'get', {
+      params
     })
   },
   getSubmissionList (offset, limit, params) {
