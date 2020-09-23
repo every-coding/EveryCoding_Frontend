@@ -188,9 +188,8 @@
             cancelButtonText: '취소'
           }).then(() => {
             api.deletePost(this.qnaList.id).then(res => {
-              this.getCommentListPage(this.currentPage, this.limit)
+              this.$router.go(-1)
             }).catch(() => {
-              this.getCommentListPage(this.currentPage, this.limit)
             })
           }, () => {
           })

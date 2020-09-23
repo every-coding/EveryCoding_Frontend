@@ -6,13 +6,6 @@
       <div slot="extra">
         <ul class="filter">
           <li>
-            <div v-if="isSuperAdmin">
-              <Button size="small" @click="goSubmissionDetail">
-                Show Submission Detail
-              </Button>
-            </div>
-          </li>
-          <li>
             <Dropdown @on-click="onRuleChange">
               <span>{{query.rule_type === '' ? this.$i18n.t('m.Rule') : this.$i18n.t('m.' + query.rule_type)}}
                 <Icon type="arrow-down-b"></Icon>

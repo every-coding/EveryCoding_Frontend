@@ -1,10 +1,19 @@
 <template>
   <div>
-    <h2 class="span-title">제목</h2>
-    <el-input
-      v-model="keyword"
-      placeholder="title">
-    </el-input>
+    <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
+      <div class="sidebar" id="wrapper">
+        <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
+        <h2 class="sidebar-header">{{$t('m.qna')}}</h2>
+        <hr/>
+        <div class="sidebar-content">
+          <br/>
+          <span>내용</span>
+          <el-input class="sidebar-content-margin" placeholder="제목을 입력해주세요." v-model="qnaContent.title"></el-input>
+          <Simditor class="sidebar-content-margin" v-model="qnaContent.content"></Simditor>
+          <el-button type="primary" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
+        </div>
+      </div>
+    </b-sidebar>
   </div>
 </template>
 <script>
