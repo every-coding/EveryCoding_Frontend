@@ -19,9 +19,13 @@
               <el-tag size="mini" v-if="qna.problem">{{ qna.problem.title }}</el-tag>
               <el-tag size="mini" type="success" v-if="qna.solved">Solved</el-tag>
             </div>
-            <h2><a class="article-title" @click="handleRoute(qna.id)">{{ qna.title }}</a></h2>
+            <h2>
+              <a class="article-title" @click="handleRoute(qna.id)" v-if="!(qna.author.realname === '관리자')">{{ qna.title }}</a>
+              <a class="article-title" v-else>{{ qna.title }}</a>
+            </h2>
             <br/>
-            <div class="article-content" v-html="qna.content"></div>
+            <div class="article-content" v-html="qna.content" v-if="!(qna.author.realname === '관리자')" @click="handleRoute(qna.id)"></div>
+            <div class="article-content" v-html="qna.content" v-else></div>
           </el-card>
   
           <el-row :gutter="24">
@@ -35,12 +39,15 @@
                 </el-pagination>
               </div>
             </el-col>
-            <el-col :span="3">
+            <el-col :span="3" v-if="!LectureID">
               <el-button type="primary" v-b-toggle.sidebar-right>{{$t('m.qa')}}</el-button>
             </el-col>
           </el-row>
         </el-col>
       </el-row>
+      <!--
+      Todo Update
+      -->
       <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
         <div class="sidebar" id="wrapper">
           <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
@@ -55,6 +62,7 @@
           </div>
         </div>
       </b-sidebar>
+      <!-- -->
     </Panel>
   </div>
 </template>
@@ -75,7 +83,7 @@
     data () {
       return {
         test_probrem: [{'name': 'user1', 'title': 'test qa 1', 'date': 'September 08, 2020', 'Content': 'test1', 'Comment': 2}, {'name': 'user2', 'date': 'September 07, 2020', 'title': 'test qa 2', 'Content': 'test2', 'Comment': 3}],
-        qnaList: [],
+        qnaList: {},
         tags: ['JavaScript', 'Java', 'Ruby', 'Python'],
         qnaContent: {
           title: '',
@@ -99,6 +107,7 @@
         console.log(this.$route.params)
         this.contestID = this.$route.params.contestID
         this.LectureID = this.$route.params.lectureID
+        console.log(this.LectureID)
         if (this.$route.name === 'constest-problem-qna') {
           // this.routeName = true
           // params = {LectureID: this.LectureID, visible: false}
@@ -117,6 +126,14 @@
         // let params = {contestID: this.contestID, visible: false}
         api.getQnAPost(params).then(res => {
           this.qnaList = res.data.data.results
+          if (this.LectureID === undefined) {
+            console.log('call!!!!!!!')
+            this.qnaList.unshift({
+              'author': {'realname': '관리자'},
+              'problem': null,
+              'content': '안녕하세요. DCU Code 관리자 입니다.<br/>본 공개 질문 페이지에서는 프로그래밍 문법 등에 대하여 질문하는 페이지이며, <b>자신이 푼 실습, 과제 코드 공유가 금지되어 있습니다.</b><br/>과제, 실습관련 질문은 해당 과목 페이지 질문을 이용해주세요.<br/><b>코드 공유시 미통보 삭제됩니다.</b><br/>감사합니다.'
+            })
+          }
           console.log(res.data.data.results)
           this.total = res.data.data.total
         })
@@ -147,7 +164,9 @@
       QnAWrite () {
         // console.log(this.submission)
         let data = { 'content': this.qnaContent, 'private': false }
-        api.writeQnAPost(data).then(res => { })
+        api.writeQnAPost(data).then(res => {
+          this.qnaList.push(res.data.data)
+        })
       },
       handleRoute (route) {
         console.log(this.$route)

@@ -118,25 +118,30 @@ export default [
     meta: {title: 'Lecture Details'}
   },
   {
+    name: 'constest-problem-qna',
+    path: '/CourseList/:lectureID/:contestID/question',
+    meta: {title: 'Problem QnA'},
+    props: true,
+    component: ProblemQnA
+  },
+  {
+    name: 'constest-problem-qna-detail',
+    path: '/CourseList/:lectureID/:contestID/question/:questionID',
+    meta: {title: 'Problem QnA Detail'},
+
+    component: ProblemQnADetail
+  },
+  {
     name: 'lecture-contest-details',
     path: '/CourseList/:lectureID/:contestID/',
     component: Lecture.LectureContestDetails,
+    props: true,
     meta: {title: 'Contest Details'},
     children: [
       {
         name: 'lecture-contest-submission-list',
         path: 'submissions',
         component: SubmissionList
-      },
-      {
-        name: 'constest-problem-qna',
-        path: 'question',
-        component: ProblemQnA
-      },
-      {
-        name: 'constest-problem-qna-detail',
-        path: 'question/:questionID',
-        component: ProblemQnADetail
       },
       {
         name: 'lecture-contest-problem-list',
@@ -146,6 +151,7 @@ export default [
       {
         name: 'lecture-contest-problem-details',
         path: 'problem/:problemID/',
+        props: true,
         component: Problem
       },
       {
@@ -191,11 +197,6 @@ export default [
         name: 'contest-problem-details',
         path: 'problem/:problemID/',
         component: Problem
-      },
-      {
-        name: 'constest-problem-qna',
-        path: 'problem/:problemID/problemqa',
-        component: ProblemQnA
       },
       {
         name: 'contest-announcement-list',
