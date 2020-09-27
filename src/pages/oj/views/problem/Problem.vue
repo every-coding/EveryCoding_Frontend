@@ -320,13 +320,16 @@
     },
     methods: {
       ...mapActions(['changeDomTitle']),
-      goContestQnA () {
+      getLectureID () {
         if (this.lectureID === undefined) {
           let data = { contestID: this.contestID }
           api.getlectureid(data).then(res => {
             this.lectureID = res.data.data
           })
         }
+      },
+      goContestQnA () {
+        console.log(this.lectureID)
         this.$router.push({
           name: 'constest-problem-qna',
           // path: '/CourseList/:lectureID/:contestID/question',
@@ -342,9 +345,7 @@
         this.contestID = this.$route.params.contestID
         this.problemID = this.$route.params.problemID
         this.lectureID = this.$route.params.lectureID
-        console.log(this.lectureID)
-        console.log(this.contestID)
-        console.log(this.problemID)
+        this.getLectureID()
         let func = this.$route.name === 'problem-details' ? 'getProblem' : 'getContestProblem'
         api[func](this.problemID, this.contestID).then(res => {
           this.$Loading.finish()
@@ -768,10 +769,4 @@
     margin-top: 5px;
     margin-right: 10px;
   }
-
-  pre {
-    border: none;
-    background: none;
-  }
-
 </style>

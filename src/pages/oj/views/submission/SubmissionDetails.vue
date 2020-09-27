@@ -89,6 +89,7 @@
       return {
         qna: false,
         input: '',
+        lectureID: '',
         qnaContent: {
           title: '',
           content: ''
@@ -147,10 +148,29 @@
       this.getSubmission()
     },
     methods: {
+      getLectureID () {
+        let data = { contestID: this.submission.contest }
+        console.log(this.submission.contest)
+        api.getlectureid(data).then(res => {
+          this.lectureID = res.data.data
+        })
+      },
+      goContestQnA () {
+        this.$router.push({
+          name: 'constest-problem-qna',
+          // path: '/CourseList/:lectureID/:contestID/question',
+          params: {
+            lectureID: this.lectureID,
+            problemID: this.submission.problem,
+            contestID: this.submission.contest
+          }
+        })
+      },
       QnAWrite () {
         // console.log(this.submission)
         let data = { 'id': this.submission.id, 'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
         api.writeQnAPost(data).then(res => { })
+        this.goContestQnA()
       },
       getSubmission () {
         this.loading = true
@@ -189,6 +209,7 @@
             }
           }
           this.submission = data
+          this.getLectureID()
         }, () => {
           this.loading = false
         })
