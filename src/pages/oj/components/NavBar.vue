@@ -70,18 +70,28 @@
         </div>
       </template>
       <template v-else>
-        <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
-          <Button type="text" class="drop-menu-title">{{ user.username }}
-            <Icon type="arrow-down-b"></Icon>
-          </Button>
-          <Dropdown-menu slot="list">
-            <Dropdown-item name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
-            <Dropdown-item name="/status?myself=1">{{$t('m.MySubmissions')}}</Dropdown-item>
-            <Dropdown-item name="/setting/profile">{{$t('m.Settings')}}</Dropdown-item>
-            <Dropdown-item v-if="isAdminRole" name="/admin">{{$t('m.Management')}}</Dropdown-item>
-            <Dropdown-item divided name="/logout">{{$t('m.Logout')}}</Dropdown-item>
-          </Dropdown-menu>
-        </Dropdown>
+        <div class="drop-menu">
+          <Dropdown class="drop-menu" @on-click="handleRoute" placement="bottom" trigger="click">
+            <Button type="text" class="drop-menu-title">{{ user.username }}
+              <Icon type="arrow-down-b"></Icon>
+            </Button>
+            <Dropdown-menu slot="list">
+              <Dropdown-item name="/user-home">{{$t('m.MyHome')}}</Dropdown-item>
+              <Dropdown-item name="/status?myself=1">{{$t('m.MySubmissions')}}</Dropdown-item>
+              <Dropdown-item name="/setting/profile">{{$t('m.Settings')}}</Dropdown-item>
+              <Dropdown-item v-if="isAdminRole" name="/admin">{{$t('m.Management')}}</Dropdown-item>
+              <Dropdown-item divided name="/logout">{{$t('m.Logout')}}</Dropdown-item>
+            </Dropdown-menu>
+          </Dropdown>
+          <!--
+          <el-row>
+            <el-col :span="4">
+              <span class="notify-badge">1</span>
+              <el-button class="drop-menu-bell" icon="el-icon-bell" @click="dialogFormVisible = true"></el-button>
+            </el-col>
+          </el-row>
+          -->
+        </div>
       </template>
     </Menu>
     <Modal v-model="modalVisible" :width="400">
@@ -89,6 +99,20 @@
       <component :is="modalStatus.mode" v-if="modalVisible"></component>
       <div slot="footer" style="display: none"></div>
     </Modal>
+    
+    <el-dialog title="Shipping address" :modal=false :fullscreen=false :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="Promotion name" :label-width="formLabelWidth">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Zones" :label-width="formLabelWidth">
+          <el-select v-model="form.region" placeholder="Please select a zone">
+            <el-option label="Zone No.1" value="shanghai"></el-option>
+            <el-option label="Zone No.2" value="beijing"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -98,6 +122,40 @@
   import register from '@oj/views/user/Register'
 
   export default {
+    data () {
+      return {
+        gridData: [{
+          date: '2016-05-02',
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
+        }, {
+          date: '2016-05-04',
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
+        }, {
+          date: '2016-05-01',
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
+        }, {
+          date: '2016-05-03',
+          name: 'John Smith',
+          address: 'No.1518,  Jinshajiang Road, Putuo District'
+        }],
+        dialogTableVisible: false,
+        dialogFormVisible: false,
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },
+        formLabelWidth: '120px'
+      }
+    },
     components: {
       login,
       register
@@ -174,10 +232,29 @@
       float: right;
       margin-right: 30px;
       position: absolute;
-      right: 10px;
+      right: 25px;
       &-title {
         font-size: 18px;
       }
+      &-bell {
+        margin: 0 2px;
+      }
+    }
+    .buttons {
+      position:absolute;
+      right:5px;
+      bottom:5px;
+      width: 100px;
+    }
+    .button-left {
+      float:left;
+      width:45px;
+      margin: 0 2px
+    }
+    .button-right {
+      float:right;
+      width:45px;
+      margin:0 2px;
     }
     .btn-menu {
       font-size: 16px;
@@ -185,11 +262,24 @@
       margin-right: 10px;
     }
   }
-
   .modal {
     &-title {
       font-size: 18px;
       font-weight: 600;
     }
+  }
+  .notify-badge{
+    position: absolute;
+    background: rgba(255,0,0,1);
+    height:1.2rem;
+    top:8px;
+    right:-4px;
+    width:1.2rem;
+    text-align: center;
+    line-height: 1rem;;
+    font-size: 1rem;
+    border-radius: 50%;
+    color:white;
+    border:1px solid red;
   }
 </style>
