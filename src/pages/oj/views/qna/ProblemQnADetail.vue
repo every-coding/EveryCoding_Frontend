@@ -76,6 +76,7 @@
                 class="page"
                 layout="prev, pager, next"
                 @current-change="currentChange"
+                :current-page.sync="currentPage"
                 :total="total" :pageSize="limit">
               </el-pagination>
             </div>
@@ -143,10 +144,10 @@
         let params = ''
         params = {questionID: this.questionID,
           limit: this.limit,
-          offset: 0}
+          offset: -1}
         api.getQnACommentList(params).then(res => {
-          this.comments = res.data.data.results
-          this.total = res.data.data.total
+          this.currentPage = res.data.data
+          this.getCommentListPage(res.data.data, this.limit)
         })
       },
       getPostList () {
