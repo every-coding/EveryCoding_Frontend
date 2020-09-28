@@ -83,14 +83,12 @@
               <Dropdown-item divided name="/logout">{{$t('m.Logout')}}</Dropdown-item>
             </Dropdown-menu>
           </Dropdown>
-          <!--
           <el-row>
             <el-col :span="4">
-              <span class="notify-badge">1</span>
+              <span class="notify-badge" v-if="!(pushTotal === 0)">{{pushTotal}}</span>
               <el-button class="drop-menu-bell" icon="el-icon-bell" @click="dialogFormVisible = true"></el-button>
             </el-col>
           </el-row>
-          -->
         </div>
       </template>
     </Menu>
@@ -100,18 +98,37 @@
       <div slot="footer" style="display: none"></div>
     </Modal>
     
-    <el-dialog title="Shipping address" :modal=false :fullscreen=false :visible.sync="dialogFormVisible">
-      <el-form :model="form">
-        <el-form-item label="Promotion name" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="Zones" :label-width="formLabelWidth">
-          <el-select v-model="form.region" placeholder="Please select a zone">
-            <el-option label="Zone No.1" value="shanghai"></el-option>
-            <el-option label="Zone No.2" value="beijing"></el-option>
-          </el-select>
-        </el-form-item>
-      </el-form>
+    <el-dialog title="QnA 확인 알림 리스트" :modal=false :visible.sync="dialogFormVisible">
+      <el-table :data="pushData" v-loading="loading">
+        <el-table-column
+          label="ID"
+          prop="id">
+        </el-table-column>
+        <el-table-column
+          label="수강과목"
+          prop="problem.contest.lecture_title">
+        </el-table-column>
+        <el-table-column
+          label="학번"
+          prop="author.realname">
+        </el-table-column>
+        <el-table-column
+          label="바로가기"
+          align="center">
+          <template slot-scope="{row}">
+            <el-button icon="el-icon-monitor" name="바로가기"
+                      @click.native="goContestQnA(row.lecture, row.contest, row.problem.id, row.id)"></el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="panel-options">
+        <el-pagination
+          class="page"
+          layout="prev, pager, next"
+          @current-change="currentChange"
+          :total="pushTotal" :pageSize="limit">
+        </el-pagination>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -120,10 +137,16 @@
   import { mapGetters, mapActions } from 'vuex'
   import login from '@oj/views/user/Login'
   import register from '@oj/views/user/Register'
+  import api from '@oj/api'
 
   export default {
     data () {
       return {
+        pushTotal: 0,
+        pushData: '',
+        limit: 10,
+        public_qna: '공개질문',
+        loading: false,
         gridData: [{
           date: '2016-05-02',
           name: 'John Smith',
@@ -162,9 +185,38 @@
     },
     mounted () {
       this.getProfile()
+      this.qnapushlist()
     },
     methods: {
       ...mapActions(['getProfile', 'changeModalStatus']),
+      qnapushlist () {
+        let params = { offset: 0,
+          limit: this.limit }
+        api.PostListPushSerializer(params).then((res) => {
+          this.pushTotal = res.data.data.total
+          this.pushData = res.data.data.results
+        })
+      },
+      currentChange (page) {
+        let params = { offset: (page - 1) * this.limit,
+          limit: this.limit }
+        api.PostListPushSerializer(params).then((res) => {
+          this.pushTotal = res.data.data.total
+          this.pushData = res.data.data.results
+        })
+      },
+      goContestQnA (lectureID, contestID, problemID, questionID) {
+        this.$router.push({
+          name: 'constest-problem-qna-detail',
+          // path: '/CourseList/:lectureID/:contestID/question',
+          params: {
+            lectureID: lectureID,
+            problemID: problemID,
+            contestID: contestID,
+            questionID: questionID
+          }
+        })
+      },
       handleRoute (route) {
         if (route && route.indexOf('admin') < 0) {
           this.$router.push(route)

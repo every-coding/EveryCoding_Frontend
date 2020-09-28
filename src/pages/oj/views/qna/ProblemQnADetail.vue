@@ -114,6 +114,9 @@
     mounted () {
       this.init()
     },
+    beforeUpdate () {
+      console.log('beforeUpdate')
+    },
     methods: {
       init () {
         this.$Loading.start()
@@ -229,6 +232,9 @@
     watch: {
       answer: function (val) {
         this.answer = val
+      },
+      $route (to, from) {
+        this.init()
       }
     }
   }
