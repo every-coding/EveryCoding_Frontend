@@ -47,6 +47,12 @@ export default {
       }
     })
   },
+  PostListPushSerializer (data) {
+    console.log(data)
+    return ajax('qapost', 'put', {
+      data
+    })
+  },
   writeQnAPost (data) {
     return ajax('qapost', 'post', {
       data
