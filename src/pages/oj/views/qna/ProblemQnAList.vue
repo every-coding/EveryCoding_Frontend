@@ -229,7 +229,6 @@
   ul {
     margin: 0;
   }
-
   .site-header .navbar-nav .nav-link {
     color: #cbd5db;
   }
@@ -271,7 +270,6 @@
     float: right;
   }
   .el-button {
-    float: right;
     margin-bottom: 10px;
     margin-right: 10px;
   }
@@ -342,10 +340,8 @@
     margin-top: 5px;
     margin-right: 10px;
   }
-
   pre {
     border: none;
     background: none;
   }
-
 </style>
