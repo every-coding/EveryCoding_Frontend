@@ -24,8 +24,11 @@
 	          <hr/>
             <div class="d-block mr-0 ml-auto">
               <el-button @click="deletePost()">삭제 하기</el-button>
+              <el-button @click="solvedQnA">해결 완료</el-button>
+              <!--
               <el-button v-if=isAdmin @click="solvedQnA">해결 완료</el-button>
               <el-button v-else disabled @click="solvedQnA">해결 완료</el-button>
+              -->
             </div>
           </el-card>
         </el-col>
