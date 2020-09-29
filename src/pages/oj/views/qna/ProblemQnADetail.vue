@@ -22,8 +22,11 @@
               </div>
             </div>
 	          <hr/>
-            <el-button class="mr-0" @click="deletePost()">삭제 하기</el-button>
-            <el-button class="d-block mr-0 ml-auto" @click="solvedQnA">해결 완료</el-button>
+            <div class="d-block mr-0 ml-auto">
+              <el-button @click="deletePost()">삭제 하기</el-button>
+              <el-button v-if=isAdmin @click="solvedQnA">해결 완료</el-button>
+              <el-button v-else disabled @click="solvedQnA">해결 완료</el-button>
+            </div>
           </el-card>
         </el-col>
       </el-row>
@@ -89,6 +92,7 @@
 
 <script>
   import api from '../../api.js'
+  import { mapGetters } from 'vuex'
   import submissionDetails from '@oj/views/qna/SubmissionDetail.vue'
 
   export default {
@@ -228,6 +232,7 @@
       }
     },
     computed: {
+      ...mapGetters(['isAdmin'])
     },
     watch: {
       answer: function (val) {
@@ -292,6 +297,8 @@
   }
   .mr-0 {
     margin-top: 10px;
+    margin-bottom: 10px;
+    float: right;
   }
   .bottom-align-text {
     position: absolute;
