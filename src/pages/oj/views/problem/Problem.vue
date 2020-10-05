@@ -242,6 +242,7 @@
   import 'bootstrap-vue/dist/bootstrap-vue.css'
   import Vue from 'vue'
   import Simditor from '../../components/Simditor.vue'
+  import axios from 'axios'
   Vue.use(SidebarPlugin)
 
   // 只显示这些状态的图形占用
@@ -256,6 +257,7 @@
     mixins: [FormMixin],
     data () {
       return {
+        clientIp: '',
         statusVisible: false,
         captchaRequired: false,
         graphVisible: false,
@@ -315,6 +317,9 @@
       }
     },
     mounted () {
+      axios.get('http://ipinfo.io/json').then(response => {
+        this.clientIp = response.data.ip
+      })
       this.$store.commit(types.CHANGE_CONTEST_ITEM_VISIBLE, {menu: false})
       this.init()
     },
@@ -498,6 +503,8 @@
         }
         const submitFunc = (data, detailsVisible) => {
           this.statusVisible = true
+          data.ip = this.clientIp
+          console.log(data)
           api.submitCode(data).then(res => {
             this.submissionId = res.data.data && res.data.data.submission_id
             // 定时检查状态
