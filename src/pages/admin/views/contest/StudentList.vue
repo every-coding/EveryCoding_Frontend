@@ -14,7 +14,7 @@
       </div>-->
       <template>
         <el-tabs v-model="activeName">
-          <el-tab-pane label="종합" name="synthesis">
+          <el-tab-pane label="등록여부" name="synthesis">
             <el-table
               v-loading="loadingTable"
               element-loading-text="loading"
@@ -42,7 +42,7 @@
                   </span>
                 </template>
               </el-table-column>
-              <el-table-column prop="isallow" label="수강 유무" align="center">
+              <el-table-column prop="isallow" label="가입 유무" align="center">
                 <template slot-scope="scope"> <!--true 일 때 출력하는 템플릿-->
                   <span v-if="scope.row.isallow" style="background-color:green; color:white">
                     {{ scope.row.isallow }}
@@ -52,32 +52,6 @@
                   </span>
                 </template>
               </el-table-column>
-              <el-table-column label="총실습/도전/해결" align="center">
-                <template slot-scope="scope">
-                  <span style="text-align:center">
-                    {{ scope.row.totalPractice }}/{{ scope.row.subPractice }}/{{ scope.row.solvePractice }}
-                  </span>
-                </template>
-              </el-table-column>
-              <el-table-column label="총과제/도전/해결" align="center">
-                <template slot-scope="scope">
-                  <span style="text-align:center">
-                    {{ scope.row.totalAssign }}/{{ scope.row.subAssign }}/{{ scope.row.solveAssign }}
-                  </span>
-                </template>
-              </el-table-column>
-              <el-table-column label="총문제/도전/해결" align="center">
-                <template slot-scope="scope">
-                  <span style="text-align:center">
-                    {{ scope.row.totalProblem }}/{{ scope.row.tryProblem }}/{{ scope.row.solveProblem }}
-                  </span>
-                </template>
-              </el-table-column>
-              
-              <el-table-column prop="maxScore" label="만점" width="90" align="center"></el-table-column>
-              <el-table-column prop="totalScore" label="총점" width="90" align="center"></el-table-column>
-              <el-table-column prop="avgScore" label="평균" width="90" align="center"></el-table-column>
-              <el-table-column prop="progress" label="진행율" width="90" align="center"></el-table-column>
               
               <el-table-column fixed="right" label="" width="200">
                 <template slot-scope="{row}">
@@ -98,18 +72,15 @@
                   <th>
                     학번
                   </th>
-                  <template v-if="scoreListTable[0] !== undefined">
-                    <template v-for="(contests, index) in scoreListTable['0'].score.traincolumnscore.contests">
+                  <template v-if="scoreListTable !== undefined">
+                    <template v-for="(item, key) in scoreListTable[0].lecDict">
                       <th>
-                        {{ index + 1 }}주차
+                        {{ key }}
                       </th>
                     </template>
                   </template>
                   <th>
                     총점
-                  </th>
-                  <th>
-                    평균
                   </th>
                 </tr>
               </thead>
@@ -121,27 +92,27 @@
                   <td>
                     {{ user.schoolssn }}
                   </td>
-                  <td v-if="persentage == false" v-for="contest in user.score.traincolumnscore.contests">
-                    {{ contest.Info.score }}
-                  </td>
-                  <td v-if="persentage == true" v-for="contest in user.score.traincolumnscore.contests">
-                    {{ contest.Info.average }}
+                  <td v-for="(item, key) in user.lecDict">
+                    {{ item }}
                   </td>
                   <td>
-                    {{ user.score.traincolumnscore.persentSum.toFixed(2) }}
-                  </td>
-                  <td v-if="persentage == true">
-                    {{ user.score.traincolumnscore.persentavg.toFixed(2) }}
-                  </td>
-                  <td v-else>
-                    {{ user.score.traincolumnscore.persentavg.toFixed(2) }}
+                    {{ user.totalScore }}
                   </td>
                 </tr>
               </tbody>
             </table>
           </el-tab-pane>
+          <el-tab-pane label="Excel export" name="export">
+            <el-checkbox-group v-model="checkList">
+              <el-checkbox label="대회"></el-checkbox>
+            </el-checkbox-group>
+            <template>
+              <button type="button" @click="exportToExcel">Excel download</button>
+            </template>
+          </el-tab-pane>
           <!---->
         </el-tabs>
+        
       </template>
       <!---->
       <div class="panel-options">
@@ -242,7 +213,14 @@
         loading: false,
         border: false,
         userList: [],
-        scoreListTable: [],
+        scoreListTable: [
+          {
+            lecDict: {
+              sample2: 0,
+              sample1: 0
+            }
+          }
+        ],
         uploadUsers: [],
         uploadUsersPage: [],
         uploadUsersCurrentPage: 1,
@@ -332,6 +310,10 @@
       getUserList (page) {
         console.log('getUserList Called')
         this.loadingTable = true
+        api.getPublicContestUserList((page - 1) * this.pageSize, this.pageSize, this.contestId).then(res => {
+          this.scoreListTable = res.data.data.results
+          console.log(this.scoreListTable)
+        })
         api.getContestUserList((page - 1) * this.pageSize, this.pageSize, this.keyword, this.contestId).then(res => {
           console.log('res')
           console.log(res)
@@ -349,58 +331,6 @@
                   var userinfo = {}
                   userinfo['realname'] = user.realname
                   userinfo['schoolssn'] = user.schoolssn
-                  var trains = []
-                  var assigns = []
-                  var contests = []
-                  var trainpersentSum = 0
-                  var assignpersentSum = 0
-                  var contestpersentSum = 0
-                  for (var train in user.score.ContestAnalysis.실습.contests) {
-                    trainpersentSum = trainpersentSum + user.score.ContestAnalysis.실습.contests[train].Info.average
-                  }
-                  for (var assign in user.score.ContestAnalysis.과제.contests) {
-                    assignpersentSum = assignpersentSum + user.score.ContestAnalysis.과제.contests[assign].Info.average
-                  }
-                  for (var contest in user.score.ContestAnalysis.대회.contests) {
-                    contestpersentSum = contestpersentSum + user.score.ContestAnalysis.대회.contests[contest].Info.average
-                  }
-                  for (var i in user.score.ContestAnalysis.실습.contests) {
-                    trains.push(user.score.ContestAnalysis.실습.contests[i])
-                  }
-                  for (var j in user.score.ContestAnalysis.과제.contests) {
-                    assigns.push(user.score.ContestAnalysis.과제.contests[j])
-                  }
-                  for (var k in user.score.ContestAnalysis.대회.contests) {
-                    contests.push(user.score.ContestAnalysis.대회.contests[k])
-                  }
-                  var columnscore = {
-                    traincolumnscore: {
-                      contests: trains,
-                      totalscore: user.score.ContestAnalysis.실습.Info.score,
-                      // avg: user.score.ContestAnalysis.실습.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                      avg: user.score.ContestAnalysis.실습.Info.average,
-                      persentSum: trainpersentSum,
-                      persentavg: trainpersentSum / user.score.ContestAnalysis.실습.Info.numofcontents
-                    },
-                    assigncolumnscore: {
-                      contests: assigns,
-                      totalscore: user.score.ContestAnalysis.과제.Info.score,
-                      // avg: user.score.ContestAnalysis.과제.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                      avg: user.score.ContestAnalysis.과제.Info.average,
-                      persentSum: assignpersentSum,
-                      persentavg: assignpersentSum / user.score.ContestAnalysis.과제.Info.numofcontents
-                    },
-                    contestcolumnscore: {
-                      contests: contests,
-                      totalscore: user.score.ContestAnalysis.대회.Info.score,
-                      // avg: user.score.ContestAnalysis.대회.Info.score / user.score.ContestAnalysis.실습.Info.numofcontents
-                      avg: user.score.ContestAnalysis.대회.Info.average,
-                      persentSum: contestpersentSum,
-                      persentavg: contestpersentSum / user.score.ContestAnalysis.대회.Info.numofcontents
-                    }
-                  }
-                  userinfo.score = columnscore
-                  this.scoreListTable.push(userinfo)
                 }
               }
             })
@@ -476,94 +406,35 @@
         this.uploadUsers = []
       },
       exportToExcel () {
-        var wb = XLSX.utils.book_new()
-        var exceldata = {
-          '실습': [
-
-          ],
-          '과제': [
-
-          ],
-          '시험': [
-
-          ]
-        }
-        for (var exportval in this.checkList) {
-          console.log(this.checkList[exportval])
-          if (this.checkList[exportval] === '실습') {
-            this.scoreListTable.forEach(user => {
-              var traindata = {}
-              traindata.이름 = user.realname
-              traindata.학번 = user.schoolssn
-              for (var i in user.score.traincolumnscore.contests) {
-                if (this.persentage === true) {
-                  traindata[Number(i) + 1 + '주차'] = user.score.traincolumnscore.contests[i].Info.average
-                } else {
-                  traindata[Number(i) + 1 + '주차'] = user.score.traincolumnscore.contests[i].Info.score
-                }
-                if (this.exceloption[0] === '최종 제출일 포함') {
-                  traindata[Number(i) + 1 + '주 최종 제출일'] = 0
-                  console.log('date added')
-                }
-              }
-              traindata.총점 = user.score.traincolumnscore.persentSum.toFixed(2)
-              if (this.persentage === true) {
-                traindata.평균 = user.score.traincolumnscore.persentavg.toFixed(2)
-              } else {
-                traindata.평균 = user.score.traincolumnscore.avg
-              }
-              exceldata['실습'].push(traindata)
-            })
-            var trainxls = XLSX.utils.json_to_sheet(exceldata.실습)
-            XLSX.utils.book_append_sheet(wb, trainxls, '실습')
-          } else if (this.checkList[exportval] === '과제') {
-            this.scoreListTable.forEach(user => {
-              var assigndata = {}
-              assigndata.이름 = user.realname
-              assigndata.학번 = user.schoolssn
-              for (var i in user.score.assigncolumnscore.contests) {
-                if (this.persentage === true) {
-                  assigndata[Number(i) + 1 + '주차'] = user.score.assigncolumnscore.contests[i].Info.average
-                } else {
-                  assigndata[Number(i) + 1 + '주차'] = user.score.assigncolumnscore.contests[i].Info.score
-                }
-              }
-              assigndata.총점 = user.score.assigncolumnscore.persentSum.toFixed(2)
-              if (this.persentage === true) {
-                assigndata.평균 = user.score.assigncolumnscore.persentavg.toFixed(2)
-              } else {
-                assigndata.평균 = user.score.assigncolumnscore.avg
-              }
-              exceldata['과제'].push(assigndata)
-            })
-            var assignxls = XLSX.utils.json_to_sheet(exceldata.과제)
-            XLSX.utils.book_append_sheet(wb, assignxls, '과제')
-          } else if (this.checkList[exportval] === '시험') {
-            this.scoreListTable.forEach(user => {
-              var contestdata = {}
-              contestdata.이름 = user.realname
-              contestdata.학번 = user.schoolssn
-              for (var i in user.score.contestcolumnscore.contests) {
-                if (this.persentage === true) {
-                  contestdata[Number(i) + 1 + '주차'] = user.score.contestcolumnscore.contests[i].Info.average
-                } else {
-                  contestdata[Number(i) + 1 + '주차'] = user.score.contestcolumnscore.contests[i].Info.score
-                }
-              }
-              contestdata.총점 = user.score.contestcolumnscore.persentSum.toFixed(2)
-              if (this.persentage === true) {
-                contestdata.평균 = user.score.contestcolumnscore.persentavg.toFixed(2)
-              } else {
-                contestdata.평균 = user.score.contestcolumnscore.avg
-              }
-              exceldata['시험'].push(contestdata)
-            })
-            var contestxls = XLSX.utils.json_to_sheet(exceldata.시험)
-            XLSX.utils.book_append_sheet(wb, contestxls, '시험')
+        api.getPublicContestUserList(0, this.total, this.contestId).then(res => {
+          this.scoreListTable = res.data.data.results
+          console.log(this.scoreListTable)
+          var wb = XLSX.utils.book_new()
+          var exceldata = {
+            '대회': [
+  
+            ]
           }
-        }
-        console.log(exceldata)
-        XLSX.writeFile(wb, 'export.xlsx')
+          for (var exportval in this.checkList) {
+            console.log(this.checkList[exportval])
+            if (this.checkList[exportval] === '대회') {
+              this.scoreListTable.forEach(user => {
+                var contestdata = {}
+                contestdata.이름 = user.realname
+                contestdata.학번 = user.schoolssn
+                for (var prob in user.lecDict) {
+                  contestdata[prob] = user.lecDict[prob]
+                }
+                contestdata.총점 = user.totalScore.toFixed(2)
+                exceldata['대회'].push(contestdata)
+              })
+              var contestxls = XLSX.utils.json_to_sheet(exceldata.대회)
+              XLSX.utils.book_append_sheet(wb, contestxls, '대회')
+            }
+          }
+          console.log(exceldata)
+          XLSX.writeFile(wb, 'export.xlsx')
+        })
       }
     },
     computed: {
