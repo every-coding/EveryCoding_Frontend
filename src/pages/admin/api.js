@@ -89,6 +89,12 @@ export default {
       params: params
     })
   },
+  getPublicContestUserList (offset, limit, contestid) {
+    let params = {paging: true, offset, limit, contest_id: contestid}
+    return ajax('admin/publicContest', 'get', {
+      params: params
+    })
+  },
   // 获取单个用户信息
   getUser (id) {
     return ajax('admin/user', 'get', {
