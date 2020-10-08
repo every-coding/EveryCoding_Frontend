@@ -303,6 +303,7 @@ export default {
     })
   },
   getContestProblemList (contestId) {
+    console.log(contestId)
     return ajax('contest/problem', 'get', {
       params: {
         contest_id: contestId
