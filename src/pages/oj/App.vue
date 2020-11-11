@@ -6,9 +6,18 @@
         <router-view></router-view>
       </transition>
       <div class="footer">
-        <p>신고 및 문의 : <a href="mailto:dcucode@gmail.com">dcucode@gmail.com</a></p>
-        <p>Powered by <a href="https://cu.ac.kr" target="_blank">Daegu Catholic university</a> and <a href="https://github.com/QingdaoU" target="_blank">Qingdao University</a>
-        </p>
+        <el-row  type="flex" class="row-bg" justify="center">
+        <div v-for="img in imgList">
+          <el-col :span="4" >
+            <a :href="img.link" target="_blank"><img :src="img.url" :style="{width: img.style.width, height: img.style.height}" style="margin-right: 30px" /></a>
+          </el-col>
+        </div>
+        <el-col :span="8">
+          <p>신고 및 문의 : <a href="mailto:dcucode@gmail.com">dcucode@gmail.com</a></p>
+          <p>Powered by <a href="https://cu.ac.kr" target="_blank">Daegu Catholic university</a> and <a href="https://github.com/QingdaoU" target="_blank">Qingdao University</a>
+          </p>
+        </el-col>
+        </el-row>
       </div>
     </div>
     <BackTop></BackTop>
@@ -34,6 +43,33 @@
     },
     data () {
       return {
+        imgList: [
+          {
+            url: 'https://www.cu.ac.kr/images/common/link_logo_active.png',
+            style: {
+              width: '220px',
+              height: '35px',
+              margin: '10px'
+            },
+            link: 'https://www.cu.ac.kr'
+          }, {
+            url: 'http://sw.cu.ac.kr/pages/layout/A_layout/A_type/images/common/logo.png',
+            style: {
+              width: '178px',
+              height: '35px',
+              margin: '10px'
+            },
+            link: 'https://sw.cu.ac.kr'
+          }, {
+            url: 'http://software.cu.ac.kr/pages/layout/A_layout/A_type/images/common/logo.png',
+            style: {
+              width: '178px',
+              height: '35px',
+              margin: '10px'
+            },
+            link: 'http://software.cu.ac.kr/'
+          }
+        ],
         version: process.env.VERSION
       }
     },
