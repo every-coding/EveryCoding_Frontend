@@ -44,7 +44,6 @@
   import Pagination from '@oj/components/Pagination'
   import ContestRankMixin from './contestRankMixin'
   import utils from '@/utils/utils'
-
   export default {
     name: 'acm-contest-rank',
     components: {
@@ -120,6 +119,7 @@
         ],
         dataRank: [],
         options: {
+          lang: 'en',
           title: {
             text: this.$i18n.t('m.Top_10_Teams'),
             left: 'center'
