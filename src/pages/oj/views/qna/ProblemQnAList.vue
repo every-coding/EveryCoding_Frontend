@@ -16,7 +16,7 @@
               <small class="text-muted">{{ qna.date_posted | localtime('YYYY-M-D HH:mm')}}</small>
               <el-tag size="mini" v-if="qna.problem">{{ qna.problem.title }}</el-tag>
               <el-tag size="mini" v-else>공개 질문</el-tag>
-              <el-tag size="mini" v-if="!(qna.problem.contest.lecture_title === undefined)">{{ qna.problem.contest.lecture_title }}</el-tag>
+              <el-tag size="mini" v-if="!(LectureID === undefined)">{{ qna.problem.contest.lecture_title }}</el-tag>
               <el-tag size="mini" type="success" v-if="qna.solved">Solved</el-tag>
             </div>
             <h2>
@@ -93,6 +93,7 @@
         LectureID: '',
         problemID: '',
         contestID: '',
+        isEmpty: false,
         limit: 5,
         total: 0
       }
@@ -104,7 +105,6 @@
       init () {
         this.$Loading.start()
         let params = ''
-        console.log(this.$route.params)
         this.contestID = this.$route.params.contestID
         this.LectureID = this.$route.params.lectureID
         console.log(this.LectureID)
@@ -125,6 +125,7 @@
         // this.contestID = this.$route.params.contestID
         // let params = {contestID: this.contestID, visible: false}
         api.getQnAPost(params).then(res => {
+          console.log(res)
           this.qnaList = res.data.data.results
           if (this.LectureID === undefined) {
             console.log('call!!!!!!!')
@@ -140,7 +141,7 @@
               'content': '안녕하세요. DCU Code 관리자 입니다.<br/>본 과목 질문 페이지에서는 실습, 과제에 대하여 질문하는 페이지입니다. <br/>문제 / 오류 내역 란에서 조교에게 질문하기 버튼을 통해 질문 할 수 있으며, 자신이 마지막으로 작성한 제출 내역이 자동으로 기입됩니다.</br><br/><b>본 게시판의 경우 비공개 게시판이므로 본인의 게시글만 조회 할 수 있습니다.</b><br/>감사합니다.'
             })
           }
-          console.log(res.data.data.results)
+          console.log(this.qnaList)
           this.total = res.data.data.total
         })
         this.$Loading.finish()
