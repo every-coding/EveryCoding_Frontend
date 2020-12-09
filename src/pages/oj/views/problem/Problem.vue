@@ -257,7 +257,6 @@
     mixins: [FormMixin],
     data () {
       return {
-        clientIp: '',
         statusVisible: false,
         captchaRequired: false,
         graphVisible: false,
@@ -317,9 +316,6 @@
       }
     },
     mounted () {
-      axios.get('http://ipinfo.io/json').then(response => {
-        this.clientIp = response.data.ip
-      })
       this.$store.commit(types.CHANGE_CONTEST_ITEM_VISIBLE, {menu: false})
       this.init()
     },
@@ -334,7 +330,6 @@
         }
       },
       goContestQnA () {
-        console.log(this.lectureID)
         this.$router.push({
           name: 'constest-problem-qna',
           // path: '/CourseList/:lectureID/:contestID/question',
@@ -388,7 +383,6 @@
         })
       },
       QnAWrite () {
-        // console.log(this.submission)
         let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problemID, 'content': this.qnaContent, 'private': false }
         api.writeQnAPost(data).then(res => {
           this.goContestQnA()
@@ -503,7 +497,6 @@
         }
         const submitFunc = (data, detailsVisible) => {
           this.statusVisible = true
-          data.ip = this.clientIp
           console.log(data)
           api.submitCode(data).then(res => {
             this.submissionId = res.data.data && res.data.data.submission_id

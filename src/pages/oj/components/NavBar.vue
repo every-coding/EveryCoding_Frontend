@@ -342,6 +342,6 @@
       float: right;
    }
   .notify {
-      display: block;
+      display: flex;
   }
 </style>
