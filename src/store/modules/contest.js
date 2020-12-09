@@ -44,7 +44,7 @@ const getters = {
   },
   isContestAdmin: (state, getters, _, rootGetters) => {
     return rootGetters.isAuthenticated &&
-      (state.contest.created_by.id === rootGetters.user.id || rootGetters.user.admin_type === USER_TYPE.SUPER_ADMIN)
+      (state.contest.created_by.id === rootGetters.user.id || rootGetters.user.admin_type === USER_TYPE.SUPER_ADMIN || rootGetters.user.admin_type === USER_TYPE.TA_ADMIN)
   },
   contestMenuDisabled: (state, getters) => {
     if (getters.isContestAdmin) return false
