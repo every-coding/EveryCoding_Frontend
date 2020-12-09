@@ -242,6 +242,7 @@
   import 'bootstrap-vue/dist/bootstrap-vue.css'
   import Vue from 'vue'
   import Simditor from '../../components/Simditor.vue'
+  import axios from 'axios'
   Vue.use(SidebarPlugin)
 
   // 只显示这些状态的图形占用
@@ -329,7 +330,6 @@
         }
       },
       goContestQnA () {
-        console.log(this.lectureID)
         this.$router.push({
           name: 'constest-problem-qna',
           // path: '/CourseList/:lectureID/:contestID/question',
@@ -383,7 +383,6 @@
         })
       },
       QnAWrite () {
-        // console.log(this.submission)
         let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problemID, 'content': this.qnaContent, 'private': false }
         api.writeQnAPost(data).then(res => {
           this.goContestQnA()
@@ -498,6 +497,7 @@
         }
         const submitFunc = (data, detailsVisible) => {
           this.statusVisible = true
+          console.log(data)
           api.submitCode(data).then(res => {
             this.submissionId = res.data.data && res.data.data.submission_id
             // 定时检查状态
