@@ -386,6 +386,14 @@ export default {
       }
     })
   },
+  copy_killer (id) {
+    console.log(id)
+    return ajax('admin/problem/copy_killer', 'post', {
+      data: {
+        id
+      }
+    })
+  },
   getContestProblemList (params) {
     params = utils.filterEmptyValue(params)
     return ajax('admin/contest/problem', 'get', {

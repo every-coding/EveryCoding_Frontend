@@ -77,6 +77,9 @@
                       @click.native="downloadTestCase(scope.row.id)"></icon-btn>
             <icon-btn icon="trash" name="문제 삭제"
                       @click.native="deleteProblem(scope.row.id)"></icon-btn>
+            <el-tooltip v-if="routeName === 'contest-problem-list'" class="item" effect="dark" content="유사도 검사" placement="top">
+              <el-button name="코드 유사도 검사" size="mini" @click.native="copyKiller(scope.row.id)" icon="el-icon-user"></el-button>
+            </el-tooltip>
           </div>
         </el-table-column>
       </el-table>
@@ -175,6 +178,9 @@
       currentChange (page) {
         this.currentPage = page
         this.getProblemList(page)
+      },
+      copyKiller (id) {
+        this.$router.push({name: 'copyKiller', params: {problemID: id}})
       },
       getProblemList (page = 1) {
         this.loading = true
