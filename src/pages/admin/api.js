@@ -386,11 +386,11 @@ export default {
       }
     })
   },
-  copy_killer (id) {
-    console.log(id)
-    return ajax('admin/problem/copy_killer', 'post', {
+  copy_killer (keyword, id) {
+    return ajax('admin/problem/copykiller', 'post', {
       data: {
-        id
+        keyword: keyword,
+        id: id
       }
     })
   },
