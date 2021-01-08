@@ -27,7 +27,7 @@
         <el-button @click="searchLecture">검색</el-button>
       </el-col>
       <el-col :span="4">
-        <el-checkbox v-model="showPublic" label="공개 문제 보기" border></el-checkbox>
+        <el-checkbox @change="handleVisibleSwitch" v-model="showPublic" label="전체 실습 보기" border></el-checkbox>
         <!-- <el-checkbox-button :label="showPublicCont"></el-checkbox-button> -->
       </el-col>
     </el-row>

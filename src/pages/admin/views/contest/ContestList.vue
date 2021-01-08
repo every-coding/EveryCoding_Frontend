@@ -130,7 +130,7 @@
                @close-on-click-modal="false">
       <add-contest-component :lectureID="lectureId" @on-change="getContestList"></add-contest-component>
     </el-dialog>
-    <el-dialog title="실습, 과제, 대회 전체 복사"
+    <el-dialog title="과목 전체 복사"
                v-if="lectureId"
                width="80%"
                :modal-append-to-body='true'
