@@ -28,12 +28,18 @@
             </Col>
             <Col :span="1" style="text-align: center">
               <Dropdown @on-click="sortSemester">
-                <span>{{ semestersort }} 학기 <Icon type="arrow-down-b"></Icon>
-                </span>
+                <div v-if="semestersort < 3">
+                    <span>{{ semestersort }} 학기 <Icon type="arrow-down-b"></Icon>
+                    </span>
+                </div>
+                <div v-else>
+                    <span style="font-size: 15px"> 입학 전 <br>프로그램</span>
+                </div>
                 <!-- 구현 예정 -->
                 <Dropdown-menu slot="list">
                   <Dropdown-item name='1'>1</Dropdown-item>
                   <Dropdown-item name='2'>2</Dropdown-item>
+                  <Dropdown-item name='3'>입학 전</Dropdown-item>
                 </Dropdown-menu>
               </Dropdown>
             </Col>
@@ -55,7 +61,8 @@
               {{ lecture.lecture.year }}
 			      </Col>
             <Col :span="1" style="text-align: center">
-              {{ lecture.lecture.semester }}
+              <p v-if="lecture.lecture.semester < 3">{{ lecture.lecture.semester }}</p>
+              <p v-else>-</p>
 			      </Col>
             <Col :span="12" class="lecture-main">
               <p class="title">
@@ -118,8 +125,7 @@
     },
     beforeRouteEnter (to, from, next) {
       let d = new Date()
-      let semester = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : 2)
-
+      let semester = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : (((d.getMonth() + 1) <= 2 && (d.getMonth() + 1) >= 1) ? 3 : 2))
       api.getTakingLectureList(0, limit, undefined, d.getFullYear(), semester).then((res) => {
         next((vm) => {
           vm.lectures = res.data.data.results
@@ -131,7 +137,9 @@
     },
     mounted () {
       let d = new Date()
-      this.semestersort = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : 2)
+      this.semestersort = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : (((d.getMonth() + 1) <= 2 && (d.getMonth() + 1) >= 1) ? 3 : 2))
+      console.log(this.semestersort)
+      this.yearsort = d.getFullYear()
     },
     methods: {
       init () {

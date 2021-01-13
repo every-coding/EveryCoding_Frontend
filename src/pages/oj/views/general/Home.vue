@@ -1,6 +1,18 @@
 <template>
   <Row type="flex" justify="space-around">
     <Col :span="22">
+      <panel>
+        <div slot="title">
+          DCU Code 소개 영상
+          <Button style="float: right" type="info" v-if="!detail" @click="showDetail">자세히 보기</Button>
+          <Button style="float: right" type="info" v-else @click="showDetail">페이지 최소화</Button>
+        </div>
+        <p v-if="detail" align="middle">
+          <iframe width="789" height="444" src="https://www.youtube.com/embed/6kaNUXN951c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </p>
+      </panel>
+    </Col>
+    <Col :span="22">
     <panel class="lecture" v-if="$store.state.user.profile.id !== undefined && !isAdmin">
       <div slot="title">
         나의 수강과목 진행 현황
@@ -129,6 +141,7 @@
         tablerow: ['1'], // 테이블 출력 수 조절을 위한 값. 지우거나 값 수정하지 말 것
         lecturelist: [],
         contests: [],
+        detail: true,
         index: 0,
         activeName: '',
         clsize: 0,
@@ -141,6 +154,13 @@
     methods: {
       getDuration (startTime, endTime) {
         return time.duration(startTime, endTime)
+      },
+      showDetail () {
+        if (this.detail === true) {
+          this.detail = false
+        } else {
+          this.detail = true
+        }
       },
       setDashboard () {
         let params = {status: CONTEST_STATUS.NOT_START}

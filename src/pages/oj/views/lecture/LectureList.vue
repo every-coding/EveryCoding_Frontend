@@ -17,8 +17,11 @@
             <Col :span="2" style="text-align: center">
                 <span>{{ yearsort }} 년도</span>
             </Col>
-            <Col :span="1" style="text-align: center">
+            <Col v-if="semestersort < 3" :span="1" style="text-align: center">
                 <span>{{ semestersort }} 학기</span>
+            </Col>
+            <Col v-else :span="1" style="text-align: center">
+              <span style="font-size: 15px">입학 전 <br>프로그램</span>
             </Col>
             <Col :span="12">
               <p>과목명</p>
@@ -38,7 +41,8 @@
               {{ lecture.year }}
 			      </Col>
             <Col :span="2" style="text-align: center">
-              {{ lecture.semester }}
+              <p v-if="lecture.semester < 3">{{ lecture.semester }}</p>
+              <p v-else>-</p>
 			      </Col>
             <Col :span="12" class="lecture-main">
               <p class="title">
@@ -108,7 +112,9 @@
     },
     mounted () {
       let d = new Date()
-      this.semestersort = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : 2)
+      this.semestersort = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : (((d.getMonth() + 1) <= 2 && (d.getMonth() + 1) >= 1) ? 3 : 2))
+      console.log(this.semestersort)
+      this.yearsort = d.getFullYear()
     },
     methods: {
       init () {
