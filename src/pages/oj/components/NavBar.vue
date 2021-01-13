@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-  <el-menu mode="horizontal" @select="handleSelect" :default-active="activeIndex" class="oj-menu">
+  <el-menu mode="horizontal" @select="handleSelect" :default-active="activeIndex" class="oj-menu" ref="test">
   <a href="/"><div class="logo"><img id="logo" src="../../../assets/logo.jpg" alt="oj logo"/></div></a>
   <el-menu-item index="/">
     <Icon type="home"></Icon>
@@ -151,6 +151,7 @@
     data () {
       return {
         activeIndex: '/',
+        navHeight: null,
         inCollapse: true,
         pushTotal: 0,
         pushData: '',

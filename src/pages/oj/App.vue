@@ -59,7 +59,7 @@
               height: '35px',
               margin: '10px'
             },
-            link: 'https://sw.cu.ac.kr'
+            link: 'http://sw.cu.ac.kr/'
           }, {
             url: 'http://software.cu.ac.kr/pages/layout/A_layout/A_type/images/common/logo.png',
             style: {
