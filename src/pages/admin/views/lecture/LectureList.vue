@@ -33,10 +33,13 @@
           label="년도">
         </el-table-column>
         <el-table-column
-          prop="semester"
           width="90"
           align="center"
           label="학기">
+          <template slot-scope="scope">
+            <p v-if="scope.row.semester < 3">{{scope.row.semester}}</p>
+            <p v-else>입학 전</p>
+          </template>
         </el-table-column>
         <el-table-column
           prop="created_by.realname"
@@ -147,6 +150,11 @@
           })
         }, () => {
         })
+      },
+      filterHandler (value, row, column) {
+        const property = column['property']
+        console.log(value, row, column)
+        return row[property] === value
       },
       handleVisibleSwitch (row) {
         api.editLecture(row)
