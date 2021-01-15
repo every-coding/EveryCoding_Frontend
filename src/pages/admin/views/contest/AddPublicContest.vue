@@ -14,6 +14,7 @@
         <el-select v-model="semester">
           <el-option value="1">1학기</el-option>
           <el-option value="2">2학기</el-option>
+          <el-option value="3">입학 전</el-option>
         </el-select>
       </el-col>
       <el-col :span="12">
