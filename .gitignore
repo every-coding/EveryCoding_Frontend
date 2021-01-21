@@ -64,6 +64,7 @@ typings/
 
 # test_code
 test.vue
+package-lock.json
 
 # build
 vendor-manifest.json
