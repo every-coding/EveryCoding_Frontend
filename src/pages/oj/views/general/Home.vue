@@ -233,13 +233,13 @@
                     },
                     data: [
                       {
-                        value: (lecture.totalPractice - lecture.subPractice || ''), name: '시작 전'
+                        value: (lecture.solvePractice || ''), name: '성공'
                       },
                       {
                         value: (lecture.subPractice - lecture.solvePractice || ''), name: '도전 중'
                       },
                       {
-                        value: (lecture.solvePractice || ''), name: '성공'
+                        value: (lecture.totalPractice - lecture.subPractice || ''), name: '시작 전'
                       }
                     ],
                     label: {
