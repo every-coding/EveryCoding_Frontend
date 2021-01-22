@@ -121,6 +121,15 @@
         </div>
       </template>
     </el-table-column>
+    <el-table-column
+      v-if="!isAdminRole"
+      label="해결완료"
+      align="center">
+      <template slot-scope="{row}">
+        <el-button icon="el-icon-check"
+                  @click.native="solveToQnA(row.id, row)"></el-button>
+      </template>
+    </el-table-column>
   </el-table>
   <div class="panel-options">
     <el-pagination
@@ -139,6 +148,12 @@
   import login from '@oj/views/user/Login'
   import register from '@oj/views/user/Register'
   import api from '@oj/api'
+  import Vue from 'vue'
+  import ElementUI from 'element-ui'
+  import locale from 'element-ui/lib/locale/lang/en'
+  
+  Vue.use(ElementUI, { locale })
+  
   export default {
     components: {
       login,
@@ -191,7 +206,7 @@
       }
     },
     methods: {
-      ...mapActions(['getProfile', 'changeModalStatus']),
+      ...mapActions(['getProfile', 'changeModalStatus', 'isAdminRole']),
       handleRoute (route) {
         if (route && route.indexOf('admin') < 0) {
           this.$router.push(route)
@@ -228,6 +243,13 @@
           params: {
             questionID: questionID
           }
+        })
+      },
+      solveToQnA (questionID, row) {
+        let data = {'questionID': questionID}
+        api.solvedQuestion(data).then((res) => {
+          let idx = this.pushData.findIndex(function (item) { return item.id === questionID })
+          if (idx > -1) this.pushData.splice(idx, 1)
         })
       },
       goContestQnA (lectureID, contestID, problemID, questionID) {
