@@ -24,7 +24,7 @@
 	          <hr/>
             <div class="d-block mr-0 ml-auto">
               <el-button @click="deletePost()">삭제 하기</el-button>
-              <el-button @click="solvedQnA">해결 완료</el-button>
+              <el-button @click="solvedQnA" v-if="!isSemiAdmin">해결 완료</el-button>
               <!--
               <el-button v-if=isAdmin @click="solvedQnA">해결 완료</el-button>
               <el-button v-else disabled @click="solvedQnA">해결 완료</el-button>
@@ -235,7 +235,7 @@
       }
     },
     computed: {
-      ...mapGetters(['isAdmin'])
+      ...mapGetters(['isAdmin', 'isSemiAdmin'])
     },
     watch: {
       answer: function (val) {
