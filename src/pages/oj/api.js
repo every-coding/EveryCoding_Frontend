@@ -201,6 +201,7 @@ export default {
     return ajax('pickone', 'get')
   },
   getProblem (problemID) {
+    console.log('call')
     return ajax('problem', 'get', {
       params: {
         problem_id: problemID
