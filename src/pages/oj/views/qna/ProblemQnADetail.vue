@@ -15,8 +15,10 @@
             <h2 class="article-title">{{ qnaList.title }}</h2>
 	          <br/>
             <div class="article-content" v-html="qnaList.content"></div>
+            <br/>
             <div v-if="qnaList.submission">
-              <a @click="showDetailCode">자세히 보기</a>
+              <a @click="dialogVisible = true">문제 자세히 보기</a><br/> <br/>
+              <a @click="showDetailCode">제출한 소스코드 보기</a>
               <div v-if="detailCode">
                 <submission-details :submissionID.sync="qnaList.submission.id"></submission-details>
               </div>
@@ -90,6 +92,12 @@
         </el-row>
       </el-row>
     </Panel>
+    <el-dialog
+      title="Problem Detail"
+      :visible.sync="dialogVisible"
+      width="60%">
+      <problem-detail :contID.sync="qnaList.contest" :probID.sync="qnaList.problem._id"></problem-detail>
+    </el-dialog>
   </div>
 </template>
 
@@ -97,11 +105,13 @@
   import api from '../../api.js'
   import { mapGetters } from 'vuex'
   import submissionDetails from '@oj/views/qna/SubmissionDetail.vue'
+  import problemDetail from '@oj/views/qna/ProblemDetail.vue'
 
   export default {
     name: 'ProblemQnADetail',
     components: {
-      submissionDetails
+      submissionDetails,
+      problemDetail
     },
     data () {
       return {
@@ -113,6 +123,7 @@
         routeName: false,
         detailCode: false,
         questionID: '',
+        dialogVisible: false,
         currentPage: 0,
         limit: 5,
         total: 0
@@ -127,7 +138,6 @@
     methods: {
       init () {
         this.$Loading.start()
-        console.log(this.$route)
         this.questionID = this.$route.params.questionID
         this.getPostList()
         this.getCommentList()
@@ -165,6 +175,7 @@
         params = {questionID: this.questionID}
         api.getQnAPostDetail(params).then(res => {
           this.qnaList = res.data.data
+          console.log(this.qnaList)
         })
       },
       onStatusChange (status) {
