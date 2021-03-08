@@ -92,12 +92,14 @@
         </el-row>
       </el-row>
     </Panel>
-    <el-dialog
-      title="Problem Detail"
-      :visible.sync="dialogVisible"
-      width="60%">
-      <problem-detail :contID.sync="qnaList.contest" :probID.sync="qnaList.problem._id"></problem-detail>
-    </el-dialog>
+    <div v-if="qnaList.problem !== null">
+      <el-dialog
+        title="Problem Detail"
+        :visible.sync="dialogVisible"
+        width="60%">
+        <problem-detail :contID.sync="qnaList.contest" :probID.sync="qnaList.problem._id"></problem-detail>
+      </el-dialog>
+    </div>
   </div>
 </template>
 
