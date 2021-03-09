@@ -63,6 +63,11 @@ export default {
       params: params
     })
   },
+  migrateLecture (data) {
+    return ajax('admin/migratelecture', 'put', {
+      data
+    })
+  },
   getLectureUserList (offset, limit, keyword, lectureid) {
     let params = {paging: true, offset, limit}
     if (keyword) {
