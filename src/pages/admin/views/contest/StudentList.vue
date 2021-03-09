@@ -61,47 +61,7 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          <!---->
-          <el-tab-pane label="대회" name="train">
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    이름
-                  </th>
-                  <th>
-                    학번
-                  </th>
-                  <template v-if="scoreListTable !== undefined">
-                    <template v-for="(item, key) in scoreListTable[0].lecDict">
-                      <th>
-                        {{ key }}
-                      </th>
-                    </template>
-                  </template>
-                  <th>
-                    총점
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="user in scoreListTable">
-                  <td>
-                    {{ user.realname }}
-                  </td>
-                  <td>
-                    {{ user.schoolssn }}
-                  </td>
-                  <td v-for="(item, key) in user.lecDict">
-                    {{ item }}
-                  </td>
-                  <td>
-                    {{ user.totalScore }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </el-tab-pane>
+          
           <el-tab-pane label="Excel export" name="export">
             <el-checkbox-group v-model="checkList">
               <el-checkbox label="대회"></el-checkbox>

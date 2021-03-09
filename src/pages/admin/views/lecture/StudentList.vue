@@ -6,9 +6,12 @@
       </div>
       <div slot="header">
         <el-row :gutter="20">
-          <el-col :span="selectedUsers.length ? 16: 24">
+          <el-col :span="selectedUsers.length ? 16: 19">
             <el-input v-model="keyword" prefix-icon="el-icon-search" placeholder="Keywords"></el-input>
           </el-col>
+          <el-tooltip class="item" effect="dark" content="Database Migrate" placement="top">
+            <el-button icon="el-icon-coin" @click="migrateLecture"></el-button>
+          </el-tooltip>
         </el-row>
       </div>
       <strong>총 수강 학생/등록/미등록 : {{ userList.length }}명 / {{ RegistUser }}명 / {{ noRegistUser }}명</strong>
@@ -484,6 +487,13 @@
       },
       getTAList (lectureID) {
         api.getTAUserList(lectureID).then(res => {
+          this.talist = res.data.data.results
+        })
+      },
+      migrateLecture () {
+        this.loadingTable = true
+        let data = {'lectureID': this.lectureID}
+        api.migrateLecture(data).then(res => {
           this.talist = res.data.data.results
         })
       },
