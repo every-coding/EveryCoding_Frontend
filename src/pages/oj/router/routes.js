@@ -125,6 +125,13 @@ export default [
     component: ProblemQnA
   },
   {
+    name: 'constest-problem-public-qna',
+    path: '/CourseList/:lectureID/:contestID/question/public',
+    meta: {title: 'Public Problem QnA'},
+    props: true,
+    component: ProblemQnA
+  },
+  {
     name: 'constest-problem-qna-detail',
     path: '/CourseList/:lectureID/:contestID/question/:questionID',
     meta: {title: 'Problem QnA Detail'},

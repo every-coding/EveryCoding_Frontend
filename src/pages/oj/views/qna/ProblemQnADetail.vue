@@ -6,11 +6,27 @@
         <el-col>
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <a class="mr-2" href="#" v-if="qnaList.author.realname">{{ qnaList.author.realname }}</a>
-              <small class="text-muted" v-if="qnaList.date_posted">{{ qnaList.date_posted | localtime('YYYY-M-D HH:mm')}}</small>
-              <el-tag size="mini" v-if="qnaList.problem">{{ qnaList.problem.contest.lecture_title }}</el-tag>
-              <el-tag size="mini" v-if="qnaList.problem">{{ qnaList.problem.title }}</el-tag>
-              <el-tag size="mini" type="success" v-if="qnaList.solved">Solved</el-tag>
+              <el-row :gutter="24">
+                <el-col :span="17">
+                  <a class="mr-2" href="#" v-if="qnaList.author.realname">{{ qnaList.author.realname }}</a>
+                  <small class="text-muted" v-if="qnaList.date_posted">{{ qnaList.date_posted | localtime('YYYY-M-D HH:mm')}}</small>
+                  <el-tag size="mini" v-if="qnaList.problem">{{ qnaList.problem.contest.lecture_title }}</el-tag>
+                  <el-tag size="mini" v-if="qnaList.problem">{{ qnaList.problem.title }}</el-tag>
+                  <el-tag size="mini" type="success" v-if="qnaList.solved">Solved</el-tag>
+                </el-col>
+                <div v-if="isAdmin || isSemiAdmin">
+                  <el-col :span="7">
+                    <el-switch
+                      v-model="openQnA"
+                      @change="changeQnA2OpenQnA"
+                      active-text="공개 질문 활성화"
+                      inactive-text="공개 질문 비활성화"
+                      active-color="#13ce66"
+                      inactive-color="#ff4949">
+                    </el-switch>
+                  </el-col>
+                </div>
+              </el-row>
             </div>
             <h2 class="article-title">{{ qnaList.title }}</h2>
 	          <br/>
@@ -40,6 +56,7 @@
           <h3 class="box-card">답변</h3>
           <el-input
             type="textarea"
+            :autosize="{ minRows: 5, maxRows: 10}"
             class="box-card"
             v-model="answer"
             placeholder="답변을 입력 해주세요."
@@ -122,6 +139,7 @@
         // comments: [{'author': 'testUser', 'date_posted': '2020-09-02 07:04:18.604325+00', 'permit': 'Student', 'comment': 'test Comment page'}, {'author': 'testUser', 'date_posted': '2020-09-02 07:05:18.604325+00', 'permit': 'TA', 'comment': 'test Comment page 2'}],
         comments: [],
         qnaList: [],
+        openQnA: false,
         routeName: false,
         detailCode: false,
         questionID: '',
@@ -133,9 +151,6 @@
     },
     mounted () {
       this.init()
-    },
-    beforeUpdate () {
-      console.log('beforeUpdate')
     },
     methods: {
       init () {
@@ -172,11 +187,20 @@
           this.getCommentListPage(res.data.data, this.limit)
         })
       },
+      changeQnA2OpenQnA () {
+        let params = ''
+        params = {questionID: this.questionID,
+          OpenQnA: this.openQnA}
+        api.changeQnA2Open(params).then(res => {
+          console.log(res)
+        })
+      },
       getPostList () {
         let params = ''
         params = {questionID: this.questionID}
         api.getQnAPostDetail(params).then(res => {
           this.qnaList = res.data.data
+          this.openQnA = !res.data.data.private
           console.log(this.qnaList)
         })
       },
@@ -340,8 +364,5 @@
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
-  }
-  .pre-formatted {
-    white-space: pre;
   }
 </style>
