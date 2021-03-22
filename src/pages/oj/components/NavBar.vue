@@ -41,7 +41,7 @@
     <el-menu-item index="/FAQ">{{$t('m.FAQ')}}</el-menu-item>
   </el-submenu>
   <template v-if="!isAuthenticated" >
-    <el-menu-item1 index="register" style="float:right;">
+    <el-menu-item index="register" style="float:right;">
       <div class="btn-menu">
         <Button v-if="website.allow_register"
                 type="ghost"
@@ -50,8 +50,8 @@
                 style="margin-left: 5px;">{{$t('m.Register')}}
         </Button>
       </div>
-    </el-menu-item1>
-    <el-menu-item1 index="login" style="float:right;">
+    </el-menu-item>
+    <el-menu-item index="login" style="float:right;">
       <div class="btn-menu">
         <Button index="login" type="ghost"
               ref="loginBtn"
@@ -59,7 +59,7 @@
               @click="handleBtnClick('login')">{{$t('m.Login')}}
         </Button>
       </div>
-    </el-menu-item1>
+    </el-menu-item>
   </template>
   <template v-else>
     <div class="tile" >

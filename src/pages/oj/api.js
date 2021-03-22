@@ -30,6 +30,11 @@ export default {
       data
     })
   },
+  changeQnA2Open (params) {
+    return ajax('qapostdetail', 'put', {
+      params
+    })
+  },
   getQnAPostDetail (params) {
     return ajax('qapostdetail', 'get', {
       params
