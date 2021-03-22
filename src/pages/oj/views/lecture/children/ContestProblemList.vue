@@ -1,7 +1,43 @@
 <template>
   <div>
-    <Panel>
+    <Panel :style="panelStyle">
       <div slot="title">{{$t('m.Problems_List')}}</div>
+      <el-table
+        :data="lectureData"
+        :resizable="resize"
+        @cell-click="cellClick"
+        style="width: 100%; font-size: 12px">
+        <el-table-column
+          prop="_id"
+          width="150"
+          label="#">
+        </el-table-column>
+        <el-table-column
+          prop="title"
+          width="300"
+          :label="this.$i18n.t('m.Title')">
+        </el-table-column>
+        <el-table-column
+          prop="submission_number"
+          :label="this.$i18n.t('m.Total')">
+        </el-table-column>
+        <el-table-column
+          prop="submission_number"
+          :label="this.$i18n.t('m.AC_Rate')">
+          <template slot-scope="scope">
+            {{getACRate(scope.row.accepted_number, scope.row.submission_number)}}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="공개 질문">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="goPublicQnA(scope.row)">바로가기</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!--
       <Table v-if="contestRuleType == 'ACM' || OIContestRealTimePermission"
              :columns="ACMTableColumns"
              :data="problems"
@@ -12,7 +48,9 @@
              :columns="OITableColumns"
              @on-row-click="goContestProblem"
              no-data-text="$t('m.No_Problems')"></Table>
+      -->
     </Panel>
+
   </div>
 </template>
 
@@ -25,6 +63,9 @@
     mixins: [ProblemMixin],
     data () {
       return {
+        lectureData: [],
+        resize: true,
+        panelStyle: { display: 'none' },
         ACMTableColumns: [
           {
             title: '#',
@@ -66,6 +107,7 @@
     methods: {
       getContestProblems () {
         this.$store.dispatch('getContestProblems').then(res => {
+          this.lectureData = res.data.data
           if (this.isAuthenticated) {
             if (this.contestRuleType === 'ACM') {
               this.addStatusColumn(this.ACMTableColumns, res.data.data)
@@ -73,10 +115,25 @@
               this.addStatusColumn(this.ACMTableColumns, res.data.data)
             }
           }
+          this.panelStyle = {display: 'block'}
         })
       },
+      goPublicQnA (row) {
+        this.$router.push({
+          name: 'constest-problem-public-qna',
+          params: {
+            lectureID: this.$route.params.lectureID,
+            contestID: this.$route.params.contestID,
+            problemID: row.id
+          }
+        })
+      },
+      cellClick (row, column, cell, event) {
+        if (column.label !== '공개 질문') {
+          this.goContestProblem(row)
+        }
+      },
       goContestProblem (row) {
-        console.log(this.$route.params)
         this.$router.push({
           name: 'contest-problem-details',
           params: {
@@ -96,5 +153,11 @@
   }
 </script>
 
-<style scoped lang="less">
+<style>
+  .el-table th, .el-table tr {
+    background-color: transparent;
+  }
+  .el-table__header-wrapper {
+    background-color: #f8f8f9;
+  }
 </style>
