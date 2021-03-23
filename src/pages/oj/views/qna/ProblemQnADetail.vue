@@ -91,7 +91,7 @@
               </el-col>
             </el-row>
           </div>
-          <div class="pre-formatted">{{comment.content}}</div>
+          <pre>{{comment.content}}</pre>
           <hr/>
         </el-card>
         <el-row :gutter="24">
@@ -364,5 +364,9 @@
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 10px;
+  }
+  pre{
+    overflow: auto;
+    white-space: pre-wrap; /* pre tag내에 word wrap */
   }
 </style>
