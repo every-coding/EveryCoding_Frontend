@@ -3,6 +3,14 @@
     <Col :span="22">
       <panel>
         <div slot="title">
+          DCU Code 사용 메뉴얼 (학생용)
+          <Button style="float: right" type="info"><a href="/static/manual.pdf" download>다운로드</a></Button>
+        </div>
+      </panel>
+    </Col>
+    <Col :span="22">
+      <panel>
+        <div slot="title">
           DCU Code 소개 영상
           <Button style="float: right" type="info" v-if="!detail" @click="showDetail">자세히 보기</Button>
           <Button style="float: right" type="info" v-else @click="showDetail">페이지 최소화</Button>
@@ -110,7 +118,7 @@
   import { mapGetters } from 'vuex'
   import time from '@/utils/time'
   import { CONTEST_STATUS } from '@/utils/constants'
-
+  
   Vue.use(Element)
 
   const pieColorMap = {
@@ -145,7 +153,8 @@
         index: 0,
         activeName: '',
         clsize: 0,
-        resize: true
+        resize: true,
+        detail2: true
       }
     },
     mounted () {
@@ -345,6 +354,8 @@
 </script>
 
 <style lang="less" scoped>
+  a {color:#ffffff; /*new colour*/}
+  a span {color:#ffffff; /*originalcolour*/}
   h3 {
     padding-left: 25px;
   }
