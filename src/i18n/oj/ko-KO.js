@@ -17,6 +17,7 @@ export const m = {
   Memory_Limit: '메모리 제한',
   qna: '조교에게 질문하기',
   qa: '질문',
+  ExamSupervisor: '온라인 시험감독',
   publicQA: '공개 질문',
   ok: '확인',
   okText: '확인',

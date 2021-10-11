@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 // 引入 view 组件
-import { Announcement, Conf, Contest, ContestList, Home, JudgeServer, Login,
+import { Announcement, Conf, Contest, ContestList, Home, JudgeServer, Login, showSupervisorList,
   Problem, ProblemList, CopyKiller, User, PruneTestCase, Dashboard, ProblemImportOrExport, Lecture, LectureList, StudentList, ContStudentList } from './views'
 Vue.use(VueRouter)
 
@@ -38,6 +38,11 @@ export default new VueRouter({
           path: '/conf',
           name: 'conf',
           component: Conf
+        },
+        {
+          path: '/supervisorList',
+          name: 'showSupervisorList',
+          component: showSupervisorList
         },
         {
           path: '/judge-server',

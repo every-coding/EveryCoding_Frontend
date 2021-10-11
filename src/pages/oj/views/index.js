@@ -11,7 +11,7 @@ import Announcements from './general/Announcements.vue'
 // Grouping Components in the Same Chunk
 const SubmissionList = () => import(/* webpackChunkName: "submission" */ '@oj/views/submission/SubmissionList.vue')
 const SubmissionDetails = () => import(/* webpackChunkName: "submission" */ '@oj/views/submission/SubmissionDetails.vue')
-
+const joinSupervisorRoom = () => import('@oj/views/supervisor/joinRoom.vue')
 const ACMRank = () => import(/* webpackChunkName: "userRank" */ '@oj/views/rank/ACMRank.vue')
 const OIRank = () => import(/* webpackChunkName: "userRank" */ '@oj/views/rank/OIRank.vue')
 
@@ -27,7 +27,7 @@ export {
   Login_, Logout, UserHome, About, FAQ,
   ProblemList, Problem,
   ACMRank, OIRank,
-  SubmissionList, SubmissionDetails,
+  SubmissionList, SubmissionDetails, joinSupervisorRoom,
   ApplyResetPassword, ResetPassword, ProblemQnA, ProblemQnADetail
 }
 /* 组件导出分为两类, 一类常用的直接导出，另一类诸如Login, Logout等用懒加载,懒加载不在此处导出

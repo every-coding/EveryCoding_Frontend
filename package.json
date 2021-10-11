@@ -21,6 +21,7 @@
     "echarts": "^4.1.0",
     "element-ui": "^2.3.7",
     "font-awesome": "^4.7.0",
+    "fs": "0.0.1-security",
     "highlight.js": "^9.12.0",
     "iview": "^2.13.0",
     "katex": "^0.10.0",
@@ -28,8 +29,11 @@
     "node-sass": "^4.11.0",
     "papaparse": "^4.4.0",
     "raven-js": "^3.25.0",
+    "rtcmulticonnection": "^3.7.0",
+    "rtcmulticonnection-v3": "^3.4.5",
     "sass-loader": "^7.2.0",
     "screenfull": "^3.3.2",
+    "socket.io": "^4.2.0",
     "tar-simditor": "^3.0.5",
     "tar-simditor-markdown": "^1.2.3",
     "vue": "^2.6.12",
@@ -44,6 +48,8 @@
     "vue-multi-select": "^4.5.0",
     "vue-quill-editor": "^3.0.5",
     "vue-router": "^3.0.1",
+    "vue-socket.io": "^3.0.10",
+    "vue-webrtc": "^2.0.0",
     "vuetify": "^2.3.9",
     "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0",
@@ -111,5 +117,11 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "http://itgit.cu.ac.kr/OnlineJudge/DCU-Online-Judge_Frontend"
+  },
+  "license": "ISC"
 }

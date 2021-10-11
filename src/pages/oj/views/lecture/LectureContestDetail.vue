@@ -64,6 +64,12 @@
 
         <VerticalMenu-item v-if="OIContestRealTimePermission"
                            :disabled="contestMenuDisabled"
+                           :route="{name: 'joinSupervisorRoom', params: {contestID: contestID, lectureID: lectureID}}">
+          <Icon type="stats-bars"></Icon>
+          {{$t('m.ExamSupervisor')}}
+        </VerticalMenu-item>
+        <VerticalMenu-item v-if="OIContestRealTimePermission"
+                           :disabled="contestMenuDisabled"
                            :route="{name: 'lecture-contest-rank', params: {contestID: contestID, lectureID: lectureID}}">
           <Icon type="stats-bars"></Icon>
           {{$t('m.Rankings')}}

@@ -17,7 +17,8 @@ import {
   SubmissionDetails,
   SubmissionList,
   UserHome,
-  ProblemQnADetail
+  ProblemQnADetail,
+  joinSupervisorRoom
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -137,6 +138,12 @@ export default [
     meta: {title: 'Problem QnA Detail'},
 
     component: ProblemQnADetail
+  },
+  {
+    name: 'joinSupervisorRoom',
+    path: '/joinSupervisorRoom',
+    meta: {title: 'Online Exam Supervisor'},
+    component: joinSupervisorRoom
   },
   {
     name: 'lecture-contest-details',

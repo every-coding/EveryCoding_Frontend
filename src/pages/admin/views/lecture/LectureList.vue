@@ -68,6 +68,7 @@
           label="">
           <div slot-scope="scope">
             <icon-btn name="과목 수정" icon="edit" @click.native="goEdit(scope.row.id)"></icon-btn>
+            <icon-btn name="시험 감독" icon="edit" @click.native="goSupervisor(scope.row.id)"></icon-btn>
             <icon-btn name="실습, 과제 목록" icon="list-ol" @click.native="goLectureContestList(scope.row.id)"></icon-btn>
             <!--<icon-btn name="Student List" icon="list-ol" @click.native="goLectureStudentList(scope.row.id, scope.row.title, scope.row.created_by.realname)"></icon-btn>-->
             <el-tooltip class="item" effect="dark" content="학생 목록" placement="top">
@@ -129,6 +130,9 @@
       openDownloadOptions (lectureId) {
         this.downloadDialogVisible = true
         this.currentId = lectureId
+      },
+      goSupervisor (lectureId) {
+        this.$router.push({name: 'showSupervisorList', params: {lectureId}})
       },
       goEdit (lectureId) {
         this.$router.push({name: 'edit-lecture', params: {lectureId}})
