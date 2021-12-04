@@ -1,2 +1,3 @@
+<<<<<<< HEAD
 npm run dev &
-echo $!
+echo $
