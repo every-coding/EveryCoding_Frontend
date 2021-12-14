@@ -192,7 +192,7 @@
         problemID: '',
         routeName: '',
         JUDGE_STATUS: '',
-        rejudge_column: false
+        rejudge_column: true
       }
     },
     mounted () {
@@ -260,31 +260,31 @@
         this.$router.push(route)
       },
       adjustRejudgeColumn () {
-        if (!this.rejudgeColumnVisible || this.rejudge_column) {
-          return
-        }
-        const judgeColumn = {
-          title: this.$i18n.t('m.Option'),
-          fixed: 'right',
-          align: 'center',
-          width: 90,
-          render: (h, params) => {
-            return h('Button', {
-              props: {
-                type: 'primary',
-                size: 'small',
-                loading: params.row.loading
-              },
-              on: {
-                click: () => {
-                  this.handleRejudge(params.row.id, params.index)
+        if (!this.rejudgeColumnVisible || this.rejudge_column) { // rejudge 권한 확인 및 rejudge 컬럼 값 확인
+          console.log('adjustRejudgeColumn called.')
+          const judgeColumn = {
+            title: this.$i18n.t('m.Option'),
+            fixed: 'right',
+            align: 'center',
+            width: 90,
+            render: (h, params) => {
+              return h('Button', {
+                props: {
+                  type: 'primary',
+                  size: 'small',
+                  loading: params.row.loading
+                },
+                on: {
+                  click: () => {
+                    this.handleRejudge(params.row.id, params.index)
+                  }
                 }
-              }
-            }, this.$i18n.t('m.Rejudge'))
+              }, this.$i18n.t('m.Rejudge'))
+            }
           }
+          this.columns.push(judgeColumn)
+          this.rejudge_column = true
         }
-        this.columns.push(judgeColumn)
-        this.rejudge_column = true
       },
       handleResultChange (status) {
         this.page = 1
@@ -321,8 +321,9 @@
         return this.formFilter.result === '' ? this.$i18n.t('m.Status') : this.$i18n.t('m.' + JUDGE_STATUS[this.formFilter.result].name.replace(/ /g, '_'))
       },
       rejudgeColumnVisible () {
-        return !this.contestID && this.user.admin_type === USER_TYPE.SUPER_ADMIN // 특정 대회에 소속된 문제이면서, 사용자가 관리자인 경우에면 Rejudge 옵션 추가
-        // return !this.contestID && this.user.admin_type === USER_TYPE.SUPER_ADMIN
+        // return !this.contestID && this.user.admin_type === USER_TYPE.SUPER_ADMIN // 특정 대회에 소속된 문제이면서, 사용자가 관리자인 경우에면 Rejudge 옵션 추가
+        console.log('rejudgeColumnVisible')
+        return this.user.admin_type === USER_TYPE.SUPER_ADMIN
       }
     },
     watch: {
