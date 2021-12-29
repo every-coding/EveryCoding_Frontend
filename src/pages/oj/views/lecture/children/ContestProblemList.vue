@@ -19,21 +19,24 @@
         </el-table-column>
         <el-table-column
           prop="submission_number"
+          width="100"
           :label="this.$i18n.t('m.Total')">
         </el-table-column>
         <el-table-column
           prop="submission_number"
+          width="100"
           :label="this.$i18n.t('m.AC_Rate')">
           <template slot-scope="scope">
             {{getACRate(scope.row.accepted_number, scope.row.submission_number)}}
           </template>
         </el-table-column>
         <el-table-column
-          label="공개 질문">
+          width="100"
+          label="">
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="goPublicQnA(scope.row)">바로가기</el-button>
+              @click="goPublicQnA(scope.row)">질문하기</el-button>
           </template>
         </el-table-column>
       </el-table>
