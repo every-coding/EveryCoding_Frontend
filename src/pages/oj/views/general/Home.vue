@@ -4,7 +4,7 @@
       <panel>
         <div slot="title">
           DCU Code 사용 메뉴얼 (학생용)
-          <Button style="float: right" type="info"><a href="/static/manual.pdf" download>다운로드</a></Button>
+          <Button style="float: right" type="info"><a href="https://drive.google.com/file/d/1-eBzQYloJeQF-1JGx6CzMDAhHxzO_gX7/view?usp=sharing" download>다운로드</a></Button>
         </div>
       </panel>
     </Col>

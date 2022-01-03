@@ -23,6 +23,7 @@
                   <Dropdown-item name="2020">2020</Dropdown-item>
                   <Dropdown-item name="2021">2021</Dropdown-item>
                   <Dropdown-item name="2022">2022</Dropdown-item>
+                  <Dropdown-item name="2020">2023</Dropdown-item>
                 </Dropdown-menu>
               </Dropdown>
             </Col>
@@ -126,7 +127,8 @@
     beforeRouteEnter (to, from, next) {
       let d = new Date()
       let semester = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : (((d.getMonth() + 1) <= 2 && (d.getMonth() + 1) >= 1) ? 3 : 2))
-      api.getTakingLectureList(0, limit, undefined, d.getFullYear(), semester).then((res) => {
+      semester = 2
+      api.getTakingLectureList(0, limit, undefined, d.getFullYear() - 1, semester).then((res) => {
         next((vm) => {
           vm.lectures = res.data.data.results
           vm.total = res.data.data.total
@@ -140,6 +142,8 @@
       this.semestersort = (((d.getMonth() + 1) <= 7 && (d.getMonth() + 1) >= 3) ? 1 : (((d.getMonth() + 1) <= 2 && (d.getMonth() + 1) >= 1) ? 3 : 2))
       console.log(this.semestersort)
       this.yearsort = d.getFullYear()
+      this.yearsort = 2021
+      this.semestersort = 2
     },
     methods: {
       init () {
