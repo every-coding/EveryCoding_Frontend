@@ -10,7 +10,7 @@
                             <el-option value="2020">2020</el-option>
                             <el-option value="2021">2021</el-option>
                             <el-option value="2022">2022</el-option>
-                            <el-option value="2022">2023</el-option>
+                            <el-option value="2023">2023</el-option>
                           </el-select>
                       </el-form-item>
                     </el-col>
@@ -49,6 +49,16 @@
   import api from '../../api.js'
   import Simditor from '../../components/Simditor.vue'
 
+  export var now = new Date()
+  export var curYear = now.getFullYear()
+  export var curMonth = now.getMonth()
+
+  if (curMonth < 8) {
+    curMonth = 1
+  } else {
+    curMonth = 2
+  }
+
   export default {
     name: 'CreateLecture',
     components: {
@@ -63,8 +73,8 @@
           description: '',
           status: true,
           password: '',
-          year: 2020,
-          semester: 1,
+          year: curYear,
+          semester: curMonth,
           contestlist: [{
             value: ''
           }]
