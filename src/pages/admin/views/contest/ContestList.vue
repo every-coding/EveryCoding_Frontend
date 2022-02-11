@@ -1,6 +1,12 @@
 <template>
   <div class="view">
     <Panel :title="$t('m.WeeklyContest_List')">
+      <div>
+        강의명 : {{ this.lectureTitle }}
+      </div>
+      <div>
+        담당교수 : {{ this.lectureCreator }}
+      </div>
       <div slot="header">
         <el-input
           v-model="keyword"
@@ -82,7 +88,7 @@
             <icon-btn name="문제 목록" icon="list-ol" @click.native="goContestProblemList(scope.row.id)"></icon-btn>
             <icon-btn name="실습, 과제 공지사항" icon="info-circle"
                       @click.native="goContestAnnouncement(scope.row.id)"></icon-btn>
-            <icon-btn name="통과한 제출 목록 내려받기" icon="download" 
+            <icon-btn name="통과한 제출 목록 내려받기" icon="download"
                       @click.native="openDownloadOptions(scope.row.id)"></icon-btn>
             <icon-btn name="실습, 과제 삭제" icon="trash" @click.native="deleteContest(scope.row.id)"></icon-btn>
             <el-tooltip v-if="scope.row.private" class="item" effect="dark" content="대회 접근 권한" placement="top">
@@ -167,6 +173,8 @@
         routeName: '',
         currentId: 1,
         lectureId: '',
+        lectureTitle: '',
+        lectureCreator: '',
         downloadDialogVisible: false,
         addContestDialogVisible: false,
         addLectureDialogVisible: false
@@ -175,6 +183,7 @@
     mounted () {
       this.routeName = this.$route.name
       this.lectureId = this.$route.params.lectureId
+      this.currentLectureInfo(this.lectureId)
       this.getContestList(this.currentPage)
     },
     filters: {
@@ -249,6 +258,13 @@
       handleVisibleSwitch (row) {
         row.lecture_id = row.lecture
         api.editContest(row)
+      },
+      currentLectureInfo (lectureId) {
+        api.getLecture(lectureId).then(res => {
+          console.log(res)
+          this.lectureTitle = res.data.data.title
+          this.lectureCreator = res.data.data.created_by.realname
+        })
       }
     },
     watch: {
