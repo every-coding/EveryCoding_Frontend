@@ -54,6 +54,13 @@ export default {
       data
     })
   },
+  getProfessorList () {
+    let params = {}
+    params.admin_type = 'Admin'
+    return ajax('admin/user', 'get', {
+      params: params
+    })
+  },
   getUserList (offset, limit, keyword) {
     let params = {paging: true, offset, limit}
     if (keyword) {
