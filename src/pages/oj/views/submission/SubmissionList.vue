@@ -22,8 +22,8 @@
 
             <li>
               <i-switch size="large" v-model="formFilter.myself" @on-change="handleQueryChange">
-                <span slot="open">{{$t('m.Mine')}}</span>
-                <span slot="close">{{$t('m.All')}}</span>
+                <span slot="open">{{$t('m.All')}}</span>
+                <span slot="close">{{$t('m.Mine')}}</span>
               </i-switch>
             </li>
             <li>
@@ -219,7 +219,7 @@
       },
       buildQuery () {
         return {
-          myself: this.formFilter.myself === true ? '1' : '0',
+          myself: this.formFilter.myself === false ? '1' : '0',
           result: this.formFilter.result,
           username: this.formFilter.username,
           page: this.page
