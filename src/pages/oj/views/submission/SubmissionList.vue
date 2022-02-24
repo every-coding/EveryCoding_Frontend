@@ -282,7 +282,7 @@
               }, this.$i18n.t('m.Rejudge'))
             }
           }
-          this.columns.push(judgeColumn)
+          // this.columns.push(judgeColumn)
           this.rejudge_column = true
         }
       },
