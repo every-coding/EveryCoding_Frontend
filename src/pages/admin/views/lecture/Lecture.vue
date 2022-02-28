@@ -24,7 +24,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="4">
-                      <el-form-item :label="$t('m.Lecture_Founder')" required="required">
+                      <el-form-item :label="$t('m.Lecture_Founder')">
                         <el-select v-model="lecture.created_by_id">
                           <el-option v-for="(professor, id) in this.professor_list" v-bind:value="id" v-bind:label="professor" :key="id">
                             {{ professor }}
@@ -85,6 +85,7 @@
         api.getLecture(this.$route.params.lectureId).then(res => {
           let data = res.data.data
           this.lecture = data
+          this.lecture.created_by_id = data.created_by.realname
         }).catch(() => {
         })
       } else if (this.$route.name === 'lecture-contest-list') {
