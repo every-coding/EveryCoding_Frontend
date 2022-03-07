@@ -155,6 +155,7 @@
     methods: {
       init () {
         this.$Loading.start()
+        this.detailCode = false
         this.questionID = this.$route.params.questionID
         this.getPostList()
         this.getCommentList()
