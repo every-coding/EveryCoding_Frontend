@@ -1,4 +1,5 @@
 export const m = {
+  Save: '저장',
   // SideMenu.vue
   Dashboard: '대시보드',
   General: '기본설정',
@@ -139,6 +140,7 @@ export const m = {
   Lecture: '개설과목',
   Lecture_Year: '개설과목 년도',
   Lecture_Semester: '학기',
+  Lecture_Founder: '개설자',
   Lecture_List: '개설과목 목록',
   Create_Lecture: '개설과목 생성',
   LectureDescription: '강의계획',
