@@ -22,8 +22,8 @@
 
             <li>
               <i-switch size="large" v-model="formFilter.myself" @on-change="handleQueryChange">
-                <span slot="open">{{$t('m.Mine')}}</span>
-                <span slot="close">{{$t('m.All')}}</span>
+                <span slot="open">{{$t('m.All')}}</span>
+                <span slot="close">{{$t('m.Mine')}}</span>
               </i-switch>
             </li>
             <li>
@@ -58,7 +58,7 @@
     data () {
       return {
         formFilter: {
-          myself: false,
+          myself: true,
           result: '',
           username: ''
         },
@@ -188,6 +188,7 @@
         total: 30,
         limit: 12,
         page: 1,
+        myself: true,
         contestID: '',
         problemID: '',
         routeName: '',
@@ -207,7 +208,7 @@
         this.contestID = this.$route.params.contestID
         let query = this.$route.query
         this.problemID = query.problemID
-        this.formFilter.myself = query.myself === '1'
+        this.formFilter.myself = query.myself === '0'
         this.formFilter.result = query.result || ''
         this.formFilter.username = query.username || ''
         this.page = parseInt(query.page) || 1
@@ -219,7 +220,7 @@
       },
       buildQuery () {
         return {
-          myself: this.formFilter.myself === true ? '1' : '0',
+          myself: this.formFilter.myself === true ? '0' : '1',
           result: this.formFilter.result,
           username: this.formFilter.username,
           page: this.page
