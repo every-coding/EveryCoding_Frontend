@@ -83,6 +83,12 @@
     mounted () {
       this.getWebsiteConfig()
       this.getInfoHeight()
+      window.ontransitionend = () => {
+        this.getInfoHeight()
+      }
+      window.onresize = () => {
+        this.getInfoHeight()
+      }
     },
     methods: {
       getInfoHeight () {
