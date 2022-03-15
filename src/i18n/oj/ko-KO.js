@@ -154,12 +154,14 @@ export const m = {
   AuthorRealname: '코드 작성자',
   When: '제출 일자',
   Time: '소요 시간',
+  Memory: '메모리',
   Language: '언어',
   Author: '코드 작성자 id',
   Lecture_id: '소속 수강 과목',
   Option: '추가 기능',
   Rejudge: '재검사',
   Mine: '내 제출',
+  Search_Author: '코드 작성자 검색',
   // Save.vue
   save: '저장'
 }
