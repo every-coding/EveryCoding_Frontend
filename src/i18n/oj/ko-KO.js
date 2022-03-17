@@ -33,6 +33,8 @@ export const m = {
   Reset: '초기화',
   Total: '시도 횟수',
   AC_Rate: '정답율',
+  You_have_solved_the_problem: '이 문제를 해결하셨습니다.',
+  Theme: '색상 테마',
   // About.vue
   Result_Explanation: '결과 설명',
   Pending_Juding: '곧 채점 될 예정입니다. 잠시만 기다려주세요.',
