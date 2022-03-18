@@ -48,7 +48,7 @@
 
   export default {
     name: 'add-TA-user',
-    props: ['lectureID', 'studentName'],
+    props: ['lectureId', 'studentName'],
     data () {
       return {
         innerVisible: false,
@@ -60,13 +60,13 @@
       }
     },
     mounted () {
-      console.log(this.lectureID)
+      console.log(this.lectureId)
       // this.getTalist()
     },
     methods: {
       searchUser () {
         let data = {
-          lecture_id: this.lectureID,
+          lecture_id: this.lectureId,
           Name: this.keyword,
           add: false,
           searchType: this.searchType
@@ -78,7 +78,7 @@
       },
       getTalist () {
         let data = {
-          lecture_id: this.lectureID,
+          lecture_id: this.lectureId,
           Name: this.keyword,
           add: false
         }
@@ -90,7 +90,7 @@
         let result = this.talist.findIndex(userID => userID.id === userID)
         this.talist.splice(result, 1)
         let data = {
-          lecture_id: this.lectureID,
+          lecture_id: this.lectureId,
           User: userID,
           add: true
         }
