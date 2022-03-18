@@ -207,6 +207,7 @@ export default {
   // TA/RA 인원 추가를 위한 함수
   getUserInfo (data) {
     console.log(data)
+    console.log('getUserInfo called')
     return ajax('admin/tauser', 'post', {
       data
     })
