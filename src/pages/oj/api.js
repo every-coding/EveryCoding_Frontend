@@ -409,6 +409,20 @@ export default {
     return ajax('admin/contest/acm_helper', 'put', {
       data
     })
+  },
+  getContestExit (contestId) {  // working by soojung
+    return ajax('contest/exit', 'get', {
+      params: {
+        contest_id: contestId
+      }
+    })
+  },
+  checkContestExit (contestId) {  // working by soojung
+    return ajax('problem/contest_exit_access', 'get', {
+      params: {
+        contest_id: contestId
+      }
+    })
   }
 }
 

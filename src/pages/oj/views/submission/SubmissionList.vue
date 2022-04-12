@@ -19,7 +19,6 @@
               </Dropdown>
             </li>
 
-
             <li>
               <i-switch size="large" v-model="formFilter.myself" @on-change="handleQueryChange">
                 <span slot="open">{{$t('m.Mine')}}</span>
