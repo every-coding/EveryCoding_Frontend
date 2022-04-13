@@ -74,6 +74,15 @@
           <Icon type="ios-paw"></Icon>
           {{$t('m.Admin_Helper')}}
         </VerticalMenu-item>
+
+        <!--submission student list (working by soojung)-->
+        <!-- view case, disappear case, route -->
+        <VerticalMenu-item v-if="OIContestRealTimePermission && contestType === '대회'"
+                           :disabled="contestExitStatus"
+                           :route="{name: 'lecture-contest-exit'}">
+          <Icon type="android-exit"></Icon>   <!--menu icon-->
+          {{$t('m.Exit')}}      <!--menu name-->
+        </VerticalMenu-item>
       </VerticalMenu>
     </div>
   </div>
@@ -97,8 +106,12 @@
         btnLoading: false,
         contestID: '',
         lectureID: '',
+        contestType: '',  // working by soojung
+        contestEndtime: '',  // working by soojung
+        contestExitStatus: false, // working by soojung
         contestPassword: '',
         isvisible: false,
+        dialogFormVisible: false,
         columns: [ // 수강과목 세부 페이지의 내부 항목 제목
           // {
           //   title: this.$i18n.t('Id'),
@@ -140,6 +153,7 @@
       }
     },
     mounted () {
+      this.CheckContestAccess()
       this.contestID = this.$route.params.contestID
       this.lectureID = this.$route.params.lectureID
       this.route_name = this.$route.name
@@ -151,6 +165,7 @@
           this.$error('잘못된 경로로 진입했습니다.')
         }
         this.lectureID = res.data.data.lecture
+        this.contestType = res.data.data.lecture_contest_type // working by soojung
         let endTime = moment(data.end_time)
         if (endTime.isAfter(moment(data.now))) {
           this.timer = setInterval(() => {
@@ -176,6 +191,17 @@
           this.btnLoading = false
         }, (res) => {
           this.btnLoading = false
+        })
+      },
+      CheckContestAccess () {  // working by soojung
+        api.checkContestExit(this.$route.params.contestID).then(res => {
+          this.contestEndtime = res.data.data.end_time
+          console.log('What is state')
+          console.log(this.contestEndtime)
+          if (this.contestEndtime) {
+            this.contestExitStatus = true
+          }
+        }).catch(() => {
         })
       }
     },
