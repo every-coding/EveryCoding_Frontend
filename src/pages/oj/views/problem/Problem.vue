@@ -340,7 +340,7 @@
           // path: '/CourseList/:lectureID/:contestID/question',
           params: {
             lectureID: this.lectureID,
-            problemID: this.problemID,
+            problemID: this.problem.id,
             contestID: this.contestID
           }
         })
@@ -348,12 +348,12 @@
       init () {
         this.$Loading.start()
         this.CheckContestExit()
-        this.contestID = this.$route.params.contestID
-        this.problemID = this.$route.params.problemID
+        this.contestID = this.$route.params.contestID // 실제 문제에 대한 정보를 얻기 위해서는 Contest의 id값과
+        this.problemID_ = this.$route.params.problemID // Contest에 포함된 problem의 id값이 필요
         this.lectureID = this.$route.params.lectureID
         this.getLectureID()
         let func = this.$route.name === 'problem-details' ? 'getProblem' : 'getContestProblem'
-        api[func](this.problemID, this.contestID).then(res => {
+        api[func](this.problemID_, this.contestID).then(res => {
           this.$Loading.finish()
           let problem = res.data.data
           this.changeDomTitle({title: problem.title})
@@ -380,7 +380,7 @@
         }, () => {
           this.$Loading.error()
         })
-        let params = {lectureID: this.lectureID, contestID: this.contestID, problemID: this.problemID}
+        let params = {lectureID: this.lectureID, contestID: this.contestID, problemID: this.problem.id}
         api.checkSubmissionLog(params).then(res => {
           this.code = res.data.data.code
           this.submissionId = res.data.data.id
@@ -401,7 +401,7 @@
         })
       },
       QnAWrite () {
-        let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problemID, 'content': this.qnaContent, 'private': false }
+        let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problem.id, 'content': this.qnaContent, 'private': false }
         api.writeQnAPost(data).then(res => {
           this.goContestQnA()
         })
@@ -586,9 +586,9 @@
       },
       submissionRoute () {
         if (this.contestID) {
-          return {name: 'contest-submission-list', query: {problemID: this.problemID}}
+          return {name: 'contest-submission-list', query: {problemID: this.problem.id}}
         } else {
-          return {name: 'submission-list', query: {problemID: this.problemID}}
+          return {name: 'submission-list', query: {problemID: this.problem.id}}
         }
       }
     },

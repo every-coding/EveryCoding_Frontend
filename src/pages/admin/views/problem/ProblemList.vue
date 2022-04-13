@@ -1,12 +1,21 @@
 <template>
   <div class="view">
     <Panel :title="contestId ? this.$i18n.t('m.Contest_Problem_List') : this.$i18n.t('m.Problem_List')">
+      <div>
+        강의명 : {{ this.lectureTitle }}
+      </div>
+      <div>
+        실습, 과제 : {{ this.contestTitle }}
+      </div>
+      <div>
+        담당교수 : {{ this.lectureCreator }}
+      </div>
       <div slot="header">
-        <el-input
+        <el-inputD
           v-model="keyword"
           prefix-icon="el-icon-search"
           placeholder="Keywords">
-        </el-input>
+        </el-inputD>
       </div>
       <el-table
         v-loading="loading"
@@ -143,6 +152,10 @@
         currentPage: 1,
         routeName: '',
         contestId: '',
+        lectureId: '',
+        contestTitle: '',
+        lectureTitle: '',
+        lectureCreator: '',
         // for make public use
         currentProblemID: '',
         currentRow: {},
@@ -154,6 +167,7 @@
     mounted () {
       this.routeName = this.$route.name
       this.contestId = this.$route.params.contestId
+      this.currentContestInfo(this.contestId)
       this.getProblemList(this.currentPage)
     },
     methods: {
@@ -246,6 +260,14 @@
       },
       getPublicProblem () {
         api.getProblemList()
+      },
+      currentContestInfo (contestId) {
+        api.getContest(contestId).then(res => {
+          console.log(res)
+          this.contestTitle = res.data.data.title
+          this.lectureTitle = res.data.data.lecture_title
+          this.lectureCreator = res.data.data.created_by.realname
+        })
       }
     },
     watch: {

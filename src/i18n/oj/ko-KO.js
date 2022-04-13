@@ -156,6 +156,8 @@ export const m = {
   Language: '언어',
   Author: '코드 작성자 id',
   Lecture_id: '소속 수강 과목',
+  Option: '추가 기능',
+  Rejudge: '재검사',
   // Save.vue
   save: '저장'
 }
