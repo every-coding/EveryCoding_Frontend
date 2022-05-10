@@ -27,11 +27,14 @@ export const m = {
   Solved: '해결',
   Show: '보기',
   Submit: '제출',
+  Submitting: '제출 중',
   WrongPath: '잘못된 경로로 들어오셨습니다.',
   Pick_One: '랜덤 문제',
   Reset: '초기화',
   Total: '시도 횟수',
   AC_Rate: '정답율',
+  You_have_solved_the_problem: '이 문제를 해결하셨습니다.',
+  Theme: '색상 테마',
   // About.vue
   Result_Explanation: '결과 설명',
   Pending_Juding: '곧 채점 될 예정입니다. 잠시만 기다려주세요.',
@@ -41,6 +44,7 @@ export const m = {
   Runtime_Error: '프로그램이 비정상적으로 종료되었습니다. 세그먼테이션 폴트나 0으로 나누기 오류 등이 있는지 확인하세요.',
   Time_Limit_Exceeded: '시간 초과입니다. (Java의 경우 3배의 시간이 부여됩니다.)',
   Memory_Limit_Exceeded: '메모리 초과입니다.',
+  Partial_Accepted: '부분 정답입니다.',
   System_Error: '채점 시스템에 오류가 발생했습니다. 관리자에게 문의하세요.',
   // FAQ.vue
   Frequently_Asked_Questions: '자주 물어보는 질문들',
@@ -52,8 +56,8 @@ export const m = {
   Announcements: '공지사항',
   Submissions: '제출',
   Rankings: '랭킹',
-  Overview: 'Overview',
-  Admin_Helper: 'Admin Helper',
+  Overview: '개요',
+  Admin_Helper: '관리자 도우미',
   Contest_Announcements: '실습 및 과제 공지사항',
   Exit: '종료',   // working by soojung
   // ContestProblemList
@@ -153,11 +157,14 @@ export const m = {
   AuthorRealname: '코드 작성자',
   When: '제출 일자',
   Time: '소요 시간',
+  Memory: '메모리',
   Language: '언어',
   Author: '코드 작성자 id',
   Lecture_id: '소속 수강 과목',
   Option: '추가 기능',
   Rejudge: '재검사',
+  Mine: '내 제출',
+  Search_Author: '코드 작성자 검색',
   // Save.vue
   save: '저장'
 }
