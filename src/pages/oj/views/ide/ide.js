@@ -1,3 +1,8 @@
+export default {
+    data: () => ({
+      ......data of your component
+    }),
+    mounted() {
 var defaultUrl = localStorageGetItem("api-url") || "https://localhost";
 var apiUrl = defaultUrl;
 var wait = localStorageGetItem("wait") || false;
@@ -1231,4 +1236,8 @@ var languageApiUrlTable = {
     1008: extraApiUrl,
     1009: extraApiUrl,
     1010: extraApiUrl
+}
+},
+methods: {
+}
 }
