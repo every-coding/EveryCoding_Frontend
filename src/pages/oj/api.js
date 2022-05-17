@@ -417,11 +417,30 @@ export default {
       }
     })
   },
+  // getContestTimeOverExit (contestId) {  // working by soojung
+  //   return ajax('contest/time_over_exit', 'get', {
+  //     params: {
+  //       contest_id: contestId
+  //     }
+  //   })
+  // },
   checkContestExit (contestId) {  // working by soojung
     return ajax('problem/contest_exit_access', 'get', {
       params: {
         contest_id: contestId
       }
+    })
+  },
+  getLectureUserList (offset, limit, keyword, lectureid) {  // working by soojung
+    let params = {paging: true, offset, limit}
+    if (keyword) {
+      params.keyword = keyword
+    }
+    if (lectureid) {
+      params.lectureid = lectureid
+    }
+    return ajax('admin/user', 'get', {
+      params: params
     })
   }
 }

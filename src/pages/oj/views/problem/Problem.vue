@@ -48,6 +48,7 @@
 
         </div>
       </Panel>
+
       <!--problem main end-->
       <!--<iframe src="https://www.onlinegdb.com/" style="width:100%; height:750px">
       </iframe>-->
@@ -81,9 +82,9 @@
             <div v-if="contestEnded">
               <Alert type="warning" show-icon>{{$t('m.Contest_has_ended')}}</Alert>
             </div>
-            <div v-else-if="contestExitStatus"> <!--working by soojung-->
+            <!-- <div v-else-if="contestExitStatus"> working by soojung
               <Alert type="warning" show-icon>{{$t('m.Already_Submitted')}}</Alert>
-            </div>
+            </div>-->
           </Col>
           <Col :span="12">
             <template v-if="captchaRequired">
@@ -96,7 +97,7 @@
             </template>
 
             <Button v-if="problemRes" type="warning" icon="edit" :loading="submitting" @click="submitCode"
-                    :disabled="problemSubmitDisabled || submitted"
+                    :disabled="problemSubmitDisabled"
                     class="fl-right">   <!--제출(비활성화)-->
               <span v-if="submitting">{{$t('m.Submitting')}}</span>   <!--제출중-->
               <span v-else>{{$t('m.Submit')}}</span>  <!--제출(평소)-->
@@ -104,7 +105,7 @@
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
 
             <Button v-b-toggle.sidebar-right
-                    :disabled="askbutton || contestExitStatus"
+                    :disabled="askbutton"
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
 
@@ -347,7 +348,7 @@
       },
       init () {
         this.$Loading.start()
-        this.CheckContestExit()
+        this.CheckContestExit() // working by soojung
         this.contestID = this.$route.params.contestID
         this.problemID = this.$route.params.problemID
         this.lectureID = this.$route.params.lectureID
@@ -397,9 +398,20 @@
             this.submitted = true
             this.contestExitStatus = true
           }
+          console.log(this.contestExitStatus)
+          if (this.contestExitStatus) {
+            this.$error('이미 퇴실하셨습니다.')
+          }
         }).catch(() => {
         })
       },
+      // ContestTimeOverExit () {  // working by soojung (설정 시간 초과로 인한 시험 자동 종료의 경우)
+      //   api.getContestTimeOverExit(this.$route.params.contestID).then(res => {
+      //     console.log(this.contestID)
+      //     console.log(this.lectureID)
+      //   }).catch(() => {
+      //   })
+      // },
       QnAWrite () {
         let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problemID, 'content': this.qnaContent, 'private': false }
         api.writeQnAPost(data).then(res => {
@@ -576,6 +588,9 @@
         return this.$store.state.contest.contest
       },
       contestEnded () {
+        // if (this.contestStatus === CONTEST_STATUS.ENDED) {
+        //   this.ContestTimeOverExit()  // working by soojung
+        // }
         return this.contestStatus === CONTEST_STATUS.ENDED
       },
       submissionStatus () {
