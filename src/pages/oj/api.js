@@ -410,6 +410,12 @@ export default {
       data
     })
   },
+  // 수강신청한 학생들에 대한 함수
+  acceptStudent (data) {
+    return ajax('admin/signupstudent', 'post', {
+      data
+    })
+  },
   getContestExit (contestId) {  // working by soojung
     return ajax('contest/exit', 'get', {
       params: {
@@ -424,14 +430,34 @@ export default {
   //     }
   //   })
   // },
-  checkContestExit (contestId) {  // working by soojung
-    return ajax('problem/contest_exit_access', 'get', {
+  checkContestExitManage (contestId, userId) {    // working by soojung
+    return ajax('lecture/contest_exit_manage', 'get', {
+      params: {
+        contest_id: contestId,
+        user_id: userId
+      }
+    })
+  },
+  exitStudent (data) {  // working by soojung
+    return ajax('contest/exit_student', 'post', {
+      data
+    })
+  },
+  checkContestExit (contestId) {    // working by soojung
+    return ajax('problem/contest_exit_info', 'get', {
       params: {
         contest_id: contestId
       }
     })
   },
-  getLectureUserList (offset, limit, keyword, lectureid) {  // working by soojung
+  checkContestScore (contestId) {    // working by soojung
+    return ajax('contest/score_info', 'get', {
+      params: {
+        contest_id: contestId
+      }
+    })
+  },
+  getLectureUserList (offset, limit, keyword, lectureid, contestid) {  // working by soojung
     let params = {paging: true, offset, limit}
     if (keyword) {
       params.keyword = keyword
@@ -439,7 +465,10 @@ export default {
     if (lectureid) {
       params.lectureid = lectureid
     }
-    return ajax('admin/user', 'get', {
+    if (contestid) {
+      params.contestid = contestid
+    }
+    return ajax('contest/user', 'get', {
       params: params
     })
   }

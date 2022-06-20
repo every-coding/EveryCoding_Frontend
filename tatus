@@ -1,0 +1,57 @@
+[1mdiff --git a/src/pages/oj/views/problem/Problem.vue b/src/pages/oj/views/problem/Problem.vue[m
+[1mindex b845d3b..635cc02 100755[m
+[1m--- a/src/pages/oj/views/problem/Problem.vue[m
+[1m+++ b/src/pages/oj/views/problem/Problem.vue[m
+[36m@@ -3,7 +3,7 @@[m
+     <div v-if="problemRes" id="problem-main">[m
+       <!--problem main-->[m
+       <Panel :padding="40" shadow>[m
+[31m-        <div slot="title">{{problem.title}}</div>[m
+[32m+[m[32m        <div slot="title">Test{{problem.title}}</div>[m
+         <div id="problem-content" class="markdown-body" v-katex>[m
+           <p class="title">{{$t('m.Description')}}</p>[m
+           <p class="content" v-html=problem.description></p>[m
+[36m@@ -91,7 +91,7 @@[m
+                 <Input v-model="captchaCode" class="captcha-code"/>[m
+               </div>[m
+             </template>[m
+[31m-            [m
+[32m+[m
+             <Button v-if="problemRes" type="warning" icon="edit" :loading="submitting" @click="submitCode"[m
+                     :disabled="problemSubmitDisabled || submitted"[m
+                     class="fl-right">[m
+[36m@@ -99,14 +99,14 @@[m
+               <span v-else>{{$t('m.Submit')}}</span>[m
+             </Button>[m
+             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>[m
+[31m-            [m
+[32m+[m
+             <Button v-b-toggle.sidebar-right[m
+                     :disabled=askbutton[m
+                     class="fl-right">[m
+               <span>{{$t('m.calltara')}}</span>[m
+[31m-              [m
+[32m+[m
+             </Button>[m
+[31m-            [m
+[32m+[m
+           </Col>[m
+         </Row>[m
+       </Card>[m
+[36m@@ -769,4 +769,4 @@[m
+     margin-top: 5px;[m
+     margin-right: 10px;[m
+   }[m
+[31m-</style>[m
+\ No newline at end of file[m
+[32m+[m[32m</style>[m
+[1mdiff --git a/start.sh b/start.sh[m
+[1mindex a7acdef..8925d38 100755[m
+[1m--- a/start.sh[m
+[1m+++ b/start.sh[m
+[36m@@ -1,3 +1,2 @@[m
+[31m-export TARGET=http://203.250.32.197:8000[m
+[31m-[m
+[31m-npm run dev nohup.out &[m
+[32m+[m[32mnpm run dev &[m
+[32m+[m[32mecho $![m

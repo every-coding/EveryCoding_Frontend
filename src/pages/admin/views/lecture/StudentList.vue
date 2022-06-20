@@ -79,12 +79,12 @@
                   </span>
                 </template>
               </el-table-column>
-              
+
               <el-table-column prop="maxScore" label="만점" width="90" align="center"></el-table-column>
               <el-table-column prop="totalScore" label="총점" width="90" align="center"></el-table-column>
               <el-table-column prop="avgScore" label="평균" width="90" align="center"></el-table-column>
               <el-table-column prop="progress" label="진행율" width="90" align="center"></el-table-column>
-              
+
               <el-table-column fixed="right" label="" width="200">
                 <template slot-scope="{row}">
                   <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
