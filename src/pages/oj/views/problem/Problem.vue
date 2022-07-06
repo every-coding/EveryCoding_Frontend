@@ -48,6 +48,7 @@
 
         </div>
       </Panel>
+
       <!--problem main end-->
       <!--<iframe src="https://www.onlinegdb.com/" style="width:100%; height:750px">
       </iframe>-->
@@ -397,9 +398,20 @@
             this.submitted = true
             this.contestExitStatus = true
           }
+          console.log(this.contestExitStatus)
+          if (this.contestExitStatus) {
+            this.$error('이미 퇴실하셨습니다.')
+          }
         }).catch(() => {
         })
       },
+      // ContestTimeOverExit () {  // working by soojung (설정 시간 초과로 인한 시험 자동 종료의 경우)
+      //   api.getContestTimeOverExit(this.$route.params.contestID).then(res => {
+      //     console.log(this.contestID)
+      //     console.log(this.lectureID)
+      //   }).catch(() => {
+      //   })
+      // },
       QnAWrite () {
         let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problem.id, 'content': this.qnaContent, 'private': false }
         api.writeQnAPost(data).then(res => {
@@ -576,6 +588,9 @@
         return this.$store.state.contest.contest
       },
       contestEnded () {
+        // if (this.contestStatus === CONTEST_STATUS.ENDED) {
+        //   this.ContestTimeOverExit()  // working by soojung
+        // }
         return this.contestStatus === CONTEST_STATUS.ENDED
       },
       submissionStatus () {
