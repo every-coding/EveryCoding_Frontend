@@ -1,4 +1,5 @@
-<template>
+
+\<template>
   <div class="view">
     <Panel :title="$t('m.WeeklyContest_List')">
       <div slot="header">
@@ -82,7 +83,7 @@
             <icon-btn name="문제 목록" icon="list-ol" @click.native="goContestProblemList(scope.row.id)"></icon-btn>
             <icon-btn name="실습, 과제 공지사항" icon="info-circle"
                       @click.native="goContestAnnouncement(scope.row.id)"></icon-btn>
-            <icon-btn name="통과한 제출 목록 내려받기" icon="download" 
+            <icon-btn name="통과한 제출 목록 내려받기" icon="download"
                       @click.native="openDownloadOptions(scope.row.id)"></icon-btn>
             <icon-btn name="실습, 과제 삭제" icon="trash" @click.native="deleteContest(scope.row.id)"></icon-btn>
             <el-tooltip v-if="scope.row.private" class="item" effect="dark" content="대회 접근 권한" placement="top">

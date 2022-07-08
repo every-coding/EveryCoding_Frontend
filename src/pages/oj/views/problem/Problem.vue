@@ -67,6 +67,7 @@
                 <Tag type="dot" :color="submissionStatus.color" @click.native="handleRoute('/status/'+submissionId)">
                   {{$t('m.' + submissionStatus.text.replace(/ /g, "_"))}}
                 </Tag>
+                <b>클릭 시 출력 결과 확인 가능</b> <!--working-->
               </template>
               <template v-else-if="this.contestID && !OIContestRealTimePermission">
                 <Alert type="success" show-icon>{{$t('m.Submitted_successfully')}}</Alert>
@@ -91,7 +92,7 @@
                 <Input v-model="captchaCode" class="captcha-code"/>
               </div>
             </template>
-            
+
             <Button v-if="problemRes" type="warning" icon="edit" :loading="submitting" @click="submitCode"
                     :disabled="problemSubmitDisabled || submitted"
                     class="fl-right">
@@ -99,14 +100,14 @@
               <span v-else>{{$t('m.Submit')}}</span>
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-            
+
             <Button v-b-toggle.sidebar-right
                     :disabled=askbutton
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
-              
+
             </Button>
-            
+
           </Col>
         </Row>
       </Card>
