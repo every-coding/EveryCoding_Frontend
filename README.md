@@ -48,3 +48,5 @@ Modern browsers and Internet Explorer 10+.
 ## Test Commit
 
 ## Test Commit 2
+
+## Test Commit 3
