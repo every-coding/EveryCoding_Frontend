@@ -2,6 +2,7 @@
   <div>
     <Panel :style="panelStyle">
       <div slot="title">{{$t('m.Problems_List')}}</div>
+      <!--
       <el-table
         :data="lectureData"
         :resizable="resize"
@@ -34,13 +35,13 @@
           width="100"
           label="">
           <template slot-scope="scope">
-            <el-button
+            <el-buttons
               size="mini"
-              @click="goPublicQnA(scope.row)">질문하기</el-button>
+              @click="goQnA(scope.row)">질문보기</el-buttons>
           </template>
         </el-table-column>
       </el-table>
-      <!--
+      -->
       <Table v-if="contestRuleType == 'ACM' || OIContestRealTimePermission"
              :columns="ACMTableColumns"
              :data="problems"
@@ -51,7 +52,6 @@
              :columns="OITableColumns"
              @on-row-click="goContestProblem"
              no-data-text="$t('m.No_Problems')"></Table>
-      -->
     </Panel>
 
   </div>
@@ -121,9 +121,9 @@
           this.panelStyle = {display: 'block'}
         })
       },
-      goPublicQnA (row) {
+      goQnA (row) {
         this.$router.push({
-          name: 'constest-problem-public-qna',
+          name: 'constest-problem-qna',
           params: {
             lectureID: this.$route.params.lectureID,
             contestID: this.$route.params.contestID,
