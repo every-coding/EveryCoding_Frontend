@@ -104,7 +104,7 @@
       prop="problem.contest.lecture_title">
     </el-table-column>
     <el-table-column
-      label="학번"
+      label="이름"
       prop="author.realname">
     </el-table-column>
     <el-table-column
