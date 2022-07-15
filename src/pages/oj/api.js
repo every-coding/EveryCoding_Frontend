@@ -101,6 +101,13 @@ export default {
       }
     })
   },
+  checkPhonenum (phonenum) {
+    return ajax('check_Phonenum', 'post', {
+      data: {
+        phonenum
+      }
+    })
+  },
   checkSchoolssn (schoolssn) {
     return ajax('check_schoolssn', 'post', {
       data: {
