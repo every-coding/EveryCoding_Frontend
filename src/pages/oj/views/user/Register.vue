@@ -26,13 +26,13 @@
           <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
-      <FormItem prop="Phonenum">
-        <Input type="text" v-model="formRegister.Phonenum" :placeholder="$t('m.Phonenum')" size="large" @on-enter="handleRegister">
+      <FormItem prop="phonenum">
+        <Input type="text" v-model="formRegister.phonenum" :placeholder="$t('m.Phonenum')" size="large" @on-enter="handleRegister">
           <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
-      <FormItem prop="Phonenum">
-        <Input type="text" v-model="formRegister.PhonenumAgain" :placeholder="$t('m.Phonenum_Again')" size="large" @on-enter="handleRegister">
+      <FormItem prop="phonenumAgain">
+        <Input type="text" v-model="formRegister.phonenumAgain" :placeholder="$t('m.Phonenum_Again')" size="large" @on-enter="handleRegister">
           <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
@@ -99,10 +99,10 @@ export default {
       }, _ => callback())
     }
     const CheckPhonenumNotExist = (rule, value, callback) => {
-      api.checkUsernameOrEmail(undefined, undefined, value).then(res => {
-        if (this.formRegister.Phonenum.length !== 11) {
+      api.checkPhonenum(undefined, undefined, value).then(res => {
+        if (this.formRegister.phonenum.length !== 11) {
           callback(new Error(this.$i18n.t('전화번호는 11자리로 입력하세요.')))
-        } else if (res.data.data.Phonenum === true) {
+        } else if (res.data.data.phonenum === true) {
           callback(new Error(this.$i18n.t('전화번호가 이미 존재합니다.')))
         } else {
           callback()
@@ -123,7 +123,7 @@ export default {
       callback()
     }
     const CheckAgainPhonenum = (rule, value, callback) => {
-      if (value !== this.formRegister.Phonenum) {
+      if (value !== this.formRegister.phonenum) {
         callback(new Error(this.$i18n.t('전화번호가 일치하지 않습니다.')))
       }
       callback()
@@ -135,8 +135,8 @@ export default {
         realname: '',
         password: '',
         passwordAgain: '',
-        Phonenum: '',
-        Phonenum_Again: '',
+        phonenum: '',
+        phonenumAgain: '',
         email: '',
         captcha: ''
       },
@@ -160,12 +160,12 @@ export default {
         passwordAgain: [
           {required: true, validator: CheckAgainPassword, trigger: 'change'}
         ],
-        Phonenum: [
+        phonenum: [
           {required: true, trigger: 'blur'},
           {validator: CheckPhonenumNotExist, required: true, trigger: 'blur'}
         ],
-        PhonenumAgain: [
-          {required: true, validataor: CheckAgainPhonenum, treigger: 'blur'}
+        phonenumAgain: [
+          {required: true, validator: CheckAgainPhonenum, trigger: 'change'}
         ],
         captcha: [
           {required: true, trigger: 'blur', min: 1, max: 10}
