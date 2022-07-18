@@ -45,7 +45,7 @@
 
             <el-table-column fixed="right" label="퇴실 철회" width="200" align="center">
               <template slot-scope="{row}">
-                <icon-btn name="철회" icon="edit" @click.native="ExitStudent(row.user.id)"></icon-btn>
+                <el-button name="철회" icon="el-icon-close" @click.native="ExitStudent(row.user.id)"></el-button>
               </template>
             </el-table-column>
           </el-table>
