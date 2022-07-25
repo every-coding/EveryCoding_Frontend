@@ -37,6 +37,31 @@
   })
 
   export default {
+    metaInfo: {
+      meta: [
+        { hid: 'og:title',
+          property: 'og:title',
+          content: 'DCU CODE' },
+        { hid: 'og:description',
+          property: 'og:description',
+          content: '대구가톨릭대학교 온라인 저지 시스템' },
+        { hid: 'og:image',
+          property: 'og:image',
+          content: 'http://localhost/static/img/logo.78eea88.jpg'},
+        { hid: 'og:image:width',
+          property: 'og:image:width',
+          content: '500'},
+        { hid: 'og:image:height',
+          property: 'og:image:height',
+          content: '200'},
+        { hid: 'og:url',
+          property: 'og:url',
+          content: 'http://localhost/' },
+        { hid: 'og:type',
+          property: 'og:type',
+          content: 'website' }
+      ]
+    },
     name: 'app',
     components: {
       NavBar

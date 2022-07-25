@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import Vue from 'vue'
+import Meta from 'vue-meta'
 import App from './App.vue'
 import router from './router'
 import store from '@/store'
@@ -44,6 +45,7 @@ Vue.use(iView, {locale})
 Vue.use(VueClipboard)
 Vue.use(highlight)
 Vue.use(katex)
+Vue.use(Meta)
 Vue.use(VueAnalytics, {
   id: GOOGLE_ANALYTICS_ID,
   router
