@@ -98,6 +98,12 @@
               <span v-if="submitting">{{$t('m.Submitting')}}</span>
               <span v-else>{{$t('m.Submit')}}</span>
             </Button>
+            <Button v-if="problemRes" type="warning" icon="play" :loading="running" @click="runCode"
+                    :disabled="problemSubmitDisabled || submitted"
+                    class="fl-right">
+              <span v-if="running">실행중</span>
+              <span v-else>실행</span>
+            </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
             
             <Button v-b-toggle.sidebar-right
