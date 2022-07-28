@@ -3,7 +3,7 @@
     <Col :span="22">
       <panel>
         <div slot="title">
-          DCU Code 사용 메뉴얼 (학생용)
+          DCU Code 사용 메뉴(학생용)
           <Button style="float: right" type="info"><a href="/static/manual.pdf" download>다운로드</a></Button>
         </div>
       </panel>
