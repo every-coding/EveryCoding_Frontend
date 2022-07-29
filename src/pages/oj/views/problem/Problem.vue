@@ -249,6 +249,7 @@
   import Vue from 'vue'
   import Simditor from '../../components/Simditor.vue'
   import axios from 'axios'
+  import * as $ from 'jquery'
   Vue.use(SidebarPlugin)
 
   // 只显示这些状态的图形占用
@@ -550,6 +551,60 @@
           submitFunc(data, true)
         }
         this.askbutton = false
+      },
+      // 코드 실행버튼
+      runCode () {
+        if (this.code.trim() === '') {
+          this.$error(this.$i18n.t('m.Code_can_not_be_empty'))
+          return
+        }
+        this.submissionId = ''
+        this.result = {result: 9}
+        this.submitting = true
+        let data = {
+          source_code: this.code,
+          language_id: '71',
+          number_of_runs: '1',
+          stdin: 'Judge0',
+          expected_output: null,
+          cpu_time_limit: '2',
+          cpu_extra_time: '0.5',
+          wall_time_limit: '5',
+          memory_limit: '128000',
+          stack_limit: '64000',
+          max_processes_and_or_threads: '60',
+          enable_per_process_and_thread_time_limit: false,
+          enable_per_process_and_thread_memory_limit: false,
+          max_file_size: '1024'
+        }
+        if (this.captchaRequired) {
+          data.captcha = this.captchaCode
+        }
+        let request = $.ajax({
+          url: 'http://localhost:2358/submissions',
+          type: 'post',
+          data: data
+        })
+        // const delay = (ms) => new Promise((res) => setTimeout(res, ms))
+        // Callback handler that will be called on success
+        request.done(async function (response, textStatus, jqXHR) {
+          // Log a message to the console
+          console.log('Hooray, it worked!')
+          let token = response.token
+          var that = this
+          setTimeout(function () { that.isHidden = false }, 3000)
+          // await new Promise((resolve) => setTimeout(resolve, 3000)) // 3 sec
+          console.log(3, 'after 3 seconds')
+          let secondRequest = $.ajax({
+            url: 'http://localhost:2358/submissions' + '/' + token,
+            type: 'get'
+          })
+          secondRequest.done(function (response) {
+            console.log(response.stdout, '결과!!')
+            $('#ans').html(response.stdout)
+          })
+        })
+        this.submitting = false
       },
       onCopy (event) {
         this.$success('Code copied')
