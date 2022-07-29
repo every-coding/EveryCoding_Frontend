@@ -591,18 +591,17 @@
           // Log a message to the console
           console.log('Hooray, it worked!')
           let token = response.token
-          var that = this
-          setTimeout(function () { that.isHidden = false }, 3000)
-          // await new Promise((resolve) => setTimeout(resolve, 3000)) // 3 sec
-          console.log(3, 'after 3 seconds')
-          let secondRequest = $.ajax({
-            url: 'http://localhost:2358/submissions' + '/' + token,
-            type: 'get'
-          })
-          secondRequest.done(function (response) {
-            console.log(response.stdout, '결과!!')
-            $('#ans').html(response.stdout)
-          })
+          console.log(3, 'after 3 seconds', token)
+          setTimeout(function () {
+            let secondRequest = $.ajax({
+              url: 'http://localhost:2358/submissions' + '/' + token,
+              type: 'get'
+            })
+            secondRequest.done(function (response) {
+              console.log(response.stdout, '결과!!')
+              $('#ans').html(response.stdout)
+            })
+          }, 3000)
         })
         this.submitting = false
       },
