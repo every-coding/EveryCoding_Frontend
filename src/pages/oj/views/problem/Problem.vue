@@ -565,7 +565,7 @@
           source_code: this.code,
           language_id: '71',
           number_of_runs: '1',
-          stdin: 'Judge0',
+          stdin: null,
           expected_output: null,
           cpu_time_limit: '2',
           cpu_extra_time: '0.5',
@@ -577,6 +577,9 @@
           enable_per_process_and_thread_memory_limit: false,
           max_file_size: '1024'
         }
+        data.stdin = this.problem.samples[0].input
+        console.log(data.stdin, '입력')
+        console.log(data, 'data')
         if (this.captchaRequired) {
           data.captcha = this.captchaCode
         }
@@ -591,10 +594,10 @@
           // Log a message to the console
           console.log('Hooray, it worked!')
           let token = response.token
-          console.log(3, 'after 3 seconds', token)
+          console.log('after 3 seconds', token)
           setTimeout(function () {
             let secondRequest = $.ajax({
-              url: 'http://localhost:2358/submissions' + '/' + token,
+              url: 'http://localhost:2358/submissions/' + token,
               type: 'get'
             })
             secondRequest.done(function (response) {
