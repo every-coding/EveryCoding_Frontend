@@ -211,6 +211,7 @@
     mounted () {
       console.log('StudentList.vue')
       this.lectureId = this.$route.params.lectureId
+      this.contestId = this.$route.params.contestId
       this.currentLectureInfo(this.lectureId)
       this.getUserList(1)
     },
@@ -402,6 +403,7 @@
         console.log('currentLectureInfo called')
         api.getLecture(lectureId).then(res => {
           console.log(res)
+          console.log(res.data.data)
           this.lectureTitle = res.data.data.title
           this.lectureCreator = res.data.data.created_by.realname
         })
