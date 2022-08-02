@@ -562,6 +562,7 @@
         this.result = {result: 9}
         this.submitting = true
         let data = {
+          language: this.language,
           source_code: this.code,
           language_id: '71',
           number_of_runs: '1',
@@ -575,13 +576,29 @@
           max_processes_and_or_threads: '60',
           enable_per_process_and_thread_time_limit: false,
           enable_per_process_and_thread_memory_limit: false,
-          max_file_size: '1024'
+          max_file_size: '1024',
+          outp: null
         }
         data.stdin = this.problem.samples[0].input
         console.log(data.stdin, '입력')
         console.log(data, 'data')
         if (this.captchaRequired) {
           data.captcha = this.captchaCode
+        }
+        if (this.language === 'C') {
+          data.language_id = '50'
+        }
+        if (this.language === 'C++') {
+          data.language_id = '54'
+        }
+        if (this.language === 'Java') {
+          data.language_id = '62'
+        }
+        if (this.language === 'Python2') {
+          data.language_id = '70'
+        }
+        if (this.language === 'Python3') {
+          data.language_id = '71'
         }
         let request = $.ajax({
           url: 'http://localhost:2358/submissions',
@@ -595,7 +612,7 @@
           console.log('Hooray, it worked!')
           let token = response.token
           console.log('after 3 seconds', token)
-          setTimeout(function () {
+          setTimeout(() => {
             let secondRequest = $.ajax({
               url: 'http://localhost:2358/submissions/' + token,
               type: 'get'
