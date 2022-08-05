@@ -457,7 +457,7 @@ export default {
       }
     })
   },
-  getLectureUserList (offset, limit, keyword, lectureid, contestid) {  // working by soojung
+  getLectureUserList (offset, limit, keyword, lectureid, contestid) {
     let params = {paging: true, offset, limit}
     if (keyword) {
       params.keyword = keyword
@@ -472,6 +472,20 @@ export default {
       params: params
     })
   }
+  // getContestUserList (offset, limit, keyword, contestid) {
+  //   let params = {paging: true, offset, limit}
+  //   if (keyword) {
+  //     params.keyword = keyword
+  //   }
+  //   console.log(contestid)
+  //   if (contestid) {
+  //     console.log(contestid)
+  //     params.contestid = contestid
+  //   }
+  //   return ajax('admin/user', 'get', {
+  //     params: params
+  //   })
+  // }
 }
 
 /**

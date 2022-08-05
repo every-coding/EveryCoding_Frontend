@@ -74,6 +74,13 @@
           <Icon type="ios-paw"></Icon>
           {{$t('m.Admin_Helper')}}
         </VerticalMenu-item>
+
+        <VerticalMenu-item v-if="OIContestRealTimePermission && contestType === '대회'"
+                           :disabled="contestMenuDisabled"
+                           :route="{name: 'contest-exit'}">
+          <Icon type="android-exit"></Icon>   <!--menu icon-->
+          {{$t('m.Exit')}}      <!--menu name-->
+        </VerticalMenu-item>
       </VerticalMenu>
     </div>
   </div>
@@ -151,6 +158,7 @@
           this.$error('잘못된 경로로 진입했습니다.')
         }
         this.lectureID = res.data.data.lecture
+        this.contestType = res.data.data.lecture_contest_type
         let endTime = moment(data.end_time)
         if (endTime.isAfter(moment(data.now))) {
           this.timer = setInterval(() => {
