@@ -34,11 +34,11 @@
 <!--            <el-table-column prop="userScore" label="점수" align="center"></el-table-column>-->
             <el-table-column prop="exit_status" label="퇴실 유무" align="center">
               <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
-                <span v-if="scope.row.exit_status" style="background-color:green; color:white">
-                    {{ scope.row.exit_status }}
+                <span v-if="scope.row.exit_status" style="color:green">
+                  <b>완료</b>
                   </span>
-                <span v-else style="background-color:red; color:white">
-                    {{ scope.row.exit_status }}
+                <span v-else style="color:red">
+                    <b>미퇴실</b>
                   </span>
               </template>
             </el-table-column>
