@@ -25,9 +25,9 @@
 
         <el-table-column prop="id" label="ID"></el-table-column>
 
-        <el-table-column prop="realname" label="실명"></el-table-column>
+        <el-table-column prop="realname" label="이름"></el-table-column>
 
-        <el-table-column prop="username" label="닉네임"></el-table-column>
+        <el-table-column prop="username" label="ID"></el-table-column>
 
         <el-table-column prop="phonenum" label="전화번호"></el-table-column>
 
