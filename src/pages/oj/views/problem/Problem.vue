@@ -112,10 +112,16 @@
               <span>{{$t('m.calltara')}}</span>
               
             </Button>
-            
           </Col>
         </Row>
       </Card>
+       <Card :padding="20" id="run_code" dis-hover>
+       <h2>예시입력 실행</h2>
+        <p>실행결과 : {{ outputdata.responseJSON.status.description }}</p>
+        <p>출력결과 : {{ outputdata.responseJSON.stdout }}</p>
+        <p>{{ requestdata }}</p>
+        <p>{{ outputdata }}</p>
+       </Card>
     </div>
     <div v-else="problemRes"></div>
 
@@ -264,6 +270,8 @@
     mixins: [FormMixin],
     data () {
       return {
+        outputdata: {'responseJSON': {'stdout': '', 'status': {'description': ''}}},
+        requestdata: 'request_',
         statusVisible: false,
         captchaRequired: false,
         graphVisible: false,
@@ -576,10 +584,10 @@
           max_processes_and_or_threads: '60',
           enable_per_process_and_thread_time_limit: false,
           enable_per_process_and_thread_memory_limit: false,
-          max_file_size: '1024',
-          outp: null
+          max_file_size: '1024'
         }
         data.stdin = this.problem.samples[0].input
+        data.expected_output = this.problem.samples[0].output
         console.log(data.stdin, '입력')
         console.log(data, 'data')
         if (this.captchaRequired) {
@@ -607,22 +615,22 @@
         })
         // const delay = (ms) => new Promise((res) => setTimeout(res, ms))
         // Callback handler that will be called on success
-        request.done(async function (response, textStatus, jqXHR) {
+        this.requestdata = request.done(async function (response, textStatus, jqXHR) {
           // Log a message to the console
           console.log('Hooray, it worked!')
           let token = response.token
           console.log('after 3 seconds', token)
-          setTimeout(() => {
-            let secondRequest = $.ajax({
-              url: 'http://localhost:2358/submissions/' + token,
-              type: 'get'
-            })
-            secondRequest.done(function (response) {
-              console.log(response.stdout, '결과!!')
-              $('#ans').html(response.stdout)
-            })
-          }, 3000)
         })
+        setTimeout(() => {
+          let secondRequest = $.ajax({
+            url: 'http://localhost:2358/submissions/' + this.requestdata.responseJSON.token,
+            type: 'get'
+          })
+          this.outputdata = secondRequest.done(async function (response) {
+            console.log(response, '결과!!')
+            $('#ans').html(response.stdout)
+          })
+        }, 3000)
         this.submitting = false
       },
       onCopy (event) {
