@@ -119,8 +119,6 @@
        <h2>예시입력 실행</h2>
         <p>실행결과 : {{ outputdata.responseJSON.status.description }}</p>
         <p>출력결과 : {{ outputdata.responseJSON.stdout }}</p>
-        <p>{{ requestdata }}</p>
-        <p>{{ outputdata }}</p>
        </Card>
     </div>
     <div v-else="problemRes"></div>
@@ -560,6 +558,28 @@
         }
         this.askbutton = false
       },
+      checkRunStatus () {
+        // 使用setTimeout避免一些问题
+        if (this.refreshStatus) {
+          // 如果之前的提交状态检查还没有停止,则停止,否则将会失去timeout的引用造成无限请求
+          clearTimeout(this.refreshStatus)
+        }
+        const checkStatus = () => {
+          let secondRequest = $.ajax({
+            url: 'http://localhost:2358/submissions/' + this.requestdata.responseJSON.token,
+            type: 'get'
+          })
+          this.outputdata = secondRequest.done(async function (response) {
+            console.log(response, '결과!!')
+            $('#ans').html(response.stdout)
+          })
+          this.submitting = false
+          this.submitted = false
+          clearTimeout(this.refreshStatus)
+          this.init()
+        }
+        this.refreshStatus = setTimeout(checkStatus, 5000)
+      },
       // 코드 실행버튼
       runCode () {
         if (this.code.trim() === '') {
@@ -621,16 +641,7 @@
           let token = response.token
           console.log('after 3 seconds', token)
         })
-        setTimeout(() => {
-          let secondRequest = $.ajax({
-            url: 'http://localhost:2358/submissions/' + this.requestdata.responseJSON.token,
-            type: 'get'
-          })
-          this.outputdata = secondRequest.done(async function (response) {
-            console.log(response, '결과!!')
-            $('#ans').html(response.stdout)
-          })
-        }, 3000)
+        this.checkRunStatus()
         this.submitting = false
       },
       onCopy (event) {
