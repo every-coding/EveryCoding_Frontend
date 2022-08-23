@@ -118,7 +118,8 @@
        <Card :padding="20" id="run_code" dis-hover>
        <h2>예시입력 실행</h2>
         <p>실행결과 : {{ outputdata.responseJSON.status.description }}</p>
-        <p>출력결과 : {{ outputdata.responseJSON.stdout }}</p>
+        <p>출력결과</p>
+        <OutMirror :value.sync="outputdata.responseJSON.stdout"></OutMirror>
        </Card>
     </div>
     <div v-else="problemRes"></div>
@@ -254,6 +255,7 @@
   import Simditor from '../../components/Simditor.vue'
   import axios from 'axios'
   import * as $ from 'jquery'
+  import OutMirror from '../../components/OutMirror.vue'
   Vue.use(SidebarPlugin)
 
   // 只显示这些状态的图形占用
@@ -263,7 +265,8 @@
     name: 'Problem',
     components: {
       CodeMirror,
-      Simditor
+      Simditor,
+      OutMirror
     },
     mixins: [FormMixin],
     data () {
@@ -566,7 +569,7 @@
         }
         const checkStatus = () => {
           let secondRequest = $.ajax({
-            url: 'http://localhost:2358/submissions/' + this.requestdata.responseJSON.token,
+            url: 'http://localhost:2358/submissions/' + this.requestdata.responseJSON.token + '?base64_encoded=true',
             type: 'get'
           })
           this.outputdata = secondRequest.done(async function (response) {
