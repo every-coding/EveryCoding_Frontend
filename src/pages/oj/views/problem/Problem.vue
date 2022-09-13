@@ -537,7 +537,6 @@
             this.statusVisible = false
           })
         }
-
         if (this.contestRuleType === 'OI' && !this.OIContestRealTimePermission) {
           if (this.submissionExists) {
             this.$Modal.confirm({
@@ -569,7 +568,8 @@
         }
         const checkStatus = () => {
           let secondRequest = $.ajax({
-            url: 'http://localhost:2358/submissions/' + this.requestdata.responseJSON.token + '?base64_encoded=true',
+            url: 'http://localhost:2358/submissions/' + this.requestdata.responseJSON.token,
+            // + '?base64_encoded=true',
             type: 'get'
           })
           this.outputdata = secondRequest.done(async function (response) {
