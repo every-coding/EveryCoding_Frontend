@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-container">
+  <div class="flex-container" v-if="access">
     <div v-if="problemRes" id="problem-main">
       <!--problem main-->
       <Panel :padding="40" shadow>
@@ -82,9 +82,9 @@
             <div v-if="contestEnded">
               <Alert type="warning" show-icon>{{$t('m.Contest_has_ended')}}</Alert>
             </div>
-            <div v-else-if="contestExitStatus"> <!--working by soojung-->
-              <Alert type="warning" show-icon>{{$t('m.Already_Submitted')}}</Alert>
-            </div>
+<!--            <div v-else-if="contestExitStatus"> &lt;!&ndash;working by soojung&ndash;&gt;-->
+<!--              <Alert type="warning" show-icon>{{$t('m.Already_Submitted')}}</Alert>-->
+<!--            </div>-->
           </Col>
           <Col :span="12">
             <template v-if="captchaRequired">
@@ -105,7 +105,7 @@
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
 
             <Button v-b-toggle.sidebar-right
-                    :disabled="askbutton || contestExitStatus"
+                    :disabled="askbutton"
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
 
@@ -305,8 +305,8 @@
           width: '500',
           height: '480'
         },
-        contestEndtime: '',  // working by soojung
-        contestExitStatus: false // working by soojung
+        contestEndtime: '',
+        access: true
       }
     },
     beforeRouteEnter (to, from, next) {
@@ -392,16 +392,15 @@
       CheckContestExit () {  // working by soojung
         api.checkContestExit(this.$route.params.contestID).then(res => {
           this.contestEndtime = res.data.data.end_time
-          console.log('What is state')
-          console.log(this.contestEndtime)
           if (this.contestEndtime) {
-            this.submitted = true
-            this.contestExitStatus = true
+            this.access = false
+          } else {
+            this.access = true
           }
-          console.log(this.contestExitStatus)
-          if (this.contestExitStatus) {
-            this.$error('이미 퇴실하셨습니다.')
-          }
+          // if (this.access === false) {
+          //   this.$router.push({name: 'lecture-contest-exit'})
+          // }
+          console.log(this.access)
         }).catch(() => {
         })
       },

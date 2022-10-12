@@ -1,12 +1,12 @@
 <template>
   <div class="view">
     <Panel :title="$t('m.WeeklyContest_List')">
-      <div>
-        강의명 : {{ this.lectureTitle }}
-      </div>
-      <div>
-        담당교수 : {{ this.lectureCreator }}
-      </div>
+<!--      <div>-->
+<!--        강의명 : {{ this.lectureTitle }}-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        담당교수 : {{ this.lectureCreator }}-->
+<!--      </div>-->
       <div slot="header">
         <el-input
           v-model="keyword"
@@ -173,8 +173,8 @@
         routeName: '',
         currentId: 1,
         lectureId: '',
-        lectureTitle: '',
-        lectureCreator: '',
+        // lectureTitle: '',
+        // lectureCreator: '',
         downloadDialogVisible: false,
         addContestDialogVisible: false,
         addLectureDialogVisible: false
@@ -183,7 +183,7 @@
     mounted () {
       this.routeName = this.$route.name
       this.lectureId = this.$route.params.lectureId
-      this.currentLectureInfo(this.lectureId)
+      // this.currentLectureInfo(this.lectureId)
       this.getContestList(this.currentPage)
     },
     filters: {
@@ -258,14 +258,14 @@
       handleVisibleSwitch (row) {
         row.lecture_id = row.lecture
         api.editContest(row)
-      },
-      currentLectureInfo (lectureId) {
-        api.getLecture(lectureId).then(res => {
-          console.log(res)
-          this.lectureTitle = res.data.data.title
-          this.lectureCreator = res.data.data.created_by.realname
-        })
       }
+      // currentLectureInfo (lectureId) {
+      //   api.getLecture(lectureId).then(res => {
+      //     console.log(res)
+      //     this.lectureTitle = res.data.data.title
+      //     this.lectureCreator = res.data.data.created_by.realname
+      //   })
+      // }
     },
     watch: {
       'keyword' () {

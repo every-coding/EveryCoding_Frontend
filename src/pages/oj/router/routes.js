@@ -19,6 +19,7 @@ import {
   UserHome,
   ProblemQnADetail,
   LectureContestExit,
+  ContestExit,
   ide
 } from '../views'
 
@@ -226,6 +227,11 @@ export default [
         name: 'acm-helper',
         path: 'helper',
         component: Contest.ACMContestHelper
+      },
+      {
+        name: 'contest-exit',
+        path: 'exit',
+        component: ContestExit
       }
     ]
   },

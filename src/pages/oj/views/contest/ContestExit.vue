@@ -31,7 +31,7 @@
               </template>
             </el-table-column>
 
-<!--            <el-table-column prop="userScore" label="점수" align="center"></el-table-column>-->
+            <!--            <el-table-column prop="userScore" label="점수" align="center"></el-table-column>-->
             <el-table-column prop="exit_status" label="퇴실 유무" align="center">
               <template slot-scope="scope"><!--lecture_signup_class에 실제 이름이 있는 경우,-->
                 <span v-if="scope.row.exit_status" style="color:green">
@@ -195,6 +195,8 @@ export default {
     getUserList (page) {
       console.log('getLectureUserList Called')
       this.loadingTable = true
+      console.log(this.lectureID)
+      console.log(this.contestID)
       api.getLectureUserList((page - 1) * this.pageSize, this.pageSize, this.keyword, this.lectureID, this.contestID).then(res => {
         this.loadingTable = false
         this.total = res.data.data.total  // 인스턴스 개수

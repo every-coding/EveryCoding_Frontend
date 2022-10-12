@@ -2,7 +2,7 @@
   <div class="view">
     <Panel :title="this.lectureTitle + ' ' + $t('m.Lecture_UserList')">
       <div>
-        <strong>개설자 : {{ this.lectureCreator }}</strong>
+        <strong>개설자 : {{ this.lectureFounder }}</strong>
       </div>
       <div slot="header">
         <el-row :gutter="20">
@@ -420,9 +420,8 @@
         showContestDialog: false,
         searchUser: '',
         addTAUserDialogVisible: false,
-        lectureId: '',
+        lectureFounder: '',
         lectureTitle: '',
-        lectureCreator: '',
         pageSize: 50,
         total: 0,
         RegistUser: 0,
@@ -459,7 +458,8 @@
     },
     mounted () {
       this.lectureId = this.$route.params.lectureId
-      this.currentLectureInfo(this.lectureId)
+      this.lectureTitle = this.$route.params.lectureTitle
+      this.lectureFounder = this.$route.params.lectureFounder
       this.getUserList(1)
       this.getTAList(this.lectureId)
     },
@@ -776,13 +776,6 @@
         }
         console.log(exceldata)
         XLSX.writeFile(wb, 'export.xlsx')
-      },
-      currentLectureInfo (lectureId) {
-        api.getLecture(lectureId).then(res => {
-          console.log(res)
-          this.lectureTitle = res.data.data.title
-          this.lectureCreator = res.data.data.created_by.realname
-        })
       }
     },
     computed: {
