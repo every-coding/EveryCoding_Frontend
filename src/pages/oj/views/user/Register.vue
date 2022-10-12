@@ -2,27 +2,27 @@
 <div>
     <Form ref="formRegister" :model="formRegister" :rules="ruleRegister">
       <FormItem prop="username">
-        <Input type="text" v-model="formRegister.username" :placeholder="$t('아이디를 입력해주세요.')" size="large" @on-enter="handleRegister">
+        <Input type="text" v-model="formRegister.username" :placeholder="$t('아이디를 입력해주세요.')" size="large" @on-enter="handleRegister" autocomplete="username">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="realname">
-        <Input type="text" v-model="formRegister.realname" :placeholder="$t('m.RegisterRealname')" size="large" @on-enter="handleRegister">
+        <Input type="text" v-model="formRegister.realname" :placeholder="$t('m.RegisterRealname')" size="large" @on-enter="handleRegister" autocomplete="name">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="email">
-        <Input v-model="formRegister.email" :placeholder="$t('m.Email_Address')" size="large" @on-enter="handleRegister">
+        <Input v-model="formRegister.email" :placeholder="$t('m.Email_Address')" size="large" @on-enter="handleRegister" autocomplete="email">
         <Icon type="ios-email-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="password">
-        <Input type="password" v-model="formRegister.password" :placeholder="$t('m.RegisterPassword')" size="large" @on-enter="handleRegister">
+        <Input type="password" v-model="formRegister.password" :placeholder="$t('m.RegisterPassword')" size="large" @on-enter="handleRegister" autocomplete="new-password">
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="passwordAgain">
-        <Input type="password" v-model="formRegister.passwordAgain" :placeholder="$t('m.Password_Again')" size="large" @on-enter="handleRegister">
+        <Input type="password" v-model="formRegister.passwordAgain" :placeholder="$t('m.Password_Again')" size="large" @on-enter="handleRegister" autocomplete="new-password">
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
