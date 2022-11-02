@@ -171,7 +171,7 @@
         }
       },
       goTestcase (problemId) {
-        this.$router.push({name: 'TestCase', params: {problemId}})
+        this.$router.push({name: 'testcase', params: {problemId}})
       },
       goCreateProblem () {
         if (this.routeName === 'problem-list') {

@@ -17,7 +17,8 @@ import {
   SubmissionDetails,
   SubmissionList,
   UserHome,
-  ProblemQnADetail
+  ProblemQnADetail,
+  TestCase
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
