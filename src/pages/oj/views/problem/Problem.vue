@@ -568,7 +568,7 @@
         }
         const checkStatus = () => {
           let secondRequest = $.ajax({
-            url: 'http://localhost:2358/submissions/' + this.requestdata.responseJSON.token,
+            url: '../judge0/submissions/' + this.requestdata.responseJSON.token,
             // + '?base64_encoded=true',
             type: 'get'
           })
@@ -632,7 +632,7 @@
           data.language_id = '71'
         }
         let request = $.ajax({
-          url: 'http://localhost:2358/submissions',
+          url: '../judge0/submissions',
           type: 'post',
           data: data
         })

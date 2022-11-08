@@ -10,6 +10,13 @@ const commonProxy = {
   target: process.env.TARGET,
   changeOrigin: true
 }
+const judge0Proxy = {
+  onProxyReq: (proxyReq, req, res) => {
+    proxyReq.setHeader('Referer', process.env.JUDGE0)
+  },
+  target: process.env.JUDGE0,
+  changeOrigin: true
+}
 
 module.exports = {
   build: {
@@ -42,7 +49,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/api": commonProxy,
-      "/public": commonProxy
+      "/public": commonProxy,
+      "/judge0": judge0Proxy
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
