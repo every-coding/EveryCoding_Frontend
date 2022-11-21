@@ -36,6 +36,11 @@
           <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
+      <FormItem prop="univ">
+        <Input type="text" v-model="formRegister.univ" :placeholder="$t('m.Univ')" size="large" @on-enter="handleRegister">
+          <Icon type="ios-person-outline" slot="prepend"></Icon>
+        </Input>
+      </FormItem>
       <FormItem prop="captcha" style="margin-bottom:10px">
         <div class="oj-captcha">
           <div class="oj-captcha-code">
@@ -138,7 +143,8 @@ export default {
         phonenum: '',
         phonenumAgain: '',
         email: '',
-        captcha: ''
+        captcha: '',
+        univ: ''
       },
       ruleRegister: {
         username: [
