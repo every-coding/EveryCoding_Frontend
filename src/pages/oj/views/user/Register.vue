@@ -173,6 +173,9 @@ export default {
         phonenumAgain: [
           {required: true, validator: CheckAgainPhonenum, trigger: 'change'}
         ],
+        univ: [
+          {required: true, validator: Univ, trigger: 'blur'}
+        ],
         captcha: [
           {required: true, trigger: 'blur', min: 1, max: 10}
         ]
