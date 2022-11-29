@@ -36,8 +36,8 @@
           <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
-      <FormItem prop="univ">
-        <Input type="text" v-model="formRegister.univ" :placeholder="$t('m.Univ')" size="large" @on-enter="handleRegister">
+      <FormItem prop="affliation">
+        <Input type="text" v-model="formRegister.affliation" :placeholder="$t('m.Affliation')" size="large" @on-enter="handleRegister">
           <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
@@ -144,7 +144,7 @@ export default {
         phonenumAgain: '',
         email: '',
         captcha: '',
-        univ: ''
+        affliation: ''
       },
       ruleRegister: {
         username: [
@@ -173,8 +173,9 @@ export default {
         phonenumAgain: [
           {required: true, validator: CheckAgainPhonenum, trigger: 'change'}
         ],
-        univ: [
-          {required: true, trigger: 'blur'}
+        affliation: [
+          {required: true, trigger: 'blur'},
+          {trigger: 'blur'}
         ],
         captcha: [
           {required: true, trigger: 'blur', min: 1, max: 10}
