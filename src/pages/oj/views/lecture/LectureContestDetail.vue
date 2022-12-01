@@ -77,12 +77,12 @@
 
         <!--submission student list (working by soojung)-->
         <!-- view case, disappear case, route -->
-        <VerticalMenu-item v-if="OIContestRealTimePermission && contestType === '대회'"
+        <!--<VerticalMenu-item v-if="OIContestRealTimePermission && contestType === '대회'"
                            :disabled="contestMenuDisabled"
                            :route="{name: 'lecture-contest-exit'}">
-          <Icon type="android-exit"></Icon>   <!--menu icon-->
-          {{$t('m.Exit')}}      <!--menu name-->
-        </VerticalMenu-item>
+          <Icon type="android-exit"></Icon>
+          {{$t('m.Exit')}}
+        </VerticalMenu-item>-->
       </VerticalMenu>
     </div>
   </div>
