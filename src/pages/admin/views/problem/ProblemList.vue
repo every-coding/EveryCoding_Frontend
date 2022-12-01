@@ -77,6 +77,9 @@
                       @click.native="downloadTestCase(scope.row.id)"></icon-btn>
             <icon-btn icon="trash" name="문제 삭제"
                       @click.native="deleteProblem(scope.row.id)"></icon-btn>
+            <icon-btn icon="file-text" name="테스트케이스 열기"
+                      @click.native="goTestcase(scope.row.id)"></icon-btn>
+
             <el-tooltip v-if="routeName === 'contest-problem-list'" class="item" effect="dark" content="유사도 검사" placement="top">
               <el-button name="코드 유사도 검사" size="mini" @click.native="copyKiller(scope.row.id)" icon="el-icon-user"></el-button>
             </el-tooltip>
@@ -167,6 +170,9 @@
         } else if (this.routeName === 'contest-problem-list') {
           this.$router.push({name: 'edit-contest-problem', params: {problemId: problemId, contestId: this.contestId}})
         }
+      },
+      goTestcase (problemId) {
+        this.$router.push({name: 'testcase', params: {problemId}})
       },
       goCreateProblem () {
         if (this.routeName === 'problem-list') {
