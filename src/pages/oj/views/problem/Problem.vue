@@ -48,6 +48,7 @@
 
         </div>
       </Panel>
+
       <!--problem main end-->
       <!--<iframe src="https://www.onlinegdb.com/" style="width:100%; height:750px">
       </iframe>-->
@@ -81,6 +82,9 @@
             <div v-if="contestEnded">
               <Alert type="warning" show-icon>{{$t('m.Contest_has_ended')}}</Alert>
             </div>
+            <div v-else-if="contestExitStatus"> <!--working by soojung-->
+              <Alert type="warning" show-icon>{{$t('m.Already_Submitted')}}</Alert>
+            </div>
           </Col>
           <Col :span="12">
             <template v-if="captchaRequired">
@@ -91,22 +95,22 @@
                 <Input v-model="captchaCode" class="captcha-code"/>
               </div>
             </template>
-            
+
             <Button v-if="problemRes" type="warning" icon="edit" :loading="submitting" @click="submitCode"
                     :disabled="problemSubmitDisabled || submitted"
-                    class="fl-right">
-              <span v-if="submitting">{{$t('m.Submitting')}}</span>
-              <span v-else>{{$t('m.Submit')}}</span>
+                    class="fl-right">   <!--제출(비활성화)-->
+              <span v-if="submitting">{{$t('m.Submitting')}}</span>   <!--제출중-->
+              <span v-else>{{$t('m.Submit')}}</span>  <!--제출(평소)-->
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-            
+
             <Button v-b-toggle.sidebar-right
-                    :disabled=askbutton
+                    :disabled="askbutton || contestExitStatus"
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
-              
+
             </Button>
-            
+
           </Col>
         </Row>
       </Card>
@@ -300,7 +304,9 @@
         largePieInitOpts: {
           width: '500',
           height: '480'
-        }
+        },
+        contestEndtime: '',  // working by soojung
+        contestExitStatus: false // working by soojung
       }
     },
     beforeRouteEnter (to, from, next) {
@@ -342,6 +348,7 @@
       },
       init () {
         this.$Loading.start()
+        this.CheckContestExit()
         this.contestID = this.$route.params.contestID // 실제 문제에 대한 정보를 얻기 위해서는 Contest의 id값과
         this.problemID_ = this.$route.params.problemID // Contest에 포함된 problem의 id값이 필요
         this.lectureID = this.$route.params.lectureID
@@ -382,6 +389,29 @@
           this.askbutton = true
         })
       },
+      CheckContestExit () {  // working by soojung
+        api.checkContestExit(this.$route.params.contestID).then(res => {
+          this.contestEndtime = res.data.data.end_time
+          console.log('What is state')
+          console.log(this.contestEndtime)
+          if (this.contestEndtime) {
+            this.submitted = true
+            this.contestExitStatus = true
+          }
+          console.log(this.contestExitStatus)
+          if (this.contestExitStatus) {
+            this.$error('이미 퇴실하셨습니다.')
+          }
+        }).catch(() => {
+        })
+      },
+      // ContestTimeOverExit () {  // working by soojung (설정 시간 초과로 인한 시험 자동 종료의 경우)
+      //   api.getContestTimeOverExit(this.$route.params.contestID).then(res => {
+      //     console.log(this.contestID)
+      //     console.log(this.lectureID)
+      //   }).catch(() => {
+      //   })
+      // },
       QnAWrite () {
         let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problem.id, 'content': this.qnaContent, 'private': false }
         api.writeQnAPost(data).then(res => {
@@ -558,6 +588,9 @@
         return this.$store.state.contest.contest
       },
       contestEnded () {
+        // if (this.contestStatus === CONTEST_STATUS.ENDED) {
+        //   this.ContestTimeOverExit()  // working by soojung
+        // }
         return this.contestStatus === CONTEST_STATUS.ENDED
       },
       submissionStatus () {

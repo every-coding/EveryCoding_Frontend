@@ -59,6 +59,7 @@ export const m = {
   Overview: '개요',
   Admin_Helper: '관리자 도우미',
   Contest_Announcements: '실습 및 과제 공지사항',
+  Exit: '종료',   // working by soojung
   // ContestProblemList
   Problems_List: '문제 목록',
   // OIRank.vue
