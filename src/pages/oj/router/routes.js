@@ -19,6 +19,9 @@ import {
   UserHome,
   ProblemQnADetail,
   TestCase
+  LectureContestExit,
+  ContestExit,
+  ide
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -152,6 +155,11 @@ export default [
         component: SubmissionList
       },
       {
+        name: 'lecture-contest-exit',
+        path: 'exit',
+        component: LectureContestExit // working by soojung
+      },
+      {
         name: 'lecture-contest-problem-list',
         path: 'problems',
         component: Lecture.LectureContestProblemList
@@ -220,6 +228,11 @@ export default [
         name: 'acm-helper',
         path: 'helper',
         component: Contest.ACMContestHelper
+      },
+      {
+        name: 'contest-exit',
+        path: 'exit',
+        component: ContestExit
       }
     ]
   },
@@ -288,6 +301,12 @@ export default [
     name: 'faq',
     meta: {title: 'FAQ'},
     component: FAQ
+  },
+  {
+    path: '/ide',
+    name: 'ide',
+    meta: {title: 'ide'},
+    component: ide
   },
   {
     path: '*',

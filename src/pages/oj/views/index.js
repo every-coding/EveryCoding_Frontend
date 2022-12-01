@@ -22,13 +22,16 @@ const Problem = () => import(/* webpackChunkName: "Problem" */ '@oj/views/proble
 const ProblemQnA = () => import(/* webpackChunkName: "Problem" */ '@oj/views/qna/ProblemQnAList.vue')
 const ProblemQnADetail = () => import(/* webpackChunkName: "Problem" */ '@oj/views/qna/ProblemQnADetail.vue')
 
+const LectureContestExit = () => import(/* webpackChunkName: "submission" */ '@oj/views/lecture/LectureContestExit.vue')  // working by soojung
+const ContestExit = () => import(/* webpackChunkName: "submission" */ '@oj/views/contest/ContestExit.vue')  // working by soojung
+
 export {
   Home, NotFound, Announcements,
   Login_, Logout, UserHome, About, FAQ,
   ProblemList, Problem,
   ACMRank, OIRank,
-  SubmissionList, SubmissionDetails,
-  ApplyResetPassword, ResetPassword, ProblemQnA, ProblemQnADetail
+  SubmissionList, SubmissionDetails, LectureContestExit,
+  ApplyResetPassword, ResetPassword, ProblemQnA, ProblemQnADetail, ContestExit
 }
 /* 组件导出分为两类, 一类常用的直接导出，另一类诸如Login, Logout等用懒加载,懒加载不在此处导出
  *   在对应的route内加载

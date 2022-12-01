@@ -79,12 +79,12 @@
                   </span>
                 </template>
               </el-table-column>
-              
+
               <el-table-column prop="maxScore" label="만점" width="90" align="center"></el-table-column>
               <el-table-column prop="totalScore" label="총점" width="90" align="center"></el-table-column>
               <el-table-column prop="avgScore" label="평균" width="90" align="center"></el-table-column>
               <el-table-column prop="progress" label="진행율" width="90" align="center"></el-table-column>
-              
+
               <el-table-column fixed="right" label="" width="200">
                 <template slot-scope="{row}">
                   <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
@@ -335,12 +335,12 @@
       </el-table>
     </Panel>
     <el-dialog title="TA/RA 이름 검색 결과"
-               v-if="lectureID"
+               v-if="lectureId"
                width="80%"
                :modal-append-to-body='true'
                @close-on-click-modal="false"
                :visible.sync="outerVisible">
-                <add-t-a-user :lectureID.sync="lectureID" :studentName.sync="ta_name" @on-change="updateTAList"></add-t-a-user>
+                <add-t-a-user :lectureId.sync="lectureId" :studentName.sync="ta_name" @on-change="updateTAList"></add-t-a-user>
     </el-dialog>
     <Panel>
       <span slot="title">{{$t('m.Import_Student')}}
@@ -418,11 +418,10 @@
         // activeName: 'synthesis', // 페이지 내 여러 탭 표현을 위한 변수, synthesis와 동일한 name을 가진 pane이 default로 출력된다.
         activeName: 'synthesis', // 임시 지정
         showContestDialog: false,
-        lectureID: '',
         searchUser: '',
         addTAUserDialogVisible: false,
-        lectureFounder: '', // 강의 개설자 realname
-        lectureTitle: '', // 수강과목 title
+        lectureFounder: '',
+        lectureTitle: '',
         pageSize: 50,
         total: 0,
         RegistUser: 0,
@@ -458,41 +457,41 @@
       }
     },
     mounted () {
-      this.lectureID = this.$route.params.lectureId
+      this.lectureId = this.$route.params.lectureId
       this.lectureTitle = this.$route.params.lectureTitle
       this.lectureFounder = this.$route.params.lectureFounder
       this.getUserList(1)
-      this.getTAList(this.lectureID)
+      this.getTAList(this.lectureId)
     },
     components: {
       AddTAUser
     },
     methods: {
       checkboxChange (check, ssn) {
-        api.updateTAuserPermit(check, ssn, this.lectureID).then(res => {
+        api.updateTAuserPermit(check, ssn, this.lectureId).then(res => {
           console.log(res)
         })
       },
       deleteTaUser (schoolssn) {
         let result = this.talist.findIndex(ssn => ssn.schoolssn === schoolssn)
-        api.deleteTAUser(this.talist[result].schoolssn, this.lectureID).then(res => {
+        api.deleteTAUser(this.talist[result].schoolssn, this.lectureId).then(res => {
           console.log(res)
         })
         this.talist.splice(result, 1)
       },
       updateTAList () {
-        api.getTAUserList(this.lectureID).then(res => {
+        api.getTAUserList(this.lectureId).then(res => {
           this.talist = res.data.data.results
         })
       },
-      getTAList (lectureID) {
-        api.getTAUserList(lectureID).then(res => {
+      getTAList (lectureId) {
+        api.getTAUserList(lectureId).then(res => {
           this.talist = res.data.data.results
         })
       },
       migrateLecture () {
         this.loadingTable = true
-        let data = {'lectureID': this.lectureID}
+        let data = {'lectureId': this.lectureId}
         api.migrateLecture(data).then(res => {
           this.talist = res.data.data.results
         })
@@ -506,7 +505,7 @@
       },
       AcceptStudent (userid) {
         let data = {
-          lecture_id: this.lectureID,
+          lecture_id: this.lectureId,
           user_id: userid
         }
         api.acceptStudent(data).then(res => {
@@ -518,7 +517,7 @@
         this.$confirm('해당 학생의 수강신청을 삭제하시겠습니까?', 'confirm', {
           type: 'warning'
         }).then(() => {
-          api.denyStudent(id, this.lectureID).then(res => {
+          api.denyStudent(id, this.lectureId).then(res => {
             this.getUserList(this.page)
           }).catch(() => {
             this.getUserList(this.page)
@@ -547,7 +546,7 @@
       getUserList (page) {
         console.log('getUserList Called')
         this.loadingTable = true
-        api.getLectureUserList((page - 1) * this.pageSize, this.pageSize, this.keyword, this.lectureID).then(res => {
+        api.getLectureUserList((page - 1) * this.pageSize, this.pageSize, this.keyword, this.lectureId).then(res => {
           this.loadingTable = false
           this.total = res.data.data.total
           this.userList = res.data.data.results

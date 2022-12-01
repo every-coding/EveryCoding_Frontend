@@ -118,7 +118,7 @@
   import { mapGetters } from 'vuex'
   import time from '@/utils/time'
   import { CONTEST_STATUS } from '@/utils/constants'
-  
+
   Vue.use(Element)
 
   const pieColorMap = {
@@ -149,7 +149,7 @@
         tablerow: ['1'], // 테이블 출력 수 조절을 위한 값. 지우거나 값 수정하지 말 것
         lecturelist: [],
         contests: [],
-        detail: true,
+        detail: false,
         index: 0,
         activeName: '',
         clsize: 0,

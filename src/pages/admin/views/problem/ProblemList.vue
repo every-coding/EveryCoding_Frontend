@@ -157,6 +157,7 @@
     mounted () {
       this.routeName = this.$route.name
       this.contestId = this.$route.params.contestId
+      // this.currentContestInfo(this.contestId)
       this.getProblemList(this.currentPage)
     },
     methods: {

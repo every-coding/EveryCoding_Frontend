@@ -136,8 +136,8 @@
       goLectureContestList (lectureId) {
         this.$router.push({name: 'lecture-contest-list', params: {lectureId}})
       },
-      goLectureStudentList (lectureId, lectureTitle, lectureFounder) {
-        this.$router.push({name: 'lecture-student-list', params: {lectureId, lectureTitle, lectureFounder}})
+      goLectureStudentList (lectureId) {
+        this.$router.push({name: 'lecture-student-list', params: {lectureId}})
       },
       deleteLecture (lectureId) {
         this.$confirm('정말로 이 수강과목을 삭제하시겠습니까?', 'confirm', {
