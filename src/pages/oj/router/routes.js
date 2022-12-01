@@ -309,6 +309,10 @@ export default [
   },
   {
     path: '*',
+    redirect: '404'
+  },
+  {
+    path: '/404',
     meta: {title: '404'},
     component: NotFound
   }
