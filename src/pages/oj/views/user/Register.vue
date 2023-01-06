@@ -26,13 +26,13 @@
         <Icon type="ios-locked-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
-      <FormItem prop="schoolssn">
-        <Input type="text" v-model="formRegister.schoolssn" :placeholder="$t('m.schoolssn')" size="large" @on-enter="handleRegister">
+      <FormItem prop="phonenum">
+        <Input type="text" v-model="formRegister.phonenum" :placeholder="$t('m.phonenum')" size="large" @on-enter="handleRegister">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
-      <FormItem prop="schoolssnAgain">
-        <Input type="text" v-model="formRegister.schoolssnAgain" :placeholder="$t('m.schoolssn_Again')" size="large" @on-enter="handleRegister">
+      <FormItem prop="phonenumAgain">
+        <Input type="text" v-model="formRegister.phonenumAgain" :placeholder="$t('m.phonenum_Again')" size="large" @on-enter="handleRegister">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
@@ -98,12 +98,12 @@
           }
         }, _ => callback())
       }
-      const CheckSchoolssnNotExist = (rule, value, callback) => {
+      const CheckPhonenumNotExist = (rule, value, callback) => {
         api.checkUsernameOrEmail(undefined, undefined, value).then(res => {
-          if (this.formRegister.schoolssn.length < 5 || this.formRegister.schoolssn.length > 8) {
-            callback(new Error(this.$i18n.t('학번/교직번호는 5자 이상, 8자 이하로 입력하세요.')))
-          } else if (res.data.data.schoolssn === true) {
-            callback(new Error(this.$i18n.t('학번/교직번호가 이미 입력되었습니다.')))
+          if (this.formRegister.phonenum.length < 11 || this.formRegister.phonenum.length > 11) {
+            callback(new Error(this.$i18n.t('전화번호는 11자리로 입력하세요.')))
+          } else if (res.data.data.phonenum === true) {
+            callback(new Error(this.$i18n.t('전화번호가 이미 입력되었습니다.')))
           } else {
             callback()
           }
@@ -122,9 +122,9 @@
         }
         callback()
       }
-      const CheckAgainSchoolssn = (rule, value, callback) => {
-        if (value !== this.formRegister.schoolssn) {
-          callback(new Error(this.$i18n.t('학번이 일치하지 않습니다.')))
+      const CheckAgainPhonenum = (rule, value, callback) => {
+        if (value !== this.formRegister.phonenum) {
+          callback(new Error(this.$i18n.t('전화호가 일치하지 않습니다.')))
         }
         callback()
       }
@@ -136,8 +136,8 @@
           realname: '',
           password: '',
           passwordAgain: '',
-          schoolssn: '',
-          schoolssnAgain: '',
+          phonenum: '',
+          phonenumAgain: '',
           email: '',
           captcha: ''
         },
@@ -161,12 +161,12 @@
           passwordAgain: [
             {required: true, validator: CheckAgainPassword, trigger: 'change'}
           ],
-          schoolssn: [
+          phonenum: [
             {required: true, trigger: 'blur'},
-            {validator: CheckSchoolssnNotExist, required: true, trigger: 'blur'}
+            {validator: CheckPhonenumNotExist, required: true, trigger: 'blur'}
           ],
-          schoolssnAgain: [
-            {required: true, validator: CheckAgainSchoolssn, trigger: 'blur'}
+          phonenumAgain: [
+            {required: true, validator: CheckAgainPhonenum, trigger: 'blur'}
           ],
           captcha: [
             {required: true, trigger: 'blur', min: 1, max: 10}
