@@ -92,19 +92,19 @@ export default {
       data
     })
   },
-  checkUsernameOrEmail (username, email, schoolssn) {
+  checkUsernameOrEmail (username, email, phonenum) {
     return ajax('check_username_or_email', 'post', {
       data: {
         username,
         email,
-        schoolssn
+        phonenum
       }
     })
   },
-  checkSchoolssn (schoolssn) {
-    return ajax('check_schoolssn', 'post', {
+  checkPhonenum (phonenum) {
+    return ajax('check_phonenum', 'post', {
       data: {
-        schoolssn
+        phonenum
       }
     })
   },
