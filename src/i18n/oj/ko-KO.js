@@ -112,6 +112,8 @@ export const m = {
   // Register.vue
   RegisterUsername: '아이디',
   RegisterRealname: '이름',
+  Phonenum: '전화번호',
+  PhonenumAgain : '전화번호 확인',
   Email_Address: '이메일 주소',
   RegisterPassword: '비밀번호',
   Password_Again: '비밀번호 확인',
