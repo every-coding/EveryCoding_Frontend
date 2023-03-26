@@ -12,6 +12,7 @@ export const m = {
   Source: '소스코드',
   Status: '제출 상태',
   calltara: '조교에게 질문하기',
+  callgpt: '인공지능에게 질문하기',
   Information: '정보',
   Time_Limit: '시간 제한',
   Memory_Limit: '메모리 제한',
