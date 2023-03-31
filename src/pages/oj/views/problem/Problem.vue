@@ -91,7 +91,7 @@
                 <Input v-model="captchaCode" class="captcha-code"/>
               </div>
             </template>
-            
+
             <Button v-if="problemRes" type="warning" icon="edit" :loading="submitting" @click="submitCode"
                     :disabled="problemSubmitDisabled || submitted"
                     class="fl-right">
@@ -99,14 +99,19 @@
               <span v-else>{{$t('m.Submit')}}</span>
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-            
+
             <Button v-b-toggle.sidebar-right
                     :disabled=askbutton
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
-              
+
             </Button>
-            
+            <Button v-b-toggle.sidebar-right
+                    :disabled=askbutton
+                    class="fl-right">
+              <span>{{$t('m.callai')}}</span>
+            </Button>
+
           </Col>
         </Row>
       </Card>
