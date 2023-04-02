@@ -68,8 +68,13 @@ export default {
       params
     })
   },
-  getDashboardinfo (data) {
-    return ajax('userprogress', 'get', {
+  askAI (data) {
+    return ajax('aihelper', 'post', {
+      data
+    })
+  },
+  getAIresponse (data) {
+    return ajax('aihelper', 'get', {
       data
     })
   },

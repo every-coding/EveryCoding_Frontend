@@ -53,11 +53,9 @@
             </div>
           </div>
         </b-sidebar>
-        <!--
-        <Button type="primary" size="large" @click.native="QnAWrite">
-          {{$t('m.qna')}}
+        <Button type="primary" size="large" @click.native="AskAI">
+          AI에게 질문하기
         </Button>
-        -->
       </div>
     </Col>
   </Row>
@@ -141,7 +139,8 @@
           }
         },
         isConcat: false,
-        loading: false
+        loading: false,
+        AIrespone: ''
       }
     },
     mounted () {
@@ -171,6 +170,17 @@
         let data = { 'id': this.submission.id, 'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
         api.writeQnAPost(data).then(res => { })
         this.goContestQnA()
+      },
+      AskAI () {
+        let data = { 'id': this.submission.id, 'code': this.submission.code, 'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
+        api.askAI(data).then(res => { })
+      },
+      getAIresponse () {
+        let data = { 'id': this.submission.id, 'contestID': this.submission.contest, 'problemID': this.submission.problem }
+        api.getAIresponse(data).then(res => {
+          this.AIrespone = res.data.data
+        })
+        console.log(this.AIrespone)
       },
       getSubmission () {
         this.loading = true
