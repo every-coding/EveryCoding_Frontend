@@ -73,16 +73,21 @@ export default {
       data
     })
   },
-  askAI (data) {
-    return ajax('aihelper', 'post', {
-      data
-    })
-  },
-  getAIresponse (data) {
+  askQuAAI (params) {
     return ajax('aihelper', 'get', {
-      data
+      params
     })
   },
+  // askAI (data) {
+  //   return ajax('aihelper', 'post', {
+  //     data
+  //   })
+  // },
+  // getAIresponse (data) {
+  //   return ajax('aihelper', 'get', {
+  //     data
+  //   })
+  // },
   getWebsiteConf (params) {
     return ajax('website', 'get', {
       params
