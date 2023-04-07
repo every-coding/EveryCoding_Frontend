@@ -223,9 +223,9 @@
         </div>
       </div>
     </b-sidebar>
-    <b-sidebar id="sidebar-airight" title="Sidebar" width="500px" no-header right shadow>
+    <b-sidebar id="sidebar-airight" title="Sidebar" width="500px" no-header right shadow v-bind:visible="sidebarVisible">
       <div class="sidebar" id="wrapper">
-        <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
+        <button b-sidebar id="close" v-on:click="toggleSidebar" class="e-btn close-btn">닫기</button>
         <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
         <hr/>
         <div class="sidebar-content">
@@ -283,6 +283,7 @@
     mixins: [FormMixin],
     data () {
       return {
+        sidebarVisible: false,
         statusVisible: false,
         captchaRequired: false,
         graphVisible: false,
@@ -579,6 +580,9 @@
       },
       onCopyError (e) {
         this.$error('Failed to copy code')
+      },
+      toggleSidebar () {
+        this.sidebarVisible = !this.sidebarVisible
       }
     },
     computed: {
