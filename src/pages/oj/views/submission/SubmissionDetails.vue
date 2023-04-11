@@ -73,16 +73,14 @@
             </div>
           </div>
         </b-sidebar>
-        <Button type="primary" size="large" @click.native="askAI">
-          AI에게 질문하기
-        </Button>
 
-        <Button v-b-toggle.sidebar-airight
+        <el-Button v-b-toggle.sidebar-airight
                 :disabled=askbutton
                 class="fl-right"
-                @click.native="popwebclose">
+                @click.native="askAI"
+                type="primary">
           <span>{{$t('m.callai')}}</span>
-        </Button>
+        </el-Button>
       </div>
     </Col>
   </Row>
