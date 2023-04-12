@@ -206,7 +206,9 @@
           problemID: this.$route.params.problemID,
           id: this.submission.id,
           code: this.submission.code,
-          content: this.qnaContent}
+          content: this.qnaContent,
+          submission: this.submission.info,
+          status: this.status}
         // let data = { 'id': this.submission.id, 'code': this.submission.code,
         //   'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
         console.log('askAI called')
