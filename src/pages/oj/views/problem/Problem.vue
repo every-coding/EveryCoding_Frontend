@@ -107,6 +107,7 @@
             </Button>
 
             <Button v-b-toggle.sidebar-airight
+                    v-if="aihelperflag"
                 :disabled=askbutton
                 class="fl-right"
                 @click.native="askAI">
@@ -288,6 +289,7 @@
         lectureID: '',
         askbutton: false,
         aiaskbutton: false,
+        aihelperflag: false,
         submitting: false,
         AIrespone: '',
         qnaContent: {
@@ -350,6 +352,12 @@
           })
         }
       },
+      checkAllowedAIhelper () {
+        let data = { contestID: this.contestID }
+        api.getAIhelperflag(data).then(res => {
+          this.aihelperflag = res.data.data
+        })
+      },
       goContestQnA () {
         this.$router.push({
           name: 'constest-problem-qna',
@@ -367,6 +375,7 @@
         this.problemID = this.$route.params.problemID
         this.lectureID = this.$route.params.lectureID
         this.getLectureID()
+        this.checkAllowedAIhelper()
         let func = this.$route.name === 'problem-details' ? 'getProblem' : 'getContestProblem'
         api[func](this.problemID, this.contestID).then(res => {
           this.$Loading.finish()

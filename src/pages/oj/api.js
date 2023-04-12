@@ -13,6 +13,11 @@ export default {
       data
     })
   },
+  getAIhelperflag (data) {
+    return ajax('lecture/aihelperflag', 'post', {
+      data
+    })
+  },
   deleteComment (id) {
     return ajax('comment', 'delete', {
       params: {
