@@ -107,8 +107,9 @@
             </Button>
 
             <Button v-b-toggle.sidebar-airight
-                    :disabled=aiaskbutton
-                    class="fl-right">
+                :disabled=askbutton
+                class="fl-right"
+                @click.native="askAI">
               <span>{{$t('m.callai')}}</span>
             </Button>
 
@@ -224,25 +225,16 @@
       </div>
     </b-sidebar>
     <b-sidebar id="sidebar-airight" title="Sidebar" width="500px" no-header right shadow v-bind:visible="sidebarVisible">
-      <div class="sidebar" id="wrapper">
-        <button b-sidebar id="close" v-on:click="toggleSidebar" class="e-btn close-btn">닫기</button>
-        <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
-        <hr/>
-        <div class="sidebar-content">
-          <br/>
-          <span>chat GPT 3.5 Turbo</span>
-          <br/>
-          <span> 여기에 GPT의 답변을 출력 <br/></span>
-          <span> ... <br/></span>
-          <span> ... <br/></span>
-          <span> ... <br/></span>
-          <span> ... <br/></span>
-          <span> ... <br/></span>
-          <span> ... <br/></span>
-          <span> ... <br/></span>
-        </div>
-      </div>
-    </b-sidebar>
+          <div class="sidebar" id="wrapper">
+            <button b-sidebar id="close" v-on:click="toggleSidebar" class="e-btn close-btn">닫기</button><p class="float-right">commented by chatGPT</p>
+            <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
+            <hr/>
+            <div class="sidebar-content">
+              <br/>
+              {{AIrespone}}
+            </div>
+          </div>
+        </b-sidebar>
     <Modal v-model="graphVisible">
       <div id="pieChart-detail">
         <ECharts :options="largePie" :initOptions="largePieInitOpts"></ECharts>
@@ -297,6 +289,7 @@
         askbutton: false,
         aiaskbutton: false,
         submitting: false,
+        AIrespone: '',
         qnaContent: {
           title: '',
           content: ''
@@ -479,6 +472,20 @@
               this.code = ''
             }
           }
+        })
+      },
+      askAI () {
+        let params = {
+          id: this.submissionId,
+          code: this.code,
+          status: this.status}
+        // let data = { 'id': this.submission.id, 'code': this.submission.code,
+        //   'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
+        console.log('askAI called')
+        api.askQuAAI(params).then(res => {
+          console.log(params)
+          this.AIrespone = res.data.data
+          console.log(res)
         })
       },
       checkSubmissionStatus () {
