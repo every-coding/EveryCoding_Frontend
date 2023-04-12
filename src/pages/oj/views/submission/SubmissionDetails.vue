@@ -55,21 +55,12 @@
 
         <b-sidebar id="sidebar-airight" title="Sidebar" width="500px" no-header right shadow v-bind:visible="sidebarVisible">
           <div class="sidebar" id="wrapper">
-            <button b-sidebar id="close" v-on:click="toggleSidebar" class="e-btn close-btn">닫기</button>
+            <button b-sidebar id="close" v-on:click="toggleSidebar" class="e-btn close-btn">닫기</button><p class="float-right">commented by chatGPT</p>
             <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
             <hr/>
             <div class="sidebar-content">
               <br/>
-              <span>chat GPT 3.5 Turbo</span>
-              <br/>
-              <span> 여기에 GPT의 답변을 출력 <br/></span>
-              <span> ... <br/></span>
-              <span> ... <br/></span>
-              <span> ... <br/></span>
-              <span> ... <br/></span>
-              <span> ... <br/></span>
-              <span> ... <br/></span>
-              <span> ... <br/></span>
+              {{AIrespone}}
             </div>
           </div>
         </b-sidebar>
@@ -212,6 +203,8 @@
         console.log('askAI called')
         api.askQuAAI(params).then(res => {
           console.log(params)
+          this.AIrespone = res.data.data
+          console.log(res)
         })
       },
       // getAIresponse () {
