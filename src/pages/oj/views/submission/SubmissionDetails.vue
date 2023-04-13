@@ -268,7 +268,7 @@
       },
       toggleSidebar () {
         this.sidebarVisible = !this.sidebarVisible
-        console.log(1)
+        this.AIrespone = '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.'
       }
 
     },
