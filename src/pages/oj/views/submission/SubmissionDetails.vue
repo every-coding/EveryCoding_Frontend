@@ -41,6 +41,7 @@
         <el-button type="primary" v-b-toggle.sidebar-right>{{$t('m.qna')}}</el-button>
         <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
           <div class="sidebar" id="wrapper">
+            <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
             <h2 class="sidebar-header">{{$t('m.qna')}}</h2>
             <hr/>
             <div class="sidebar-content">
@@ -160,7 +161,7 @@
         },
         isConcat: false,
         loading: false,
-        AIrespone: ''
+        AIrespone: '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.'
       }
     },
     mounted () {
