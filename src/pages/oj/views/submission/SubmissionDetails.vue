@@ -55,7 +55,6 @@
 
         <b-sidebar id="sidebar-airight" title="Sidebar" width="100%" no-header right shadow v-bind:visible="sidebarVisible">
           <div class="sidebar" id="wrapper">
-            <button b-sidebar id="close" v-on:click="toggleSidebar" class="e-btn close-btn">닫기</button>
             <p class="float-right">commented by chatGPT</p>
             <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
             <hr/>
@@ -63,6 +62,8 @@
               <br/>
               {{AIrespone}}
             </div>
+            <el-button class="fl-right" type="primary" b-sidebar id="close" v-on:click="toggleSidebar"
+                    style="margin: auto; display: block">닫기</el-button>
           </div>
         </b-sidebar>
 
