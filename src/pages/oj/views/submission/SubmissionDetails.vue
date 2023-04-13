@@ -68,9 +68,8 @@
           </div>
         </b-sidebar>
 
-        <el-Button v-b-toggle.sidebar-airight
-                :disabled=askbutton
-                class="fl-right"
+        <el-Button
+                   v-on:click="toggleSidebar"
                 @click.native="askAI"
                 type="primary">
           <span>{{$t('m.callai')}}</span>
@@ -269,6 +268,7 @@
       },
       toggleSidebar () {
         this.sidebarVisible = !this.sidebarVisible
+        console.log(1)
       }
 
     },
