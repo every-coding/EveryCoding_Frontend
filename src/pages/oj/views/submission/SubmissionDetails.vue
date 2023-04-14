@@ -41,6 +41,7 @@
         <el-button type="primary" v-b-toggle.sidebar-right>{{$t('m.qna')}}</el-button>
         <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
           <div class="sidebar" id="wrapper">
+            <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
             <h2 class="sidebar-header">{{$t('m.qna')}}</h2>
             <hr/>
             <div class="sidebar-content">
@@ -53,25 +54,28 @@
           </div>
         </b-sidebar>
 
-        <b-sidebar id="sidebar-airight" title="Sidebar" width="500px" no-header right shadow v-bind:visible="sidebarVisible">
+        <b-sidebar id="sidebar-airight" title="Sidebar" width="100%" no-header right shadow v-bind:visible="sidebarVisible">
           <div class="sidebar" id="wrapper">
-            <button b-sidebar id="close" v-on:click="toggleSidebar" class="e-btn close-btn">닫기</button><p class="float-right">commented by chatGPT</p>
+            <p class="float-right">commented by chatGPT</p>
             <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
             <hr/>
             <div class="sidebar-content">
               <br/>
               {{AIrespone}}
             </div>
+            <el-button class="fl-right" type="primary" b-sidebar id="close" v-on:click="toggleSidebar"
+                    style="margin: auto; display: block">닫기</el-button>
           </div>
         </b-sidebar>
 
-        <el-Button v-b-toggle.sidebar-airight
-                :disabled=askbutton
-                class="fl-right"
+        <!--
+        <el-Button
+                   v-on:click="toggleSidebar"
                 @click.native="askAI"
                 type="primary">
           <span>{{$t('m.callai')}}</span>
         </el-Button>
+        -->
       </div>
     </Col>
   </Row>
@@ -158,7 +162,7 @@
         },
         isConcat: false,
         loading: false,
-        AIrespone: ''
+        AIrespone: '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.'
       }
     },
     mounted () {
@@ -266,6 +270,7 @@
       },
       toggleSidebar () {
         this.sidebarVisible = !this.sidebarVisible
+        this.AIrespone = '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.'
       }
 
     },

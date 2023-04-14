@@ -99,19 +99,18 @@
               <span v-else>{{$t('m.Submit')}}</span>
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-
+            <Button
+              v-on:click="toggleSidebar"
+              v-if="aihelperflag"
+              @click.native="askAI"
+              class="fl-right"
+            >
+              <span>{{$t('m.callai')}}</span>
+            </Button>
             <Button v-b-toggle.sidebar-right
                     :disabled=askbutton
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
-            </Button>
-
-            <Button v-b-toggle.sidebar-airight
-                    v-if="aihelperflag"
-                :disabled=askbutton
-                class="fl-right"
-                @click.native="askAI">
-              <span>{{$t('m.callai')}}</span>
             </Button>
 
           </Col>
@@ -225,17 +224,21 @@
         </div>
       </div>
     </b-sidebar>
-    <b-sidebar id="sidebar-airight" title="Sidebar" width="500px" no-header right shadow v-bind:visible="sidebarVisible">
-          <div class="sidebar" id="wrapper">
-            <button b-sidebar id="close" v-on:click="toggleSidebar" class="e-btn close-btn">닫기</button><p class="float-right">commented by chatGPT</p>
-            <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
-            <hr/>
-            <div class="sidebar-content">
-              <br/>
-              {{AIrespone}}
-            </div>
-          </div>
-        </b-sidebar>
+
+    <b-sidebar id="sidebar-airight" title="Sidebar" width="100%" no-header right shadow v-bind:visible="sidebarVisible">
+      <div class="sidebar" id="wrapper">
+        <p class="float-right">commented by chatGPT</p>
+        <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
+        <hr/>
+        <div class="sidebar-content">
+          <br/>
+          {{AIrespone}}
+        </div>
+        <el-button type="primary" b-sidebar id="close" v-on:click="toggleSidebar"
+                   style="margin: auto; display: block">닫기</el-button>
+      </div>
+    </b-sidebar>
+
     <Modal v-model="graphVisible">
       <div id="pieChart-detail">
         <ECharts :options="largePie" :initOptions="largePieInitOpts"></ECharts>
@@ -291,7 +294,7 @@
         aiaskbutton: false,
         aihelperflag: false,
         submitting: false,
-        AIrespone: '',
+        AIrespone: '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.',
         qnaContent: {
           title: '',
           content: ''
@@ -599,6 +602,7 @@
       },
       toggleSidebar () {
         this.sidebarVisible = !this.sidebarVisible
+        this.AIrespone = '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.'
       }
     },
     computed: {
