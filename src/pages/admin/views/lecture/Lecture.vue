@@ -106,7 +106,7 @@
           title: '',
           description: '',
           status: true,
-          aihelper_status: true,
+          aihelper_status: false,
           password: '',
           year: curYear,
           semester: curMonth,

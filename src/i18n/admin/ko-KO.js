@@ -148,7 +148,7 @@ export const m = {
   Lecture_Start_Time: '개설과목 시작일',
   Lecture_End_Time: '개설과목 종료일',
   LectureStatus: '개설과목 상태',
-  AI_helper_flag: 'AI 코딩도우미 설정',
+  AI_helper_flag: 'AI 코딩 도우미 설정',
   Lecture_Password: '개설과목 비밀번호',
   Lecture_ContestList: '개설과목 강의 목록',
   Contest_id: '실습, 과제, 대회 id',
