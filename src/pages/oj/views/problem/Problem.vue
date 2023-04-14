@@ -103,12 +103,17 @@
               <span v-else>{{$t('m.Submit')}}</span>  <!--제출(평소)-->
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-
+            <Button v-on:click="toggleSidebar"
+                    v-if="aihelperflag"
+                    :disabled=askbutton
+                    @click.native="askAI"
+                    class="fl-right">
+              <span>{{$t('m.callai')}}</span>
+            </Button>
             <Button v-b-toggle.sidebar-right
                     :disabled="askbutton || contestExitStatus"
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
-
             </Button>
 
           </Col>
@@ -207,6 +212,7 @@
         </div>
       </Card>
     </div>
+
     <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
       <div class="sidebar" id="wrapper">
         <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
@@ -221,6 +227,23 @@
         </div>
       </div>
     </b-sidebar>
+
+    <b-sidebar id="sidebar-airight" title="Sidebar" width="500px"no-header right shadow v-bind:visible="sidebarVisible">
+      <div class="sidebar" id="wrapper">
+        <el-button class="sidebar-margin" v-on:click="toggleSidebar" icon="el-icon-close" circle></el-button>
+        <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
+        <hr/>
+        <div class="sidebar-content" top="50%" left="50%">
+          <br/>
+          <p style= "font-size:18px">{{AIrespone}}</p>
+        </div>
+        <br/>
+        <p style="font-weight: bold" align="right">commented by chatGPT </p>
+<!--        <el-button type="primary" b-sidebar id="close" v-on:click="toggleSidebar"-->
+<!--                   style="margin: auto; display: block">닫기</el-button>-->
+      </div>
+    </b-sidebar>
+
     <Modal v-model="graphVisible">
       <div id="pieChart-detail">
         <ECharts :options="largePie" :initOptions="largePieInitOpts"></ECharts>
@@ -261,6 +284,7 @@
     mixins: [FormMixin],
     data () {
       return {
+        sidebarVisible: false,
         statusVisible: false,
         captchaRequired: false,
         graphVisible: false,
@@ -272,7 +296,10 @@
         problemID: '',
         lectureID: '',
         askbutton: false,
+        aiaskbutton: false,
+        aihelperflag: false,
         submitting: false,
+        AIrespone: '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.',
         qnaContent: {
           title: '',
           content: ''
@@ -335,6 +362,12 @@
           })
         }
       },
+      checkAllowedAIhelper () {
+        let data = { contestID: this.contestID }
+        api.getAIhelperflag(data).then(res => {
+          this.aihelperflag = res.data.data
+        })
+      },
       goContestQnA () {
         this.$router.push({
           name: 'constest-problem-qna',
@@ -353,6 +386,7 @@
         this.problemID_ = this.$route.params.problemID // Contest에 포함된 problem의 id값이 필요
         this.lectureID = this.$route.params.lectureID
         this.getLectureID()
+        this.checkAllowedAIhelper()
         let func = this.$route.name === 'problem-details' ? 'getProblem' : 'getContestProblem'
         api[func](this.problemID_, this.contestID).then(res => {
           this.$Loading.finish()
@@ -387,6 +421,7 @@
           this.submissionId = res.data.data.id
         }).catch(() => {
           this.askbutton = true
+          this.aiaskbutton = true
         })
       },
       CheckContestExit () {  // working by soojung
@@ -482,6 +517,20 @@
           }
         })
       },
+      askAI () {
+        let params = {
+          id: this.submissionId,
+          code: this.code,
+          status: this.status}
+        // let data = { 'id': this.submission.id, 'code': this.submission.code,
+        //   'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
+        console.log('askAI called')
+        api.askQuAAI(params).then(res => {
+          console.log(params)
+          this.AIrespone = res.data.data
+          console.log(res)
+        })
+      },
       checkSubmissionStatus () {
         // 使用setTimeout避免一些问题
         if (this.refreshStatus) {
@@ -574,12 +623,17 @@
           submitFunc(data, true)
         }
         this.askbutton = false
+        this.aiaskbutton = false
       },
       onCopy (event) {
         this.$success('Code copied')
       },
       onCopyError (e) {
         this.$error('Failed to copy code')
+      },
+      toggleSidebar () {
+        this.sidebarVisible = !this.sidebarVisible
+        this.AIrespone = '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.'
       }
     },
     computed: {

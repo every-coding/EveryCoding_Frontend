@@ -13,6 +13,11 @@ export default {
       data
     })
   },
+  getAIhelperflag (data) {
+    return ajax('lecture/aihelperflag', 'post', {
+      data
+    })
+  },
   deleteComment (id) {
     return ajax('comment', 'delete', {
       params: {
@@ -73,6 +78,21 @@ export default {
       data
     })
   },
+  askQuAAI (params) {
+    return ajax('aihelper', 'get', {
+      params
+    })
+  },
+  // askAI (data) {
+  //   return ajax('aihelper', 'post', {
+  //     data
+  //   })
+  // },
+  // getAIresponse (data) {
+  //   return ajax('aihelper', 'get', {
+  //     data
+  //   })
+  // },
   getWebsiteConf (params) {
     return ajax('website', 'get', {
       params
