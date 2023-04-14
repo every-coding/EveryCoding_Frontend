@@ -68,12 +68,14 @@
           </div>
         </b-sidebar>
 
+        <!--
         <el-Button
                    v-on:click="toggleSidebar"
                 @click.native="askAI"
                 type="primary">
           <span>{{$t('m.callai')}}</span>
         </el-Button>
+        -->
       </div>
     </Col>
   </Row>
