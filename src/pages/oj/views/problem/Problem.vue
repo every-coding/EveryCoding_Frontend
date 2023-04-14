@@ -99,12 +99,11 @@
               <span v-else>{{$t('m.Submit')}}</span>
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-            <Button
-              v-on:click="toggleSidebar"
-              v-if="aihelperflag"
-              @click.native="askAI"
-              class="fl-right"
-            >
+            <Button v-on:click="toggleSidebar"
+                    v-if="aihelperflag"
+                    :disabled=askbutton
+                    @click.native="askAI"
+                    class="fl-right">
               <span>{{$t('m.callai')}}</span>
             </Button>
             <Button v-b-toggle.sidebar-right
@@ -225,17 +224,19 @@
       </div>
     </b-sidebar>
 
-    <b-sidebar id="sidebar-airight" title="Sidebar" width="100%" no-header right shadow v-bind:visible="sidebarVisible">
+    <b-sidebar id="sidebar-airight" title="Sidebar" width="500px"no-header right shadow v-bind:visible="sidebarVisible">
       <div class="sidebar" id="wrapper">
-        <p class="float-right">commented by chatGPT</p>
+        <el-button class="sidebar-margin" v-on:click="toggleSidebar" icon="el-icon-close" circle></el-button>
         <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
         <hr/>
-        <div class="sidebar-content">
+        <div class="sidebar-content" top="50%" left="50%">
           <br/>
-          {{AIrespone}}
+          <p style= "font-size:18px">{{AIrespone}}</p>
         </div>
-        <el-button type="primary" b-sidebar id="close" v-on:click="toggleSidebar"
-                   style="margin: auto; display: block">닫기</el-button>
+        <br/>
+        <p style="font-weight: bold" align="right">commented by chatGPT </p>
+<!--        <el-button type="primary" b-sidebar id="close" v-on:click="toggleSidebar"-->
+<!--                   style="margin: auto; display: block">닫기</el-button>-->
       </div>
     </b-sidebar>
 
