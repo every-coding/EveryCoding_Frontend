@@ -57,6 +57,7 @@ export default {
   getProfessorList () {
     let params = {}
     params.admin_type = 'Admin'
+    params.limit = 250
     return ajax('admin/user', 'get', {
       params: params
     })
@@ -207,6 +208,7 @@ export default {
   // TA/RA 인원 추가를 위한 함수
   getUserInfo (data) {
     console.log(data)
+    console.log('getUserInfo called')
     return ajax('admin/tauser', 'post', {
       data
     })

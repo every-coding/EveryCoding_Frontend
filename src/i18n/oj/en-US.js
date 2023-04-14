@@ -33,6 +33,7 @@ export const m = {
   Submitted_successfully: 'Submitted successfully',
   You_have_submitted_a_solution: 'You have submitted a solution.',
   Contest_has_ended: 'Contest has ended',
+  Already_Submitted: 'Already submitted',  // working by soojung
   You_have_submission_in_this_problem_sure_to_cover_it: 'You have submission in this problem, sure to cover it?',
   // About.vue
   Compiler: 'Compiler',

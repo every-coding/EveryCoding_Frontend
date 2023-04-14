@@ -1,6 +1,6 @@
 <template>
   <div class="view">
-    <Panel :title="this.ContestTitle + ' ' + $t('m.Lecture_UserList')">
+    <Panel :title="this.lectureTitle + ' ' + $t('m.Lecture_UserList')">
       <div slot="header">
         <el-row :gutter="20">
           <el-col :span="selectedUsers.length ? 16: 24">
@@ -52,7 +52,7 @@
                   </span>
                 </template>
               </el-table-column>
-              
+
               <el-table-column fixed="right" label="" width="200">
                 <template slot-scope="{row}">
                   <icon-btn name="Accept" icon="edit" @click.native="AcceptStudent(row.user.id)"></icon-btn>
@@ -61,7 +61,7 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          
+
           <el-tab-pane label="Excel export" name="export">
             <el-checkbox-group v-model="checkList">
               <el-checkbox label="대회"></el-checkbox>
@@ -72,7 +72,7 @@
           </el-tab-pane>
           <!---->
         </el-tabs>
-        
+
       </template>
       <!---->
       <div class="panel-options">
@@ -85,12 +85,12 @@
         </el-pagination>
       </div>
     </Panel>
-    
+
     <Panel>
       <span slot="title">{{$t('m.Import_Student')}}
         <el-popover placement="right" trigger="hover">
           <p><img src="./example.png"/></p>
-          <span>위 이미지와 동일한 형태로 존재하는 엑셀 학생 리스트를 가져올 수 있습니다.</span></br>
+          <span>위 이미지와 동일한 형태로 존재하는 엑셀 학생 리스트를 가져올 수 있습니다.</span>
           <span>학생 이름이 ?와 같이 표시되는 경우, 인코딩 방식을 utf-8로 변경하여야 합니다.</span>
           <i slot="reference" class="el-icon-fa-question-circle import-user-icon"></i>
         </el-popover>
@@ -164,8 +164,9 @@
         ContestTitle: '',
         searchUser: '',
         contestId: '',
-        lectureFounder: '', // 강의 개설자 realname
-        lectureTitle: '', // 수강과목 title
+        lectureId: '',
+        lectureTitle: '',
+        lectureCreator: '',
         pageSize: 50,
         total: 0,
         RegistUser: 0,
@@ -208,8 +209,9 @@
       }
     },
     mounted () {
-      this.contestId = this.$route.params.contestId
-      this.ContestTitle = this.$route.params.ContestTitle
+      console.log('StudentList.vue')
+      this.lectureId = this.$route.params.lectureId
+      this.currentLectureInfo(this.lectureId)
       this.getUserList(1)
     },
     components: {
@@ -372,7 +374,7 @@
           var wb = XLSX.utils.book_new()
           var exceldata = {
             '대회': [
-  
+
             ]
           }
           for (var exportval in this.checkList) {
@@ -394,6 +396,14 @@
           }
           console.log(exceldata)
           XLSX.writeFile(wb, 'export.xlsx')
+        })
+      },
+      currentLectureInfo (lectureId) {
+        console.log('currentLectureInfo called')
+        api.getLecture(lectureId).then(res => {
+          console.log(res)
+          this.lectureTitle = res.data.data.title
+          this.lectureCreator = res.data.data.created_by.realname
         })
       }
     },

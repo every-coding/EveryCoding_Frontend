@@ -74,6 +74,15 @@
           <Icon type="ios-paw"></Icon>
           {{$t('m.Admin_Helper')}}
         </VerticalMenu-item>
+
+        <!--submission student list (working by soojung)-->
+        <!-- view case, disappear case, route -->
+        <!--<VerticalMenu-item v-if="OIContestRealTimePermission && contestType === '대회'"
+                           :disabled="contestMenuDisabled"
+                           :route="{name: 'lecture-contest-exit'}">
+          <Icon type="android-exit"></Icon>
+          {{$t('m.Exit')}}
+        </VerticalMenu-item>-->
       </VerticalMenu>
     </div>
   </div>
@@ -97,8 +106,12 @@
         btnLoading: false,
         contestID: '',
         lectureID: '',
+        // contestType: '',  // working by soojung
+        // contestEndtime: '',  // working by soojung
+        // contestExitStatus: false, // working by soojung
         contestPassword: '',
         isvisible: false,
+        dialogFormVisible: false,
         columns: [ // 수강과목 세부 페이지의 내부 항목 제목
           // {
           //   title: this.$i18n.t('Id'),
@@ -151,6 +164,7 @@
           this.$error('잘못된 경로로 진입했습니다.')
         }
         this.lectureID = res.data.data.lecture
+        this.contestType = res.data.data.lecture_contest_type // working by soojung
         let endTime = moment(data.end_time)
         if (endTime.isAfter(moment(data.now))) {
           this.timer = setInterval(() => {
@@ -178,6 +192,14 @@
           this.btnLoading = false
         })
       }
+      // ,
+      // ContestTimeOverExit () {  // working by soojung (설정 시간 초과로 인한 시험 자동 종료의 경우)
+      //   api.getContestTimeOverExit(this.$route.params.contestID).then(res => {
+      //     console.log(this.contestID)
+      //     console.log(this.lectureID)
+      //   }).catch(() => {
+      //   })
+      // }
     },
     computed: {
       ...mapState({
@@ -192,6 +214,9 @@
       ),
       countdownColor () {
         if (this.contestStatus) {
+          // if (this.contestStatus === CONTEST_STATUS.ENDED) {  // working by soojung
+          //   this.ContestTimeOverExit()
+          // }
           return CONTEST_STATUS_REVERSE[this.contestStatus].color
         }
       },

@@ -90,7 +90,7 @@
         api.getLecture(this.$route.params.lectureId).then(res => {
           let data = res.data.data
           this.lecture = data
-          this.lecture.created_by_id = data.created_by.realname
+          // this.lecture.created_by_id = data.created_by.realname
         }).catch(() => {
         })
       } else if (this.$route.name === 'lecture-contest-list') {

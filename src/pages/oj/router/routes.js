@@ -17,7 +17,9 @@ import {
   SubmissionDetails,
   SubmissionList,
   UserHome,
-  ProblemQnADetail
+  ProblemQnADetail,
+  LectureContestExit,
+  ide
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -149,6 +151,11 @@ export default [
         name: 'lecture-contest-submission-list',
         path: 'submissions',
         component: SubmissionList
+      },
+      {
+        name: 'lecture-contest-exit',
+        path: 'exit',
+        component: LectureContestExit // working by soojung
       },
       {
         name: 'lecture-contest-problem-list',
@@ -289,7 +296,17 @@ export default [
     component: FAQ
   },
   {
+    path: '/ide',
+    name: 'ide',
+    meta: {title: 'ide'},
+    component: ide
+  },
+  {
     path: '*',
+    redirect: '404'
+  },
+  {
+    path: '/404',
     meta: {title: '404'},
     component: NotFound
   }

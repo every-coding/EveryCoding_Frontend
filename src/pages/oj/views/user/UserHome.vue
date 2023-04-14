@@ -46,15 +46,15 @@
           </div>
         </div>
         <div id="icons">
-          <a :href="profile.github">
+          <!-- <a :href="profile.github">
             <Icon type="social-github-outline" size="30"></Icon>
-          </a>
+          </a> -->
           <a :href="'mailto:'+ profile.user.email">
             <Icon class="icon" type="ios-email-outline" size="30"></Icon>
           </a>
-          <a :href="profile.blog">
+          <!-- <a :href="profile.blog">
             <Icon class="icon" type="ios-world-outline" size="30"></Icon>
-          </a>
+          </a> -->
         </div>
       </div>
     </Card>

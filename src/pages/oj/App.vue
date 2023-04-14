@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavBar></NavBar>
-    <div class="content-app">
+    <NavBar ref="navbar"></NavBar>
+    <div class="content-app" v-bind:style="navbarmargin">
       <transition name="fadeInUp" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -70,7 +70,8 @@
             link: 'http://software.cu.ac.kr/'
           }
         ],
-        version: process.env.VERSION
+        version: process.env.VERSION,
+        navbarmargin: { }
       }
     },
     created () {
@@ -81,8 +82,19 @@
     },
     mounted () {
       this.getWebsiteConfig()
+      this.getInfoHeight()
+      window.ontransitionend = () => {
+        this.getInfoHeight()
+      }
+      window.onresize = () => {
+        this.getInfoHeight()
+      }
     },
     methods: {
+      getInfoHeight () {
+        var margin = this.$refs.navbar.$el.scrollHeight + 30 + 'px'
+        Vue.set(this.navbarmargin, 'marginTop', margin)
+      },
       ...mapActions(['getWebsiteConfig', 'changeDomTitle'])
     },
     computed: {
@@ -117,8 +129,8 @@
 
 
   .content-app {
-    margin-top: 80px;
     padding: 0 2%;
+    margin-top: '80px';
   }
 
   .footer {
