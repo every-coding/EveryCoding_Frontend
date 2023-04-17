@@ -105,13 +105,13 @@
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
             <Button v-on:click="toggleSidebar"
                     v-if="aihelperflag"
-                    :disabled=askbutton
+                    :enabled=aiaskbutton
                     @click.native="askAI"
                     class="fl-right">
               <span>{{$t('m.callai')}}</span>
             </Button>
             <Button v-b-toggle.sidebar-right
-                    :disabled="askbutton || contestExitStatus"
+                    :enabled="askbutton"
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
             </Button>
