@@ -521,7 +521,7 @@
         let params = {
           id: this.submissionId,
           code: this.code,
-          status: this.status}
+          result: this.result.result}
         // let data = { 'id': this.submission.id, 'code': this.submission.code,
         //   'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
         console.log('askAI called')
