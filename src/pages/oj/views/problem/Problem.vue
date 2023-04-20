@@ -48,6 +48,7 @@
 
         </div>
       </Panel>
+
       <!--problem main end-->
       <!--<iframe src="https://www.onlinegdb.com/" style="width:100%; height:750px">
       </iframe>-->
@@ -102,12 +103,17 @@
               <span v-else>{{$t('m.Submit')}}</span>  <!--제출(평소)-->
             </Button>
             <Button v-else="problemRes" class="fl-right" disabled>{{$t('m.WrongPath')}}</Button>
-
+            <Button v-on:click="toggleSidebar"
+                    v-if="aihelperflag"
+                    :enabled=aiaskbutton
+                    @click.native="askAI"
+                    class="fl-right">
+              <span>{{$t('m.callai')}}</span>
+            </Button>
             <Button v-b-toggle.sidebar-right
-                    :disabled="askbutton || contestExitStatus"
+                    :enabled="askbutton"
                     class="fl-right">
               <span>{{$t('m.calltara')}}</span>
-
             </Button>
 
           </Col>
@@ -206,6 +212,7 @@
         </div>
       </Card>
     </div>
+
     <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
       <div class="sidebar" id="wrapper">
         <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
@@ -220,6 +227,23 @@
         </div>
       </div>
     </b-sidebar>
+
+    <b-sidebar id="sidebar-airight" title="Sidebar" width="500px"no-header right shadow v-bind:visible="sidebarVisible">
+      <div class="sidebar" id="wrapper">
+        <el-button class="sidebar-margin" v-on:click="toggleSidebar" icon="el-icon-close" circle></el-button>
+        <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
+        <hr/>
+        <div class="sidebar-content" top="50%" left="50%">
+          <br/>
+          <p style= "font-size:18px">{{AIrespone}}</p>
+        </div>
+        <br/>
+        <p style="font-weight: bold" align="right">commented by chatGPT </p>
+<!--        <el-button type="primary" b-sidebar id="close" v-on:click="toggleSidebar"-->
+<!--                   style="margin: auto; display: block">닫기</el-button>-->
+      </div>
+    </b-sidebar>
+
     <Modal v-model="graphVisible">
       <div id="pieChart-detail">
         <ECharts :options="largePie" :initOptions="largePieInitOpts"></ECharts>
@@ -260,6 +284,7 @@
     mixins: [FormMixin],
     data () {
       return {
+        sidebarVisible: false,
         statusVisible: false,
         captchaRequired: false,
         graphVisible: false,
@@ -271,7 +296,10 @@
         problemID: '',
         lectureID: '',
         askbutton: false,
+        aiaskbutton: false,
+        aihelperflag: false,
         submitting: false,
+        AIrespone: '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.',
         qnaContent: {
           title: '',
           content: ''
@@ -334,6 +362,12 @@
           })
         }
       },
+      checkAllowedAIhelper () {
+        let data = { contestID: this.contestID }
+        api.getAIhelperflag(data).then(res => {
+          this.aihelperflag = res.data.data
+        })
+      },
       goContestQnA () {
         this.$router.push({
           name: 'constest-problem-qna',
@@ -352,6 +386,7 @@
         this.problemID_ = this.$route.params.problemID // Contest에 포함된 problem의 id값이 필요
         this.lectureID = this.$route.params.lectureID
         this.getLectureID()
+        this.checkAllowedAIhelper()
         let func = this.$route.name === 'problem-details' ? 'getProblem' : 'getContestProblem'
         api[func](this.problemID_, this.contestID).then(res => {
           this.$Loading.finish()
@@ -386,6 +421,7 @@
           this.submissionId = res.data.data.id
         }).catch(() => {
           this.askbutton = true
+          this.aiaskbutton = true
         })
       },
       CheckContestExit () {  // working by soojung
@@ -397,9 +433,20 @@
             this.submitted = true
             this.contestExitStatus = true
           }
+          console.log(this.contestExitStatus)
+          if (this.contestExitStatus) {
+            this.$error('이미 퇴실하셨습니다.')
+          }
         }).catch(() => {
         })
       },
+      // ContestTimeOverExit () {  // working by soojung (설정 시간 초과로 인한 시험 자동 종료의 경우)
+      //   api.getContestTimeOverExit(this.$route.params.contestID).then(res => {
+      //     console.log(this.contestID)
+      //     console.log(this.lectureID)
+      //   }).catch(() => {
+      //   })
+      // },
       QnAWrite () {
         let data = { id: this.submissionId, contestID: this.contestID, problemID: this.problem.id, 'content': this.qnaContent, 'private': false }
         api.writeQnAPost(data).then(res => {
@@ -468,6 +515,20 @@
               this.code = ''
             }
           }
+        })
+      },
+      askAI () {
+        let params = {
+          id: this.submissionId,
+          code: this.code,
+          result: this.result.result}
+        // let data = { 'id': this.submission.id, 'code': this.submission.code,
+        //   'contestID': this.submission.contest, 'problemID': this.submission.problem, 'content': this.qnaContent }
+        console.log('askAI called')
+        api.askQuAAI(params).then(res => {
+          console.log(params)
+          this.AIrespone = res.data.data
+          console.log(res)
         })
       },
       checkSubmissionStatus () {
@@ -562,12 +623,17 @@
           submitFunc(data, true)
         }
         this.askbutton = false
+        this.aiaskbutton = false
       },
       onCopy (event) {
         this.$success('Code copied')
       },
       onCopyError (e) {
         this.$error('Failed to copy code')
+      },
+      toggleSidebar () {
+        this.sidebarVisible = !this.sidebarVisible
+        this.AIrespone = '답변을 작성하고 있습니다. 잠시만 기다려 주세요. 10초~30초 정도 소요 됩니다.'
       }
     },
     computed: {
@@ -576,6 +642,9 @@
         return this.$store.state.contest.contest
       },
       contestEnded () {
+        // if (this.contestStatus === CONTEST_STATUS.ENDED) {
+        //   this.ContestTimeOverExit()  // working by soojung
+        // }
         return this.contestStatus === CONTEST_STATUS.ENDED
       },
       submissionStatus () {
