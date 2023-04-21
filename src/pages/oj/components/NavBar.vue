@@ -30,11 +30,11 @@
    <Icon type="help"></Icon>
    공개 질문
   </el-menu-item>
-  <el-menu-item index="/question">
+  <el-menu-item index="/community">
     <Icon type="ios-chatboxes"></Icon>
     {{$t('m.Community')}}
   </el-menu-item>
-  <el-menu-item index="/question">
+  <el-menu-item index="/groupstudy">
     <Icon type="ios-contact"></Icon>
     {{$t('m.GroupStudy')}}
   </el-menu-item>
