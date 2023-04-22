@@ -47,11 +47,6 @@
                             <el-switch v-model="lecture.status" active-text="" inactive-text=""></el-switch>
                         </el-form-item>
                     </el-col>
-                    <el-col :span="12">
-                      <el-form-item :label="$t('m.AI_helper_flag')">
-                        <el-switch v-model="lecture.aihelper_status" active-text="" inactive-text=""></el-switch>
-                      </el-form-item>
-                    </el-col>
                 </el-row>
             </el-form>
             <save @click.native="saveLecture"></save>
@@ -106,7 +101,6 @@
           title: '',
           description: '',
           status: true,
-          aihelper_status: false,
           password: '',
           year: curYear,
           semester: curMonth,
@@ -125,7 +119,6 @@
           this.$router.push({name: 'lecture-list', query: {refresh: 'true'}})
         }).catch(() => {
         })
-        console.log(data)
       }
     }
   }

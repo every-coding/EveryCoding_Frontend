@@ -57,7 +57,6 @@ export default {
   getProfessorList () {
     let params = {}
     params.admin_type = 'Admin'
-    params.limit = 250
     return ajax('admin/user', 'get', {
       params: params
     })
