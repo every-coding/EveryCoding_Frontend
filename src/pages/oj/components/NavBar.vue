@@ -309,6 +309,7 @@
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
     .oj-menu {
       background: #fdfdfd;
+      color: #407a2d;
     }
 
     .logo {
