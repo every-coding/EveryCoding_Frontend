@@ -4,7 +4,7 @@
       <panel>
         <div slot="title">
           DCU Code 사용 메뉴얼 (학생용)
-          <Button style="float: right" type="info"><a href="/static/manual.pdf" download>다운로드</a></Button>
+          <Button style="float: right" type="success"><a href="/static/manual.pdf" download>다운로드</a></Button>
         </div>
       </panel>
     </Col>
@@ -12,8 +12,8 @@
       <panel>
         <div slot="title">
           DCU Code 소개 영상
-          <Button style="float: right" type="info" v-if="!detail" @click="showDetail">자세히 보기</Button>
-          <Button style="float: right" type="info" v-else @click="showDetail">페이지 최소화</Button>
+          <Button style="float: right" type="success" v-if="!detail" @click="showDetail">자세히 보기</Button>
+          <Button style="float: right" type="success" v-else @click="showDetail">페이지 최소화</Button>
         </div>
         <p v-if="detail" align="middle">
           <iframe width="789" height="444" src="https://www.youtube.com/embed/6kaNUXN951c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
