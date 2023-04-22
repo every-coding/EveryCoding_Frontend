@@ -310,6 +310,7 @@
     .oj-menu {
       background: #fdfdfd;
       color: #407a2d;
+      background-color: #407a2d;
     }
 
     .logo {
