@@ -343,6 +343,12 @@
       padding-right: 0 !important;
       color: #407a2d;
     }
+    .el-menu-item1:hover {
+      color: #407a2d;
+    }
+    .el-menu-item1.is-active {
+      color: #407a2d;
+    }
   }
   .notify-badge{
     position: relative;
@@ -369,4 +375,5 @@
   .notify {
       display: flex;
   }
+  
 </style>
