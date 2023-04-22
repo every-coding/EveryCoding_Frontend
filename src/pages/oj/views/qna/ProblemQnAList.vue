@@ -330,7 +330,7 @@
     margin-top: 17px;
   }
   .sidebar-content {
-    font-family: 'Noto Sans KR', 'Helvetica Neue', sans-serif;
+    font-family: Pretendard, 'Noto Sans KR', 'Helvetica Neue', sans-serif;
     font-size: 14px;
     margin: 10px;
   }
