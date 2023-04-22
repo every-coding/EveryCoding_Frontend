@@ -343,10 +343,7 @@
       padding-right: 0 !important;
       color: #407a2d;
     }
-    .el-menu-item1:hover {
-      color: #407a2d;
-    }
-    .el-menu-item1.is-active {
+    .el-menu {
       color: #407a2d;
     }
   }
