@@ -56,9 +56,11 @@
   .ivu-page-item-active {
     background-color: #407a2d;
     border-color: #407a2d;
+    color: #407a2d;
   }
   .ivu-page-item:hover {
     background-color: #407a2d;
     border-color: #407a2d;
+    color: #407a2d;
   }
 </style>
