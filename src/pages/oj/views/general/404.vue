@@ -60,7 +60,7 @@
         text-align: center;
         font-size: 240px;
         font-weight: 700;
-        color: #2d8cf0;
+        color: #407a2d;
         height: 260px;
         line-height: 260px;
         margin-top: 40px;

@@ -51,8 +51,8 @@
     padding: 15px 20px;
     &:hover {
       background: #f8f8f9;
-      border-left: 2px solid #5cadff;
-      color: #2d8cf0;
+      border-left: 2px solid #407a2d;
+      color: #407a2d;
     }
     & > .ivu-icon {
       font-size: 16px;

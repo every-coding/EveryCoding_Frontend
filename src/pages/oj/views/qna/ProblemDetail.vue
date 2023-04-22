@@ -122,7 +122,7 @@
       font-size: 20px;
       font-weight: 400;
       margin: 25px 0 8px 0;
-      color: #3091f2;
+      color: #407a2d;
       .copy {
         padding-left: 8px;
       }

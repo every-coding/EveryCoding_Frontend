@@ -5,7 +5,7 @@ const pieColorMap = {
   'MLE': {color: '#f7de00'},
   'RE': {color: '#ff6104'},
   'CE': {color: '#80848f'},
-  'PAC': {color: '#2d8cf0'}
+  'PAC': {color: '#407a2d'}
 }
 
 function getItemColor (obj) {

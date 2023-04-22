@@ -275,7 +275,7 @@
   }
 
   a.article-title:hover {
-    color: #428bca;
+    color: #407a2d;
     text-decoration: none;
   }
 

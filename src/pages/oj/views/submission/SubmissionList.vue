@@ -344,7 +344,7 @@
 
 <style scoped lang="less">
   .ivu-btn-text {
-    color: #57a3f3;
+    color: #407a2d;
   }
 
   .flex-container {
