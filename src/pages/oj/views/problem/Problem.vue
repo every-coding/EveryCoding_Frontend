@@ -634,7 +634,7 @@
       font-size: 20px;
       font-weight: 400;
       margin: 25px 0 8px 0;
-      color: #00ff00;
+      color: #439529;
       .copy {
         padding-left: 8px;
       }
