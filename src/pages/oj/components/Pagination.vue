@@ -52,6 +52,6 @@
   .page {
     margin: 20px;
     float: right;
-    background-color: #407a2d;
+    color: #407a2d;
   }
 </style>
