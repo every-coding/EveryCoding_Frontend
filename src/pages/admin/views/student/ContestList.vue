@@ -42,7 +42,7 @@
           label="Contest Type"
           width="180">
           <template slot-scope="scope">
-            <el-tag :type="scope.row.contest_type === 'Public' ? 'success' : 'primary'">
+            <el-tag :type="scope.row.contest_type === 'Public' ? 'success' : 'success'">
               {{ scope.row.contest_type}}
             </el-tag>
           </template>
@@ -52,7 +52,7 @@
           width="130">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.status === '-1' ? 'danger' : scope.row.status === '0' ? 'success' : 'primary'">
+              :type="scope.row.status === '-1' ? 'danger' : scope.row.status === '0' ? 'success' : 'success'">
               {{ scope.row.status | contestStatus}}
             </el-tag>
           </template>
@@ -97,7 +97,7 @@
                :visible.sync="downloadDialogVisible">
       <el-switch v-model="excludeAdmin" active-text="Exclude admin submissions"></el-switch>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="downloadSubmissions">确 定</el-button>
+        <el-button type="success" @click="downloadSubmissions">确 定</el-button>
       </span>
     </el-dialog>
   </div>

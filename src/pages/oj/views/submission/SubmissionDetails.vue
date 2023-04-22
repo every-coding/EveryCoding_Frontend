@@ -33,12 +33,12 @@
           {{$t('m.UnShare')}}
         </Button>
         <Button v-else
-                type="primary" size="large" @click="shareSubmission(true)">
+                type="success" size="large" @click="shareSubmission(true)">
           {{$t('m.Share')}}
         </Button>
         -->
 
-        <el-button type="primary" v-b-toggle.sidebar-right>{{$t('m.qna')}}</el-button>
+        <el-button type="success" v-b-toggle.sidebar-right>{{$t('m.qna')}}</el-button>
         <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
           <div class="sidebar" id="wrapper">
             <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
@@ -49,12 +49,12 @@
               <span>내용</span>
               <el-input class="sidebar-content-margin" placeholder="제목을 입력해주세요." v-model="qnaContent.title"></el-input>
               <Simditor class="sidebar-content-margin" v-model="qnaContent.content"></Simditor>
-              <el-button class="sidebar-margin d-block mr-0 ml-auto" type="primary" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
+              <el-button class="sidebar-margin d-block mr-0 ml-auto" type="success" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
             </div>
           </div>
         </b-sidebar>
         <!--
-        <Button type="primary" size="large" @click.native="QnAWrite">
+        <Button type="success" size="large" @click.native="QnAWrite">
           {{$t('m.qna')}}
         </Button>
         -->

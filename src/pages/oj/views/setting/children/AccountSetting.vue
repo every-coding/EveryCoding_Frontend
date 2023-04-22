@@ -19,7 +19,7 @@
           <FormItem v-if="visible.passwordAlert">
             <Alert type="success">비밀번호 변경이 완료되었습니다. 5초 후에 다시 로그인해주세요.</Alert>
           </FormItem>
-          <Button type="primary" @click="changePassword">{{$t('m.Update_Password')}}</Button>
+          <Button type="success" @click="changePassword">{{$t('m.Update_Password')}}</Button>
         </Form>
       </div>
 
@@ -40,7 +40,7 @@
           <FormItem v-if="visible.tfaRequired" label="이중 인증" prop="tfa_code">
             <Input v-model="formEmail.tfa_code"/>
           </FormItem>
-          <Button type="primary" @click="changeEmail">{{$t('m.ChangeEmail')}}</Button>
+          <Button type="success" @click="changeEmail">{{$t('m.ChangeEmail')}}</Button>
         </Form>
       </div>
     </div>

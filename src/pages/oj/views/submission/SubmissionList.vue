@@ -270,7 +270,7 @@
             render: (h, params) => {
               return h('Button', {
                 props: {
-                  type: 'primary',
+                  type: 'success',
                   size: 'small',
                   loading: params.row.loading
                 },

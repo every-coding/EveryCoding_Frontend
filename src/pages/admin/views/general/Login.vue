@@ -9,7 +9,7 @@
       <el-input type="password" v-model="ruleForm2.password" auto-complete="off" :placeholder="$t('m.password')" @keyup.enter.native="handleLogin"></el-input>
     </el-form-item>
     <el-form-item style="width:100%;">
-      <el-button type="primary" style="width:100%;" @click.native.prevent="handleLogin" :loading="logining">{{$t('m.GO')}}
+      <el-button type="success" style="width:100%;" @click.native.prevent="handleLogin" :loading="logining">{{$t('m.GO')}}
       </el-button>
     </el-form-item>
   </el-form>

@@ -23,7 +23,7 @@
           </div>
         </Form-item>
       </Form>
-      <Button type="primary"
+      <Button type="success"
               @click="sendEmail"
               class="btn" long
               :loading="btnLoading">{{$t('m.Send_Password_Reset_Email')}}

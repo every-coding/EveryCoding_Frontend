@@ -19,7 +19,7 @@
     </Form>
     <div class="footer">
       <Button
-        type="primary"
+        type="success"
         @click="handleLogin"
         class="btn" long
         :loading="btnLoginLoading"

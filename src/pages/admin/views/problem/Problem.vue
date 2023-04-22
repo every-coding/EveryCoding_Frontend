@@ -177,7 +177,7 @@
                   <el-radio :label="lang.name">{{ lang.name }}</el-radio>
                 </el-tooltip>
               </el-radio-group>
-              <el-button type="primary" size="small" icon="el-icon-fa-random" @click="compileSPJ"
+              <el-button type="success" size="small" icon="el-icon-fa-random" @click="compileSPJ"
                          :loading="loadingCompile">
                 {{$t('m.Compile')}}
               </el-button>
@@ -203,7 +203,7 @@
                 :show-file-list="true"
                 :on-success="uploadSucceeded"
                 :on-error="uploadFailed">
-                <el-button size="small" type="primary" icon="el-icon-fa-upload">Choose File</el-button>
+                <el-button size="small" type="success" icon="el-icon-fa-upload">Choose File</el-button>
               </el-upload>
             </el-form-item>
           </el-col>

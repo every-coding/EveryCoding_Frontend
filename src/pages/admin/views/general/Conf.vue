@@ -32,7 +32,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <el-button type="primary" @click="saveSMTPConfig">저장</el-button>
+      <el-button type="success" @click="saveSMTPConfig">저장</el-button>
       <el-button type="warning" @click="testSMTPConfig"
                  v-if="saved" :loading="loadingBtnTest">Send Test Email</el-button>
     </Panel>
