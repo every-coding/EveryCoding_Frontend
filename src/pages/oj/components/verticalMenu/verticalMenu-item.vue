@@ -57,6 +57,7 @@
     & > .ivu-icon {
       font-size: 16px;
       margin-right: 8px;
+      color:#407a2d;
     }
     &:last-child {
       border-bottom: none;

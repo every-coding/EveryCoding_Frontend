@@ -360,6 +360,7 @@
   .ivu-dropdown {
     float: right;
     margin-right: 22px;
+    color: #407a2d;
   }
   .box-card {
     margin-left: 10px;
