@@ -339,7 +339,6 @@
       margin-right: 10px;
       margin-top: 15px;
       color: #407a2d;
-      border-bottom: 2px solid #407a2d;
     }
     .el-menu-item1 {
       padding-right: 0 !important;
