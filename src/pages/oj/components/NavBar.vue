@@ -309,7 +309,7 @@
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
     .oj-menu {
       background: #fdfdfd;
-      border-bottom: #407a2d;
+      border-bottom: 2px solid #407a2d;
     }
 
     .logo {
@@ -339,13 +339,11 @@
       margin-right: 10px;
       margin-top: 15px;
       color: #407a2d;
+      border-bottom: 2px solid #407a2d;
     }
     .el-menu-item1 {
       padding-right: 0 !important;
-      color: #407a2d;
-    }
-    .el-menu {
-      color: #407a2d;
+      border-bottom: 2px solid #407a2d;
     }
   }
   .notify-badge{
