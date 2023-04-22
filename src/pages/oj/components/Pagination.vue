@@ -52,6 +52,8 @@
   .page {
     margin: 20px;
     float: right;
+    border-color: #407a2d;
+    color: #407a2d;
   }
   .ivu-page-item-active {
     background-color: #407a2d;
