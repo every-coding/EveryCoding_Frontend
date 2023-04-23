@@ -132,6 +132,7 @@
   .ivu-menu-vertical.ivu-menu-light:after {
     /*取消默认的伪元素*/
     width: 0;
+    color: #407a2d;
   }
 </style>
 

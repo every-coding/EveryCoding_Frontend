@@ -52,6 +52,7 @@
     line-height: 40px;
     .ivu-input-icon {
       line-height: 40px;
+      color: #407a2d;
     }
     ul.filter {
       > li {

@@ -53,7 +53,7 @@
           label="유형"
           width="120">
           <template slot-scope="scope">
-            <el-tag :type="scope.row.contest_type === 'Public' ? 'success' : 'primary'">
+            <el-tag :type="scope.row.contest_type === 'Public' ? 'success' : 'success'">
               {{ scope.row.contest_type}}
             </el-tag>
           </template>
@@ -63,7 +63,7 @@
           width="130">
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.status === '-1' ? 'danger' : scope.row.status === '0' ? 'success' : 'primary'">
+              :type="scope.row.status === '-1' ? 'danger' : scope.row.status === '0' ? 'success' : 'success'">
               {{ scope.row.status | contestStatus}}
             </el-tag>
           </template>
@@ -100,14 +100,14 @@
       </el-table>
       <div class="panel-options">
         <el-button v-if="lectureId"
-                   type="primary" size="small"
+                   type="success" size="small"
                    @click="goCreateContest" icon="el-icon-plus">강의 생성
         </el-button>
-        <el-button v-if="lectureId" type="primary"
+        <el-button v-if="lectureId" type="success"
                    size="small" icon="el-icon-plus"
                    @click="addContestDialogVisible = true">실습, 과제 가져오기
         </el-button>
-        <el-button v-if="lectureId" type="primary"
+        <el-button v-if="lectureId" type="success"
                    size="small" icon="el-icon-plus"
                    @click="addLectureDialogVisible = true">과목 전체 복사
         </el-button>
@@ -125,7 +125,7 @@
                :visible.sync="downloadDialogVisible">
       <el-switch v-model="excludeAdmin" active-text="Exclude admin submissions"></el-switch>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="downloadSubmissions">确 定</el-button>
+        <el-button type="success" @click="downloadSubmissions">确 定</el-button>
       </span>
     </el-dialog>
     <el-dialog title="실습, 과제, 대회 전체 복사"

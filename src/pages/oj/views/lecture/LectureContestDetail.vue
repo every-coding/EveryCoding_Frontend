@@ -23,7 +23,7 @@
                 <Input v-model="contestPassword" type="password"
                        placeholder="contest password" class="contest-password-input"
                        @on-enter="checkPassword"/>
-                <Button type="info" @click="checkPassword">Enter</Button>
+                <Button type="success" @click="checkPassword">Enter</Button>
               </div>
             </Panel>
             <Table :columns="columns" :data="contest_table" disabled-hover style="margin-bottom: 40px;"></Table>

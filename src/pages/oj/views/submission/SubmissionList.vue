@@ -30,7 +30,7 @@
             </li>
 
             <li>
-              <Button type="info" icon="refresh" @click="getSubmissions">{{$t('m.Refresh')}}</Button>
+              <Button type="success" icon="refresh" @click="getSubmissions">{{$t('m.Refresh')}}</Button>
             </li>
           </ul>
         </div>
@@ -270,7 +270,7 @@
             render: (h, params) => {
               return h('Button', {
                 props: {
-                  type: 'primary',
+                  type: 'success',
                   size: 'small',
                   loading: params.row.loading
                 },
@@ -344,7 +344,7 @@
 
 <style scoped lang="less">
   .ivu-btn-text {
-    color: #57a3f3;
+    color: #407a2d;
   }
 
   .flex-container {

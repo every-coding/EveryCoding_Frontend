@@ -262,8 +262,8 @@
             a.entry {
               color: #495060;
               &:hover {
-                color: #2d8cf0;
-                border-bottom: 1px solid #2d8cf0;
+                color: #407a2d;
+                border-bottom: 1px solid #407a2d;
               }
             }
           }
@@ -285,7 +285,7 @@
       font-weight: bold;
       color: black;
       &:hover {
-        color: #2d8cf0;
+        color: #407a2d;
       }
     }
   }

@@ -74,7 +74,7 @@
             </Select>
           </FormItem>
           <Form-item>
-            <Button type="primary" @click="updateProfile" :loading="loadingSaveBtn">저장하기</Button>
+            <Button type="success" @click="updateProfile" :loading="loadingSaveBtn">저장하기</Button>
           </Form-item>
         </Col>
 

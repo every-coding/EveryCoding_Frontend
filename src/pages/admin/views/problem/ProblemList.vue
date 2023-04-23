@@ -93,10 +93,10 @@
         </el-table-column>
       </el-table>
       <div class="panel-options">
-        <el-button v-if="contestId" type="primary" size="small"
+        <el-button v-if="contestId" type="success" size="small"
                    @click="goCreateProblem" icon="el-icon-plus">문제 만들기
         </el-button>
-        <el-button v-if="contestId" type="primary"
+        <el-button v-if="contestId" type="success"
                    size="small" icon="el-icon-plus"
                    @click="addProblemDialogVisible = true">문제 가져오기
         </el-button>

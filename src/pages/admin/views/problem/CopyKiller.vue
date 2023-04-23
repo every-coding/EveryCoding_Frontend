@@ -4,7 +4,7 @@
             <el-tabs v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane label="Single Lecture" name="first">
                     <div v-loading="loading">
-                        선택 과목 CopyKiller 수행 <el-button type="primary" icon="el-icon-download" @click.native="single_download"></el-button>
+                        선택 과목 CopyKiller 수행 <el-button type="success" icon="el-icon-download" @click.native="single_download"></el-button>
                     </div>
                 </el-tab-pane>
                 <el-tab-pane label="Multiple Lecture" name="second" :disable=check>
@@ -21,7 +21,7 @@
                             </el-input>
                         </el-col>
                         <el-col :span="2">
-                            <el-button type="primary" size="small" style="margin: 4px"
+                            <el-button type="success" size="small" style="margin: 4px"
                                        @click="searchProblem" icon="el-icon-search">검색
                             </el-button>
                         </el-col>

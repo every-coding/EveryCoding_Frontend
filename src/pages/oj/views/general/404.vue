@@ -6,7 +6,7 @@
         <p class="error404-body-con-message">YOU&nbsp;&nbsp;LOOK&nbsp;&nbsp;LOST</p>
         <div class="error404-btn-con">
           <Button @click="goHome" size="large" style="width: 200px;" type="ghost">{{$t('m.Go_Home')}}</Button>
-          <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="primary">{{$t('m.Back')}}</Button>
+          <Button @click="backPage" size="large" style="width: 200px;margin-left: 40px;" type="success">{{$t('m.Back')}}</Button>
         </div>
       </Card>
     </div>
@@ -60,7 +60,7 @@
         text-align: center;
         font-size: 240px;
         font-weight: 700;
-        color: #2d8cf0;
+        color: #407a2d;
         height: 260px;
         line-height: 260px;
         margin-top: 40px;

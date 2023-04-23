@@ -27,7 +27,7 @@
             </p>
           </template>
           <template>
-            <Button type="primary" size="small" @click="downloadRankCSV">{{$t('m.download_csv')}}</Button>
+            <Button type="success" size="small" @click="downloadRankCSV">{{$t('m.download_csv')}}</Button>
           </template>
         </div>
       </Poptip>

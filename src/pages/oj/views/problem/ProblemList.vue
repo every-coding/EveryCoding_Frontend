@@ -32,7 +32,7 @@
                    icon="ios-search-strong"/>
           </li>
           <li>
-            <Button type="info" @click="onReset">
+            <Button type="success" @click="onReset">
               <Icon type="refresh"></Icon>
               {{$t('m.Reset')}}
             </Button>

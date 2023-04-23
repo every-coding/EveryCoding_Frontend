@@ -28,7 +28,7 @@
         </div>
       </Form-item>
     </Form>
-    <Button type="primary"
+    <Button type="success"
             @click="resetPassword"
             class="btn" long
             :loading="btnLoading">{{$t('m.Reset_Password')}}

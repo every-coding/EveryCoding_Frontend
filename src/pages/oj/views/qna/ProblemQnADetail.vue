@@ -324,7 +324,7 @@
   }
 
   a.article-title:hover {
-    color: #428bca;
+    color: #407a2d;
     text-decoration: none;
   }
 
@@ -360,6 +360,7 @@
   .ivu-dropdown {
     float: right;
     margin-right: 22px;
+    color: #407a2d;
   }
   .box-card {
     margin-left: 10px;
