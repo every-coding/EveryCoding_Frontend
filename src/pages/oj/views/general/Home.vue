@@ -1,19 +1,19 @@
 <template>
   <Row type="flex" justify="space-around">
-    <Col :span="22">
-      <panel v-if="(month == 3) || (month == 4)">
-        <div slot="title">
-          <Button style="float: right" type="info" @click="dialogFormVisible = true">개인정보 변경</Button>
-          <h2>[신입생 개인정보 변경 안내]</h2><br/>
-          DCU Code 입학 전 교육에 참여한 신입생 분들은<br/>
-          반드시 개인정보를 수정해주시기 바랍니다.<br/>
-        </div>
-      </panel>
-    </Col>
+<!--    <Col :span="22">-->
+<!--      <panel v-if="(month == 3) || (month == 4)">-->
+<!--        <div slot="title">-->
+<!--          <Button style="float: right" type="info" @click="dialogFormVisible = true">개인정보 변경</Button>-->
+<!--          <h2>[신입생 개인정보 변경 안내]</h2><br/>-->
+<!--          DCU Code 입학 전 교육에 참여한 신입생 분들은<br/>-->
+<!--          반드시 개인정보를 수정해주시기 바랍니다.<br/>-->
+<!--        </div>-->
+<!--      </panel>-->
+<!--    </Col>-->
     <Col :span="22">
       <panel>
         <div slot="title">
-          DCU Code 사용 메뉴얼 (학생용)
+          Every coding 사용 메뉴얼 (학생용)
           <Button style="float: right" type="success"><a href="/static/manual.pdf" download>다운로드</a></Button>
         </div>
       </panel>
@@ -21,7 +21,7 @@
     <Col :span="22">
       <panel>
         <div slot="title">
-          DCU Code 소개 영상
+          Every coding 소개 영상
           <Button style="float: right" type="success" v-if="!detail" @click="showDetail">자세히 보기</Button>
           <Button style="float: right" type="success" v-else @click="showDetail">페이지 최소화</Button>
         </div>
