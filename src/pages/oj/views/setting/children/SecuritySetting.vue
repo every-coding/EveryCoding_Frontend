@@ -47,7 +47,7 @@
           <FormItem style="width: 250px">
             <Input v-model="formTwoFactor.code" placeholder="이중 인증을 위해 QR코드를 인식하세요."/>
           </FormItem>
-          <Button type="primary"
+          <Button type="success"
                   :loading="loadingBtn"
                   @click="updateTFA(false)"
                   v-if="!TFAOpened">Open TFA

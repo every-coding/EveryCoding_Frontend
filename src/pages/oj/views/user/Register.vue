@@ -53,7 +53,7 @@
     </Form>
     <div class="footer">
       <Button
-        type="primary"
+        type="success"
         @click="handleRegister"
         class="btn" long
         :loading="btnRegisterLoading">

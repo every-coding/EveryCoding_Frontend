@@ -58,7 +58,7 @@
           </el-table-column>
         </el-table>
         <div class="panel-options">
-          <el-button type="primary" size="small" @click="openAnnouncementDialog(null)" icon="el-icon-plus">새 글 작성 </el-button>
+          <el-button type="success" size="small" @click="openAnnouncementDialog(null)" icon="el-icon-plus">새 글 작성 </el-button>
           <el-pagination
             v-if="!contestID"
             class="page"
@@ -94,7 +94,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
           <cancel @click.native="showEditAnnouncementDialog = false"></cancel>
-          <save type="primary" @click.native="submitAnnouncement"></save>
+          <save type="success" @click.native="submitAnnouncement"></save>
         </span>
     </el-dialog>
   </div>

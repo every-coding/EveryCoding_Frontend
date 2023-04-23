@@ -8,11 +8,11 @@
   </el-menu-item>
   <el-menu-item index="/CourseList">
     <Icon type="ios-book"></Icon>
-    {{$t('m.Signup_Lectures')}}
+    {{$t('m.TextbookPractice')}}
   </el-menu-item>
   <el-menu-item index="/lecture">
     <Icon type="ios-book"></Icon>
-    {{$t('m.Lectures')}}
+    {{$t('m.TextbookRegistration')}}
   </el-menu-item>
   <el-menu-item index="/contest">
     <Icon type="ios-book"></Icon>
@@ -29,6 +29,14 @@
   <el-menu-item index="/question">
    <Icon type="help"></Icon>
    공개 질문
+  </el-menu-item>
+  <el-menu-item index="/community">
+    <Icon type="ios-chatboxes"></Icon>
+    {{$t('m.Community')}}
+  </el-menu-item>
+  <el-menu-item index="/groupstudy">
+    <Icon type="ios-contact"></Icon>
+    {{$t('m.GroupStudy')}}
   </el-menu-item>
   <el-submenu index="8" name="rank">
     <template slot="title"><Icon type="podium"></Icon>{{$t('m.Rank')}}</template>
@@ -151,9 +159,9 @@
   import Vue from 'vue'
   import ElementUI from 'element-ui'
   import locale from 'element-ui/lib/locale/lang/en'
-  
+
   Vue.use(ElementUI, { locale })
-  
+
   export default {
     components: {
       login,
@@ -340,6 +348,11 @@
     }
     .el-menu-item1 {
       padding-right: 0 !important;
+      border-bottom: 2px solid #407a2d;
+    }
+    .el-menu-item.is-active {
+      color: #407a2d;
+      border-bottom: 2px solid #407a2d;
     }
   }
   .notify-badge{

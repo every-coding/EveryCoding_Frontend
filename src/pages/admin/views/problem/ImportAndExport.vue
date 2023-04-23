@@ -44,7 +44,7 @@
       </el-table>
 
       <div class="panel-options">
-        <el-button type="primary" size="small" v-show="selected_problems.length"
+        <el-button type="success" size="small" v-show="selected_problems.length"
                    @click="exportProblems" icon="el-icon-fa-arrow-down">Export
         </el-button>
         <el-pagination
@@ -69,7 +69,7 @@
         :auto-upload="false"
         :on-success="uploadSucceeded"
         :on-error="uploadFailed">
-        <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">파일 선택</el-button>
+        <el-button size="small" type="success" icon="el-icon-fa-upload" slot="trigger">파일 선택</el-button>
         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('QDU')">업로드</el-button>
       </el-upload>
     </panel>
@@ -87,7 +87,7 @@
         :auto-upload="false"
         :on-success="uploadSucceeded"
         :on-error="uploadFailed">
-        <el-button size="small" type="primary" icon="el-icon-fa-upload" slot="trigger">파일 선택</el-button>
+        <el-button size="small" type="success" icon="el-icon-fa-upload" slot="trigger">파일 선택</el-button>
         <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload('FPS')">업로드</el-button>
       </el-upload>
     </panel>

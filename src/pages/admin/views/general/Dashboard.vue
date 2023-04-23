@@ -190,7 +190,7 @@
       font-size: 24px;
       font-weight: 700;
       margin-bottom: 10px;
-      color: #409EFF;
+      color: #407a2d;
     }
     .avatar {
       max-width: 100%;

@@ -271,6 +271,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+.ivu-btn-text {
+  color: #407a2d;
+}
 .flex-container {
   #manage {
     flex: auto;

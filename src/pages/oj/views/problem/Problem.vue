@@ -223,7 +223,7 @@
           <span>내용</span>
           <el-input class="sidebar-content-margin" placeholder="제목을 입력해주세요." v-model="qnaContent.title"></el-input>
           <Simditor class="sidebar-content-margin" v-model="qnaContent.content"></Simditor>
-          <el-button type="primary" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
+          <el-button type="success" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
         </div>
       </div>
     </b-sidebar>
@@ -703,7 +703,7 @@
       font-size: 20px;
       font-weight: 400;
       margin: 25px 0 8px 0;
-      color: #3091f2;
+      color: #407a2d;
       .copy {
         padding-left: 8px;
       }
@@ -825,7 +825,7 @@
     margin-top: 17px;
   }
   .sidebar-content {
-    font-family: 'Noto Sans KR', 'Helvetica Neue', sans-serif;
+    font-family: Pretendard, 'Noto Sans KR', 'Helvetica Neue', sans-serif;
     font-size: 14px;
     margin: 10px;
   }
