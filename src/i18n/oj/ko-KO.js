@@ -166,5 +166,10 @@ export const m = {
   Mine: '내 제출',
   Search_Author: '코드 작성자 검색',
   // Save.vue
-  save: '저장'
+  save: '저장',
+  // Everycoding
+  TextbookPractice: '교재 실습',
+  TextbookRegistration: '교재 등록',
+  Community: '커뮤니티',
+  GroupStudy: '그룹 스터디'
 }
