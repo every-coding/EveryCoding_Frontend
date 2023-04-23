@@ -369,7 +369,7 @@
   }
   pre{
     overflow: auto;
-    font-family: 'Noto Sans KR', 'Helvetica Neue', sans-serif;
+    font-family: Pretendard, 'Noto Sans KR', 'Helvetica Neue', sans-serif;
     white-space: pre-wrap; /* pre tag내에 word wrap */
   }
 </style>
