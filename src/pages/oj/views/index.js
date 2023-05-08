@@ -24,13 +24,15 @@ const ProblemQnADetail = () => import(/* webpackChunkName: "Problem" */ '@oj/vie
 
 const LectureContestExit = () => import(/* webpackChunkName: "submission" */ '@oj/views/lecture/LectureContestExit.vue')  // working by soojung
 
+const StudyForGroup = () => import(/* webpackChunkName: "groupstudy" */ '@oj/views/communication/GroupStudy.vue')
+
 export {
   Home, NotFound, Announcements,
   Login_, Logout, UserHome, About, FAQ,
   ProblemList, Problem,
   ACMRank, OIRank,
   SubmissionList, SubmissionDetails, LectureContestExit,
-  ApplyResetPassword, ResetPassword, ProblemQnA, ProblemQnADetail
+  ApplyResetPassword, ResetPassword, ProblemQnA, ProblemQnADetail, StudyForGroup
 }
 /* 组件导出分为两类, 一类常用的直接导出，另一类诸如Login, Logout等用懒加载,懒加载不在此处导出
  *   在对应的route内加载
