@@ -152,6 +152,11 @@ export default {
       data: profile
     })
   },
+  updateRank_point (rankpoint) {
+    return ajax('profile_rankpoint', 'get', {
+      rankpoint
+    })
+  },
   freshDisplayID (userID) {
     return ajax('profile/fresh_display_id', 'get', {
       params: {

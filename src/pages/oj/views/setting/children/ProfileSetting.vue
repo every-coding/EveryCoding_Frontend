@@ -86,7 +86,7 @@
             <Input v-model="formProfile.rank_point" readonly/>
           </Form-Item>
           <Form-Item>
-            <Button type="success" :loading="loadingSaveBtn">랭크포인트 갱신</Button>
+            <Button type="success" @click="updaterank_point" :loading="loadingSaveRankBtn">랭크포인트 갱신</Button>
           </Form-Item>
         </Col>
       </Row>
@@ -109,6 +109,7 @@
       return {
         loadingSaveBtn: false,
         loadingUploadBtn: false,
+        loadingSaveRankBtn: false,
         uploadModalVisible: false,
         preview: {},
         uploadImgSrc: '',
@@ -225,6 +226,16 @@
           this.loadingSaveBtn = false
         }, _ => {
           this.loadingSaveBtn = false
+        })
+      },
+      updaterank_point () {
+        this.loadingSaveRankBtn = true
+        let updaterankData = utils.filterEmptyValue(Object.assign({}, this.formProfile.rank_point))
+        api.updateRank_point(updaterankData).then(res => {
+          this.formProfile.rank_point = res.data.data
+          this.loadingSaveRankBtn = false
+        }, _ => {
+          this.loadingSaveRankBtn = false
         })
       }
     },
