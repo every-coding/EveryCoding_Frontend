@@ -79,9 +79,15 @@
         </Col>
 
         <Col :span="11">
-          <Form-item label="학번">
+          <Form-Item label="학번">
             <Input v-model="formProfile.schoolssn"/>
-          </Form-item>
+          </Form-Item>
+          <Form-Item label="랭크 포인트">
+            <Input v-model="formProfile.rank_point" readonly/>
+          </Form-Item>
+          <Form-Item>
+            <Button type="success" :loading="loadingSaveBtn">랭크포인트 갱신</Button>
+          </Form-Item>
         </Col>
       </Row>
     </Form>
@@ -114,11 +120,13 @@
         languages: languages,
         formProfile: {
           realname: '',
-          schoolssn: ''
+          schoolssn: '',
+          rank_point: ''
         }
       }
     },
     mounted () {
+      this.formProfile.rank_point = this.$store.getters.user.rank_point || ''
       let profile = this.$store.state.user.profile.user
       console.log(profile)
       Object.keys(this.formProfile).forEach(element => {
