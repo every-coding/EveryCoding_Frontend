@@ -1,32 +1,37 @@
 <template>
   <main>
-<!--    <div class="logo">-->
-<!--      <img-->
-<!--        src="/applications/jitsi.png"-->
-<!--      >-->
-<!--    </div>-->
-    <div id="roomselection">
+    <div id="roomcreation">
       <span>{{ $t('toStart') }}</span>
       <input
-        id="roomInputField"
+        id="roomCreateInputField"
         v-model="roomName"
         type="text"
-        :placeholder="$t('roomName')"
-      >
-
+        :placeholder="$t('roomName')">
       <button
         data-test-id="button-create-room"
         :disabled="jitsi || (cleanup(roomName).length === 0)"
-        @click="onCreate"
-      >
+        @click="onCreate">
         {{ $t('create') }}
       </button>
-
       <div
         v-show="jitsi"
         ref="jitsiInterface"
         class="jitsiInterface"
       />
+    </div>
+    <div id="roomselection">
+      <span>{{ $t('toEnter') }}</span>
+      <input
+        id="roomEnterInputField"
+        v-model="channelID"
+        type="text"
+        :placeholder="$t('channelID')">
+      <button
+        data-test-id="button-enter-room"
+        :disabled="jitsi || (cleanup(channelID).length === 0)"
+        @click="onJoin">
+        {{ $t('join') }}
+      </button>
     </div>
   </main>
 </template>
@@ -53,7 +58,7 @@ export default {
 
   data () {
     return {
-      channelID: null,
+      channelID: '',
       roomName: '',
       jitsi: null,
       channels: null
@@ -94,7 +99,7 @@ export default {
     onJoin () {
       this.open({
         roomName: this.channelID,
-        userDisplayName: this.$auth.user.name || this.$auth.user.email
+        userDisplayName: this.roomName
       })
     },
 
@@ -198,6 +203,13 @@ main {
     & > iframe {
       flex: 1 1 auto;
     }
+  }
+
+  #roomcreation {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 50px;
+    background: white;
   }
 
   #roomselection {
