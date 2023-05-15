@@ -93,6 +93,11 @@ export default {
   //     data
   //   })
   // },
+  getNumOfParticipants (data) {
+    return ajax('groupstudy', 'get', {
+      data
+    })
+  },
   getWebsiteConf (params) {
     return ajax('website', 'get', {
       params

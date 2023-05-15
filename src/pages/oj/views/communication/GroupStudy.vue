@@ -38,6 +38,7 @@
 
 <script>
 import Vue from 'vue'
+import api from '@oj/api'
 
 const domain = 'meet.jit.si'
 
@@ -125,7 +126,7 @@ export default {
 
       /* eslint-disable no-undef */
       this.jitsi = new JitsiMeetExternalAPI(domain, {
-        roomName: `crust_${this.cleanup(roomName || 'unnamed')}`,
+        roomName: `Every-coding_${this.cleanup(roomName || 'unnamed')}`,
         width: '100%',
         height: '100%',
         parentNode: this.$refs.jitsiInterface,
@@ -170,6 +171,17 @@ export default {
       // this is to remove the page that mentions slack after the rating page.
       this.jitsi.addEventListeners({
         readyToClose: this.removeJitsiAfterHangup
+      })
+
+      const numberOfParticipants = this.jitsi.getNumberOfParticipants()
+      console.log('wow1')
+      console.log(numberOfParticipants)
+      console.log('wow2')
+      api.getNumOfParticipants(numberOfParticipants).then(res => {
+        console.log('wow3')
+        console.log(numberOfParticipants)
+        console.log('wow4')
+      }, () => {
       })
 
       window.jitsi = this.jitsi
