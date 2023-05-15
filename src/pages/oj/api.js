@@ -230,6 +230,9 @@ export default {
   pickone () {
     return ajax('pickone', 'get')
   },
+  random_by_level () {
+    return ajax('random_by_level', 'get')
+  },
   getProblem (problemID) {
     console.log('call')
     return ajax('problem', 'get', {

@@ -32,6 +32,7 @@ export const m = {
   Submitting: '제출 중',
   WrongPath: '잘못된 경로로 들어오셨습니다.',
   Pick_One: '랜덤 문제',
+  Random_By_level: '수준별 문제 추천',
   Reset: '초기화',
   Total: '시도 횟수',
   AC_Rate: '정답율',
