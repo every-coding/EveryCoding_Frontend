@@ -1,12 +1,12 @@
 <template>
   <main>
     <div id="roomcreation">
-      <span>{{ $t('toStart') }}</span>
+      <span><b>{{$t('m.RoomCreation')}}</b></span>
       <input
         id="roomCreateInputField"
         v-model="roomName"
         type="text"
-        :placeholder="$t('roomName')">
+        :placeholder="$t('스터디 코드 명')">
       <button
         data-test-id="button-create-room"
         :disabled="jitsi || (cleanup(roomName).length === 0)"
@@ -20,17 +20,17 @@
       />
     </div>
     <div id="roomselection">
-      <span>{{ $t('toEnter') }}</span>
+      <span><b>{{$t('m.RoomSelection')}}</b></span>
       <input
         id="roomEnterInputField"
         v-model="channelID"
         type="text"
-        :placeholder="$t('channelID')">
+        :placeholder="$t('스터디 코드 명')">
       <button
         data-test-id="button-enter-room"
         :disabled="jitsi || (cleanup(channelID).length === 0)"
         @click="onJoin">
-        {{ $t('join') }}
+        {{$t('m.Selection')}}
       </button>
     </div>
   </main>
@@ -222,6 +222,7 @@ main {
     margin: 50px auto;
     padding: 50px;
     background: white;
+    font-size: 20px;
   }
 
   #roomselection {
@@ -229,6 +230,7 @@ main {
     margin: 50px auto;
     padding: 50px;
     background: white;
+    font-size: 20px;
   }
 
   input {
@@ -272,7 +274,7 @@ main {
   button {
     cursor: pointer;
     background: transparent;
-    color: #007bff;
+    color: #407a2d;
     font-size: 14px;
     line-height: 38px;
     text-decoration: none;
@@ -282,10 +284,10 @@ main {
     height: 40px;
     margin: 20px auto 0;
     transition: color .2s,background-color .2s;
-    border: 1px solid #007bff;
+    border: 1px solid #407a2d;
     &:hover {
-      border: 1px solid #007bff;
-      background: #007bff;
+      border: 1px solid #407a2d;
+      background: #407a2d;
       color: #fff;
     }
     &:disabled {
