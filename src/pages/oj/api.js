@@ -157,6 +157,11 @@ export default {
       rankpoint
     })
   },
+  updateRank_tear (ranktear) {
+    return ajax('profile_ranktear', 'get', {
+      ranktear
+    })
+  },
   freshDisplayID (userID) {
     return ajax('profile/fresh_display_id', 'get', {
       params: {

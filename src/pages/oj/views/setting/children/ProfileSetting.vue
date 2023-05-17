@@ -86,10 +86,10 @@
             <Input v-model="formProfile.rank_point" readonly/>
           </Form-Item>
           <Form-Item>
-            <Button type="success" @click="updaterank_point" :loading="loadingSaveRankBtn">랭크포인트 갱신</Button>
+            <Button type="success" @click="updaterank_point (), updaterank_tear ()" :loading="loadingSaveRankBtn">랭크포인트 갱신</Button>
           </Form-Item>
           <Form-Item label="랭크 티어">
-            <Input v-model="formProfile.rank_point" readonly/>
+            <Input v-model="formProfile.rank_tear" readonly/>
           </Form-Item>
         </Col>
       </Row>
@@ -132,6 +132,7 @@
     },
     mounted () {
       this.formProfile.rank_point = this.$store.getters.user.rank_point || ''
+      this.formProfile.rank_tear = this.$store.getters.user.rank_tear || ''
       let profile = this.$store.state.user.profile.user
       console.log(profile)
       Object.keys(this.formProfile).forEach(element => {
@@ -240,6 +241,13 @@
           this.loadingSaveRankBtn = false
         }, _ => {
           this.loadingSaveRankBtn = false
+        })
+      },
+      updaterank_tear () {
+        let updatetearData = utils.filterEmptyValue(Object.assign({}, this.formProfile.rank_point))
+        api.updateRank_tear(updatetearData).then(res => {
+          this.formProfile.rank_tear = res.data.data
+        }, _ => {
         })
       }
     },
