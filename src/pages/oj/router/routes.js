@@ -10,6 +10,7 @@ import {
   Logout,
   NotFound,
   OIRank,
+  POINTRank,
   Problem,
   ProblemQnA,
   ProblemList,
@@ -240,6 +241,12 @@ export default [
     path: '/oi-rank',
     meta: {title: 'OI Rankings'},
     component: OIRank
+  },
+  {
+    name: 'point-rank',
+    path: '/point-rank',
+    meta: {title: 'POINT Rankings'},
+    component: POINTRank
   },
   {
     name: 'user-home',

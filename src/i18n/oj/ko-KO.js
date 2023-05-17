@@ -74,6 +74,10 @@ export const m = {
   mood: 'mood',
   AC: '맞춘 문제 수',
   Rating: '정답률',
+  // POINTRank.vue
+  POINT_Ranklist: 'Point 순위표',
+  point: '포인트',
+  tear: '티어',
   // NavBar.vue
   Home: '홈',
   NavProblems: '공개 문제',
@@ -82,6 +86,7 @@ export const m = {
   Rank: '랭킹',
   ACM_Rank: 'ACM 랭킹',
   OI_Rank: 'OI 랭킹',
+  POINT_Rank: 'POINT 랭킹',
   About: '정보',
   Judger: '채점 시스템',
   FAQ: 'FAQ',
