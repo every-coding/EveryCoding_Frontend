@@ -9,8 +9,8 @@
       </Panel>
       <Table :data="dataRank" :columns="columns" :loading="loadingTable" size="large"></Table>
       <Pagination :total="total" :page-size.sync="limit" :current.sync="page"
-                  @on-change="getRankData" show-sizer
-                  @on-page-size-change="getRankData(1)"></Pagination>
+                  @on-change="getPointRankData" show-sizer
+                  @on-page-size-change="getPointRankData(1)"></Pagination>
     </Col>
   </Row>
 </template>
@@ -68,12 +68,12 @@ export default {
         //   key: 'mood'
         // },
         {
-          title: this.$i18n.t('m.AC'),
+          title: this.$i18n.t('m.point'),
           align: 'center',
           key: 'accepted_number'
         },
         {
-          title: this.$i18n.t('m.Total'),
+          title: this.$i18n.t('m.tear'),
           align: 'center',
           key: 'submission_number'
         },
@@ -90,7 +90,7 @@ export default {
           trigger: 'axis'
         },
         legend: {
-          data: [this.$i18n.t('m.AC'), this.$i18n.t('m.Total')]
+          data: [this.$i18n.t('m.point'), this.$i18n.t('m.tear')]
         },
         grid: {
           x: '3%',
@@ -128,7 +128,7 @@ export default {
         ],
         series: [
           {
-            name: this.$i18n.t('m.AC'),
+            name: this.$i18n.t('m.point'),
             type: 'bar',
             data: [0],
             markPoint: {
@@ -138,7 +138,7 @@ export default {
             }
           },
           {
-            name: this.$i18n.t('m.Total'),
+            name: this.$i18n.t('m.tear'),
             type: 'bar',
             data: [0],
             markPoint: {
@@ -152,15 +152,15 @@ export default {
     }
   },
   mounted () {
-    this.getRankData(1)
+    this.getPointRankData(1)
   },
   methods: {
-    getRankData (page) {
+    getPointRankData (page) {
       let offset = (page - 1) * this.limit
       let bar = this.$refs.chart
       bar.showLoading({maskColor: 'rgba(250, 250, 250, 0.8)'})
       this.loadingTable = true
-      api.getUserRank(offset, this.limit, RULE_TYPE.ACM).then(res => {
+      api.getPointRank(offset, this.limit, RULE_TYPE.ACM).then(res => {
         this.loadingTable = false
         if (page === 1) {
           this.changeCharts(res.data.data.results.slice(0, 10))
@@ -174,15 +174,15 @@ export default {
       })
     },
     changeCharts (rankData) {
-      let [usernames, acData, totalData] = [[], [], []]
+      let [usernames, pointData, tearData] = [[], [], []]
       rankData.forEach(ele => {
         usernames.push(ele.user.username)
-        acData.push(ele.accepted_number)
-        totalData.push(ele.submission_number)
+        pointData.push(ele.user.rank_point)
+        tearData.push(ele.user.rank_tear)
       })
       this.options.xAxis[0].data = usernames
-      this.options.series[0].data = acData
-      this.options.series[1].data = totalData
+      this.options.series[0].data = pointData
+      this.options.series[1].data = tearData
     }
   }
 }

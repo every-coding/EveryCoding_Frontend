@@ -88,6 +88,9 @@
           <Form-Item>
             <Button type="success" @click="updaterank_point" :loading="loadingSaveRankBtn">랭크포인트 갱신</Button>
           </Form-Item>
+          <Form-Item label="랭크 티어">
+            <Input v-model="formProfile.rank_point" readonly/>
+          </Form-Item>
         </Col>
       </Row>
     </Form>
@@ -122,7 +125,8 @@
         formProfile: {
           realname: '',
           schoolssn: '',
-          rank_point: ''
+          rank_point: '',
+          rank_tear: ''
         }
       }
     },

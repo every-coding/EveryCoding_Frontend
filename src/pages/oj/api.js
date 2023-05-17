@@ -423,6 +423,16 @@ export default {
       params
     })
   },
+  getPointRank (offset, limit, rule = 'point') {
+    let params = {
+      offset,
+      limit,
+      rule
+    }
+    return ajax('user_pointrank', 'get', {
+      params
+    })
+  },
   getContestRank (params) {
     return ajax('contest_rank', 'get', {
       params
