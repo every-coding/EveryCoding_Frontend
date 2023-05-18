@@ -220,8 +220,7 @@
       },
       pushgithub () {
         let params = {contestID: this.contestID,
-          LectureID: this.LectureID,
-          problemID: this.$route.params.problemID,
+          problem: this.$route.params.problemID,
           id: this.submission.id,
           code: this.submission.code,
           content: this.qnaContent,
