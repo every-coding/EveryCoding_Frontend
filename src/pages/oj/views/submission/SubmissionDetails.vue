@@ -229,6 +229,7 @@
           Githubtoken: this.Githubtoken
         }
         api.pushgithub(params).then(res => {
+          console.log(params)
           console.log(res)
         })
       },
