@@ -233,7 +233,6 @@
           console.log(res)
         })
       },
-      }
       // getAIresponse () {
       //   let data = { 'id': this.submission.id, 'contestID': this.submission.contest, 'problemID': this.submission.problem }
       //   api.getAIresponse(data).then(res => {
