@@ -218,7 +218,7 @@
           console.log(res)
         })
       },
-      pushgithub() {
+      pushgithub () {
         let params = {contestID: this.contestID,
           LectureID: this.LectureID,
           problemID: this.$route.params.problemID,
@@ -229,7 +229,7 @@
           status: this.status,
           Githubtoken: this.Githubtoken
         }
-        api.pushgithub(data).then(res => {
+        api.pushgithub(params).then(res => {
           console.log(res)
         })
       },
