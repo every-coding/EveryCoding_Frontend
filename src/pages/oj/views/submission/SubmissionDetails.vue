@@ -39,7 +39,7 @@
         -->
         <!-- add github button-->
         <el-input class="sidebar-content-margin" placeholder="토큰을 입력해주세요." v-model="Githubtoken"></el-input>
-        <el-button type="success" size="large" @click="pushgithub">
+        <el-button type="success" size="large" @click="githubpush">
           <i class="fab fa-github"></i>
           <span>{{$t('m.PushGithub')}}</span>
           
@@ -218,7 +218,7 @@
           console.log(res)
         })
       },
-      pushgithub () {
+      githubpush () {
         let params = {contestID: this.contestID,
           problem: this.$route.params.problemID,
           id: this.submission.id,
