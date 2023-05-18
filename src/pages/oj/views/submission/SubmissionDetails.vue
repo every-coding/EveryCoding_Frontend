@@ -38,9 +38,11 @@
         </Button>
         -->
         <!-- add github button-->
+        <el-input class="sidebar-content-margin" placeholder="토큰을 입력해주세요." v-model="Githubtoken"></el-input>
         <el-button type="success" size="large" @click="pushgithub">
           <i class="fab fa-github"></i>
-          <span>{{$t('m.Share')}}</span>
+          <span>{{$t('m.PushGithub')}}</span>
+          
         </el-button>
         <el-button type="success" v-b-toggle.sidebar-right>{{$t('m.qna')}}</el-button>
         <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
@@ -50,7 +52,7 @@
             <hr/>
             <div class="sidebar-content">
               <br/>
-              <span>내용</span>
+              <span>내용</span>a
               <el-input class="sidebar-content-margin" placeholder="제목을 입력해주세요." v-model="qnaContent.title"></el-input>
               <Simditor class="sidebar-content-margin" v-model="qnaContent.content"></Simditor>
               <el-button class="sidebar-margin d-block mr-0 ml-auto" type="success" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
