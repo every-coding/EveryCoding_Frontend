@@ -37,7 +37,11 @@
           {{$t('m.Share')}}
         </Button>
         -->
-
+        <!-- add github button-->
+        <el-button type="success" size="large" @click="pushgithub">
+          <i class="fab fa-github"></i>
+          <span>{{$t('m.Share')}}</span>
+        </el-button>
         <el-button type="success" v-b-toggle.sidebar-right>{{$t('m.qna')}}</el-button>
         <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
           <div class="sidebar" id="wrapper">
@@ -110,6 +114,7 @@
         aiaskbutton: true,
         input: '',
         lectureID: '',
+        Githubtoken: '',
         qnaContent: {
           title: '',
           content: ''
@@ -211,6 +216,22 @@
           console.log(res)
         })
       },
+      pushgithub() {
+        let params = {contestID: this.contestID,
+          LectureID: this.LectureID,
+          problemID: this.$route.params.problemID,
+          id: this.submission.id,
+          code: this.submission.code,
+          content: this.qnaContent,
+          submission: this.submission.info,
+          status: this.status,
+          Githubtoken: this.Githubtoken
+        }
+        api.pushgithub(data).then(res => {
+          console.log(res)
+        })
+      },
+      }
       // getAIresponse () {
       //   let data = { 'id': this.submission.id, 'contestID': this.submission.contest, 'problemID': this.submission.problem }
       //   api.getAIresponse(data).then(res => {
