@@ -244,10 +244,12 @@
         })
       },
       updaterank_tear () {
-        let updatetearData = utils.filterEmptyValue(Object.assign({}, this.formProfile.rank_point))
+        let updatetearData = utils.filterEmptyValue(Object.assign({}, this.formProfile.rank_tear))
         api.updateRank_tear(updatetearData).then(res => {
           this.formProfile.rank_tear = res.data.data
+          this.loadingSaveRankBtn = false
         }, _ => {
+          this.loadingSaveRankBtn = false
         })
       }
     },
