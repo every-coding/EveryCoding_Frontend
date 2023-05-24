@@ -70,19 +70,12 @@ export default {
         {
           title: this.$i18n.t('m.point'),
           align: 'center',
-          key: 'accepted_number'
+          key: 'point_number'
         },
         {
           title: this.$i18n.t('m.tear'),
           align: 'center',
           key: 'tear_number'
-        },
-        {
-          title: this.$i18n.t('m.Rating'),
-          align: 'center',
-          render: (h, params) => {
-            return h('span', utils.getACRate(params.row.accepted_number, params.row.submission_number))
-          }
         }
       ],
       options: {
@@ -160,7 +153,7 @@ export default {
       let bar = this.$refs.chart
       bar.showLoading({maskColor: 'rgba(250, 250, 250, 0.8)'})
       this.loadingTable = true
-      api.getPointRank(offset, this.limit, RULE_TYPE.POINT).then(res => {
+      api.getPointRank(offset, this.limit, RULE_TYPE.ACM).then(res => {
         this.loadingTable = false
         if (page === 1) {
           this.changeCharts(res.data.data.results.slice(0, 10))
@@ -177,7 +170,7 @@ export default {
       let [usernames, pointData, tearData] = [[], [], []]
       rankData.forEach(ele => {
         usernames.push(ele.user.username)
-        pointData.push(ele.accepted_number)
+        pointData.push(ele.point_number)
         tearData.push(ele.tear_number)
       })
       this.options.xAxis[0].data = usernames
