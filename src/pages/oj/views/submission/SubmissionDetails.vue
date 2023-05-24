@@ -39,6 +39,7 @@
         -->
         <!-- add github button-->
         <el-input class="sidebar-content-margin" placeholder="토큰을 입력해주세요." v-model="Githubtoken"></el-input>
+        <el-input class="sidebar-content-margin" placeholder="GithubID를 입력해주세요." v-model="GithubID"></el-input>
         <el-button type="success" size="large" @click="githubpush">
           <i class="fab fa-github"></i>
           <span>{{$t('m.PushGithub')}}</span>
@@ -117,6 +118,7 @@
         input: '',
         lectureID: '',
         Githubtoken: '',
+        GithubID: '',
         qnaContent: {
           title: '',
           content: ''
@@ -226,7 +228,8 @@
           content: this.qnaContent,
           submission: this.submission.info,
           status: this.status,
-          Githubtoken: this.Githubtoken
+          Githubtoken: this.Githubtoken,
+          GithubID: this.GithubID
         }
         api.pushgithub(params).then(res => {
           console.log(params)
