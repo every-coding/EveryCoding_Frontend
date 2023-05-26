@@ -120,6 +120,7 @@
         lectureID: '',
         Githubtoken: '',
         GithubID: '',
+        GithubRepo: '',
         qnaContent: {
           title: '',
           content: ''
@@ -231,7 +232,7 @@
           status: this.status,
           Githubtoken: this.Githubtoken,
           GithubID: this.GithubID,
-          GithubRepo: this.GithubRepo,
+          GithubRepo: this.GithubRepo
         }
         api.pushgithub(params).then(res => {
           console.log(params)
