@@ -20,7 +20,8 @@ import {
   UserHome,
   ProblemQnADetail,
   LectureContestExit,
-  ide
+  ide,
+  StudyForGroup
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -53,6 +54,12 @@ export default [
     path: '/question/:questionID',
     meta: {requiresAuth: true, title: 'questions'},
     component: ProblemQnADetail
+  },
+  { // group study
+    name: 'problem-qna-list',
+    path: '/groupstudy',
+    meta: {requiresAuth: true, title: 'group study'},
+    component: StudyForGroup
   },
   {
     name: 'login',
