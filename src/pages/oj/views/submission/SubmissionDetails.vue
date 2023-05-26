@@ -37,7 +37,15 @@
           {{$t('m.Share')}}
         </Button>
         -->
-
+        <!-- add github button-->
+        <el-input class="sidebar-content-margin" placeholder="토큰을 입력해주세요." v-model="Githubtoken"></el-input>
+        <el-input class="sidebar-content-margin" placeholder="GithubID를 입력해주세요." v-model="GithubID"></el-input>
+        <el-input class="sidebar-content-margin" placeholder="저장소 이름을 입력해주세요." v-model="GithubRepo"></el-input>
+        <el-button type="success" size="large" @click="githubpush">
+          <i class="fab fa-github"></i>
+          <span>{{$t('m.PushGithub')}}</span>
+          
+        </el-button>
         <el-button type="success" v-b-toggle.sidebar-right>{{$t('m.qna')}}</el-button>
         <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
           <div class="sidebar" id="wrapper">
@@ -46,7 +54,7 @@
             <hr/>
             <div class="sidebar-content">
               <br/>
-              <span>내용</span>
+              <span>내용</span>a
               <el-input class="sidebar-content-margin" placeholder="제목을 입력해주세요." v-model="qnaContent.title"></el-input>
               <Simditor class="sidebar-content-margin" v-model="qnaContent.content"></Simditor>
               <el-button class="sidebar-margin d-block mr-0 ml-auto" type="success" v-b-toggle.sidebar-right @click.native="QnAWrite">저장하기</el-button>
@@ -110,6 +118,8 @@
         aiaskbutton: true,
         input: '',
         lectureID: '',
+        Githubtoken: '',
+        GithubID: '',
         qnaContent: {
           title: '',
           content: ''
@@ -208,6 +218,23 @@
         api.askQuAAI(params).then(res => {
           console.log(params)
           this.AIrespone = res.data.data
+          console.log(res)
+        })
+      },
+      githubpush () {
+        let params = {contestID: this.contestID,
+          problem: this.$route.params.problemID,
+          id: this.submission.id,
+          code: this.submission.code,
+          content: this.qnaContent,
+          submission: this.submission.info,
+          status: this.status,
+          Githubtoken: this.Githubtoken,
+          GithubID: this.GithubID,
+          GithubRepo: this.GithubRepo,
+        }
+        api.pushgithub(params).then(res => {
+          console.log(params)
           console.log(res)
         })
       },
