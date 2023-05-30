@@ -179,5 +179,9 @@ export const m = {
   TextbookPractice: '교재 실습',
   TextbookRegistration: '교재 등록',
   Community: '커뮤니티',
-  GroupStudy: '그룹 스터디'
+  GroupStudy: '그룹 스터디',
+  RoomCreation: '방 만들기',
+  RoomSelection: '방 입장하기',
+  Creation: '생성',
+  Selection: '입장'
 }
