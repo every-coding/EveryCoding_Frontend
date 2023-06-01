@@ -33,23 +33,14 @@
           label="년도">
         </el-table-column>
         <el-table-column
-          width="90"
-          align="center"
-          label="학기">
-          <template slot-scope="scope">
-            <p v-if="scope.row.semester < 3">{{scope.row.semester}}</p>
-            <p v-else>입학 전</p>
-          </template>
-        </el-table-column>
-        <el-table-column
           prop="created_by.realname"
           width="80"
           align="center"
-          label="담당교수">
+          label="출판사">
         </el-table-column>
         <el-table-column
           prop="title"
-          label="과목명">
+          label="교재명">
         </el-table-column>
 		<el-table-column
 		  width="100"

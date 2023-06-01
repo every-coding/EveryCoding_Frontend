@@ -25,9 +25,9 @@
       <el-menu-item v-if="isAdmin" index="/contest/create">{{$t('m.Create_Contests')}}</el-menu-item>
     </el-submenu>
     <el-submenu index="lecture">
-      <template slot="title"><i class="el-icon-fa-book"></i>{{$t('m.Lecture')}}</template>
-      <el-menu-item index="/lecture">{{$t('m.Lecture_List')}}</el-menu-item>
-      <el-menu-item v-if="isAdmin" index="/lecture/create">{{$t('m.Create_Lecture')}}</el-menu-item>
+      <template slot="title"><i class="el-icon-fa-book"></i>{{$t('m.TextbookRegistration')}}</template>
+      <el-menu-item index="/lecture">{{$t('m.Book_List')}}</el-menu-item>
+      <el-menu-item v-if="isAdmin" index="/lecture/create">{{$t('m.Create_Book')}}</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>

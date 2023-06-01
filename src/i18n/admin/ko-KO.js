@@ -141,6 +141,7 @@ export const m = {
   Lecture_Year: '개설과목 년도',
   Lecture_Semester: '학기',
   Lecture_Founder: '개설자',
+  Book_Founder: '출판사',
   Lecture_List: '개설과목 목록',
   Create_Lecture: '개설과목 생성',
   LectureDescription: '강의계획',
@@ -156,5 +157,11 @@ export const m = {
   Import_Student: '학생 가져오기',
   // 수강과목 학생
   Student: '학생',
-  Student_List: '학생 목록'
+  Student_List: '학생 목록',
+  // Everycoding
+  Book_Year: '교재등록 년도',
+  Create_Book: '교재등록 생성',
+  BookTitle: '교재등록 제목',
+  BookStatus: '교재등록 상태',
+  Book_List: '교재등록 목록'
 }

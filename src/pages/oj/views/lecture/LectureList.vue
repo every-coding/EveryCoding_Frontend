@@ -17,17 +17,11 @@
             <Col :span="2" style="text-align: center">
                 <span>{{ yearsort }} 년도</span>
             </Col>
-            <Col v-if="semestersort < 3" :span="1" style="text-align: center">
-                <span>{{ semestersort }} 학기</span>
-            </Col>
-            <Col v-else :span="1" style="text-align: center">
-              <span style="font-size: 15px">입학 전 <br>프로그램</span>
-            </Col>
             <Col :span="12">
               <p>과목명</p>
             </Col>
-            <Col :span="1">
-              <p>담당교수</p>
+            <Col :span="2">
+              <p>출판사</p>
 			      </Col>
             <Col :span="4" style="text-align: center">
               수강신청 상태
@@ -37,12 +31,8 @@
         <li v-for="lecture in lectures" :key="lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
           <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
-            <Col :span="2" style="text-align: center">
+            <Col :span="1" style="text-align: center">
               {{ lecture.year }}
-			      </Col>
-            <Col :span="2" style="text-align: center">
-              <p v-if="lecture.semester < 3">{{ lecture.semester }}</p>
-              <p v-else>-</p>
 			      </Col>
             <Col :span="12" class="lecture-main">
               <p class="title">
@@ -53,12 +43,12 @@
               {{ lecture.created_by.realname }}
 			      </Col>
             <Col :span="4" style="text-align: center">
-              <Button @click="applylecture(lecture)">수강신청</Button>
+              <Button @click="applylecture(lecture)">실습신청</Button>
 			      </Col>
           </Row>
         </li>
       </ol>
-      <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
+      <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_Book')}}</p>
     </Panel>
     <Pagination :total="total" :pageSize="limit" @on-change="getLectureList" :current.sync="page"></Pagination>
     </Col>
