@@ -47,7 +47,7 @@
               </div>
             </el-col>
             <el-col :span="3" v-if="!LectureID">
-              <el-button type="success" v-b-toggle.sidebar-right>{{$t('m.qa')}}</el-button>
+              <el-button type="success" v-b-toggle.sidebar-right>{{$t('m.write')}}</el-button>
             </el-col>
           </el-row>
         </el-col>
