@@ -156,8 +156,8 @@
           } else {
             this.qnaList.unshift({
               'author': {'realname': '관리자'},
-              'problem': {'title': '공개 질문&답변', 'contest': {lecture_title: undefined}},
-              'content': '안녕하세요. DCU Code 관리자 입니다.<br/>본 공개 질문 페이지에서는 프로그래밍 문법 등에 대하여 질문하는 페이지이며, <b>자신이 푼 실습, 과제 코드 공유가 금지되어 있습니다.</b><br/>과제, 실습관련 질문은 해당 과목 페이지 질문을 이용해주세요.<br/><b>코드 공유시 미통보 삭제됩니다.</b><br/>감사합니다.'
+              'problem': {'title': '공지사항', 'contest': {lecture_title: undefined}},
+              'content': '안녕하세요. EveryCoding 관리자 입니다.<br/>본 커뮤니티 페이지에서는 다양한 글을 작성하는 페이지이며, <b>자신이 푼 실습, 과제 코드 공유가 금지되어 있습니다.</b><br/>과제, 실습관련 질문은 해당 과목 페이지 질문을 이용해주세요.<br/><b>코드 공유시 미통보 삭제됩니다.</b><br/>감사합니다.'
             })
           }
           console.log(this.qnaList)
