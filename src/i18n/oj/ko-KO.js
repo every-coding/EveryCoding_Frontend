@@ -18,6 +18,7 @@ export const m = {
   Time_Limit: '시간 제한',
   Memory_Limit: '메모리 제한',
   qna: '조교에게 질문하기',
+  write: '글 작성',
   aianswer: 'AI 코딩 도우미 답변',
   qa: '질문',
   publicQA: '공개 질문',

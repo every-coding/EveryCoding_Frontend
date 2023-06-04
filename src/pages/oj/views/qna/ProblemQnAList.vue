@@ -58,7 +58,7 @@
       <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
         <div class="sidebar" id="wrapper">
           <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
-          <h2 class="sidebar-header">{{$t('m.qna')}}</h2>
+          <h2 class="sidebar-header">{{$t('m.write')}}</h2>
           <hr/>
           <div class="sidebar-content">
             <br/>
