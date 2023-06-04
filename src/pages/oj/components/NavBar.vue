@@ -26,10 +26,6 @@
     <Icon type="ios-pulse-strong"></Icon>
     {{$t('m.NavStatus')}}
   </el-menu-item>
-  <el-menu-item index="/question">
-   <Icon type="help"></Icon>
-   공개 질문
-  </el-menu-item>
   <el-menu-item index="/community">
     <Icon type="ios-chatboxes"></Icon>
     {{$t('m.Community')}}

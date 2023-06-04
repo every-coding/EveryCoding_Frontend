@@ -45,14 +45,14 @@ export default [
   },
   {
     name: 'problem-qna-list',
-    path: '/question',
-    meta: {requiresAuth: true, title: 'questions'},
+    path: '/community',
+    meta: {requiresAuth: true, title: 'community'},
     component: ProblemQnA
   },
   {
     name: 'problem-qna-detail',
-    path: '/question/:questionID',
-    meta: {requiresAuth: true, title: 'questions'},
+    path: '/community/:questionID',
+    meta: {requiresAuth: true, title: 'community'},
     component: ProblemQnADetail
   },
   { // group study
