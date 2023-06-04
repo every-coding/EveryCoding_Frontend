@@ -1,7 +1,7 @@
 <template>
   <div>
     <Panel id="lecture-card" shadow>
-      <div slot="title"><b>DCU Code 질문/답변</b>
+      <div slot="title"><b>커뮤니티</b>
         <i-switch class="switch" size="large" @on-change="handleTagsVisible">
           <span slot="open">{{$t('m.Solved')}}</span>
           <span slot="close">{{$t('m.Solved')}}</span>
@@ -17,7 +17,7 @@
                   <a class="mr-2" href="#">{{ qna.author.realname }}</a>
                   <small class="text-muted">{{ qna.date_posted | localtime('YYYY-M-D HH:mm')}}</small>
                   <el-tag size="mini" v-if="qna.problem">{{ qna.problem.title }}</el-tag>
-                  <el-tag size="mini" v-else>공개 질문</el-tag>
+                  <el-tag size="mini" v-else>공개 글</el-tag>
                   <el-tag size="mini" v-if="!(LectureID === undefined)">{{ qna.problem.contest.lecture_title }}</el-tag>
                   <el-tag size="mini" type="success" v-if="qna.solved">Solved</el-tag>
                 </el-col>
@@ -69,28 +69,6 @@
           </div>
         </div>
       </b-sidebar>
-
-      <b-sidebar id="sidebar-airight" title="Sidebar" width="500px" no-header right shadow>
-        <div class="sidebar" id="wrapper">
-          <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
-          <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
-          <hr/>
-          <div class="sidebar-content">
-            <br/>
-            <span>chat GPT 3.5 Turbo</span>
-            <br/>
-            <span> 여기에 GPT의 답변을 출력 <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-          </div>
-        </div>
-      </b-sidebar>
-      <!-- -->
     </Panel>
   </div>
 </template>
