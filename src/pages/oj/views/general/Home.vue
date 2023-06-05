@@ -10,11 +10,30 @@
 <!--        </div>-->
 <!--      </panel>-->
 <!--    </Col>-->
+<!--    <Col :span="22">-->
+<!--      <panel>-->
+<!--        <div slot="title">-->
+<!--          Every coding 사용 메뉴얼 (학생용)-->
+<!--          <Button style="float: right" type="success"><a href="/static/manual.pdf" download>다운로드</a></Button>-->
+<!--        </div>-->
+<!--      </panel>-->
+<!--    </Col>-->
     <Col :span="22">
       <panel>
         <div slot="title">
-          Every coding 사용 메뉴얼 (학생용)
-          <Button style="float: right" type="success"><a href="/static/manual.pdf" download>다운로드</a></Button>
+          ✎ 지금 바로 도전해보세요!
+          <q-card >
+            <div class="text-center bg-primary text-white"></div>
+            <q-card-section>
+              <div class="logo"><img id="logo" src="../../../../assets/logo.jpg" alt="oj logo"/></div>
+              <div>코딩:생각을 현실로</div>
+              <div>김미혜</div>
+            </q-card-section>
+            <q-card-section>
+              <div>전공자의 첫 C 언어 프로그래밍</div>
+              <div>서동만</div>
+            </q-card-section>
+          </q-card>
         </div>
       </panel>
     </Col>
@@ -204,6 +223,16 @@ export default {
       },
       loadingSaveBtn: false,
       month: 0
+      // subjectList: [
+      //   {
+      //     title: '코딩:생각을 현실로',
+      //     author: '김미혜'
+      //   },
+      //   {
+      //     title: '전공자의 첫 C 언어 프로그래밍',
+      //     author: '서동만'
+      //   }
+      // ]
     }
   },
   mounted () {
