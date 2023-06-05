@@ -54,7 +54,7 @@
               TA/RA
             </span>
             <span v-else-if="scope.row.admin_type === 'Admin'">
-              교수
+              출판사
             </span>
             <span v-else>
               관리자

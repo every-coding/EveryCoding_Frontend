@@ -162,6 +162,7 @@ export const m = {
   Lectures: '개설 과목',
   Lecture_Contests: '문제',
   No_lecture: '수강 과목 없음',
+  No_Book: '교재 실습 없음',
   // Submission
   Signal: 'Signal',
   AuthorRealname: '코드 작성자',

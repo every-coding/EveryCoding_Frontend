@@ -26,31 +26,14 @@
                 </Dropdown-menu>
               </Dropdown>
             </Col>
-            <Col :span="1" style="text-align: center">
-              <Dropdown @on-click="sortSemester">
-                <div v-if="semestersort < 3">
-                    <span>{{ semestersort }} 학기 <Icon type="arrow-down-b"></Icon>
-                    </span>
-                </div>
-                <div v-else>
-                    <span style="font-size: 15px"> 입학 전 <br>프로그램</span>
-                </div>
-                <!-- 구현 예정 -->
-                <Dropdown-menu slot="list">
-                  <Dropdown-item name='1'>1</Dropdown-item>
-                  <Dropdown-item name='2'>2</Dropdown-item>
-                  <Dropdown-item name='3'>입학 전</Dropdown-item>
-                </Dropdown-menu>
-              </Dropdown>
-            </Col>
             <Col :span="12">
-              <p>과목명</p>
+              <p>교재명</p>
             </Col>
             <Col :span="2">
-              <p>담당교수</p>
+              <p>출판사</p>
 			      </Col>
             <Col :span="4" style="text-align: center">
-              수강신청 상태
+              교재실습 신청 상태
 			      </Col>
           </Row>
         </li>
@@ -59,10 +42,6 @@
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
             <Col :span="2" style="text-align: center">
               {{ lecture.lecture.year }}
-			      </Col>
-            <Col :span="1" style="text-align: center">
-              <p v-if="lecture.lecture.semester < 3">{{ lecture.lecture.semester }}</p>
-              <p v-else>-</p>
 			      </Col>
             <Col :span="12" class="lecture-main">
               <p class="title">
@@ -74,13 +53,13 @@
               {{ lecture.lecture.created_by.realname }}
 			      </Col>
             <Col :span="4" style="text-align: center">
-              <Button @click="goLecture(lecture.lecture)" v-if="lecture.isallow">수강하기</Button>
-              <Button v-else disabled>수강대기</Button>
+              <Button @click="goLecture(lecture.lecture)" v-if="lecture.isallow">신청하기</Button>
+              <Button v-else disabled>신청대기</Button>
 			      </Col>
           </Row>
         </li>
       </ol>
-      <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_lecture')}}</p>
+      <p id="no-lecture" v-if="lectures.length == 0">{{$t('m.No_Book')}}</p>
     </Panel>
     <Pagination :total="total" :pageSize="limit" @on-change="getLectureList" :current.sync="page"></Pagination>
     </Col>
