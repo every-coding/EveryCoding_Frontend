@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="lecture-card" shadow>
-      <div slot="title"><b>{{$t('m.Lectures')}}</b></div>
+      <div slot="title"><b>{{$t('m.TextbookPractice')}}</b></div>
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -24,7 +24,7 @@
               <p>출판사</p>
 			      </Col>
             <Col :span="4" style="text-align: center">
-              수강신청 상태
+              교재실습 신청 상태
 			      </Col>
           </Row>
         </li>
