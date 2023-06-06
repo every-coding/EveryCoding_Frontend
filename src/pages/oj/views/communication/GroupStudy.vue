@@ -39,6 +39,7 @@
 <script>
 import Vue from 'vue'
 import api from '@oj/api'
+import { JitsiMeetJS } from 'lib-jitsi-meet'
 
 const domain = 'meet.jit.si'
 
@@ -73,6 +74,13 @@ export default {
   mounted () {
     this.loadScript(`https://meet.jit.si/external_api.js`, () => {
       if (!window.JitsiMeetExternalAPI) throw new Error('Jitsi Meet External API not loaded')
+    })
+    this.loadScript(`https://code.jquery.com/jquery-3.5.1.min.js`, () => {
+      if (!window.jQuery) throw new Error('jQuery library not loaded')
+    })
+
+    this.loadScript(`https://meet.jit.si/libs/lib-jitsi-meet.min.js`, () => {
+      if (!window.JitsiMeetJS) throw new Error('lib-jitsi-meet library not loaded')
     })
   },
 
@@ -119,13 +127,31 @@ export default {
       this.dispose()
     },
 
+    getUserMedia () {
+      return navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+          const audioDevices = devices.filter(device => device.kind === 'audioinput')
+          const videoDevices = devices.filter(device => device.kind === 'videoinput')
+          return { audioDevices, videoDevices }
+        })
+    },
+
+    createInitialLocalTracks () {
+      return this.getUserMedia()
+        .then(({ audioDevices, videoDevices }) => {
+          const audioDevice = audioDevices.length > 0 ? audioDevices[0].deviceId : undefined
+          const videoDevice = videoDevices.length > 0 ? videoDevices[0].deviceId : undefined
+          const options = { devices: { audio: audioDevice, video: videoDevice } }
+          return JitsiMeetJS.createLocalTracks(options)
+        })
+    },
+
     open ({ roomName, userDisplayName } = {}) {
       this.dispose()
 
       const $t = (k) => this.$t(k)
 
-      /* eslint-disable no-undef */
-      this.jitsi = new JitsiMeetExternalAPI(domain, {
+      const options = {
         roomName: `Every-coding_${this.cleanup(roomName || 'unnamed')}`,
         width: '100%',
         height: '100%',
@@ -164,14 +190,25 @@ export default {
             'profile',
             'calendar'
           ]
+        },
+        configOverwrite: {
+          disableAudioLevels: false, // 오디오 레벨 표시를 활성화
+          disableSimulcast: false, // 동시 전송을 활성화
+          enableAudio: true, // 오디오를 활성화
+          enableVideo: true // 비디오를 활성화
         }
-      })
+      }
+      /* eslint-disable no-undef */
+      this.jitsi = new JitsiMeetExternalAPI(domain, options)
 
       // add an event listner to remove jitsi after the local party has hung up the call.
       // this is to remove the page that mentions slack after the rating page.
       this.jitsi.addEventListeners({
         readyToClose: this.removeJitsiAfterHangup
       })
+
+      this.jitsi.executeCommand('toggleAudio')
+      this.jitsi.executeCommand('toggleVideo')
 
       const numberOfParticipants = this.jitsi.getNumberOfParticipants()
       console.log('wow1')
