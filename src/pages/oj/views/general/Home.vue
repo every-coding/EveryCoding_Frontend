@@ -12,6 +12,41 @@
 <!--    </Col>-->
     <Col :span="22">
       <panel>
+        <Row type="flex" justify="space-around" :gutter="10">
+          <Col>
+            <panel>
+              <div slot="title">✎ 지금 바로 도전해보세요 !</div>
+            </panel>
+          </Col>
+          <Col>
+            <panel>
+              <img src="../../../../assets/Cprogramming.jpg" width="292" height="404"/>
+              <h2 align="center">전공자의 첫 C 언어 프로그래밍</h2>
+              <h3 align="center">서동만</h3>
+              <br/>
+            </panel>
+            <br/>
+          </Col>
+          <Col>
+            <panel>
+              <img src="../../../../assets/Coding.jpg" width="292" height="402"/>
+              <h2 align="center">코딩:생각을 현실로</h2>
+              <h3 align="center">김미혜</h3>
+              <br/>
+            </panel>
+            <br/>
+          </Col>
+<!--          <Col>-->
+<!--            <Row><Button class="extra-large-button">교재 실습</Button></Row>-->
+<!--            <Row><Button class="extra-large-button">경진 대회</Button></Row>-->
+<!--            <Row><Button class="extra-large-button">공개 문제</Button></Row>-->
+<!--            <Row><Button class="extra-large-button">그룹스터디</Button></Row>-->
+<!--          </Col>-->
+        </Row>
+      </panel>
+    </Col>
+    <Col :span="22">
+      <panel>
         <div slot="title">
           Every coding 사용 메뉴얼 (학생용)
           <Button style="float: right" type="success"><a href="/static/manual.pdf" download>다운로드</a></Button>
@@ -204,6 +239,16 @@ export default {
       },
       loadingSaveBtn: false,
       month: 0
+      // subjectList: [
+      //   {
+      //     title: '코딩:생각을 현실로',
+      //     author: '김미혜'
+      //   },
+      //   {
+      //     title: '전공자의 첫 C 언어 프로그래밍',
+      //     author: '서동만'
+      //   }
+      // ]
     }
   },
   mounted () {
@@ -542,6 +587,11 @@ h3 {
       }
     }
   }
+}
+.extra-large-button {
+  font-size: 24px;
+  padding: 16px 32px;
+  /* 추가적인 스타일 조정 */
 }
 </style>
 <style>
