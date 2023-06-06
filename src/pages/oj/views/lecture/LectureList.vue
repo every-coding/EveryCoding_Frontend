@@ -18,7 +18,7 @@
                 <span>{{ yearsort }} 년도</span>
             </Col>
             <Col :span="12">
-              <p>과목명</p>
+              <p>교재명</p>
             </Col>
             <Col :span="2">
               <p>출판사</p>
