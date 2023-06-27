@@ -249,6 +249,9 @@ export default {
     this.month = today.getMonth() + 1
   },
   methods: {
+    init () {
+      this.getLectureList()
+    },
     getDuration (startTime, endTime) {
       return time.duration(startTime, endTime)
     },
@@ -260,12 +263,12 @@ export default {
       }
     },
     getLectureList (page = 1) {
-        let offset = (page - 1) * this.limit
-        api.getTakingLectureList(offset, this.limit, this.query, this.yearsort, this.semestersort, undefined).then((res) => {
-          this.lectures = res.data.data.results
-          this.total = res.data.data.total
-        })
-      },
+      let offset = (page - 1) * this.limit
+      api.getTakingLectureList(offset, this.limit, this.query, this.yearsort, this.semestersort, undefined).then((res) => {
+        this.lectures = res.data.data.results
+        this.total = res.data.data.total
+      })
+    },
     setDashboard () {
       let params = {status: CONTEST_STATUS.NOT_START}
       api.getContestList(0, 5, params).then(res => {
