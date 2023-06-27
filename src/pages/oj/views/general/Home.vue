@@ -18,20 +18,11 @@
               <div slot="title">✎ 지금 바로 도전해보세요 !</div>
             </panel>
           </Col>
-          <Col>
+          <Col v-for="lecture in lectures" :key="lecture.lecture.id">
             <panel>
               <img src="../../../../assets/Cprogramming.jpg" width="292" height="404"/>
-              <h2 align="center">전공자의 첫 C 언어 프로그래밍</h2>
-              <h3 align="center">서동만</h3>
-              <br/>
-            </panel>
-            <br/>
-          </Col>
-          <Col>
-            <panel>
-              <img src="../../../../assets/Coding.jpg" width="292" height="402"/>
-              <h2 align="center">코딩:생각을 현실로</h2>
-              <h3 align="center">김미혜</h3>
+              <h2 align="center">{{ lecture.lecture.title }}</h2>
+              <h3 align="center">{{ lecture.lecture.created_by.realname }}</h3>
               <br/>
             </panel>
             <br/>
@@ -234,6 +225,7 @@ export default {
       resize: true,
       detail2: true,
       dialogFormVisible: false,
+      lectures: [],
       formProfile: {
         schoolssn: ''
       },
@@ -267,6 +259,13 @@ export default {
         this.detail = true
       }
     },
+    getLectureList (page = 1) {
+        let offset = (page - 1) * this.limit
+        api.getTakingLectureList(offset, this.limit, this.query, this.yearsort, this.semestersort, undefined).then((res) => {
+          this.lectures = res.data.data.results
+          this.total = res.data.data.total
+        })
+      },
     setDashboard () {
       let params = {status: CONTEST_STATUS.NOT_START}
       api.getContestList(0, 5, params).then(res => {
