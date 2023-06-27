@@ -264,7 +264,7 @@ export default {
     },
     getLectureList (page = 1) {
       let offset = (page - 1) * this.limit
-      api.getTakingLectureList(offset, this.limit, this.query, this.yearsort, this.semestersort, undefined).then((res) => {
+      api.getTakingLectureList(offset, this.limit, {status: '', keyword: '', rule_type: ''}, 2020, 1, undefined).then((res) => {
         this.lectures = res.data.data.results
         this.total = res.data.data.total
       })
