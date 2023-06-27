@@ -26,7 +26,7 @@
           <Button style="float: right" type="success" v-else @click="showDetail">페이지 최소화</Button>
         </div>
         <p v-if="detail" align="middle">
-          <iframe width="789" height="444" src="https://www.youtube.com/embed/6kaNUXN951c" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <iframe width="789" height="444" src="https://www.youtube.com/embed/UzsAt8_LmDI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </p>
       </panel>
     </Col>
