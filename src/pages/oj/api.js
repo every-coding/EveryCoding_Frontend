@@ -78,6 +78,11 @@ export default {
       data
     })
   },
+  pushgithub (params) {
+    return ajax('githubpush', 'get', {
+      params
+    })
+  },
   askQuAAI (params) {
     return ajax('aihelper', 'get', {
       params
@@ -93,6 +98,11 @@ export default {
   //     data
   //   })
   // },
+  getNumOfParticipants (param) {
+    return ajax('groupstudy', 'get', {
+      param
+    })
+  },
   getWebsiteConf (params) {
     return ajax('website', 'get', {
       params
@@ -150,6 +160,16 @@ export default {
   updateProfile (profile) {
     return ajax('profile', 'put', {
       data: profile
+    })
+  },
+  updateRank_point (rankpoint) {
+    return ajax('profile_rankpoint', 'get', {
+      rankpoint
+    })
+  },
+  updateRank_tear (ranktear) {
+    return ajax('profile_ranktear', 'get', {
+      ranktear
     })
   },
   freshDisplayID (userID) {
@@ -224,6 +244,9 @@ export default {
   },
   pickone () {
     return ajax('pickone', 'get')
+  },
+  random_by_level () {
+    return ajax('random_by_level', 'get')
   },
   getProblem (problemID) {
     console.log('call')
@@ -412,6 +435,16 @@ export default {
       rule
     }
     return ajax('user_rank', 'get', {
+      params
+    })
+  },
+  getPointRank (offset, limit, rule = 'point') {
+    let params = {
+      offset,
+      limit,
+      rule
+    }
+    return ajax('user_pointrank', 'get', {
       params
     })
   },

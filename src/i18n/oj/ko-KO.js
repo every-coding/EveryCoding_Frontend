@@ -13,10 +13,12 @@ export const m = {
   Status: '제출 상태',
   calltara: '조교에게 질문하기',
   callai: 'AI 코딩 도우미',
+  PushGithub: 'Github에 업로드',
   Information: '정보',
   Time_Limit: '시간 제한',
   Memory_Limit: '메모리 제한',
   qna: '조교에게 질문하기',
+  write: '글 작성',
   aianswer: 'AI 코딩 도우미 답변',
   qa: '질문',
   publicQA: '공개 질문',
@@ -32,6 +34,7 @@ export const m = {
   Submitting: '제출 중',
   WrongPath: '잘못된 경로로 들어오셨습니다.',
   Pick_One: '랜덤 문제',
+  Random_By_level: '수준별 문제 추천',
   Reset: '초기화',
   Total: '시도 횟수',
   AC_Rate: '정답율',
@@ -73,6 +76,10 @@ export const m = {
   mood: 'mood',
   AC: '맞춘 문제 수',
   Rating: '정답률',
+  // POINTRank.vue
+  POINT_Ranklist: 'Point 순위표',
+  point: '포인트',
+  tear: '티어',
   // NavBar.vue
   Home: '홈',
   NavProblems: '공개 문제',
@@ -81,6 +88,7 @@ export const m = {
   Rank: '랭킹',
   ACM_Rank: 'ACM 랭킹',
   OI_Rank: 'OI 랭킹',
+  POINT_Rank: 'POINT 랭킹',
   About: '정보',
   Judger: '채점 시스템',
   FAQ: 'FAQ',
@@ -154,6 +162,7 @@ export const m = {
   Lectures: '개설 과목',
   Lecture_Contests: '문제',
   No_lecture: '수강 과목 없음',
+  No_Book: '교재 실습 없음',
   // Submission
   Signal: 'Signal',
   AuthorRealname: '코드 작성자',
@@ -173,5 +182,9 @@ export const m = {
   TextbookPractice: '교재 실습',
   TextbookRegistration: '교재 등록',
   Community: '커뮤니티',
-  GroupStudy: '그룹 스터디'
+  GroupStudy: '그룹 스터디',
+  RoomCreation: '방 만들기',
+  RoomSelection: '방 입장하기',
+  Creation: '생성',
+  Selection: '입장'
 }

@@ -79,9 +79,18 @@
         </Col>
 
         <Col :span="11">
-          <Form-item label="학번">
+          <Form-Item label="학번">
             <Input v-model="formProfile.schoolssn"/>
-          </Form-item>
+          </Form-Item>
+          <Form-Item label="랭크 포인트">
+            <Input v-model="formProfile.rank_point" readonly/>
+          </Form-Item>
+          <Form-Item>
+            <Button type="success" @click="updaterank_point (), updaterank_tear ()" :loading="loadingSaveRankBtn">랭크포인트 갱신</Button>
+          </Form-Item>
+          <Form-Item label="랭크 티어">
+            <Input v-model="formProfile.rank_tear" readonly/>
+          </Form-Item>
         </Col>
       </Row>
     </Form>
@@ -103,6 +112,7 @@
       return {
         loadingSaveBtn: false,
         loadingUploadBtn: false,
+        loadingSaveRankBtn: false,
         uploadModalVisible: false,
         preview: {},
         uploadImgSrc: '',
@@ -114,11 +124,15 @@
         languages: languages,
         formProfile: {
           realname: '',
-          schoolssn: ''
+          schoolssn: '',
+          rank_point: '',
+          rank_tear: ''
         }
       }
     },
     mounted () {
+      this.formProfile.rank_point = this.$store.getters.user.rank_point || ''
+      this.formProfile.rank_tear = this.$store.getters.user.rank_tear || ''
       let profile = this.$store.state.user.profile.user
       console.log(profile)
       Object.keys(this.formProfile).forEach(element => {
@@ -217,6 +231,25 @@
           this.loadingSaveBtn = false
         }, _ => {
           this.loadingSaveBtn = false
+        })
+      },
+      updaterank_point () {
+        this.loadingSaveRankBtn = true
+        let updaterankData = utils.filterEmptyValue(Object.assign({}, this.formProfile.rank_point))
+        api.updateRank_point(updaterankData).then(res => {
+          this.formProfile.rank_point = res.data.data
+          this.loadingSaveRankBtn = false
+        }, _ => {
+          this.loadingSaveRankBtn = false
+        })
+      },
+      updaterank_tear () {
+        let updatetearData = utils.filterEmptyValue(Object.assign({}, this.formProfile.rank_tear))
+        api.updateRank_tear(updatetearData).then(res => {
+          this.formProfile.rank_tear = res.data.data
+          this.loadingSaveRankBtn = false
+        }, _ => {
+          this.loadingSaveRankBtn = false
         })
       }
     },

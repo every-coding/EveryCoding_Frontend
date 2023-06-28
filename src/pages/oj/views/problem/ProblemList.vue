@@ -60,11 +60,18 @@
               shape="circle"
               class="tag-btn">{{tag.name}}
       </Button>
-
-      <Button long id="pick-one" @click="pickone">
-        <Icon type="shuffle"></Icon>
-        {{$t('m.Pick_One')}}
-      </Button>
+      <div>
+        <Button long id="pick-one" @click="pickone">
+          <Icon type="shuffle"></Icon>
+          {{$t('m.Pick_One')}}
+        </Button>
+      </div>
+      <div>
+        <Button long id="random_by_level" @click="random_by_level">
+          <Icon type="shuffle"></Icon>
+          {{$t('m.Random_By_level')}}
+        </Button>
+      </div>
     </Panel>
     <Spin v-if="loadings.tag" fix size="large"></Spin>
     </Col>
@@ -261,6 +268,13 @@
       },
       pickone () {
         api.pickone().then(res => {
+          this.$success('Good Luck')
+          this.$router.push({name: 'problem-details', params: {problemID: res.data.data}})
+        })
+      },
+      random_by_level () {
+        console.log(11)
+        api.random_by_level().then(res => {
           this.$success('Good Luck')
           this.$router.push({name: 'problem-details', params: {problemID: res.data.data}})
         })

@@ -26,10 +26,6 @@
     <Icon type="ios-pulse-strong"></Icon>
     {{$t('m.NavStatus')}}
   </el-menu-item>
-  <el-menu-item index="/question">
-   <Icon type="help"></Icon>
-   공개 질문
-  </el-menu-item>
   <el-menu-item index="/community">
     <Icon type="ios-chatboxes"></Icon>
     {{$t('m.Community')}}
@@ -42,6 +38,7 @@
     <template slot="title"><Icon type="podium"></Icon>{{$t('m.Rank')}}</template>
     <el-menu-item index="/acm-rank">{{$t('m.ACM_Rank')}}</el-menu-item>
     <el-menu-item index="/oi-rank">{{$t('m.OI_Rank')}}</el-menu-item>
+    <el-menu-item index="/point-rank">{{$t('m.POINT_Rank')}}</el-menu-item>
   </el-submenu>
   <el-submenu index="9">
     <template slot="title"><Icon type="information-circled"></Icon>{{$t('m.About')}}</template>

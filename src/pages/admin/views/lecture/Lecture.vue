@@ -5,7 +5,7 @@
             <el-form label-position="top">
                 <el-row :gutter="20">
                     <el-col :span="4">
-                      <el-form-item :label="$t('m.Lecture_Year')" required="required">
+                      <el-form-item :label="$t('m.Book_Year')" required="required">
                           <el-select v-model="lecture.year">
                             <el-option value="2020">2020</el-option>
                             <el-option value="2021">2021</el-option>
@@ -24,7 +24,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="4">
-                      <el-form-item :label="$t('m.Lecture_Founder')">
+                      <el-form-item :label="$t('m.Book_Founder')">
                         <el-select v-model="lecture.created_by_id">
                           <el-option v-for="(professor, id) in this.professor_list" v-bind:value="id" v-bind:label="professor" :key="id">
                             {{ professor }}
@@ -33,8 +33,8 @@
                       </el-form-item>
                     </el-col>
                     <el-col :span="24">
-                        <el-form-item :label="$t('m.LectureTitle')" required="required">
-                            <el-input v-model="lecture.title" :placeholder="$t('m.LectureTitle')"></el-input>
+                        <el-form-item :label="$t('m.BookTitle')" required="required">
+                            <el-input v-model="lecture.title" :placeholder="$t('m.BookTitle')"></el-input>
                         </el-form-item>
                     </el-col>
                     <el-col :span="24">
@@ -43,7 +43,7 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                        <el-form-item :label="$t('m.LectureStatus')">
+                        <el-form-item :label="$t('m.BookStatus')">
                             <el-switch v-model="lecture.status" active-text="" inactive-text=""></el-switch>
                         </el-form-item>
                     </el-col>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Panel id="lecture-card" shadow>
-      <div slot="title"><b>DCU Code 질문/답변</b>
+      <div slot="title"><b>커뮤니티</b>
         <i-switch class="switch" size="large" @on-change="handleTagsVisible">
           <span slot="open">{{$t('m.Solved')}}</span>
           <span slot="close">{{$t('m.Solved')}}</span>
@@ -17,7 +17,7 @@
                   <a class="mr-2" href="#">{{ qna.author.realname }}</a>
                   <small class="text-muted">{{ qna.date_posted | localtime('YYYY-M-D HH:mm')}}</small>
                   <el-tag size="mini" v-if="qna.problem">{{ qna.problem.title }}</el-tag>
-                  <el-tag size="mini" v-else>공개 질문</el-tag>
+                  <el-tag size="mini" v-else>공개 글</el-tag>
                   <el-tag size="mini" v-if="!(LectureID === undefined)">{{ qna.problem.contest.lecture_title }}</el-tag>
                   <el-tag size="mini" type="success" v-if="qna.solved">Solved</el-tag>
                 </el-col>
@@ -47,7 +47,7 @@
               </div>
             </el-col>
             <el-col :span="3" v-if="!LectureID">
-              <el-button type="success" v-b-toggle.sidebar-right>{{$t('m.qa')}}</el-button>
+              <el-button type="success" v-b-toggle.sidebar-right>{{$t('m.write')}}</el-button>
             </el-col>
           </el-row>
         </el-col>
@@ -58,7 +58,7 @@
       <b-sidebar id="sidebar-right" title="Sidebar" width="500px" no-header right shadow>
         <div class="sidebar" id="wrapper">
           <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
-          <h2 class="sidebar-header">{{$t('m.qna')}}</h2>
+          <h2 class="sidebar-header">{{$t('m.write')}}</h2>
           <hr/>
           <div class="sidebar-content">
             <br/>
@@ -69,28 +69,6 @@
           </div>
         </div>
       </b-sidebar>
-
-      <b-sidebar id="sidebar-airight" title="Sidebar" width="500px" no-header right shadow>
-        <div class="sidebar" id="wrapper">
-          <el-button class="sidebar-margin" v-b-toggle.sidebar-right icon="el-icon-close" circle></el-button>
-          <h2 class="sidebar-header">{{$t('m.aianswer')}}</h2>
-          <hr/>
-          <div class="sidebar-content">
-            <br/>
-            <span>chat GPT 3.5 Turbo</span>
-            <br/>
-            <span> 여기에 GPT의 답변을 출력 <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-            <span> ... <br/></span>
-          </div>
-        </div>
-      </b-sidebar>
-      <!-- -->
     </Panel>
   </div>
 </template>
@@ -178,8 +156,8 @@
           } else {
             this.qnaList.unshift({
               'author': {'realname': '관리자'},
-              'problem': {'title': '공개 질문&답변', 'contest': {lecture_title: undefined}},
-              'content': '안녕하세요. DCU Code 관리자 입니다.<br/>본 공개 질문 페이지에서는 프로그래밍 문법 등에 대하여 질문하는 페이지이며, <b>자신이 푼 실습, 과제 코드 공유가 금지되어 있습니다.</b><br/>과제, 실습관련 질문은 해당 과목 페이지 질문을 이용해주세요.<br/><b>코드 공유시 미통보 삭제됩니다.</b><br/>감사합니다.'
+              'problem': {'title': '공지사항', 'contest': {lecture_title: undefined}},
+              'content': '안녕하세요. EveryCoding 관리자 입니다.<br/>본 커뮤니티 페이지에서는 다양한 글을 작성하는 페이지이며, <b>자신이 푼 실습, 과제 코드 공유가 금지되어 있습니다.</b><br/>과제, 실습관련 질문은 해당 과목 페이지 질문을 이용해주세요.<br/><b>코드 공유시 미통보 삭제됩니다.</b><br/>감사합니다.'
             })
           }
           console.log(this.qnaList)

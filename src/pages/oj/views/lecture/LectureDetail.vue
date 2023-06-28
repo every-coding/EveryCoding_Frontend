@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="contest-card" shadow>
-      <div slot="title">{{ this.lecture_title }} <p>개설자 : {{ this.lecture_creator }}</p></div><!--LectureList.vue에서 보낸 수강과목 title 값-->
+      <div slot="title">{{ this.lecture_title }} <p>출판사 : {{ this.lecture_creator }}</p></div><!--LectureList.vue에서 보낸 수강과목 title 값-->
       <div slot="extra">
         <ul class="filter">
           <li>

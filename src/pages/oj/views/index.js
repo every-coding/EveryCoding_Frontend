@@ -14,6 +14,7 @@ const SubmissionDetails = () => import(/* webpackChunkName: "submission" */ '@oj
 
 const ACMRank = () => import(/* webpackChunkName: "userRank" */ '@oj/views/rank/ACMRank.vue')
 const OIRank = () => import(/* webpackChunkName: "userRank" */ '@oj/views/rank/OIRank.vue')
+const POINTRank = () => import(/* webpackChunkName: "userRank" */ '@oj/views/rank/POINTRank.vue')
 
 const ApplyResetPassword = () => import(/* webpackChunkName: "password" */ '@oj/views/user/ApplyResetPassword.vue')
 const ResetPassword = () => import(/* webpackChunkName: "password" */ '@oj/views/user/ResetPassword.vue')
@@ -24,13 +25,15 @@ const ProblemQnADetail = () => import(/* webpackChunkName: "Problem" */ '@oj/vie
 
 const LectureContestExit = () => import(/* webpackChunkName: "submission" */ '@oj/views/lecture/LectureContestExit.vue')  // working by soojung
 
+const StudyForGroup = () => import(/* webpackChunkName: "groupstudy" */ '@oj/views/communication/GroupStudy.vue')
+
 export {
   Home, NotFound, Announcements,
   Login_, Logout, UserHome, About, FAQ,
   ProblemList, Problem,
-  ACMRank, OIRank,
+  ACMRank, OIRank, POINTRank,
   SubmissionList, SubmissionDetails, LectureContestExit,
-  ApplyResetPassword, ResetPassword, ProblemQnA, ProblemQnADetail
+  ApplyResetPassword, ResetPassword, ProblemQnA, ProblemQnADetail, StudyForGroup
 }
 /* 组件导出分为两类, 一类常用的直接导出，另一类诸如Login, Logout等用懒加载,懒加载不在此处导出
  *   在对应的route内加载

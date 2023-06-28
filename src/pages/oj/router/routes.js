@@ -10,6 +10,7 @@ import {
   Logout,
   NotFound,
   OIRank,
+  POINTRank,
   Problem,
   ProblemQnA,
   ProblemList,
@@ -19,7 +20,8 @@ import {
   UserHome,
   ProblemQnADetail,
   LectureContestExit,
-  ide
+  ide,
+  StudyForGroup
 } from '../views'
 
 import * as Contest from '@oj/views/contest'
@@ -43,15 +45,21 @@ export default [
   },
   {
     name: 'problem-qna-list',
-    path: '/question',
-    meta: {requiresAuth: true, title: 'questions'},
+    path: '/community',
+    meta: {requiresAuth: true, title: 'community'},
     component: ProblemQnA
   },
   {
     name: 'problem-qna-detail',
-    path: '/question/:questionID',
-    meta: {requiresAuth: true, title: 'questions'},
+    path: '/community/:questionID',
+    meta: {requiresAuth: true, title: 'community'},
     component: ProblemQnADetail
+  },
+  { // group study
+    name: 'problem-qna-list',
+    path: '/groupstudy',
+    meta: {requiresAuth: true, title: 'group study'},
+    component: StudyForGroup
   },
   {
     name: 'login',
@@ -240,6 +248,12 @@ export default [
     path: '/oi-rank',
     meta: {title: 'OI Rankings'},
     component: OIRank
+  },
+  {
+    name: 'point-rank',
+    path: '/point-rank',
+    meta: {title: 'POINT Rankings'},
+    component: POINTRank
   },
   {
     name: 'user-home',
