@@ -5,7 +5,7 @@
         강의명 : {{ this.lectureTitle }}
       </div>
       <div>
-        담당교수 : {{ this.lectureCreator }}
+        출판사 : {{ this.lectureCreator }}
       </div>
       <div slot="header">
         <el-input

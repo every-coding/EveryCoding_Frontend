@@ -8,7 +8,7 @@
         실습, 과제 : {{ this.contestTitle }}
       </div>
       <div>
-        담당교수 : {{ this.lectureCreator }}
+        출판사 : {{ this.lectureCreator }}
       </div>
       <div slot="header">
         <el-inputD
