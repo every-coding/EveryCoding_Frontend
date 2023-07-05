@@ -54,7 +54,7 @@
               TA/RA
             </span>
             <span v-else-if="scope.row.admin_type === 'Admin'">
-              출판사
+              출판사 및 저자
             </span>
             <span v-else>
               관리자
@@ -209,7 +209,7 @@
               <el-select v-model="user.admin_type">
                 <el-option label="학생" value="Regular User"></el-option>
                 <el-option label="TA/RA" value="TA_Admin"></el-option>
-                <el-option label="교수" value="Admin"></el-option>
+                <el-option label="출판사 및 저자" value="Admin"></el-option>
                 <el-option label="관리자" value="Super Admin"></el-option>
               </el-select>
             </el-form-item>

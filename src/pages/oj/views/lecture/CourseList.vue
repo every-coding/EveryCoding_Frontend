@@ -2,7 +2,7 @@
   <Row type="flex">
     <Col :span="24">
     <Panel id="lecture-card" shadow>
-      <div slot="title"><b>{{$t('m.Signup_Lectures')}}</b></div>
+      <div slot="title"><b>{{$t('m.TextbookPractice')}}</b></div>
       <div slot="extra">
         <ul class="filter">
           <li>
@@ -14,38 +14,23 @@
       <ol id="lecture-list">
         <li><!--표시될 수강과목 수가 0이 아닌 경우에만 출력-->
           <Row id="tb-column" type="flex" justify="space-between" align="middle">
-            <Col :span="2" style="text-align: center">
-              <Dropdown @on-click="sortYear">
-                <span>{{ yearsort }} 년도 <Icon type="arrow-down-b"></Icon>
-                </span>
-                <!-- 구현 예정 -->
-                <Dropdown-menu slot="list">
-                  <Dropdown-item name="2020">2020</Dropdown-item>
-                  <Dropdown-item name="2021">2021</Dropdown-item>
-                  <Dropdown-item name="2022">2022</Dropdown-item>
-                </Dropdown-menu>
-              </Dropdown>
-            </Col>
-            <Col :span="12">
+            <Col :span="12" style="padding-left: 150px">
               <p>교재명</p>
             </Col>
             <Col :span="2">
               <p>출판사</p>
 			      </Col>
             <Col :span="4" style="text-align: center">
-              교재실습 신청 상태
+              교재실습 진행 버튼
 			      </Col>
           </Row>
         </li>
         <li v-for="lecture in lectures" :key="lecture.lecture.id"><!--v-if 조건식을 통해 열림 상태인 수강 과목만 출력한다.-->
           <Row type="flex" justify="space-between" align="middle">
             <!--<img class="trophy" src="../../../../assets/Cup.png"/>--><!--트로피 대신 다른 이미지 추가-->
-            <Col :span="2" style="text-align: center">
-              {{ lecture.lecture.year }}
-			      </Col>
             <Col :span="12" class="lecture-main">
               <p class="title">
-                <span class="entry" v-if="lecture.isallow"><a id="lecture-title" @click="goLecture(lecture.lecture)">{{ lecture.lecture.title }}</a></span>
+                <span class="entry" v-if="lecture.isallow" style="padding-left: 50px"><a id="lecture-title" @click="goLecture(lecture.lecture)">{{ lecture.lecture.title }}</a></span>
                 <span id="waitlecture" class="entry" v-else>{{ lecture.lecture.title }}</span>
               </p>
             </Col>
@@ -53,7 +38,7 @@
               {{ lecture.lecture.created_by.realname }}
 			      </Col>
             <Col :span="4" style="text-align: center">
-              <Button @click="goLecture(lecture.lecture)" v-if="lecture.isallow">신청하기</Button>
+              <Button @click="goLecture(lecture.lecture)" v-if="lecture.isallow">실습하기</Button>
               <Button v-else disabled>신청대기</Button>
 			      </Col>
           </Row>
