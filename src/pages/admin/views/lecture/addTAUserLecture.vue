@@ -4,7 +4,7 @@
       <el-col :span="4">
         <el-select v-model="searchType">
           <el-option value="이름">이름</el-option>
-          <el-option value="학번">학번</el-option>
+          <el-option value="전화번호">전화번호</el-option>
         </el-select>
       </el-col>
       <el-col :span="17" fixed="right">
@@ -29,7 +29,7 @@
         prop="realname">
       </el-table-column>
       <el-table-column
-        label="학번"
+        label="전화번호"
         prop="schoolssn">
       </el-table-column>
       <el-table-column

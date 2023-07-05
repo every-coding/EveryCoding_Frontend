@@ -29,7 +29,7 @@
 
         <el-table-column prop="username" label="ID"></el-table-column>
 
-        <el-table-column prop="schoolssn" label="학번 / 교직번호"></el-table-column>
+        <el-table-column prop="schoolssn" label="전화번호"></el-table-column>
 
         <el-table-column prop="create_time" label="계정 생성일">
           <template slot-scope="scope">

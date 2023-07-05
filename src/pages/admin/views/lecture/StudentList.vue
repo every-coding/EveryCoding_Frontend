@@ -38,7 +38,7 @@
                   </span>
                 </template>
               </el-table-column>
-              <el-table-column prop="schoolssn" label="학번" align="center">
+              <el-table-column prop="schoolssn" label="전화번호" align="center">
                 <template slot-scope="scope"><!--마찬가지로 lecture_signup_class에 학번이 있는 경우,-->
                   <span v-if="scope.row.schoolssn"><!--해당 값을 출력하고-->
                     {{ scope.row.schoolssn }}
@@ -102,7 +102,7 @@
                     이름
                   </th>
                   <th>
-                    학번
+                    전화번호
                   </th>
                   <template v-if="scoreListTable[0] !== undefined">
                     <template v-for="(contests, index) in scoreListTable['0'].score.traincolumnscore.contests">
@@ -155,7 +155,7 @@
                     이름
                   </th>
                   <th>
-                    학번
+                    전화번호
                   </th>
                   <template v-if="scoreListTable[0] !== undefined">
                     <template v-for="(contests, index) in scoreListTable['0'].score.assigncolumnscore.contests">
@@ -208,7 +208,7 @@
                     이름
                   </th>
                   <th>
-                    학번
+                    전화번호
                   </th>
                   <template v-if="scoreListTable[0] !== undefined">
                     <template v-for="(contests, index) in scoreListTable['0'].score.contestcolumnscore.contests">
@@ -284,7 +284,7 @@
       <div slot="header">
         <el-row :gutter="20">
           <el-col :span="selectedUsers.length ? 16: 24">
-            <el-input v-model="ta_name" @click.native="onEnter" v-on:keyup.native.enter="onEnter" prefix-icon="el-icon-search" placeholder="TA/RA 학생 학번"></el-input>
+            <el-input v-model="ta_name" @click.native="onEnter" v-on:keyup.native.enter="onEnter" prefix-icon="el-icon-search" placeholder="TA/RA 학생 전화번호"></el-input>
           </el-col>
         </el-row>
       </div>
@@ -294,7 +294,7 @@
           prop="realname">
         </el-table-column>
         <el-table-column
-          label="학번"
+          label="전화번호"
           prop="schoolssn">
         </el-table-column>
         <el-table-column

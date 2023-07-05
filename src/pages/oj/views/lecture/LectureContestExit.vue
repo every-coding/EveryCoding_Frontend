@@ -20,7 +20,7 @@
                   </span>
               </template>
             </el-table-column>
-            <el-table-column prop="schoolssn" label="학번" align="center">
+            <el-table-column prop="schoolssn" label="전화번호" align="center">
               <template slot-scope="scope"><!--마찬가지로 lecture_signup_class에 학번이 있는 경우,-->
                 <span v-if="scope.row.schoolssn"> <!--해당 값을 출력하고-->
                     {{ scope.row.schoolssn }}

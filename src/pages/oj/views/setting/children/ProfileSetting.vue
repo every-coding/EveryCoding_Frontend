@@ -79,7 +79,7 @@
         </Col>
 
         <Col :span="11">
-          <Form-Item label="학번">
+          <Form-Item label="전화번호">
             <Input v-model="formProfile.schoolssn"/>
           </Form-Item>
           <Form-Item label="랭크 포인트">
