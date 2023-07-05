@@ -136,11 +136,11 @@ export const m = {
   UserRegister: '회원가입',
   Already_Registed: '이미 등록하셨나요? 로그인하세요!',
   password_does_not_match: '패스워드가 일치하지 않습니다.',
-  schoolssn_does_not_match: '학번/교직번호가 일치하지 않습니다.',
+  schoolssn_does_not_match: '전화번호가 일치하지 않습니다.',
   schoolssn_invalid: '테스트',
   The_username_already_exists: '사용자 id가 이미 있습니다.',
   The_email_already_exists: '이미 존재하는 이메일입니다.',
-  The_schoolssn_already_exists: '학번/교직번호가 이미 있습니다.',
+  The_schoolssn_already_exists: '전화번호가 이미 있습니다.',
   // ResetPassword.vue and ApplyResetPassword.vue
   Success: '완료',
   Password_reset_mail_sent: '비밀번호 초기화 메일을 전송했습니다.',
@@ -186,5 +186,7 @@ export const m = {
   RoomCreation: '방 만들기',
   RoomSelection: '방 입장하기',
   Creation: '생성',
-  Selection: '입장'
+  Selection: '입장',
+  regiphonenum: '전화번호 (ex 01012345678)',
+  regiphonenum_Again: '전화번호 확인'
 }

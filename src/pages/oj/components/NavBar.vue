@@ -2,15 +2,12 @@
   <div id="header">
   <el-menu mode="horizontal" @select="handleSelect" :default-active="activeIndex" class="oj-menu" ref="test">
   <a href="/"><div class="logo"><img id="logo" src="../../../assets/logo.jpg" alt="oj logo"/></div></a>
-  <el-menu-item index="/">
-    <Icon type="home"></Icon>
-    {{$t('m.Home')}}
-  </el-menu-item>
   <el-menu-item index="/CourseList">
     <Icon type="ios-book"></Icon>
     {{$t('m.TextbookPractice')}}
   </el-menu-item>
-  <el-menu-item index="/lecture">
+  <!--
+   <el-menu-item index="/lecture">
     <Icon type="ios-book"></Icon>
     {{$t('m.TextbookRegistration')}}
   </el-menu-item>
@@ -18,6 +15,7 @@
     <Icon type="ios-book"></Icon>
     {{$t('m.Public_Contests')}}
   </el-menu-item>
+  -->
   <el-menu-item index="/problem">
     <Icon type="ios-keypad"></Icon>
     {{$t('m.NavProblems')}}
@@ -38,7 +36,6 @@
     <template slot="title"><Icon type="podium"></Icon>{{$t('m.Rank')}}</template>
     <el-menu-item index="/acm-rank">{{$t('m.ACM_Rank')}}</el-menu-item>
     <el-menu-item index="/oi-rank">{{$t('m.OI_Rank')}}</el-menu-item>
-    <el-menu-item index="/point-rank">{{$t('m.POINT_Rank')}}</el-menu-item>
   </el-submenu>
   <el-submenu index="9">
     <template slot="title"><Icon type="information-circled"></Icon>{{$t('m.About')}}</template>

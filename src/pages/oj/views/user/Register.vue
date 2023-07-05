@@ -27,12 +27,12 @@
         </Input>
       </FormItem>
       <FormItem prop="schoolssn">
-        <Input type="text" v-model="formRegister.schoolssn" :placeholder="$t('m.schoolssn')" size="large" @on-enter="handleRegister">
+        <Input type="text" v-model="formRegister.schoolssn" :placeholder="$t('m.regiphonenum')" size="large" @on-enter="handleRegister">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem prop="schoolssnAgain">
-        <Input type="text" v-model="formRegister.schoolssnAgain" :placeholder="$t('m.schoolssn_Again')" size="large" @on-enter="handleRegister">
+        <Input type="text" v-model="formRegister.schoolssnAgain" :placeholder="$t('m.regiphonenum_Again')" size="large" @on-enter="handleRegister">
         <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
@@ -100,10 +100,10 @@
       }
       const CheckSchoolssnNotExist = (rule, value, callback) => {
         api.checkUsernameOrEmail(undefined, undefined, value).then(res => {
-          if (this.formRegister.schoolssn.length < 5 || this.formRegister.schoolssn.length > 8) {
-            callback(new Error(this.$i18n.t('학번/교직번호는 5자 이상, 8자 이하로 입력하세요.')))
+          if (this.formRegister.schoolssn.length !== 11) {
+            callback(new Error(this.$i18n.t('전화번호는 11자리로 입력하세요.')))
           } else if (res.data.data.schoolssn === true) {
-            callback(new Error(this.$i18n.t('학번/교직번호가 이미 입력되었습니다.')))
+            callback(new Error(this.$i18n.t('전화번호가 이미 입력되었습니다.')))
           } else {
             callback()
           }
@@ -124,7 +124,7 @@
       }
       const CheckAgainSchoolssn = (rule, value, callback) => {
         if (value !== this.formRegister.schoolssn) {
-          callback(new Error(this.$i18n.t('학번이 일치하지 않습니다.')))
+          callback(new Error(this.$i18n.t('전화번호가 일치하지 않습니다.')))
         }
         callback()
       }
