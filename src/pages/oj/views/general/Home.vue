@@ -22,7 +22,7 @@
             <panel>
               <img src="../../../../assets/Cprogramming.jpg" width="292" height="404"/>
               <h2 align="center">전공자의 첫 C 언어 프로그래밍</h2>
-              <h3 align="center">서동만</h3>
+              <h3 align="center">서동만, 전수빈</h3>
               <br/>
             </panel>
             <br/>
@@ -31,7 +31,16 @@
             <panel>
               <img src="../../../../assets/Coding.jpg" width="292" height="402"/>
               <h2 align="center">코딩:생각을 현실로</h2>
-              <h3 align="center">김미혜</h3>
+              <h3 align="center">김미혜, 서동만, 전수빈</h3>
+              <br/>
+            </panel>
+            <br/>
+          </Col>
+          <Col>
+            <panel>
+              <img src="../../../../assets/Cbasic.jpg" width="292" height="402"/>
+              <h2 align="center">C 프로그래밍 기초</h2>
+              <h3 align="center">서동만, 전수빈</h3>
               <br/>
             </panel>
             <br/>
