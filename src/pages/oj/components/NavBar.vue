@@ -11,11 +11,11 @@
     <Icon type="ios-book"></Icon>
     {{$t('m.TextbookRegistration')}}
   </el-menu-item>
+  -->
   <el-menu-item index="/contest">
     <Icon type="ios-book"></Icon>
     {{$t('m.Public_Contests')}}
   </el-menu-item>
-  -->
   <el-menu-item index="/problem">
     <Icon type="ios-keypad"></Icon>
     {{$t('m.NavProblems')}}
