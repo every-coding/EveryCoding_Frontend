@@ -14,11 +14,6 @@
       <panel>
         <Row type="flex" justify="space-around" :gutter="10">
           <Col>
-            <panel>
-              <div slot="title" align="center"><b>DCU SW 경진대회<br/></b>포스터</div>
-            </panel>
-          </Col>
-          <Col>
             <img src="../../../../assets/codingcontest.png" width="650" height="919"/>
           </Col>
         </Row>
