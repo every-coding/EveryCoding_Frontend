@@ -10,7 +10,7 @@
 <!--        </div>-->
 <!--      </panel>-->
 <!--    </Col> -->
-    <Col :span="22" padding="30">
+    <Col :span="22">
       <panel>
         <Row type="flex" justify="space-around" :gutter="10">
           <Col>
@@ -60,12 +60,6 @@
             </panel>
             <br/>
           </Col>
-<!--          <Col>-->
-<!--            <Row><Button class="extra-large-button">교재 실습</Button></Row>-->
-<!--            <Row><Button class="extra-large-button">경진 대회</Button></Row>-->
-<!--            <Row><Button class="extra-large-button">공개 문제</Button></Row>-->
-<!--            <Row><Button class="extra-large-button">그룹스터디</Button></Row>-->
-<!--          </Col>-->
         </Row>
       </panel>
     </Col>
