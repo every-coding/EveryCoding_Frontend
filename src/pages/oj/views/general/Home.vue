@@ -1,6 +1,6 @@
 <template>
   <Row type="flex" justify="space-around">
-<!--    <Col :span="22">-->
+   <!-- <Col :span="22">-->
 <!--      <panel v-if="(month == 3) || (month == 4)">-->
 <!--        <div slot="title">-->
 <!--          <Button style="float: right" type="info" @click="dialogFormVisible = true">개인정보 변경</Button>-->
@@ -9,7 +9,17 @@
 <!--          반드시 개인정보를 수정해주시기 바랍니다.<br/>-->
 <!--        </div>-->
 <!--      </panel>-->
-<!--    </Col>-->
+<!--    </Col> -->
+    <Col :span="22">
+      <panel>
+        <Row type="flex" justify="space-around" :gutter="10">
+          <Col>
+            <img src="../../../../assets/codingcontest.png" width="650" height="919"/>
+          </Col>
+        </Row>
+      </panel>
+      <br/>
+    </Col>
     <Col :span="22">
       <panel>
         <Row type="flex" justify="space-around" :gutter="10">
@@ -45,15 +55,10 @@
             </panel>
             <br/>
           </Col>
-<!--          <Col>-->
-<!--            <Row><Button class="extra-large-button">교재 실습</Button></Row>-->
-<!--            <Row><Button class="extra-large-button">경진 대회</Button></Row>-->
-<!--            <Row><Button class="extra-large-button">공개 문제</Button></Row>-->
-<!--            <Row><Button class="extra-large-button">그룹스터디</Button></Row>-->
-<!--          </Col>-->
         </Row>
       </panel>
     </Col>
+
     <Col :span="22">
       <panel>
         <div slot="title">
